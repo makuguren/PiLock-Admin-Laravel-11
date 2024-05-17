@@ -43,5 +43,11 @@
                 {{ __('Log in') }}
             </x-primary-button>
         </div>
+
+        <div class="-mx-3 flex-flex-1 justify-center">
+            <div class="grid grid-cols-2">
+                <a href="{{ route('socialite.login') }}">Connect to Google</a>
+            </div>
+        </div>
     </form>
 </x-guest-layout>
