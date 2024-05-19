@@ -22,6 +22,72 @@ Route::middleware('auth')->group(function () {
 Route::get('/socialite/google', [SocialLoginController::class, 'toProvider'])->name('socialite.login');
 Route::get('/auth/google/login', [SocialLoginController::class, 'handleCallback'])->name('auth.google.login');
 
+//Admin Interface
+Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard.index');
+
+    //Student Routes
+    Route::controller(App\Http\Controllers\Admin\StudentsController::class)->group(function(){
+        Route::get('students', 'index')->name('students.index');
+        Route::get('students/create', 'create')->name('students.create');
+        Route::post('students', 'storeStudent')->name('students.store');
+        Route::get('students/{student}/edit', 'edit')->name('students.edit');
+        Route::put('students/{student}', 'updateStudent')->name('students.update');
+        Route::get('students/{student}/delete', 'deleteStudent')->name('students.delete');
+    });
+
+    //Add Tag UID for Students Routes
+    Route::controller(App\Http\Controllers\Admin\StudentsController::class)->group(function(){
+        Route::get('students/addtaguid', 'indextaguid')->name('students.addtaguid');
+    });
+
+    //RFID Checker
+    Route::controller(App\Http\Controllers\Admin\RfidCheckerController::class)->group(function(){
+        Route::get('rfidchecker', 'index')->name('rfidchecker.index');
+    });
+
+    //Settings Routes
+    Route::controller(App\Http\Controllers\Admin\SettingsController::class)->group(function(){
+        Route::get('settings', 'index')->name('settings.index');
+        Route::post('settings', 'save')->name('settings.save');
+    });
+
+    //Sections Routes
+    Route::controller(App\Http\Controllers\Admin\SectionsController::class)->group(function(){
+        Route::get('sections', 'index')->name('sections.index');
+    });
+
+    //Events Routes
+    Route::controller(App\Http\Controllers\Admin\EventsController::class)->group(function(){
+        Route::get('events', 'index')->name('events.index');
+    });
+
+    //Subjects Routes
+    Route::controller(App\Http\Controllers\Admin\SubjectsController::class)->group(function(){
+        Route::get('subjects', 'index')->name('subjects.index');
+    });
+
+    //Instructors Routes
+    Route::controller(App\Http\Controllers\Admin\InstructorsController::class)->group(function(){
+        Route::get('instructors', 'index')->name('instructors.index');
+    });
+
+    //Add Tag UID for Instructor Routes
+    Route::controller(App\Http\Controllers\Admin\InstructorsController::class)->group(function(){
+        Route::get('instructors/addtaguid', 'indextaguid')->name('instructors.addtaguid');
+    });
+
+    //Schedules Routes
+    Route::controller(App\Http\Controllers\Admin\SchedulesController::class)->group(function(){
+        Route::get('schedules', 'index')->name('schedules.index');
+    });
+
+    //Logs
+    Route::controller(App\Http\Controllers\Admin\LogsController::class)->group(function(){
+        Route::get('logs', 'index')->name('logs.index');
+    });
+});
+
 require __DIR__.'/auth.php';
 require __DIR__.'/admin-auth.php';
 require __DIR__.'/instructor-auth.php';
