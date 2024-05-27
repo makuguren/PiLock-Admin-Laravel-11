@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Log;
 use App\Models\User;
 use App\Models\Schedule;
 use Illuminate\Database\Eloquent\Model;
@@ -28,7 +29,7 @@ class Section extends Model
         return $this->hasMany(User::class, 'section_id', 'id');
     }
 
-    // public function logs(){
-    //     return $this->hasMany(Log::class, 'section_id', 'id');
-    // }
+    public function logs(){
+        return $this->hasMany(Log::class, 'section_id', 'id');
+    }
 }
