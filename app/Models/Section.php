@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\User;
+use App\Models\Schedule;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -15,9 +16,9 @@ class Section extends Model
         'section_name'
     ];
 
-    // public function schedules(){
-    //     return $this->hasMany(Schedules::class, 'section_id', 'id');
-    // }
+    public function schedules(){
+        return $this->hasMany(Schedule::class, 'section_id', 'id');
+    }
 
     // public function scheduleNow(){
     //     return $this->hasMany(ScheduleNow::class, 'section_id', 'id');
