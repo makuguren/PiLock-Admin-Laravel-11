@@ -15,6 +15,10 @@ class StudentsController extends Controller
         return view('admin.students.index');
     }
 
+    public function indextaguid(){
+        return view('admin.students.adduid');
+    }
+
     public function create(){
         $sections = Section::all();
         return view('admin.students.create', ['sections' => $sections]);
