@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Section extends Model
 {
@@ -22,9 +23,9 @@ class Section extends Model
     //     return $this->hasMany(ScheduleNow::class, 'section_id', 'id');
     // }
 
-    // public function students(){
-    //     return $this->hasMany(Student::class, 'section_id', 'id');
-    // }
+    public function users(){
+        return $this->hasMany(User::class, 'section_id', 'id');
+    }
 
     // public function logs(){
     //     return $this->hasMany(Log::class, 'section_id', 'id');

@@ -108,7 +108,7 @@ class Index extends Component
     }
 
     public function render(){
-        $instructors = Instructor::all();
+        $instructors = Instructor::paginate(10);
         return view('livewire.admin.instructors.index', ['instructors' => $instructors]);
     }
 }
