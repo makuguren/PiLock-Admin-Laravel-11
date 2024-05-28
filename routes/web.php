@@ -6,21 +6,22 @@ use App\Http\Controllers\User\SocialLoginController;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome.index');
 
 Route::get('/dashboard', function () {
     return view('user.dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+//User Interface
 Route::middleware('auth:web')->name('user.')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-//User Interface
 Route::get('/socialite/google', [SocialLoginController::class, 'toProvider'])->name('socialite.login');
 Route::get('/auth/google/login', [SocialLoginController::class, 'handleCallback'])->name('auth.google.login');
+
 
 //Admin Interface
 Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function () {
