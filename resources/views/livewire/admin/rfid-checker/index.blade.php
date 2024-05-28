@@ -34,6 +34,13 @@
                 </div>
 
                 <div class="overflow-x-auto">
+
+                    <div class="w-full">
+                        <label class="label-text">Student Avatar</label>
+                        {{-- <input class="input input-bordered bg-base-300 block w-full py-3 px-4 mb-3" value="{{ $info->avatar ?? '' }}" type="text" placeholder="" disabled> --}}
+                        <img src="{{ $info->avatar ?? '' }}" class="rounded-md" alt="" srcset="">
+                    </div>
+
                     <div class="w-full">
                         <label class="label-text">Student / Instructor ID</label>
                         <input class="input input-bordered bg-base-300 block w-full py-3 px-4 mb-3" value="{{ $info->student_id ?? '' }}" type="text" placeholder="" disabled>
@@ -46,12 +53,12 @@
 
                     <div class="w-full">
                         <label class="label-text">Name</label>
-                        <input class="input input-bordered bg-base-300 block w-full py-3 px-4 mb-3" value="{{ $info->first_name ?? '' }} {{ $info->last_name ?? '' }}" type="text" placeholder="" disabled>
+                        <input class="input input-bordered bg-base-300 block w-full py-3 px-4 mb-3" value="{{ $info->name ?? '' }}" type="text" placeholder="" disabled>
                     </div>
 
                     <div class="w-full">
                         <label class="label-text">Section (Student)</label>
-                        <input class="input input-bordered bg-base-300 block w-full py-3 px-4 mb-3" value="{{ $info->section_id ?? '' }}" type="text" placeholder="" disabled>
+                        <input class="input input-bordered bg-base-300 block w-full py-3 px-4 mb-3" value="{{ $info->section->section_name ?? '' }}" type="text" placeholder="" disabled>
                     </div>
                 </div>
             </div>

@@ -18,6 +18,12 @@
         @method('patch')
 
         <div>
+            <x-input-label for="student_id" :value="__('Student ID')" />
+            <x-text-input id="student_id" name="student_id" type="text" class="mt-1 block w-full" :value="old('student_id', $user->student_id)" required autofocus autocomplete="birthdate" />
+            <x-input-error class="mt-2" :messages="$errors->get('student_id')" />
+        </div>
+
+        <div>
             <x-input-label for="name" :value="__('Name')" />
             <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
             <x-input-error class="mt-2" :messages="$errors->get('name')" />
@@ -45,6 +51,12 @@
                     @endif
                 </div>
             @endif
+        </div>
+
+        <div>
+            <x-input-label for="birthdate" :value="__('Birthday')" />
+            <x-text-input id="birthdate" name="birthdate" type="date" class="mt-1 block w-full" :value="old('birthdate', $user->birthdate)" required autofocus autocomplete="birthdate" />
+            <x-input-error class="mt-2" :messages="$errors->get('birthdate')" />
         </div>
 
         <div class="flex items-center gap-4">

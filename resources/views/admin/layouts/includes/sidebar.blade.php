@@ -103,7 +103,7 @@
                                 List</a>
                         </li>
                         <li class="">
-                            <a href="{{ url('students/create') }}"
+                            <a href="{{ route('admin.students.create') }}"
                                 class="group text-sm flex items-center hover:text-blue-700 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Add
                                 Student</a>
                         </li>
