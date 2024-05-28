@@ -5,7 +5,7 @@ namespace App\Livewire\Admin\Schedules;
 use App\Models\Section;
 use App\Models\Subject;
 use Livewire\Component;
-use App\Models\Schedule;
+use App\Models\Schedules;
 use App\Models\Instructor;
 use Livewire\WithPagination;
 
@@ -35,7 +35,7 @@ class Index extends Component
     public function saveSchedule(){
         $validatedData = $this->validate();
 
-        Schedule::create($validatedData);
+        Schedules::create($validatedData);
         toastr()->success('Schedule Added Successfully');
         $this->resetInput();
         $this->dispatch('close-modal');
@@ -43,7 +43,7 @@ class Index extends Component
 
     //Edit Schedule
     public function editSchedule(int $schedule_id){
-        $schedule = Schedule::find($schedule_id);
+        $schedule = Schedules::find($schedule_id);
         if($schedule){
             $this->schedule_id = $schedule->id;
             $this->subject_id = $schedule->subject_id;
@@ -60,7 +60,7 @@ class Index extends Component
     public function updateSchedule(){
         $validatedData = $this->validate();
 
-        Schedule::where('id', $this->schedule_id)->update([
+        Schedules::where('id', $this->schedule_id)->update([
             'subject_id' => $validatedData['subject_id'],
             'instructor_id' => $validatedData['instructor_id'],
             'section_id' => $validatedData['section_id'],
@@ -79,7 +79,7 @@ class Index extends Component
     }
 
     public function destroySchedule(){
-        Schedule::find($this->schedule_id)->delete();
+        Schedules::find($this->schedule_id)->delete();
         toastr()->success('Schedule Deleted Successfully');
         $this->dispatch('close-modal');
     }
@@ -97,7 +97,7 @@ class Index extends Component
         $subjects = Subject::all();
         $instructors = Instructor::all();
         $sections = Section::all();
-        $schedules = Schedule::paginate(10);
+        $schedules = Schedules::paginate(10);
         return view('livewire.admin.schedules.index', [
             'schedules' => $schedules,
             'subjects' => $subjects,

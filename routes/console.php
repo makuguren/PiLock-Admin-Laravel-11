@@ -3,8 +3,9 @@
 use Carbon\Carbon;
 use App\Models\Event;
 use App\Models\EventNow;
-use App\Models\Schedule;
+use App\Models\Schedules;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schedule;
 
 Schedule::call(function () {
     $datetime = Carbon::now('Asia/Manila');
@@ -18,8 +19,8 @@ Schedule::call(function () {
     $event_now = EventNow::where('date', $date)->get();
 
     //Schedules Query
-    $scheds_start = Schedule::where('days', $day)->where('time_start', $time)->get();
-    $scheds_end = Schedule::where('days', $day)->where('time_end', $time)->get();
+    $scheds_start = Schedules::where('days', $day)->where('time_start', $time)->get();
+    $scheds_end = Schedules::where('days', $day)->where('time_end', $time)->get();
     $scheds_now = DB::table('schedule_now')->where('days', $day)->get();
 
     //Checking if the Events is !Empty then Proceed to Events else Proceed to Schedules

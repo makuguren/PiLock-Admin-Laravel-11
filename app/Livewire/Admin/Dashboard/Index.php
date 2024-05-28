@@ -8,7 +8,7 @@ use App\Models\Section;
 use App\Models\Subject;
 use Livewire\Component;
 use App\Models\EventNow;
-use App\Models\Schedule;
+use App\Models\Schedules;
 use App\Models\Instructor;
 use App\Models\ScheduleNow;
 use Illuminate\Support\Facades\Http;
@@ -18,7 +18,7 @@ class Index extends Component
 {
     public function render(){
         $totalStudents = User::count();
-        $totalSchedules = Schedule::count();
+        $totalSchedules = Schedules::count();
         $totalInstructors = Instructor::count();
         $totalSubjects = Subject::count();
         $totalSections = Section::count();

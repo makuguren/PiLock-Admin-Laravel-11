@@ -21,7 +21,7 @@
                     <select wire:model="instructor_id" class="select select-bordered bg-base-300 block w-full py-3 px-4 mb-3 form-control" required>
                         <option value="">--Select Instructor--</option>
                             @foreach ($instructors as $instructor)
-                                <option value="{{ $instructor->id }}">{{ $instructor->instructor_name }}</option>
+                                <option value="{{ $instructor->id }}">{{ $instructor->name }}</option>
                             @endforeach
                     </select>
                     @error('instructor_id') <span class="error" role="alert">{{ $message }}</span> @enderror

@@ -185,7 +185,7 @@
                     @else
                         @forelse ($schedulesNow as $sched_now)
                             <div class="text-md">Subject: {{ $sched_now->subject->subject_name }}</div>
-                            <div class="text-md">Instructor: {{ $sched_now->instructor->instructor_name }}</div>
+                            <div class="text-md">Instructor: {{ $sched_now->instructor->name }}</div>
                             <div class="text-md">Section: {{ $sched_now->section->section_name }}</div>
                             <div class="text-md">Day: {{ $sched_now->days }}</div>
                             <div class="text-md">Time Frame: {{ $sched_now->time_start }} to {{ $sched_now->time_end }}</div>

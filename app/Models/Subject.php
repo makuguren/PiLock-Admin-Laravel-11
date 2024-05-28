@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use App\Models\Log;
-use App\Models\Schedule;
+use App\Models\Schedules;
 use App\Models\ScheduleNow;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -20,7 +20,7 @@ class Subject extends Model
     ];
 
     public function schedules(){
-        return $this->hasMany(Schedule::class, 'subject_id', 'id');
+        return $this->hasMany(Schedules::class, 'subject_id', 'id');
     }
 
     public function scheduleNow(){
