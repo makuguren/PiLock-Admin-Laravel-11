@@ -17,7 +17,8 @@ class ScheduleNow extends Model
         'section_id',
         'days',
         'time_start',
-        'time_end'
+        'time_end',
+        'isMakeUp'
     ];
 
     public function subject(){

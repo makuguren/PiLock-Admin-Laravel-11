@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('days');
             $table->time('time_start');
             $table->time('time_end');
+            $table->tinyInteger('isMakeUp')->default('0')->comment('0=Regular, 1=MakeUp');
             $table->timestamps();
 
             // Foreign Key
@@ -35,6 +36,7 @@ return new class extends Migration
             $table->string('days');
             $table->time('time_start');
             $table->time('time_end');
+            $table->tinyInteger('isMakeUp')->default('0')->comment('0=Regular, 1=MakeUp');
 
             // Foreign Key
             $table->foreign('subject_id')->references('id')->on('subjects');

@@ -9,7 +9,7 @@ use App\Models\Schedules;
 use App\Models\Instructor;
 use Livewire\WithPagination;
 
-class Index extends Component
+class Makeup extends Component
 {
     use WithPagination;
     public $schedule_id, $subject_id, $instructor_id, $section_id, $days, $time_start, $time_end;
@@ -35,8 +35,17 @@ class Index extends Component
     public function saveSchedule(){
         $validatedData = $this->validate();
 
-        Schedules::create($validatedData);
-        toastr()->success('Schedule Added Successfully');
+        Schedules::create([
+            'subject_id' => $validatedData['subject_id'],
+            'instructor_id' => $validatedData['instructor_id'],
+            'section_id' => $validatedData['section_id'],
+            'days' => $validatedData['days'],
+            'time_start' => $validatedData['time_start'],
+            'time_end' => $validatedData['time_end'],
+            'isMakeUp' => '1'
+        ]);
+
+        toastr()->success('Make-Up Schedule Added Successfully');
         $this->resetInput();
         $this->dispatch('close-modal');
     }
@@ -53,7 +62,7 @@ class Index extends Component
             $this->time_start = $schedule->time_start;
             $this->time_end = $schedule->time_end;
         } else {
-            return redirect()->to('/schedules');
+            return redirect()->to('/makeupscheds');
         }
     }
 
@@ -66,10 +75,11 @@ class Index extends Component
             'section_id' => $validatedData['section_id'],
             'days' => $validatedData['days'],
             'time_start' => $validatedData['time_start'],
-            'time_end' => $validatedData['time_end']
+            'time_end' => $validatedData['time_end'],
+            'isMakeUp' => '1'
         ]);
 
-        toastr()->success('Schedule Updated Successfully');
+        toastr()->success('Make-Up Schedule Updated Successfully');
         $this->resetInput();
         $this->dispatch('close-modal');
     }
@@ -81,7 +91,7 @@ class Index extends Component
 
     public function destroySchedule(){
         Schedules::find($this->schedule_id)->delete();
-        toastr()->success('Schedule Deleted Successfully');
+        toastr()->success('Make-Up Schedule Deleted Successfully');
         $this->dispatch('close-modal');
     }
 
@@ -98,8 +108,8 @@ class Index extends Component
         $subjects = Subject::all();
         $instructors = Instructor::all();
         $sections = Section::all();
-        $schedules = Schedules::where('isMakeUp', '0')->paginate(10);
-        return view('livewire.admin.schedules.index', [
+        $schedules = Schedules::where('isMakeUp', '1')->paginate(10);
+        return view('livewire.admin.schedules.makeup' , [
             'schedules' => $schedules,
             'subjects' => $subjects,
             'instructors' => $instructors,

@@ -14,9 +14,15 @@ class SchedulesController extends Controller
         return view('admin.schedules.index');
     }
 
+    public function makeupIndex(){
+        return view('admin.schedules.makeup');
+    }
+
     //API Controllers/Functions
+
+    //Regular Schedules
     public function showSchedulesAPI(){
-        $schedules = Schedules::all();
+        $schedules = Schedules::where('isMakeUp', '0')->get();
         if($schedules->count() > 0){
             return response()->json([
                 'schedules' => $schedules->map(function ($schedule) {
@@ -63,6 +69,31 @@ class SchedulesController extends Controller
         }
     }
 
+    //Make-Up Schedules
+    public function showMakeUpSchedsAPI(){
+        $schedules = Schedules::where('isMakeUp', '1')->get();
+        if($schedules->count() > 0){
+            return response()->json([
+                'schedules' => $schedules->map(function ($schedule) {
+                    return [
+                        'id' => $schedule->id,
+                        'subject' => $schedule->subject->subject_name,
+                        'instructor' => $schedule->instructor->name,
+                        'section' => $schedule->section->section_name,
+                        'days' => $schedule->days,
+                        'time_start' => $schedule->time_start,
+                        'time_end' => $schedule->time_end
+                    ];
+                })
+            ], 200);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'status_message' => 'No Make-Up Schedules Found'
+            ], 404);
+        }
+    }
+
     public function showCurrentSchedAPI(){
         $currentsched = ScheduleNow::all();
         $currentevent = EventNow::all();
@@ -90,7 +121,7 @@ class SchedulesController extends Controller
                     'schedule' => $currentsched->map(function ($curschedule) {
                         return [
                             'id' => $curschedule->id,
-                            'sched_type' => 'Regular Class',
+                            'sched_type' => 'Regular Class/Make-Up Schedules',
                             'subject' => $curschedule->subject->subject_name,
                             'instructor' => $curschedule->instructor->name,
                             'section' => $curschedule->section->section_name,

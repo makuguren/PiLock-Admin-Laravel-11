@@ -184,6 +184,13 @@
                         @endforeach
                     @else
                         @forelse ($schedulesNow as $sched_now)
+                            <div class="text-md">Schedule Type:
+                                @if ($sched_now->isMakeUp == '0')
+                                    Regular Schedule
+                                @else
+                                    Make-Up Schedule
+                                @endif
+                            </div>
                             <div class="text-md">Subject: {{ $sched_now->subject->subject_name }}</div>
                             <div class="text-md">Instructor: {{ $sched_now->instructor->name }}</div>
                             <div class="text-md">Section: {{ $sched_now->section->section_name }}</div>

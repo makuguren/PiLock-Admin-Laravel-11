@@ -22,6 +22,7 @@ Route::get('instructor/{instructor_uid}', [InstructorsController::class, 'showIn
 //Schedules List
 Route::get('schedules/', [SchedulesController::class, 'showSchedulesAPI']);
 Route::get('schedule/{schedule_id}', [SchedulesController::class, 'showScheduleAPI']);
+Route::get('makeupscheds/', [SchedulesController::class, 'showMakeUpSchedsAPI']);
 
 //Show Current Schedules
 Route::get('schedules/current', [SchedulesController::class, 'showCurrentSchedAPI']);

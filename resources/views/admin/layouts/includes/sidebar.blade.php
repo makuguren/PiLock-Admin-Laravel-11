@@ -163,16 +163,32 @@
             {{-- @endcan --}}
 
             {{-- @can('View Schedules') --}}
-            <li class="mb-1 group {{ Request::is('admin/schedules') ? 'active':'' }}">
-                <a href="{{ route('admin.schedules.index') }}"
-                    class="flex items-center py-2 px-4 hover:bg-blue-400 hover:text-white rounded-md group-[.active]:bg-blue-700 group-[.active]:text-white group-[.selected]:bg-blue-700 group-[.selected]:text-gray-200">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor" class="w-6 h-6 mr-1">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                    </svg>
-                    <span class="text-sm">Schedules</span>
-                </a>
+            <li>
+                <details id="disclosure-schedules">
+                    <summary class="hover:bg-blue-400 hover:text-white {{ Request::is('admin/schedules') || Request::is('admin/makeupscheds') ? 'group bg-blue-700 text-white':'' }}">
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="w-6 h-6 mr-1">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                            </svg>
+                        </span>Schedules
+                    </summary>
+                    <ul>
+                        <li class="">
+                            <a href="{{ route('admin.schedules.index') }}"
+                                class="group text-sm flex items-center hover:text-blue-700 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">
+                                Regular Schedules
+                            </a>
+                        </li>
+                        <li class="">
+                            <a href="{{ route('admin.schedules.makeup') }}"
+                                class="group text-sm flex items-center hover:text-blue-700 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">
+                                Make-Up Class Schedules
+                            </a>
+                        </li>
+                    </ul>
+                </details>
             </li>
             {{-- @endcan --}}
 
