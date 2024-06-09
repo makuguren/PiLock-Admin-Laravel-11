@@ -50,7 +50,8 @@ Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function
     //Settings Routes
     Route::controller(App\Http\Controllers\Admin\SettingsController::class)->group(function(){
         Route::get('settings', 'index')->name('settings.index');
-        Route::post('settings', 'save')->name('settings.save');
+        Route::post('settings', 'saveSettings')->name('settings.saveSettings');
+        Route::patch('settings', 'updateAdminProfile')->name('settings.updateProfile');
     });
 
     //Sections Routes
