@@ -91,6 +91,19 @@ Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function
     });
 });
 
+//Instructor Interface
+Route::middleware('auth:instructor')->prefix('instructor')->name('instructor.')->group(function () {
+    //Schedule Routes
+    Route::controller(App\Http\Controllers\Instructor\SchedulesController::class)->group(function () {
+        Route::get('schedules', 'index')->name('schedules.index');
+        Route::get('makeupscheds', 'makeupIndex')->name('schedules.makeup');
+    });
+
+    Route::controller(App\Http\Controllers\Instructor\EventsController::class)->group(function () {
+        Route::get('events', 'index')->name('events.index');
+    });
+});
+
 require __DIR__.'/user-auth.php';
 require __DIR__.'/admin-auth.php';
 require __DIR__.'/instructor-auth.php';
