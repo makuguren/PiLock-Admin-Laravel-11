@@ -79,8 +79,8 @@
             {{-- @endcan --}}
 
             {{-- @can('View Settings') --}}
-            {{-- <li class="mb-1 group {{ Request::is('admin/settings') ? 'active':'' }}">
-                <a href="{{ route('admin.settings.index') }}"
+            <li class="mb-1 group {{ Request::is('instructor/settings') ? 'active':'' }}">
+                <a href="{{ route('instructor.settings.index') }}"
                     class="flex items-center py-2 px-4 hover:bg-blue-400 hover:text-white rounded-md group-[.active]:bg-blue-700 group-[.active]:text-white group-[.selected]:bg-blue-700 group-[.selected]:text-gray-200">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-6 h-6 mr-1">
@@ -90,7 +90,7 @@
                     </svg>
                     <span class="text-sm">Settings</span>
                 </a>
-            </li> --}}
+            </li>
             {{-- @endcan --}}
         </ul>
     </aside>

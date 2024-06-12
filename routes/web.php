@@ -99,8 +99,15 @@ Route::middleware('auth:instructor')->prefix('instructor')->name('instructor.')-
         Route::get('makeupscheds', 'makeupIndex')->name('schedules.makeup');
     });
 
+    //Events Routes
     Route::controller(App\Http\Controllers\Instructor\EventsController::class)->group(function () {
         Route::get('events', 'index')->name('events.index');
+    });
+
+    //Profile Routes
+    Route::controller(App\Http\Controllers\Instructor\SettingsController::class)->group(function () {
+        Route::get('settings', 'index')->name('settings.index');
+        Route::patch('settings', 'updateProfile')->name('settings.updateProfile');
     });
 });
 

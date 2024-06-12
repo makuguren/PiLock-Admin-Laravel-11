@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Requests\Admin;
+namespace App\Http\Requests\Instructor;
 
-use App\Models\Admin;
+use App\Models\Instructor;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -17,8 +17,8 @@ class ProfileUpdateRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', Rule::unique(Admin::class)->ignore($this->user()->id)],
-            'admin_theme' => ['nullable', 'string']
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', Rule::unique(Instructor::class)->ignore($this->user()->id)],
+            'instructor_theme' => ['nullable', 'string']
         ];
     }
 }

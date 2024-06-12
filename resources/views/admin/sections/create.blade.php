@@ -7,7 +7,7 @@
                 <div class="w-full px-3">
                     <label class="label-text">Section</label>
                     <input wire:model="section_name" id="addsection_name" class="input input-bordered bg-base-300 block w-full py-3 px-4 mb-3 form-control" type="text">
-                    @error('section_name') <span class="error" role="alert">{{ $message }}</span> @enderror
+                    @error('section_name') <span class="error text-sm text-red-600 space-y-1" role="alert">{{ $message }}</span> @enderror
                 </div>
             </div>
             <div class="modal-action">

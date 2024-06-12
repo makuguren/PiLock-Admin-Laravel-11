@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\User;
 use App\Models\Section;
+use App\Models\Attendance;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -16,6 +17,23 @@ class StudentsController extends Controller
     }
 
     public function indextaguid(){
+
+        // Create attendance in just one click
+            // $users = User::all();
+            // $attendanceData = [];
+
+            // foreach ($users as $user) {
+            //     $attendanceData[] = [
+            //         'student_id' => $user->id
+            //     ];
+            // }
+            // Attendance::insert($attendanceData);
+            // dd("Student Attendance Created Successfully!");
+
+        // Delete all attendance table
+            // Attendance::truncate();
+            // dd("Student Attendance Created Successfully!");
+
         return view('admin.students.adduid');
     }
 
