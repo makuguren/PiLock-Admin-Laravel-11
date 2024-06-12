@@ -42,6 +42,7 @@ class Makeup extends Component
             'days' => $validatedData['days'],
             'time_start' => $validatedData['time_start'],
             'time_end' => $validatedData['time_end'],
+            'isApproved' => '1',
             'isMakeUp' => '1'
         ]);
 

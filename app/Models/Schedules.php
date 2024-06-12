@@ -21,7 +21,8 @@ class Schedules extends Model
         'days',
         'time_start',
         'time_end',
-        'isMakeUp'
+        'isMakeUp',
+        'isApproved'
     ];
 
     public function subject(){

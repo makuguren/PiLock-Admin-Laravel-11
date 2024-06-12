@@ -20,6 +20,7 @@ return new class extends Migration
             $table->time('time_start');
             $table->time('time_end');
             $table->tinyInteger('isMakeUp')->default('0')->comment('0=Regular, 1=MakeUp');
+            $table->tinyInteger('isApproved')->default('1')->comment('0=Pending, 1=Approved, 2=Declined');
             $table->timestamps();
 
             // Foreign Key
@@ -37,6 +38,7 @@ return new class extends Migration
             $table->time('time_start');
             $table->time('time_end');
             $table->tinyInteger('isMakeUp')->default('0')->comment('0=Regular, 1=MakeUp');
+            $table->tinyInteger('isApproved')->default('1')->comment('0=Pending, 1=Approved, 2=Declined');
 
             // Foreign Key
             $table->foreign('subject_id')->references('id')->on('subjects');
