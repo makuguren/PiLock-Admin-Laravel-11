@@ -18,6 +18,10 @@ class SchedulesController extends Controller
         return view('admin.schedules.makeup');
     }
 
+    public function approvalsIndex(){
+        return view('admin.schedules.approvals');
+    }
+
     //API Controllers/Functions
 
     //Regular Schedules

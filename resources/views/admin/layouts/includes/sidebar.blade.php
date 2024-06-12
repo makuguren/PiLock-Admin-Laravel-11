@@ -165,7 +165,7 @@
             {{-- @can('View Schedules') --}}
             <li>
                 <details id="disclosure-schedules">
-                    <summary class="hover:bg-blue-400 hover:text-white {{ Request::is('admin/schedules') || Request::is('admin/makeupscheds') ? 'group bg-blue-700 text-white':'' }}">
+                    <summary class="hover:bg-blue-400 hover:text-white {{ Request::is('admin/schedules') || Request::is('admin/schedules/makeupscheds') || Request::is('admin/schedules/makeupapprovals') ? 'group bg-blue-700 text-white':'' }}">
                         <span>
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="currentColor" class="w-6 h-6 mr-1">
@@ -185,6 +185,12 @@
                             <a href="{{ route('admin.schedules.makeup') }}"
                                 class="group text-sm flex items-center hover:text-blue-700 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">
                                 Make-Up Class Schedules
+                            </a>
+                        </li>
+                        <li class="">
+                            <a href="{{ route('admin.schedules.approvals') }}"
+                                class="group text-sm flex items-center hover:text-blue-700 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">
+                                Make-Up Approvals
                             </a>
                         </li>
                     </ul>

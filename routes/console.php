@@ -24,9 +24,9 @@ Schedule::call(function () {
     $scheds_now = DB::table('schedule_now')->where('isMakeUp','0')->where('days', $day)->get();
 
     //Schedules (Make-Up Class) Query
-    $makeupscheds_start = Schedules::where('isMakeUp','1')->where('days', $day)->where('time_start', $time)->get();
-    $makeupscheds_end = Schedules::where('isMakeUp','1')->where('days', $day)->where('time_end', $time)->get();
-    $makeupscheds_now = DB::table('schedule_now')->where('isMakeUp','1')->where('days', $day)->get();
+    $makeupscheds_start = Schedules::where('isMakeUp','1')->where('isApproved', '1')->where('days', $day)->where('time_start', $time)->get();
+    $makeupscheds_end = Schedules::where('isMakeUp','1')->where('isApproved', '1')->where('days', $day)->where('time_end', $time)->get();
+    $makeupscheds_now = DB::table('schedule_now')->where('isMakeUp','1')->where('isApproved', '1')->where('days', $day)->get();
 
     //Checking if the Events is !Empty then Proceed to Events else Proceed to Schedules
     if($events_start->isNotEmpty()){

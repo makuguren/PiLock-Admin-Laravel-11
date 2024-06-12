@@ -29,7 +29,6 @@
                 <table class="table table-zebra">
                     <thead class="bg-base-200 rounded-md text-md">
                         <tr>
-                            <th>ID</th>
                             <th>SUBJECT</th>
                             <th>INSTRUCTOR</th>
                             <th>DAYS</th>
@@ -43,7 +42,6 @@
                     <tbody>
                         @forelse ($schedules as $schedule)
                         <tr>
-                            <td><div class="font-bold">{{ $schedule->id }}</div></td>
                             <td>
                                 <div class="">
                                     @if ($schedule->subject_id)

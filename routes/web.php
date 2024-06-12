@@ -82,7 +82,8 @@ Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function
     //Schedules Routes
     Route::controller(App\Http\Controllers\Admin\SchedulesController::class)->group(function(){
         Route::get('schedules', 'index')->name('schedules.index');
-        Route::get('makeupscheds', 'makeupIndex')->name('schedules.makeup');
+        Route::get('schedules/makeupscheds', 'makeupIndex')->name('schedules.makeup');
+        Route::get('schedules/makeupapprovals', 'approvalsIndex')->name('schedules.approvals');
     });
 
     //Logs
