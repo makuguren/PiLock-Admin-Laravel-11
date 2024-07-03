@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\User;
 use App\Models\Subject;
+use App\Models\Schedules;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -15,6 +16,7 @@ class Attendance extends Model
     protected $fillable = [
         'student_id',
         'subject_id',
+        'schedule_id',
         'isPresent',
         'isCurrent'
     ];
@@ -25,5 +27,9 @@ class Attendance extends Model
 
     public function subject(){
         return $this->belongsTo(Subject::class, 'subject_id', 'id');
+    }
+
+    public function schedule(){
+        return $this->belongsTo(Schedules::class, 'schedule_id', 'id');
     }
 }

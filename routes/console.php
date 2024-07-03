@@ -19,8 +19,8 @@ Schedule::call(function () {
     $event_now = EventNow::where('date', $date)->get();
 
     //Schedules (Regular Class) Query
-    $scheds_start = Schedules::where('isMakeUp','0')->where('days', $day)->where('time_start', $time)->get();
-    $scheds_end = Schedules::where('isMakeUp','0')->where('days', $day)->where('time_end', $time)->get();
+    $scheds_start = Schedules::where('isMakeUp','0')->where('isCurrent', '0')->where('days', $day)->where('time_start', $time);
+    $scheds_end = Schedules::where('isMakeUp','0')->where('isCurrent', '1')->where('days', $day)->where('time_end', $time);
     $scheds_now = DB::table('schedule_now')->where('isMakeUp','0')->where('days', $day)->get();
 
     //Schedules (Make-Up Class) Query
@@ -132,57 +132,27 @@ Schedule::call(function () {
             }
         } else {
             //Regular Schedules
-            foreach ($scheds_start as $sched) {
-                if($scheds_now->isEmpty()){
-                    //Create Schedules
-                    DB::table('schedule_now')->insert([
-                        'subject_id' => $sched->subject_id,
-                        'instructor_id' => $sched->instructor_id,
-                        'section_id' => $sched->section_id,
-                        'days' => $sched->days,
-                        'time_start' => $sched->time_start,
-                        'time_end' => $sched->time_end
-                    ]);
+            //Generate Attendance before Executing Regular Schedules
+            $schedule = $scheds_start->first();
+            if($schedule){
+                $users = DB::table('users')->where('section_id', $schedule->section_id)->get(); //Sections where scheduled assigned
+                $attendanceData = [];
 
-                    //Generate Attendance after Executing Regular Schedules
-                    $users = DB::table('users')->where('section_id', $sched->section_id)->get(); //Sections where scheduled assigned
-                    $attendanceData = [];
-
-                    foreach ($users as $user) {
-                        $attendanceData[] = [
-                            'student_id' => $user->id,
-                            'subject_id' => $sched->subject_id,
-                            'isCurrent' => '1'
-                        ];
-                        // info($sched->subject_id);
-                    }
-                    DB::table('attendances')->insert($attendanceData);
-                    // dd("Student Attendance Created Successfully!");
-                } else {
-                    //Update Schedules
-                    DB::table('schedule_now')->where('days', $day)->update([
-                        'subject_id' => $sched->subject_id,
-                        'instructor_id' => $sched->instructor_id,
-                        'section_id' => $sched->section_id,
-                        'days' => $sched->days,
-                        'time_start' => $sched->time_start,
-                        'time_end' => $sched->time_end
-                    ]);
-                    // info('Update Done');
-
-                    //Generate Attendance after Executing Regular Schedules
-                    $users = DB::table('users')->where('section_id', $sched->section_id)->get(); //Sections where scheduled assigned
-                    $attendanceData = [];
-
-                    foreach ($users as $user) {
-                        $attendanceData[] = [
-                            'student_id' => $user->id
-                        ];
-                    }
-                    DB::table('attendances')->insert($attendanceData);
-                    // dd("Student Attendance Created Successfully!");
+                foreach ($users as $user) {
+                    $attendanceData[] = [
+                        'student_id' => $user->id,
+                        'subject_id' => $schedule->subject_id,
+                        'schedule_id' => $schedule->id,
+                        'isCurrent' => '1'
+                    ];
                 }
+                DB::table('attendances')->insert($attendanceData);
             }
+
+            //Update the Schedule Current = 1
+            $scheds_start->update([
+                'isCurrent' => '1'
+            ]);
         }
     }
 
@@ -194,30 +164,30 @@ Schedule::call(function () {
         }
     }
 
-    //Delete ScheduleNow if the Regular Schedule reaches Time_End
-    foreach ($scheds_end as $sched) {
-        if($scheds_now->isNotEmpty()){
-            DB::table('schedule_now')->where('isMakeUp','0')->where('time_end', $time)->delete();
-            info('Deleted Successfully');
+    //Update isCurrent = 0 if the Regular Schedule reaches Time_End
+    $schedule = $scheds_end->first();
+    if($schedule){
+        $users = DB::table('attendances')->where('schedule_id', $schedule->id)->where('isCurrent', '1')->get();
+        $attendanceData = [];
 
-            // Update isCurrent = 1 after the Regular Class
-            $users = DB::table('attendances')->where('isCurrent', '1')->get();
-            $attendanceData = [];
+        foreach ($users as $user) {
+            $attendanceData[] = [
+                'student_id' => $user->student_id,
+                'isCurrent' => '0'
+            ];
+        }
 
-            foreach ($users as $user) {
-                $attendanceData[] = [
-                    'student_id' => $user->student_id,
-                    'isCurrent' => '0'
-                ];
-            }
-
-            foreach ($attendanceData as $data) {
-                DB::table('attendances')->where('student_id', $data['student_id'])->update([
-                    'isCurrent' => $data['isCurrent']
-                ]);
-            }
+        foreach ($attendanceData as $data) {
+            DB::table('attendances')->where('student_id', $data['student_id'])->update([
+                'isCurrent' => $data['isCurrent']
+            ]);
         }
     }
+
+    //Update isCurrent = 0 if the Schedule is Ended
+    $scheds_end->update([
+        'isCurrent' => '0'
+    ]);
 
     //Delete ScheduleNow also the Schedule View if the Make-Up Schedule reaches Time_End
     foreach ($makeupscheds_end as $makeup) {
