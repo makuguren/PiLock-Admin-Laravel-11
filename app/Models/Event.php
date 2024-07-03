@@ -16,6 +16,7 @@ class Event extends Model
         'description',
         'date',
         'event_start',
-        'event_end'
+        'event_end',
+        'isCurrent'
     ];
 }

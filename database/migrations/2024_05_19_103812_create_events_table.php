@@ -18,16 +18,7 @@ return new class extends Migration
             $table->date('date');
             $table->time('event_start');
             $table->time('event_end');
-            $table->timestamps();
-        });
-
-        Schema::create('event_now', function (Blueprint $table) {
-            $table->id();
-            $table->string('title');
-            $table->string('description');
-            $table->date('date');
-            $table->time('event_start');
-            $table->time('event_end');
+            $table->integer('isCurrent')->default('0')->comment('0=No, 1=Yes')->nullable();
             $table->timestamps();
         });
     }
