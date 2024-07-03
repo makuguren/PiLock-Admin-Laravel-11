@@ -19,7 +19,7 @@ class StudentsController extends Controller
     public function indextaguid(){
 
         // Create attendance in just one click
-            // $users = User::all();
+            // $users = User::where('section_id', '1')->get(); //Sections where scheduled assigned
             // $attendanceData = [];
 
             // foreach ($users as $user) {
@@ -32,7 +32,7 @@ class StudentsController extends Controller
 
         // Delete all attendance table
             // Attendance::truncate();
-            // dd("Student Attendance Created Successfully!");
+            // dd("Student Attendance Deleted Successfully!");
 
         return view('admin.students.adduid');
     }

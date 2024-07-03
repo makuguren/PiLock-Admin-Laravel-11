@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Carbon\Carbon;
 use App\Models\Log;
 use App\Models\User;
+use App\Models\Attendance;
 use App\Models\ScheduleNow;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -16,21 +17,31 @@ class LogsController extends Controller
     }
 
     public function attendStudentAPI(String $student_id){
-        $students = User::where('student_id', $student_id)->get();
+        $student = User::where('student_id', $student_id)->first();
         $schedule_now = ScheduleNow::first();
         $datetime = Carbon::now('Asia/Manila');
-        if($students->count() > 0){
+
+        //Update isPresent Query in Attendance
+        $isPresent = Attendance::where('student_id', $student->id);
+
+        if($student->count() > 0){
             if ($schedule_now != NULL) {
-                foreach ($students as $student) {
-                    $students = Log::create([
-                        'student_id' => $student->id,
-                        'section_id' => $student->section_id,
-                        'subject_id' => $schedule_now->subject_id,
-                        'instructor_id' => $schedule_now->instructor_id,
-                        'date' => $datetime->toDateString(),
-                        'time' => $datetime->toTimeString()
-                    ]);
-                }
+
+                //Save Logs by Tapping their RFID
+                $student = Log::create([
+                    'student_id' => $student->id,
+                    'section_id' => $student->section_id,
+                    'subject_id' => $schedule_now->subject_id,
+                    'instructor_id' => $schedule_now->instructor_id,
+                    'date' => $datetime->toDateString(),
+                    'time' => $datetime->toTimeString()
+                ]);
+
+                //Update isPresent set 1 for Present
+                $isPresent->update([
+                    'isPresent' => '1'
+                ]);
+
                 return response()->json([
                     'status' => 200,
                     'status_message' => 'Saved Logs Successfully'

@@ -42,6 +42,12 @@ Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function
         Route::get('students/addtaguid', 'indextaguid')->name('students.addtaguid');
     });
 
+    //Attendances Routes
+    Route::controller(App\Http\Controllers\Admin\AttendancesController::class)->group(function(){
+        Route::get('attendances/current', 'currentIndex')->name('attendances.current');
+        Route::get('attendances', 'index')->name('attendances.index');
+    });
+
     //RFID Checker
     Route::controller(App\Http\Controllers\Admin\RfidCheckerController::class)->group(function(){
         Route::get('rfidchecker', 'index')->name('rfidchecker.index');

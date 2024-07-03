@@ -82,6 +82,19 @@ Schedule::call(function () {
                         'time_end' => $makeup->time_end,
                         'isMakeUp' => $makeup->isMakeUp
                     ]);
+
+                    //Generate Attendance after Executing Make-Up Schedules
+                    $users = DB::table('users')->where('section_id', $makeup->section_id)->get(); //Sections where scheduled assigned
+                    $attendanceData = [];
+
+                    foreach ($users as $user) {
+                        $attendanceData[] = [
+                            'student_id' => $user->id
+                        ];
+                    }
+                    DB::table('attendances')->insert($attendanceData);
+                    // dd("Student Attendance Created Successfully!");
+
                 } else {
                     //Update Make-Up Schedules
                     DB::table('schedule_now')->where('days', $day)->update([
@@ -94,12 +107,27 @@ Schedule::call(function () {
                         'isMakeUp' => $makeup->isMakeUp
                     ]);
                     // info('Update Done');
+
+                    //Generate Attendance after Executing Make-Up Schedules
+                    $users = DB::table('users')->where('section_id', $makeup->section_id)->get(); //Sections where scheduled assigned
+                    $attendanceData = [];
+
+                    foreach ($users as $user) {
+                        $attendanceData[] = [
+                            'student_id' => $user->id
+                        ];
+                    }
+                    DB::table('attendances')->insert($attendanceData);
+                    // dd("Student Attendance Created Successfully!");
                 }
 
                 //Delete Regular Class if the Make-Up Classes is Going to Start
                 if($scheds_now->isNotEmpty()){
                     DB::table('schedule_now')->where('isMakeUp','0')->delete();
                     info('Deleted Successfully');
+
+                    // Delete all attendances table
+                    DB::table('attendances')->truncate();
                 }
             }
         } else {
@@ -115,6 +143,21 @@ Schedule::call(function () {
                         'time_start' => $sched->time_start,
                         'time_end' => $sched->time_end
                     ]);
+
+                    //Generate Attendance after Executing Regular Schedules
+                    $users = DB::table('users')->where('section_id', $sched->section_id)->get(); //Sections where scheduled assigned
+                    $attendanceData = [];
+
+                    foreach ($users as $user) {
+                        $attendanceData[] = [
+                            'student_id' => $user->id,
+                            'subject_id' => $sched->subject_id,
+                            'isCurrent' => '1'
+                        ];
+                        // info($sched->subject_id);
+                    }
+                    DB::table('attendances')->insert($attendanceData);
+                    // dd("Student Attendance Created Successfully!");
                 } else {
                     //Update Schedules
                     DB::table('schedule_now')->where('days', $day)->update([
@@ -126,6 +169,18 @@ Schedule::call(function () {
                         'time_end' => $sched->time_end
                     ]);
                     // info('Update Done');
+
+                    //Generate Attendance after Executing Regular Schedules
+                    $users = DB::table('users')->where('section_id', $sched->section_id)->get(); //Sections where scheduled assigned
+                    $attendanceData = [];
+
+                    foreach ($users as $user) {
+                        $attendanceData[] = [
+                            'student_id' => $user->id
+                        ];
+                    }
+                    DB::table('attendances')->insert($attendanceData);
+                    // dd("Student Attendance Created Successfully!");
                 }
             }
         }
@@ -144,6 +199,23 @@ Schedule::call(function () {
         if($scheds_now->isNotEmpty()){
             DB::table('schedule_now')->where('isMakeUp','0')->where('time_end', $time)->delete();
             info('Deleted Successfully');
+
+            // Update isCurrent = 1 after the Regular Class
+            $users = DB::table('attendances')->where('isCurrent', '1')->get();
+            $attendanceData = [];
+
+            foreach ($users as $user) {
+                $attendanceData[] = [
+                    'student_id' => $user->student_id,
+                    'isCurrent' => '0'
+                ];
+            }
+
+            foreach ($attendanceData as $data) {
+                DB::table('attendances')->where('student_id', $data['student_id'])->update([
+                    'isCurrent' => $data['isCurrent']
+                ]);
+            }
         }
     }
 
@@ -153,6 +225,9 @@ Schedule::call(function () {
             DB::table('schedules')->where('isMakeUp','1')->where('days', $day)->where('time_end', $time)->delete();
             DB::table('schedule_now')->where('isMakeUp','1')->where('time_end', $time)->delete();
             info('Deleted Successfully');
+
+            // Delete all attendances table
+            DB::table('attendances')->truncate();
         }
     }
 
