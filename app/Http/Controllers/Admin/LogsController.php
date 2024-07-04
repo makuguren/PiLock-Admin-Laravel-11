@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Admin;
 use Carbon\Carbon;
 use App\Models\Log;
 use App\Models\User;
+use App\Models\Schedules;
 use App\Models\Attendance;
-use App\Models\ScheduleNow;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -18,15 +18,21 @@ class LogsController extends Controller
 
     public function attendStudentAPI(String $student_id){
         $student = User::where('student_id', $student_id)->first();
-        $schedule_now = ScheduleNow::first();
+        $schedule_now = Schedules::where('isCurrent', '1')->first();
         $datetime = Carbon::now('Asia/Manila');
 
-        //Update isPresent Query in Attendance
-        $isPresent = Attendance::where('student_id', $student->id);
+        // Check if student exists
+        if (!$student) {
+            return response()->json([
+                'status' => 404,
+                'status_message' => 'Student not found'
+            ], 404);
+        } elseif($schedule_now != NULL) {
+            //Update isPresent Query in Attendance
+            $isPresent = Attendance::where('student_id', $student->id);
 
-        if($student->count() > 0){
-            if ($schedule_now != NULL) {
-
+            //Checking if the Student Matched by their Schedule
+            if($student->section_id == $schedule_now->section_id){
                 //Save Logs by Tapping their RFID
                 $student = Log::create([
                     'student_id' => $student->id,
@@ -48,15 +54,14 @@ class LogsController extends Controller
                 ], 200);
             } else {
                 return response()->json([
-                    'status' => 404,
-                    'status_message' => 'Saved Logs Unsuccessfully'
-                ], 404);
+                    'status' => 200,
+                    'status_message' => 'You are not Allowed to Enter your Class!'
+                ], 200);
             }
-
         } else {
             return response()->json([
                 'status' => 404,
-                'status_message' => 'No Student Found'
+                'status_message' => 'No Schedules Found'
             ], 404);
         }
     }

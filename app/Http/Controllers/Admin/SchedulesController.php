@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\EventNow;
+use App\Models\Event;
 use App\Models\Schedules;
-use App\Models\ScheduleNow;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -99,8 +98,8 @@ class SchedulesController extends Controller
     }
 
     public function showCurrentSchedAPI(){
-        $currentsched = ScheduleNow::all();
-        $currentevent = EventNow::all();
+        $currentsched = Schedules::where('isCurrent', '1')->get();
+        $currentevent = Event::where('isCurrent', '1')->get();
 
         //Check if There's an Event is not Empty else Direct to Schedule
         if($currentevent->isNotEmpty()){

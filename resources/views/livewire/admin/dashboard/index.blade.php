@@ -174,31 +174,27 @@
                 </div>
                 <div wire:poll class="overflow-x-auto">
                     {{-- Checking if There's in Events --}}
-                    @if ($eventsNow->isNotEmpty())
-                        @foreach ($eventsNow as $event_now)
-                            <div class="text-md">Title: {{ $event_now->title }}</div>
-                            <div class="text-md">Description: {{ $event_now->description }}</div>
-                            <div class="text-md">Date: {{ $event_now->date }}</div>
-                            <div class="text-md">Event Start: {{ $event_now->event_start }}</div>
-                            <div class="text-md">Event End: {{ $event_now->event_end }}</div>
-                        @endforeach
+                    @if ($eventsNow)
+                        <div class="text-md">Title: {{ $eventsNow->title }}</div>
+                        <div class="text-md">Description: {{ $eventsNow->description }}</div>
+                        <div class="text-md">Date: {{ $eventsNow->date }}</div>
+                        <div class="text-md">Event Start: {{ $eventsNow->event_start }}</div>
+                        <div class="text-md">Event End: {{ $eventsNow->event_end }}</div>
+                    @elseif ($schedulesNow)
+                        <div class="text-md">Schedule Type:
+                            @if ($schedulesNow->isMakeUp == '0')
+                                Regular Schedule
+                            @else
+                                Make-Up Schedule
+                            @endif
+                        </div>
+                        <div class="text-md">Subject: {{ $schedulesNow->subject->subject_name }}</div>
+                        <div class="text-md">Instructor: {{ $schedulesNow->instructor->name }}</div>
+                        <div class="text-md">Section: {{ $schedulesNow->section->section_name }}</div>
+                        <div class="text-md">Day: {{ $schedulesNow->days }}</div>
+                        <div class="text-md">Time Frame: {{ $schedulesNow->time_start }} to {{ $schedulesNow->time_end }}</div>
                     @else
-                        @forelse ($schedulesNow as $sched_now)
-                            <div class="text-md">Schedule Type:
-                                @if ($sched_now->isMakeUp == '0')
-                                    Regular Schedule
-                                @else
-                                    Make-Up Schedule
-                                @endif
-                            </div>
-                            <div class="text-md">Subject: {{ $sched_now->subject->subject_name }}</div>
-                            <div class="text-md">Instructor: {{ $sched_now->instructor->name }}</div>
-                            <div class="text-md">Section: {{ $sched_now->section->section_name }}</div>
-                            <div class="text-md">Day: {{ $sched_now->days }}</div>
-                            <div class="text-md">Time Frame: {{ $sched_now->time_start }} to {{ $sched_now->time_end }}</div>
-                        @empty
-                            <div class="text-md">No Schedule / Events as of Now!</div>
-                        @endforelse
+                        <div class="text-md">No Schedule / Events as of Now!</div>
                     @endif
                 </div>
             </div>

@@ -7,10 +7,8 @@ use App\Models\Event;
 use App\Models\Section;
 use App\Models\Subject;
 use Livewire\Component;
-use App\Models\EventNow;
 use App\Models\Schedules;
 use App\Models\Instructor;
-use App\Models\ScheduleNow;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Client\ConnectionException;
 
@@ -23,8 +21,8 @@ class Index extends Component
         $totalSubjects = Subject::count();
         $totalSections = Section::count();
         $totalEvents = Event::count();
-        $schedulesNow = ScheduleNow::all();
-        $eventsNow = EventNow::all();
+        $schedulesNow = Schedules::where('isCurrent', '1')->first();
+        $eventsNow = Event::where('isCurrent', '1')->first();
 
         //Connect API from the Device
         try {
