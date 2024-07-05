@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\LogsController;
+use App\Http\Controllers\Admin\EventsController;
 use App\Http\Controllers\Admin\StudentsController;
 use App\Http\Controllers\Admin\SchedulesController;
 use App\Http\Controllers\Admin\InstructorsController;
@@ -28,4 +29,7 @@ Route::get('makeupscheds/', [SchedulesController::class, 'showMakeUpSchedsAPI'])
 Route::get('schedules/current', [SchedulesController::class, 'showCurrentSchedAPI']);
 
 //Inputting Students to Logs
-Route::post('attend/{student_id}', [LogsController::class, 'attendStudentAPI']);
+Route::post('attend/{tag_uid}', [LogsController::class, 'attendStudentAPI']);
+
+//Show All Events
+Route::get('events/', [EventsController::class, 'showEventsAPI']);

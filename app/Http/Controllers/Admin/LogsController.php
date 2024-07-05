@@ -16,8 +16,8 @@ class LogsController extends Controller
         return view('admin.logs.index');
     }
 
-    public function attendStudentAPI(String $student_id){
-        $student = User::where('student_id', $student_id)->first();
+    public function attendStudentAPI(String $tag_uid){
+        $student = User::where('tag_uid', $tag_uid)->first();
         $schedule_now = Schedules::where('isCurrent', '1')->first();
         $datetime = Carbon::now('Asia/Manila');
 

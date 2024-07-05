@@ -24,7 +24,7 @@
             {{-- @endcan --}}
         </div>
 
-        <div class="bg-base-100 border-gray-100 shadow-md shadow-black/5 p-6 rounded-md">
+        <div wire:poll class="bg-base-100 border-gray-100 shadow-md shadow-black/5 p-6 rounded-md">
             <div class="overflow-x-auto">
                 <table class="table table-zebra">
                     <thead class="bg-base-200 rounded-md text-md">

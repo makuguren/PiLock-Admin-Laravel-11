@@ -26,7 +26,7 @@ class Index extends Component
 
         //Connect API from the Device
         try {
-            $response = Http::get('http://127.0.0.1:5000/systeminfo');
+            $response = Http::get('http://10.8.0.2:4200/cputemp');
             if($response->successful()){
                 $systeminfo = json_decode($response, true);
             }

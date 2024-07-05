@@ -112,12 +112,12 @@
                             </h6>
                             <h6
                                 class="block font-sans text-base antialiased font-semibold leading-relaxed tracking-normal text-blue-gray-900">
-                                {{ $systeminfo['cpu_usage'] }}%
+                                {{ $systeminfo['cpuUsage'] }}%
                             </h6>
                             </div>
                             <div
                             class="flex-start flex h-2.5 w-full overflow-hidden rounded-full bg-blue-gray-50 font-sans text-xs font-medium">
-                            <progress class="progress progress-info w-100 h-full" value="{{ $systeminfo['cpu_usage'] }}" max="100"></progress>
+                            <progress class="progress progress-info w-100 h-full" value="{{ $systeminfo['cpuUsage'] }}" max="100"></progress>
                             </div>
                         </div>
 
@@ -129,16 +129,16 @@
                             </h6>
                             <h6
                                 class="block font-sans text-base antialiased font-semibold leading-relaxed tracking-normal text-blue-gray-900">
-                                {{ $systeminfo['memory_percentage'] }}%
+                                {{ $systeminfo['usagePercentage'] }}%
                             </h6>
                             </div>
                             <div
                             class="flex-start flex h-2.5 w-full overflow-hidden rounded-full bg-blue-gray-50 font-sans text-xs font-medium">
-                            <progress class="progress progress-info w-100 h-full" value="{{ $systeminfo['memory_percentage'] }}" max="100"></progress>
+                            <progress class="progress progress-info w-100 h-full" value="{{ $systeminfo['usagePercentage'] }}" max="100"></progress>
                             </div>
                         </div>
 
-                        <div class="w-full mb-4">
+                        {{-- <div class="w-full mb-4">
                             <div class="flex items-center justify-between gap-4 mb-2">
                             <h6
                                 class=" text-base block font-sans antialiased leading-relaxed tracking-normal text-blue-gray-900">
@@ -153,17 +153,13 @@
                             class="flex-start flex h-2.5 w-full overflow-hidden rounded-full bg-blue-gray-50 font-sans text-xs font-medium">
                             <progress class="progress progress-info w-100 h-full" value="{{ $systeminfo['storage_percentage'] }}" max="100"></progress>
                             </div>
-                        </div>
+                        </div> --}}
 
-                        <div class="text-sm mt-2">Total RAM: {{ $systeminfo['total_memory'] }}</div>
-                        <div class="text-sm mt-2">Used RAM: {{ $systeminfo['used_memory'] }}</div>
-                        <div class="text-sm mt-2">Free RAM: {{ $systeminfo['free_memory'] }}</div>
-                        <div class="text-sm mt-2">Total Storage: {{ $systeminfo['total_capacity'] }}</div>
-                        <div class="text-sm mt-2">Storage Used: {{ $systeminfo['storage_used'] }}</div>
-                        <div class="text-sm mt-2">Free Storage: {{ $systeminfo['free_storage'] }}</div>
-                        <div class="text-sm mt-2">Boot Time: {{ $systeminfo['boot_time'] }}</div>
-                        <div class="text-sm mt-2">Architecture: {{ $systeminfo['architecture'] }}</div>
-                        <div class="text-sm mt-2">Operating System: {{ $systeminfo['operating_system'] }}</div>
+                        <div class="text-sm mt-2">Total RAM: {{ $systeminfo['totalMemory'] }}</div>
+                        <div class="text-sm mt-2">Used RAM: {{ $systeminfo['memUsed'] }}</div>
+                        <div class="text-sm mt-2">Free RAM: {{ $systeminfo['memFree'] }}</div>
+                        <div class="text-sm mt-2">Boot Time: {{ $systeminfo['uptime'] }}</div>
+                        {{-- <div class="text-sm mt-2">Architecture: {{ $systeminfo['family'] }}</div> --}}
                     </div>
                 @endif
             </div>
