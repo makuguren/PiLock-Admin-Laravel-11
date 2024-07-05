@@ -18,6 +18,7 @@ return new class extends Migration
             $table->date('birthdate')->nullable();
             $table->string('google_id')->unique()->nullable();
             $table->string('avatar')->nullable();
+            $table->string('user_theme')->nullable();
 
             //Foreign Key
             $table->foreign('section_id')->references('id')->on('sections');
@@ -36,6 +37,7 @@ return new class extends Migration
             $table->dropColumn('birthdate');
             $table->dropColumn('google_id');
             $table->dropColumn('avatar');
+            $table->dropColumn('user_theme');
         });
     }
 };

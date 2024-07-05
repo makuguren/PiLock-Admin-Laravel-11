@@ -30,7 +30,8 @@ class User extends Authenticatable
         'student_id',
         'tag_uid',
         'birthdate',
-        'section_id'
+        'section_id',
+        'user_theme'
     ];
 
     /**

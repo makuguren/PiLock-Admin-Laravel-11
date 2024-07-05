@@ -21,6 +21,11 @@ Route::middleware('auth:web')->name('user.')->group(function () {
     //Dashboard Routes
     Route::get('dashboard', [App\Http\Controllers\User\DashboardController::class, 'index'])->name('dashboard');
 
+    //Profile Routes
+    Route::controller(App\Http\Controllers\User\SettingsController::class)->group(function () {
+        Route::get('settings', 'index')->name('settings.index');
+        Route::patch('settings', 'updateProfile')->name('settings.updateProfile');
+    });
 });
 
 Route::get('/socialite/google', [SocialLoginController::class, 'toProvider'])->name('socialite.login');
