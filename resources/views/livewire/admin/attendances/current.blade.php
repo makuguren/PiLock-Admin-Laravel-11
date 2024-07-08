@@ -30,10 +30,9 @@
                     <thead class="bg-base-200 rounded-md text-md">
                         <tr>
                             <th>STUDENT ID</th>
-                            <th>NAME</th>
+                            <th>NAME AND EMAIL</th>
                             <th>SECTION</th>
                             <th>SUBJECT</th>
-                            <th>EMAIL</th>
                             <th>IS PRESENT</th>
                         </tr>
                     </thead>
@@ -41,10 +40,22 @@
                         @forelse ($attendances as $attendance)
                             <tr>
                                 <td><div class="font-bold">{{ $attendance->student->student_id }}</div></td>
-                                <td><div class="">{{ $attendance->student->name }}</div></td>
+                                <td>
+                                    <div class="flex items-center gap-3">
+                                        <div class="avatar">
+                                          <div class="mask mask-squircle h-12 w-12">
+                                            <img
+                                              src="{{ $attendance->student->avatar ?? '' }}" />
+                                          </div>
+                                        </div>
+                                        <div>
+                                          <div class="font-bold">{{ $attendance->student->name }}</div>
+                                          <div class="text-sm opacity-50">{{ $attendance->student->email }}</div>
+                                        </div>
+                                    </div>
+                                </td>
                                 <td><div class="">{{ $attendance->student->section->section_name }}</div></td>
                                 <td><div class="">{{ $attendance->subject->subject_name }}</div></td>
-                                <td><div class="">{{ $attendance->student->email }}</div></td>
                                 <td>
                                     <div class="">
                                         @if ($attendance->isPresent == '0')

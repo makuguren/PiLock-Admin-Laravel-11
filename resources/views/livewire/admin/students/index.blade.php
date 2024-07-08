@@ -71,9 +71,8 @@
                       <tr class="bg-base-200">
                         <th>STUDENT ID</th>
                         <th>TAG UID</th>
-                        <th>NAME</th>
+                        <th>NAME AND EMAIL</th>
                         <th>YEAR AND SECTION</th>
-                        <th>EMAIL</th>
                         <th>ACTION</th>
                       </tr>
                     </thead>
@@ -98,22 +97,26 @@
                                         @endif
                                     </div>
                                 </td>
-                                <td><div class="">{{ $student->name }}</div></td>
+                                <td>
+                                    <div class="flex items-center gap-3">
+                                        <div class="avatar">
+                                          <div class="mask mask-squircle h-12 w-12">
+                                            <img
+                                              src="{{ $student->avatar ?? '' }}" />
+                                          </div>
+                                        </div>
+                                        <div>
+                                          <div class="font-bold">{{ $student->name }}</div>
+                                          <div class="text-sm opacity-50">{{ $student->email }}</div>
+                                        </div>
+                                    </div>
+                                </td>
                                 <td>
                                     <div class="">
                                         @if ($student->section_id)
                                             {{ $student->section->section_name }}
                                         @else
                                             No Section Assigned
-                                        @endif
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="">
-                                        @if ($student->email)
-                                            {{ $student->email }}
-                                        @else
-                                            No Email Assigned
                                         @endif
                                     </div>
                                 </td>

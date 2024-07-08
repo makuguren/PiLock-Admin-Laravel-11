@@ -102,7 +102,7 @@
                         </div>
                     </div>
                 @else
-                    <div wire:poll class="overflow-x-auto">
+                    <div wire:poll.1s class="overflow-x-auto">
                         {{-- Implement Code here! --}}
                         <div class="w-full mb-4">
                             <div class="flex items-center justify-between gap-4 mb-2">
@@ -155,6 +155,7 @@
                             </div>
                         </div> --}}
 
+                        <div class="text-sm mt-2">Temperature {{ $systeminfo['temp'] }}</div>
                         <div class="text-sm mt-2">Total RAM: {{ $systeminfo['totalMemory'] }}</div>
                         <div class="text-sm mt-2">Used RAM: {{ $systeminfo['memUsed'] }}</div>
                         <div class="text-sm mt-2">Free RAM: {{ $systeminfo['memFree'] }}</div>
