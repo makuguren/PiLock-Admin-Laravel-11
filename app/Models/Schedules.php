@@ -23,7 +23,8 @@ class Schedules extends Model
         'time_start',
         'time_end',
         'isMakeUp',
-        'isApproved'
+        'isApproved',
+        'isAttend'
     ];
 
     public function subject(){

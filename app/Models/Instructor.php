@@ -22,7 +22,8 @@ class Instructor extends Authenticatable
         'name',
         'email',
         'password',
-        'instructor_theme'
+        'instructor_theme',
+        'tag_uid'
     ];
 
     /**

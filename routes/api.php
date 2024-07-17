@@ -28,8 +28,9 @@ Route::get('makeupscheds/', [SchedulesController::class, 'showMakeUpSchedsAPI'])
 //Show Current Schedules
 Route::get('schedules/current', [SchedulesController::class, 'showCurrentSchedAPI']);
 
-//Inputting Students to Logs
-Route::post('attend/{tag_uid}', [LogsController::class, 'attendStudentAPI']);
+//Inputting Instructor First and Students to Logs
+Route::post('attendstud/{tag_uid}', [LogsController::class, 'attendStudentAPI']);
+Route::post('attendinst/{tag_uid}', [LogsController::class, 'attendInstructorAPI']);
 
 //Show All Events
 Route::get('events/', [EventsController::class, 'showEventsAPI']);

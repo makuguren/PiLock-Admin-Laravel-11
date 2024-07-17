@@ -109,6 +109,11 @@ Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function
 
 //Instructor Interface
 Route::middleware('auth:instructor')->prefix('instructor')->name('instructor.')->group(function () {
+    //Attendances Routes
+    Route::controller(App\Http\Controllers\Instructor\AttendancesController::class)->group(function () {
+        Route::get('attendances', 'index')->name('attendances.index');
+    });
+
     //Schedule Routes
     Route::controller(App\Http\Controllers\Instructor\SchedulesController::class)->group(function () {
         Route::get('schedules', 'index')->name('schedules.index');

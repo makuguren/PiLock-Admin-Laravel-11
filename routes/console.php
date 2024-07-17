@@ -55,7 +55,8 @@ Schedule::call(function () {
 
         //Also, Update isCurrent to 0 in the Make-Up Class if the Event is Going to Start
         Schedules::where('isMakeUp','1')->where('isCurrent', '1')->update([
-            'isCurrent' => '0'
+            'isCurrent' => '0',
+            'isAttend' => '0'
         ]);
 
 
@@ -81,7 +82,8 @@ Schedule::call(function () {
 
         //Also, Update isCurrent to 0 in the Regular Class if the Event is Going to Start
         Schedules::where('isMakeUp','0')->where('isCurrent', '1')->update([
-            'isCurrent' => '0'
+            'isCurrent' => '0',
+            'isAttend' => '0'
         ]);
 
     } else {
@@ -129,7 +131,8 @@ Schedule::call(function () {
 
             //Also, Update isCurrent to 0 in the Regular Class if the Make-Up Classes is Going to Start
             Schedules::where('isMakeUp','0')->where('isCurrent', '1')->update([
-                'isCurrent' => '0'
+                'isCurrent' => '0',
+                'isAttend' => '0'
             ]);
 
         } else {
@@ -185,7 +188,8 @@ Schedule::call(function () {
 
     //Update isCurrent = 0 if the Regular Schedule is Ended
     $scheds_end->update([
-        'isCurrent' => '0'
+        'isCurrent' => '0',
+        'isAttend' => '0'
     ]);
 
     //Update isCurrent = 0 if the Make-Up Class Schedule reaches Time_End
