@@ -11,7 +11,7 @@
 
         <div data-sveltekit-preload-data class="bg-base-100 sticky top-0 z-20 hidden items-center gap-2 bg-opacity-90 px-4 py-2 backdrop-blur lg:flex ">
             <!-- Drawer Logo -->
-            <a href="{{ route('user.dashboard') }}" aria-current="page" aria-label="Homepage" class="flex-0 btn btn-ghost px-2"
+            <a href="{{ route('user.dashboard.index') }}" aria-current="page" aria-label="Homepage" class="flex-0 btn btn-ghost px-2"
                 data-svelte-h="svelte-nce89e">
                 <img src="https://placehold.co/32x32" alt="" class="w-8 h-8 rounded object-cover">
                 <span class="text-lg font-bold ml-3">{{ $appSetting->website_name ?? 'Pi:Lock | Student' }}</span>
@@ -21,7 +21,7 @@
         {{-- Sidebar Content --}}
         <ul class="menu px-4 py-0">
             <li class="mb-1 group {{ Request::is('dashboard') ? 'active':'' }}">
-                <a href="{{ route('user.dashboard') }}"
+                <a href="{{ route('user.dashboard.index') }}"
                     class="flex items-center py-2 px-4 hover:bg-blue-400 hover:text-white rounded-md group-[.active]:bg-blue-700 group-[.active]:text-white group-[.selected]:bg-blue-700 group-[.selected]:text-gray-200">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-6 h-6 mr-1">

@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Instructor\Auth;
+namespace App\Http\Controllers\Admin\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\Instructor;
+use App\Models\Admin;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -12,14 +12,14 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 
-class RegisteredUserController extends Controller
+class RegisteredAdminController extends Controller
 {
     /**
      * Display the registration view.
      */
     public function create(): View
     {
-        return view('instructor.auth.register');
+        return view('admin.auth.register');
     }
 
     /**
@@ -31,20 +31,20 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.Instructor::class],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.Admin::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        $instructor = Instructor::create([
+        $admin = Admin::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
 
-        event(new Registered($instructor));
+        event(new Registered($admin));
 
-        Auth::guard('instructor')->login($instructor);
+        Auth::guard('admin')->login($admin);
 
-        return redirect(route('instructor.dashboard', absolute: false));
+        return redirect(route('admin.dashboard.index', absolute: false));
     }
 }

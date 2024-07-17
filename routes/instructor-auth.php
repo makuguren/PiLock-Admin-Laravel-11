@@ -3,14 +3,14 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Instructor\ProfileController;
 use App\Http\Controllers\Instructor\Auth\PasswordController;
-use App\Http\Controllers\Instructor\Auth\RegisteredUserController;
+use App\Http\Controllers\Instructor\Auth\RegisteredInstructorController;
 use App\Http\Controllers\Instructor\Auth\AuthenticatedSessionController;
 
 Route::middleware('guest:instructor')->prefix('instructor')->name('instructor.')->group(function () {
-    Route::get('register', [RegisteredUserController::class, 'create'])
+    Route::get('register', [RegisteredInstructorController::class, 'create'])
                 ->name('register');
 
-    Route::post('register', [RegisteredUserController::class, 'store']);
+    Route::post('register', [RegisteredInstructorController::class, 'store']);
 
     Route::get('login', [AuthenticatedSessionController::class, 'create'])
                 ->name('login');
@@ -22,7 +22,7 @@ Route::middleware('auth:instructor')->prefix('instructor')->name('instructor.')-
 
     Route::get('/dashboard', function () {
         return view('instructor.dashboard');
-    })->middleware(['verified'])->name('dashboard');
+    })->middleware(['verified'])->name('dashboard.index');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

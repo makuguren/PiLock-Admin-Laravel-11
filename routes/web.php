@@ -19,7 +19,7 @@ Route::middleware('auth:web')->name('user.')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     //Dashboard Routes
-    Route::get('dashboard', [App\Http\Controllers\User\DashboardController::class, 'index'])->name('dashboard');
+    Route::get('dashboard', [App\Http\Controllers\User\DashboardController::class, 'index'])->name('dashboard.index');
 
     //Profile Routes
     Route::controller(App\Http\Controllers\User\SettingsController::class)->group(function () {

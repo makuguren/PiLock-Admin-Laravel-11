@@ -15,7 +15,7 @@ class Index extends Component
     //Validations
     protected function rules(){
         return [
-            'student_id' => 'required|string',
+            'student_id' => 'required|string|unique:users,student_id',
             'section_id' => 'required|integer',
             'birthdate' => 'required'
         ];
