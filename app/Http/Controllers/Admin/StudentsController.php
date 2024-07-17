@@ -93,4 +93,49 @@ class StudentsController extends Controller
         toastr()->success('Student Updated Successfully');
         return redirect()->route('admin.students.index');
     }
+
+    //API Controllers/Functions
+    public function showStudentsAPI(){
+        $students = User::all();
+        if($students->count() > 0){
+            return response()->json([
+                'students' => $students->map(function ($student) {
+                    return [
+                        'id' => $student->id,
+                        'student_id' => $student->student_id,
+                        'tag_uid' => $student->tag_uid,
+                        'name' => $student->name,
+                        'section' => $student->section->section_name
+                    ];
+                })
+            ], 200);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'status_message' => 'No Students Found'
+            ], 404);
+        }
+    }
+
+    public function showStudentAPI(String $student_id){
+        $students = User::where('student_id', $student_id)->get();
+        if($students->count() > 0){
+            return response()->json([
+                'student' => $students->map(function ($student) {
+                    return [
+                        'id' => $student->id,
+                        'student_id' => $student->student_id,
+                        'tag_uid' => $student->tag_uid,
+                        'name' => $student->name,
+                        'section' => $student->section->section_name
+                    ];
+                })
+            ], 200);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'status_message' => 'No Student Found'
+            ], 404);
+        }
+    }
 }
