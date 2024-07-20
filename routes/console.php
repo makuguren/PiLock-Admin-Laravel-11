@@ -36,7 +36,7 @@ Schedule::call(function () {
         //Update isCurrent to 0 in the Attendance for Make-Up Class if the Event is Going to Start
         $schedule = Schedules::where('isMakeUp','1')->where('isCurrent', '1')->first();
         if($schedule){
-            $users = DB::table('attendances')->where('schedule_id', $schedule->id)->where('isCurrent', '1')->get();
+            $users = DB::table('attendances')->where('isCurrent', '1')->get();
             $attendanceData = [];
 
             foreach ($users as $user) {
@@ -63,7 +63,7 @@ Schedule::call(function () {
         //Update isCurrent to 0 in the Attendance for Regular Class if the Event is Going to Start
         $schedule = Schedules::where('isMakeUp','0')->where('isCurrent', '1')->first();
         if($schedule){
-            $users = DB::table('attendances')->where('schedule_id', $schedule->id)->where('isCurrent', '1')->get();
+            $users = DB::table('attendances')->where('isCurrent', '1')->get();
             $attendanceData = [];
 
             foreach ($users as $user) {
@@ -97,8 +97,8 @@ Schedule::call(function () {
             foreach ($users as $user) {
                 $attendanceData[] = [
                     'student_id' => $user->id,
-                    'subject_id' => $makeupsched->subject_id,
                     'schedule_id' => $makeupsched->id,
+                    'date' => $date,
                     'isCurrent' => '1'
                 ];
             }
@@ -112,7 +112,7 @@ Schedule::call(function () {
             //Update isCurrent to 0 in the Attendance if the Make-Up Classes is Going to Start
             $schedule = Schedules::where('isMakeUp','0')->where('isCurrent', '1')->first();
             if($schedule){
-                $users = DB::table('attendances')->where('schedule_id', $schedule->id)->where('isCurrent', '1')->get();
+                $users = DB::table('attendances')->where('isCurrent', '1')->get();
                 $attendanceData = [];
 
                 foreach ($users as $user) {
@@ -146,7 +146,7 @@ Schedule::call(function () {
                 foreach ($users as $user) {
                     $attendanceData[] = [
                         'student_id' => $user->id,
-                        'subject_id' => $schedule->subject_id,
+                        'date' => $date,
                         'schedule_id' => $schedule->id,
                         'isCurrent' => '1'
                     ];
@@ -169,7 +169,7 @@ Schedule::call(function () {
     //Update isCurrent = 0 if the Regular Schedule reaches Time_End
     $schedule = $scheds_end->first();
     if($schedule){
-        $users = DB::table('attendances')->where('schedule_id', $schedule->id)->where('isCurrent', '1')->get();
+        $users = DB::table('attendances')->where('isCurrent', '1')->get();
         $attendanceData = [];
 
         foreach ($users as $user) {
@@ -195,7 +195,7 @@ Schedule::call(function () {
     //Update isCurrent = 0 if the Make-Up Class Schedule reaches Time_End
     $schedule = $makeupscheds_end->first();
     if($schedule){
-        $users = DB::table('attendances')->where('schedule_id', $schedule->id)->where('isCurrent', '1')->get();
+        $users = DB::table('attendances')->where('isCurrent', '1')->get();
         $attendanceData = [];
 
         foreach ($users as $user) {

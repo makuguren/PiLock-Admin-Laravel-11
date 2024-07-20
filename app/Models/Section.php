@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Log;
 use App\Models\User;
 use App\Models\Schedules;
+use App\Models\Attendance;
 use App\Models\ScheduleNow;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;

@@ -30,8 +30,4 @@ class Subject extends Model
     public function logs(){
         return $this->hasMany(Log::class, 'subject_id', 'id');
     }
-
-    public function attendance(){
-        return $this->hasMany(Attendance::class, 'subject_id', 'id');
-    }
 }

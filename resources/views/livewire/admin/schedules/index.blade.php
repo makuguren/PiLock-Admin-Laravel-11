@@ -75,8 +75,8 @@
                                     @endif
                                 </div>
                             </td>
-                            <td><div class="">{{ $schedule->time_start }}</div></td>
-                            <td><div class="">{{ $schedule->time_end }}</div></td>
+                            <td><div class="">{{ Carbon\Carbon::parse($schedule->time_start)->format('h:i A') }}</div></td>
+                            <td><div class="">{{ Carbon\Carbon::parse($schedule->time_end)->format('h:i A') }}</div></td>
                             <th>
                                 <div class="flex flex-row space-x-2">
                                     {{-- @can('Update Schedules') --}}
