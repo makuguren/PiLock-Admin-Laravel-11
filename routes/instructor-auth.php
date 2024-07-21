@@ -1,16 +1,23 @@
 <?php
 
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Instructor\ProfileController;
 use App\Http\Controllers\Instructor\Auth\PasswordController;
-use App\Http\Controllers\Instructor\Auth\RegisteredInstructorController;
 use App\Http\Controllers\Instructor\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Instructor\Auth\RegisteredInstructorController;
 
 Route::middleware('guest:instructor')->prefix('instructor')->name('instructor.')->group(function () {
-    Route::get('register', [RegisteredInstructorController::class, 'create'])
-                ->name('register');
 
-    Route::post('register', [RegisteredInstructorController::class, 'store']);
+    // Check if the Configuration is Allow to Logged In and Register
+    $appSetting = View::shared('appSetting');
+
+    if($appSetting->isRegInst == '1'){
+        Route::get('register', [RegisteredInstructorController::class, 'create'])
+        ->name('register');
+
+        Route::post('register', [RegisteredInstructorController::class, 'store']);
+    }
 
     Route::get('login', [AuthenticatedSessionController::class, 'create'])
                 ->name('login');

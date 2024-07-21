@@ -9,7 +9,13 @@ class Setting extends Model
 {
     use HasFactory;
     protected $table = 'settings';
+
     protected $fillable = [
-        'website_title'
+        'website_title',
+        'isMaintenance',
+        'isDevInteg',
+        'isRegStud',
+        'isRegLoginStud',
+        'isRegInst'
     ];
 }

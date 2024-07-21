@@ -50,6 +50,9 @@
                 </form>
             </div>
 
+            {{-- Switches Section --}}
+            <livewire:global.switches.configuration />
+
             <div class="bg-base-100 border-gray-100 shadow-md shadow-black/5 p-6 rounded-md">
                 <div class="flex justify-between mb-4 items-start">
                     <div class="font-medium">Admin Profile Information</div>
