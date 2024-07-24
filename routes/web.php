@@ -1,5 +1,6 @@
 <?php
 
+use Livewire\Livewire;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\User\SocialLoginController;
@@ -7,6 +8,14 @@ use App\Http\Controllers\User\SocialLoginController;
 Route::get('/', function () {
     return view('welcome');
 })->name('welcome.index');
+
+Livewire::setUpdateRoute(function ($handle) {
+    return Route::post('Autogen_V3_Livewire_3/public/livewire/update', $handle);
+});
+
+Livewire::setScriptRoute(function ($handle) {
+    return Route::get('Autogen_V3_Livewire_3/public/livewire/livewire.js', $handle);
+});
 
 // Route::get('/dashboard', function () {
 //     return view('user.dashboard');
