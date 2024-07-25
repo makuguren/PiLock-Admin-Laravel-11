@@ -10,7 +10,7 @@
     @livewireStyles
 </head>
 
-<body class="font-inter">
+<body class="font-body">
     <div class="drawer lg:drawer-open">
         <input id="drawer" type="checkbox" class="drawer-toggle" />
         <div class="drawer-content bg-base-200">

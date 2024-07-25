@@ -2,7 +2,8 @@
 <div dialog wire:ignore.self class="modal modal-bottom sm:modal-middle" role="dialog">
     <div class="modal-box">
       <h3 class="text-lg font-bold">Delete Student</h3>
-        <form wire:submit.prevent="destroyStudent" method="dialog" class="w-full mt-6">
+        <form wire:submit.prevent="destroyStudent" method="POST" class="w-full mt-6">
+            @csrf
             <div class="flex flex-wrap mb-6">
                 <div class="w-full px-3">
                     <h5>Are you Sure you want to Delete?</h5>
