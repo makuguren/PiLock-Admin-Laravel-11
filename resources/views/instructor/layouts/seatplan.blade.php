@@ -22,8 +22,8 @@
                     <!-- Drawer Logo -->
                     <a href="{{ route('instructor.dashboard.index') }}" aria-current="page" aria-label="Homepage" class="flex-0 btn btn-ghost px-2"
                         data-svelte-h="svelte-nce89e">
-                        <img src="https://placehold.co/32x32" alt="" class="w-8 h-8 rounded object-cover">
-                        <span class="text-lg font-bold ml-3">{{ $appSetting->website_name ?? 'Pi:Lock | Instructor' }}</span>
+                        <img src="{{ asset('assets/images/pilock-white.png') }}" alt="" class="w-10 h-10 rounded object-cover">
+                        <span class="text-lg font-bold">{{ $appSetting->website_name ?? 'Pi:Lock | Instructor' }}</span>
                     </a>
                 </div>
 
