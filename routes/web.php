@@ -121,7 +121,6 @@ Route::middleware('auth:instructor')->prefix('instructor')->name('instructor.')-
     //Dashboard Routes
     Route::get('dashboard', [App\Http\Controllers\Instructor\DashboardController::class, 'index'])->name('dashboard.index');
 
-
     //Attendances Routes
     Route::controller(App\Http\Controllers\Instructor\AttendancesController::class)->group(function () {
         Route::get('attendances', 'index')->name('attendances.index');
@@ -142,6 +141,12 @@ Route::middleware('auth:instructor')->prefix('instructor')->name('instructor.')-
     Route::controller(App\Http\Controllers\Instructor\SettingsController::class)->group(function () {
         Route::get('settings', 'index')->name('settings.index');
         Route::patch('settings', 'updateProfile')->name('settings.updateProfile');
+    });
+
+    // SeatPlan Routes
+    Route::prefix('seatplan')->group(function () {
+        Route::get('/', App\Livewire\Instructor\SeatPlan\Index::class)->name('seatplan.index');
+        Route::get('assign', App\Livewire\Instructor\SeatPlan\EditSP::class)->name('seatplan.assign');
     });
 });
 

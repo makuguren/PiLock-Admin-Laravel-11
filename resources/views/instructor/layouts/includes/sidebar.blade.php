@@ -4,8 +4,8 @@
 
         <div class="bg-base-100 sticky top-0 z-10 w-full gap-y-2 bg-opacity-90 px-2 py-3 backdrop-blur lg:hidden">
             <a href="/" aria-current="page" aria-label="Homepage" class="flex-0 btn btn-ghost" data-svelte-h="svelte-nce89e">
-                <img src="https://placehold.co/32x32" alt="" class="w-8 h-8 rounded object-cover">
-                <span class="text-lg font-bold ml-3">{{ $appSetting->website_name ?? 'Pi:Lock | Instructor' }}</span>
+                <img src="{{ asset('assets/images/pilock-white.png') }}" alt="" class="w-10 h-10 rounded object-cover">
+                <span class="text-lg font-bold">{{ $appSetting->website_name ?? 'Pi:Lock | Instructor' }}</span>
             </a>
         </div>
 
@@ -13,8 +13,8 @@
             <!-- Drawer Logo -->
             <a href="{{ route('instructor.dashboard.index') }}" aria-current="page" aria-label="Homepage" class="flex-0 btn btn-ghost px-2"
                 data-svelte-h="svelte-nce89e">
-                <img src="https://placehold.co/32x32" alt="" class="w-8 h-8 rounded object-cover">
-                <span class="text-lg font-bold ml-3">{{ $appSetting->website_name ?? 'Pi:Lock | Instructor' }}</span>
+                <img src="{{ asset('assets/images/pilock-white.png') }}" alt="" class="w-10 h-10 rounded object-cover">
+                <span class="text-lg font-bold">{{ $appSetting->website_name ?? 'Pi:Lock | Instructor' }}</span>
             </a>
         </div>
         <div class="h-4"></div>
@@ -118,6 +118,13 @@
                 </a>
             </li>
             {{-- @endcan --}}
+
+            <li class="mb-1 group {{ Request::is('instructor/seatplan') ? 'active':'' }}">
+                <a href="{{ route('instructor.seatplan.index') }}"
+                    class="flex items-center py-2 px-4 hover:bg-blue-400 hover:text-white rounded-md group-[.active]:bg-blue-700 group-[.active]:text-white group-[.selected]:bg-blue-700 group-[.selected]:text-gray-200">
+                    <span class="text-sm">Seat Plan</span>
+                </a>
+            </li>
         </ul>
     </aside>
 </div>

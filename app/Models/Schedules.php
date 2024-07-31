@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Section;
 use App\Models\Subject;
+use App\Models\SeatPlan;
 use App\Models\Attendance;
 use App\Models\Instructor;
 use Illuminate\Database\Eloquent\Model;
@@ -41,5 +42,9 @@ class Schedules extends Model
 
     public function attendance(){
         return $this->hasMany(Attendance::class, 'schedule_id', 'id');
+    }
+
+    public function seatplan(){
+        return $this->hasMany(SeatPlan::class, 'schedule_id', 'id');
     }
 }
