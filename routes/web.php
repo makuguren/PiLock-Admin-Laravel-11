@@ -22,7 +22,7 @@ Route::get('/', function () {
 // })->middleware(['auth', 'verified'])->name('dashboard');
 
 //User Interface
-Route::middleware('auth:web')->name('user.')->group(function () {
+Route::middleware(['auth:web', App\Http\Middleware\UserComponentLayout::class])->name('user.')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -42,7 +42,7 @@ Route::get('/auth/google/login', [SocialLoginController::class, 'handleCallback'
 
 
 //Admin Interface
-Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function () {
+Route::middleware(['auth:admin', App\Http\Middleware\AdminComponentLayout::class])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard.index');
 
     //Student Routes
@@ -117,7 +117,7 @@ Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function
 });
 
 //Instructor Interface
-Route::middleware('auth:instructor')->prefix('instructor')->name('instructor.')->group(function () {
+Route::middleware(['auth:instructor', App\Http\Middleware\InstructorComponentLayout::class])->prefix('instructor')->name('instructor.')->group(function () {
     //Dashboard Routes
     Route::get('dashboard', [App\Http\Controllers\Instructor\DashboardController::class, 'index'])->name('dashboard.index');
 

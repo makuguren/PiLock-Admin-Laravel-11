@@ -75,6 +75,6 @@ class Index extends Component
             'seatplans' => $queryFetchSeats,
             'sections' => $sections,
             'subjects' => $subjects
-        ])->layout('instructor.layouts.app');
+        ]);
     }
 }
