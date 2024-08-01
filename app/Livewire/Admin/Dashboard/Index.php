@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Admin\Dashboard;
 
+use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Event;
 use App\Models\Section;
@@ -16,6 +17,8 @@ use Illuminate\Http\Client\ConnectionException;
 
 class Index extends Component
 {
+    public $greetMessage;
+
     public function render(){
         $totalStudents = User::count();
         $totalSchedules = Schedules::count();
@@ -27,6 +30,8 @@ class Index extends Component
         $eventsNow = Event::where('isCurrent', '1')->first();
 
         // $setting = Setting::where('id', '1')->first();
+
+        // Configuration if the System Integration is either on and off using Global Variable.
         $appSetting = View::shared('appSetting');
 
         //Connect API from the Device
@@ -43,6 +48,21 @@ class Index extends Component
             }
         }
 
+        // Greetings from the Admins (Good Morning, Afternoon, and Evening)
+        $getHour = Carbon::now()->timezone('Asia/Manila')->format('H');
+        if($getHour > 0){
+            $this->greetMessage = 'Good Morning';
+        }
+        if($getHour > 6){
+            $this->greetMessage = 'Good Morning';
+        }
+        if($getHour > 12){
+            $this->greetMessage = 'Good Afternoon';
+        }
+        if($getHour > 18){
+            $this->greetMessage = 'Good Evening';
+        }
+
         return view('livewire.admin.dashboard.index', [
             'totalStudents' => $totalStudents,
             'totalSchedules' => $totalSchedules,
@@ -52,7 +72,8 @@ class Index extends Component
             'totalSections' => $totalSections,
             'systeminfo' => $systeminfo,
             'schedulesNow' => $schedulesNow,
-            'eventsNow' => $eventsNow
+            'eventsNow' => $eventsNow,
+            'greetMessage' => $this->greetMessage
         ]);
     }
 }

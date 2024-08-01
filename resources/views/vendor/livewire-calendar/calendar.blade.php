@@ -14,15 +14,15 @@
             </div>
 
             <div class="flex flex-column gap-3 mb-3">
-                <div class="btn bg-blue-700 hover:bg-blue-500 btn-sm">
+                <div class="btn btn-ghost bg-blue-700 hover:bg-blue-500 btn-sm">
                     <button wire:click="goToCurrentMonth" class="text-white">Current</button>
                 </div>
 
-                <div class="btn bg-red-700 hover:bg-red-500 btn-sm">
+                <div class="btn btn-ghost bg-red-700 hover:bg-red-500 btn-sm">
                     <button wire:click="goToPreviousMonth" class="text-white">Previous</button>
                 </div>
 
-                <div class="btn bg-blue-700 hover:bg-blue-500 btn-sm">
+                <div class="btn btn-ghost bg-blue-700 hover:bg-blue-500 btn-sm">
                     <button wire:click="goToNextMonth" class="text-white">Next</button>
                 </div>
             </div>
@@ -39,15 +39,15 @@
             </div>
 
             <div class="flex flex-column gap-3 mb-3">
-                <div class="btn bg-blue-700 hover:bg-blue-500 btn-sm">
+                <div class="btn btn-ghost bg-blue-700 hover:bg-blue-500 btn-sm">
                     <button wire:click="goToCurrentMonth" class="text-white">Current</button>
                 </div>
 
-                <div class="btn bg-red-700 hover:bg-red-500 btn-sm">
+                <div class="btn btn-ghost bg-red-700 hover:bg-red-500 btn-sm">
                     <button wire:click="goToPreviousMonth" class="text-white">Previous</button>
                 </div>
 
-                <div class="btn bg-blue-700 hover:bg-blue-500 btn-sm">
+                <div class="btn btn-ghost bg-blue-700 hover:bg-blue-500 btn-sm">
                     <button wire:click="goToNextMonth" class="text-white">Next</button>
                 </div>
             </div>

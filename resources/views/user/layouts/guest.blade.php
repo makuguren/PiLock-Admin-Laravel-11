@@ -8,7 +8,8 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <link rel="icon" type="image/x-icon" href="{{ asset('assets/images/pilock-dark.png') }}">
+    <title>{{ $title ?? '' }} - Pi:Lock | Student</title>
 
     <!-- Link for cdn -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])

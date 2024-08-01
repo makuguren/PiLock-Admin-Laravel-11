@@ -1,7 +1,7 @@
 <x-instructor-app-layout>
 
     <x-slot:title>
-        Instructor Events
+        Events
     </x-slot>
 
     <div>

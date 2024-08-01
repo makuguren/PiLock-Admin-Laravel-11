@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <link rel="icon" type="image/x-icon" href="{{ asset('assets/images/pilock-dark.png') }}">
+    <title>Pi:Lock System</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,700,0,0" />
 </head>
 
 <style>
@@ -79,7 +81,7 @@
                         <li><a>Community</a></li>
                     </ul>
                 </li>
-                <a class="btn btn-primary btn-sm">
+                <a class="btn btn-ghost btn-primary btn-sm">
                     <i class="fa-solid fa-rocket"></i>
                     Access
                 </a>
@@ -87,36 +89,67 @@
         </div>
 
         <!-- Menu for desktop -->
-        <div class="hidden sm:flex gap-2">
-            <a class="btn btn-ghost btn-sm">
-                <i class="fa-solid fa-circle-info text-secondary"></i>
-                About
-            </a>
+        <ul class="hidden menu sm:menu-horizontal gap-2">
+            <li><a>Home</a></li>
+            <li><a>About</a></li>
+            <li><a>Members</a></li>
+            <li><a>Blog</a></li>
+            <li><a>Contact</a></li>
+        </ul>
 
-            <a class="btn btn-ghost btn-sm">
-                <i class="fa-solid fa-users text-secondary"></i>
-                Team
-            </a>
-
+        <!-- Menu for desktop -->
+        <div class="hidden sm:flex gap-2 mr-2">
             <!-- Dropdown menu -->
             <div class="dropdown dropdown-end">
-                <button class="btn btn-ghost btn-sm">
-                    <i class="fa-solid fa-fire text-secondary"></i>
-                    Features
-                    <i class="fa-solid fa-chevron-down"></i>
+                <button class="btn btn-ghost btn-sm text-white bg-blue-700 hover:bg-blue-500">
+                    <span class="material-symbols-outlined">how_to_reg</span>
+                    Register
+                    {{-- <i class="fa-solid fa-chevron-down"></i> --}}
                 </button>
 
-                <ul tabindex="0" class="dropdown-content menu z-[1] bg-base-200 p-6 rounded-box shadow w-56 gap-2">
-                    <li><a>Tech tools</a></li>
-                    <li><a>Podcast</a></li>
-                    <li><a>Community</a></li>
+                <ul tabindex="0" class="dropdown-content menu z-[1] bg-base-200 p-2 rounded-box shadow w-56 gap-2">
+                    @if (Route::has('admin.register'))
+                        <li><a href="{{ route('admin.register') }}">Admin Register</a></li>
+                    @endif
+
+                    @if (Route::has('instructor.register'))
+                        <li><a href="{{ route('instructor.register') }}">Instructor Register</a></li>
+                    @endif
+
+                    @if (Route::has('user.register'))
+                        <li><a href="{{ route('user.register') }}">Student Register</a></li>
+                    @endif
                 </ul>
             </div>
 
-            <a class="btn btn-primary btn-sm">
-                <i class="fa-solid fa-rocket"></i>
-                Access
-            </a>
+            <!-- Dropdown menu -->
+            <div class="dropdown dropdown-end">
+                <button class="btn btn-ghost btn-sm text-white bg-blue-700 hover:bg-blue-500">
+                    <span class="material-symbols-outlined">Login</span>
+                    Login
+                    {{-- <i class="fa-solid fa-chevron-down"></i> --}}
+                </button>
+
+                <ul tabindex="0" class="dropdown-content menu z-[1] bg-base-200 p-2 rounded-box shadow w-56 gap-2">
+                    @auth('admin')
+                        <li><a href="{{ route('admin.dashboard.index') }}">Admin Dashboard</a></li>
+                    @else
+                        <li><a href="{{ route('admin.login') }}">Admin Login</a></li>
+                    @endauth
+
+                    @auth('instructor')
+                        <li><a href="{{ route('instructor.dashboard.index') }}">Instructor Dashboard</a></li>
+                    @else
+                        <li><a href="{{ route('instructor.login') }}">Instructor Login</a></li>
+                    @endauth
+
+                    @auth('web')
+                        <li><a href="{{ route('user.dashboard.index') }}">Student Dashboard</a></li>
+                    @else
+                        <li><a href="{{ route('user.login') }}">Student Login</a></li>
+                    @endauth
+                </ul>
+            </div>
         </div>
     </nav>
 
@@ -125,21 +158,20 @@
             <h1 class="text-5xl font-bold">Pi:Lock System</h1>
 
             <span class="">
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatem architecto quae accusamus obcaecati laboriosam minima dignissimos, cupiditate explicabo placeat commodi nihil sed eveniet ducimus facilis reiciendis, inventore fugiat possimus quis!.
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque consequatur soluta tempore praesentium necessitatibus quia, sit asperiores delectus quos quisquam rem modi quas dolorem culpa dolor earum sapiente est magni?
+                Welcome to Pi:Lock System – your ultimate solution for secure, automated door locking. Our system leverages the power of Raspberry Pi and Laravel 11 to offer seamless schedule-based authentication, ensuring your spaces are protected and accessible only at the right times. Experience the future of security with Pi:Lock System.
             </span>
 
-            <div class="flex gap-4">
-                <a class="btn bg-green-700 hover:bg-green-500 text-white">
+            {{-- <div class="flex gap-4">
+                <a class="btn btn-ghost bg-green-700 hover:bg-green-500 text-white">
                     Get started
-                    {{-- <i class="fa-solid fa-arrow-right text-sm"></i> --}}
+                    <i class="fa-solid fa-arrow-right text-sm"></i>
                 </a>
 
-                {{-- <a class="btn btn-neutral">
+                <a class="btn btn-ghost btn-neutral">
                     See our blog
                     <i class="fa-solid fa-blog"></i>
-                </a> --}}
-            </div>
+                </a>
+            </div> --}}
         </div>
 
         <div class="flex flex-col place-content-center items-center lg:w-1/3">

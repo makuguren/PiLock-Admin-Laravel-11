@@ -1,7 +1,7 @@
 <x-admin-app-layout>
 
     <x-slot:title>
-        Admin Logs
+        Logs
     </x-slot>
 
     <div>

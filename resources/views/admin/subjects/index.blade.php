@@ -1,7 +1,7 @@
 <x-admin-app-layout>
 
     <x-slot:title>
-        Admin Subjects
+        Subjects
     </x-slot>
 
     <div>

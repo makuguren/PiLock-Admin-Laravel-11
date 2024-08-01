@@ -2,10 +2,10 @@
     <div class="p-6">
         <div class="flex flex-row">
             <div class="flex flex-col w-full">
-                <h1 class="font-bold text-2xl mb-2">Dashboard</h1>
+                <h1 class="font-bold text-2xl mb-2">{{ $greetMessage }}, {{ Auth::user()->name }}!</h1>
                 <ul class="flex items-center text-sm mb-6">
                     <li class="mr-2">
-                        <a href="#" class="text-gray-400 hover:text-gray-600 font-medium">Summary of Data in Every Pages</a>
+                        <a href="#" class="text-gray-400 hover:text-gray-600 font-medium">Admin Dashboard</a>
                     </li>
                 </ul>
             </div>

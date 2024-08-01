@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Instructor\Dashboard;
 
+use Carbon\Carbon;
 use Livewire\Component;
 use App\Models\Schedules;
 use App\Models\Attendance;
@@ -9,6 +10,8 @@ use Illuminate\Support\Facades\Auth;
 
 class Index extends Component
 {
+    public $greetMessage;
+
     public function markPresent(int $schedule_id){
         $markpresent = Schedules::findOrFail($schedule_id);
 
@@ -19,6 +22,22 @@ class Index extends Component
     }
 
     public function render(){
+
+        // Greetings from the Admins (Good Morning, Afternoon, and Evening)
+        $getHour = Carbon::now()->timezone('Asia/Manila')->format('H');
+        if($getHour > 0){
+            $this->greetMessage = 'Good Morning';
+        }
+        if($getHour > 6){
+            $this->greetMessage = 'Good Morning';
+        }
+        if($getHour > 12){
+            $this->greetMessage = 'Good Afternoon';
+        }
+        if($getHour > 18){
+            $this->greetMessage = 'Good Evening';
+        }
+
         $curschedule = Schedules::where('instructor_id', Auth::user()->id)
                                 ->where('isApproved', '1')
                                 ->where('isCurrent', '1')
@@ -28,7 +47,8 @@ class Index extends Component
         return view('livewire.instructor.dashboard.index',[
             'curschedule' => $curschedule,
             'totalPresent' => $totalPresent,
-            'totalStudents' => $totalStudents
+            'totalStudents' => $totalStudents,
+            'greetMessage' => $this->greetMessage
         ]);
     }
 }

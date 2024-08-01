@@ -40,7 +40,7 @@
             </div>
             <div class="modal-action">
                 <div class="flex flex-row-reverse space-x-2 space-x-reverse">
-                    <button onclick="cancel_event()" type="button" class="btn bg-red-700 hover:bg-red-500 text-white">Cancel</button>
+                    <button onclick="cancel_event()" type="button" class="btn btn-ghost bg-red-700 hover:bg-red-500 text-white">Cancel</button>
                 </div>
             </div>
         </form>

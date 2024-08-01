@@ -6,7 +6,7 @@ use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\User\SocialLoginController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('landing');
 })->name('welcome.index');
 
 // Livewire::setUpdateRoute(function ($handle) {

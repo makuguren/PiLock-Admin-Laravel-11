@@ -1,7 +1,7 @@
 <x-admin-app-layout>
 
     <x-slot:title>
-        Admin Events
+        Events
     </x-slot>
 
     <div>

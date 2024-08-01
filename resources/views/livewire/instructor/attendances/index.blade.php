@@ -13,7 +13,7 @@
                 </ul>
             </div>
 
-            <label for="download_pdf_modal" class="btn bg-red-700 hover:bg-red-500 w-55 btn-sm mt-3">
+            <label for="download_pdf_modal" class="btn btn-ghost bg-red-700 hover:bg-red-500 w-55 btn-sm mt-3">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" /></svg>
                 <span class="text-white text-sm">Download PDF</span>
             </label>

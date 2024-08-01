@@ -1,7 +1,7 @@
 <!-- Implement Code here for Header Body -->
 <nav class="navbar bg-base-100 sticky top-0 z-30">
     <div class="flex-1">
-        <label aria-label="Open menu" for="drawer" class="btn btn-square btn-ghost drawer-button lg:hidden">
+        <label aria-label="Open menu" for="drawer" class="btn btn-ghost btn-square btn-ghost drawer-button lg:hidden">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                 stroke="currentColor" class="w-6 h-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
@@ -72,7 +72,7 @@
                     d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z">
                     </path>
                 </svg>
-                <span class="hidden font-normal md:inline">Welcome! {{ Auth::user()->name }}</span>
+                <span class="hidden font-normal md:inline">{{ Auth::user()->name }}</span>
                 <svg width="12px" height="12px" class="hidden h-2 w-2 fill-current opacity-60 sm:inline-block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2048 2048">
                     <path d="M1799 349l242 241-1017 1017L7 590l242-241 775 775 775-775z"></path>
                 </svg>

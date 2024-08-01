@@ -1,7 +1,7 @@
 <x-admin-app-layout>
 
     <x-slot:title>
-        Admin Dashboard
+        Dashboard
     </x-slot>
 
     <div>

@@ -1,7 +1,7 @@
 <x-admin-app-layout>
 
     <x-slot:title>
-        Admin RFID Checker
+        RFID Checker
     </x-slot>
 
     <div>

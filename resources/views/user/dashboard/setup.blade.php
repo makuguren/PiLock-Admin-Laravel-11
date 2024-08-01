@@ -36,12 +36,12 @@
 
         <div class="modal-action">
             <div class="flex flex-row-reverse space-x-2 space-x-reverse">
-                <button type="submit" class="btn bg-blue-700 hover:bg-blue-500 text-white">Update</button>
+                <button type="submit" class="btn btn-ghost bg-blue-700 hover:bg-blue-500 text-white">Update</button>
             </div>
         </div>
     </form>
     <div class="modal-action">
-      {{-- <label for="my_modal_6" class="btn">Close!</label> --}}
+      {{-- <label for="my_modal_6" class="btn btn-ghost">Close!</label> --}}
     </div>
   </div>
 </div>

@@ -19,8 +19,8 @@
             </div>
             <div class="modal-action">
                 <div class="flex flex-row-reverse space-x-2 space-x-reverse">
-                    <button type="submit" class="btn bg-blue-700 hover:bg-blue-500 text-white">Save</button>
-                    <button onclick="cancel_subj()" type="button" class="btn bg-red-700 hover:bg-red-500 text-white">Cancel</button>
+                    <button type="submit" class="btn btn-ghost bg-blue-700 hover:bg-blue-500 text-white">Save</button>
+                    <button onclick="cancel_subj()" type="button" class="btn btn-ghost bg-red-700 hover:bg-red-500 text-white">Cancel</button>
                 </div>
             </div>
         </form>

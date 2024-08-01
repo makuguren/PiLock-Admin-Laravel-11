@@ -1,7 +1,7 @@
 <x-instructor-app-layout>
 
     <x-slot:title>
-        Instructor Schedules
+        Schedules
     </x-slot>
 
     <div>

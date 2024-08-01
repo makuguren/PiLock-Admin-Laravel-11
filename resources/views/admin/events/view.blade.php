@@ -40,10 +40,10 @@
             </div>
             <div class="modal-action">
                 <div class="flex flex-row-reverse space-x-2 space-x-reverse">
-                    <button disabled type="submit" id="updateBtn" class="btn bg-blue-700 hover:bg-blue-500 text-white">Update</button>
-                    <button onclick="enable_event()" id="editBtn" type="button" class="btn bg-green-700 hover:bg-green-500 text-white">Edit</button>
-                    <button onclick="delete_event()" type="button" class="btn bg-red-700 hover:bg-red-500 text-white">Delete</button>
-                    <button onclick="cancel_event()" type="button" class="btn bg-red-700 hover:bg-red-500 text-white">Cancel</button>
+                    <button disabled type="submit" id="updateBtn" class="btn btn-ghost bg-blue-700 hover:bg-blue-500 text-white">Update</button>
+                    <button onclick="enable_event()" id="editBtn" type="button" class="btn btn-ghost bg-green-700 hover:bg-green-500 text-white">Edit</button>
+                    <button onclick="delete_event()" type="button" class="btn btn-ghost bg-red-700 hover:bg-red-500 text-white">Delete</button>
+                    <button onclick="cancel_event()" type="button" class="btn btn-ghost bg-red-700 hover:bg-red-500 text-white">Cancel</button>
                 </div>
             </div>
         </form>

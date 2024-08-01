@@ -1,7 +1,7 @@
 <x-admin-app-layout>
 
     <x-slot:title>
-        Admin Attendances
+        Attendances
     </x-slot>
 
     <div>
