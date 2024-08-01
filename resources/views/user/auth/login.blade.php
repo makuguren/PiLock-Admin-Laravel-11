@@ -3,7 +3,7 @@
     <x-slot:title>Login</x-slot:title>
 
     {{-- Left Page --}}
-    <div class="hidden lg:flex flex-col gap-4 bg-base-100 p-6 lg:w-1/2">
+    <div class="hidden lg:flex flex-col gap-4 bg-base-100 p-6 justify-center lg:w-1/2">
         <img src="{{ asset('assets/images/pilock-white.png') }}" class="self-center" style="max-width: 40%; max-height: 40%" alt="" srcset="">
         <h1 class="text-3xl font-bold self-center">Pi:Lock | Login</h1>
         <h1 class="text-md text-justify">Welcome to Pi:Lock System – your ultimate solution for secure, automated door locking. Our system leverages the power of Raspberry Pi and Laravel 11 to offer seamless schedule-based authentication, ensuring your spaces are protected and accessible only at the right times. Experience the future of security with Pi:Lock System.</h1>
@@ -11,7 +11,7 @@
     </div>
 
     {{-- Right Pages --}}
-    <div class="flex flex-col gap-4 bg-base-100 p-6 lg:w-1/2">
+    <div class="flex flex-col gap-4 bg-base-100 p-6 justify-center lg:w-1/2">
         {{-- Responsive Start --}}
         <img src="{{ asset('assets/images/pilock-white.png') }}" class="self-center lg:hidden" style="max-width: 30%; max-height: 30%" alt="" srcset="">
         <h1 class="text-3xl font-bold self-center lg:hidden">Pi:Lock | Login</h1>
