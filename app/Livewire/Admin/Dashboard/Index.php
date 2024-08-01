@@ -53,13 +53,13 @@ class Index extends Component
         if($getHour > 0){
             $this->greetMessage = 'Good Morning';
         }
-        if($getHour > 6){
+        if($getHour > 5){
             $this->greetMessage = 'Good Morning';
         }
-        if($getHour > 12){
+        if($getHour > 11){
             $this->greetMessage = 'Good Afternoon';
         }
-        if($getHour > 18){
+        if($getHour > 17){
             $this->greetMessage = 'Good Evening';
         }
 
