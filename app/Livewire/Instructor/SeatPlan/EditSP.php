@@ -157,6 +157,6 @@ class EditSP extends Component
             'fetchStudentsList' => $queryFetchStudents,
             'sections' => $sections,
             'subjects' => $subjects
-        ])->layout('instructor.layouts.seatplan');
+        ]);
     }
 }
