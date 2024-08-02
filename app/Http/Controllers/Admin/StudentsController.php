@@ -9,28 +9,34 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\Admin\StudentFormRequest;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 
-class StudentsController extends Controller
+class StudentsController extends Controller implements HasMiddleware
 {
-    public function index(){
-        // Create attendance in just one click
-            // $users = User::where('section_id', '1')->get(); //Sections where scheduled assigned
-            // $attendanceData = [];
-
-            // foreach ($users as $user) {
-            //     $attendanceData[] = [
-            //         'student_id' => $user->id
-            //     ];
-            // }
-            // Attendance::insert($attendanceData);
-            // dd("Student Attendance Created Successfully!");
-
-        // Delete all attendance table
-            // Attendance::truncate();
-            // dd("Student Attendance Deleted Successfully!");
-
-        // return view('admin.students.index');
+    public static function middleware(): array
+    {
+        return [
+            new Middleware('permission:Create Student', only: ['create', 'storeStudent']),
+            new Middleware('permission:Update Student', only: ['edit', 'updateStudent']),
+        ];
     }
+
+    // Create attendance in just one click
+        // $users = User::where('section_id', '1')->get(); //Sections where scheduled assigned
+        // $attendanceData = [];
+
+        // foreach ($users as $user) {
+        //     $attendanceData[] = [
+        //         'student_id' => $user->id
+        //     ];
+        // }
+        // Attendance::insert($attendanceData);
+        // dd("Student Attendance Created Successfully!");
+
+    // Delete all attendance table
+        // Attendance::truncate();
+        // dd("Student Attendance Deleted Successfully!");
 
     public function create(){
         $sections = Section::all();

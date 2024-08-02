@@ -7,16 +7,18 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 
-class AdminsController extends Controller
+class AdminsController extends Controller implements HasMiddleware
 {
-    // public function __construct()
-    // {
-    //     $this->middleware('permission:view user', ['only' => ['index']]);
-    //     $this->middleware('permission:create user', ['only' => ['create','store']]);
-    //     $this->middleware('permission:update user', ['only' => ['update','edit']]);
-    //     $this->middleware('permission:delete user', ['only' => ['destroy']]);
-    // }
+    public static function middleware(): array
+    {
+        return [
+            new Middleware('permission:Create Admins', only: ['create', 'store']),
+            new Middleware('permission:Update Admins', only: ['edit', 'update']),
+        ];
+    }
 
     public function create(){
         $roles = Role::pluck('name','name')->all();

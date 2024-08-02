@@ -8,9 +8,19 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Admin\ProfileUpdateRequest;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 
-class SettingsController extends Controller
+class SettingsController extends Controller implements HasMiddleware
 {
+    public static function middleware(): array
+    {
+        return [
+            new Middleware('permission:View Settings', only: ['index']),
+            new Middleware('permission:Update Settings', only: ['saveSettings', 'updateAdminProfile']),
+        ];
+    }
+
     public function index(Request $request){
         $setting = Setting::first();
         return view('admin.settings.index', [
