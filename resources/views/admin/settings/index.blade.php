@@ -27,6 +27,7 @@
         @endif
 
         <div class="grid grid-cols-1 lg:grid-cols-1 gap-6 mb-6">
+            @can('Update Settings')
             <div class="bg-base-100 border-gray-100 shadow-md shadow-black/5 p-6 rounded-md">
                 <div class="flex justify-between mb-4 items-start">
                     <div class="font-medium">Website Configuration</div>
@@ -52,6 +53,7 @@
 
             {{-- Switches Section --}}
             <livewire:global.switches.configuration />
+            @endcan
 
             <div class="bg-base-100 border-gray-100 shadow-md shadow-black/5 p-6 rounded-md">
                 <div class="flex justify-between mb-4 items-start">

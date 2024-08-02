@@ -10,7 +10,7 @@
 
         <ul class="menu lg:menu-horizontal rounded-box">
             <livewire:global.navbar.timedate/>
-            <li>
+            {{-- <li>
               <a>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -27,8 +27,8 @@
                 Inbox
                 <span class="badge badge-sm">99+</span>
               </a>
-            </li>
-            <li>
+            </li> --}}
+            {{-- <li>
               <a>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -45,13 +45,13 @@
                 Updates
                 <span class="badge badge-sm badge-warning">NEW</span>
               </a>
-            </li>
-            <li>
+            </li> --}}
+            {{-- <li>
               <a>
                 Hardware Active
                 <span class="badge badge-xs badge-info"></span>
               </a>
-            </li>
+            </li> --}}
         </ul>
     </div>
     <div class="flex-none gap-1">

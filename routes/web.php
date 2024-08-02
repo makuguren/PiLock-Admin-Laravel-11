@@ -114,6 +114,37 @@ Route::middleware(['auth:admin', App\Http\Middleware\AdminComponentLayout::class
     Route::controller(App\Http\Controllers\Admin\LogsController::class)->group(function(){
         Route::get('logs', 'index')->name('logs.index');
     });
+
+    // Roles and Permissions Routes
+    Route::prefix('permissions')->group(function () {
+        Route::get('/', App\Livewire\Admin\Permissions\Index::class)->name('permissions.index')
+            ->middleware('permission:View Permissions');
+    });
+
+    Route::prefix('roles')->group(function () {
+        Route::get('/', App\Livewire\Admin\Roles\Index::class)->name('roles.index')
+            ->middleware('permission:View Roles');
+    });
+
+    Route::controller(App\Http\Controllers\Admin\RolesController::class)->group(function(){
+        Route::get('roles/{role_id}/give-permissions', 'addPermissionToRole')->name('roles.addpermission');
+        Route::put('roles/{role_id}', 'givePermissionToRole')->name('roles.givepermission');
+    });
+
+    // Admins Routes
+    Route::prefix('admins')->group(function () {
+        Route::get('/', App\Livewire\Admin\Admins\Index::class)->name('admins.index');
+    });
+
+    Route::controller(App\Http\Controllers\Admin\AdminsController::class)->group(function(){
+        Route::get('admins/create', 'create')->name('admins.create');
+        Route::post('admins/create', 'store')->name('admins.store');
+        Route::get('admins/{admin}/edit', 'edit')->name('admins.edit');
+        Route::put('admins/{admin}', 'update')->name('admins.update');
+    });
+
+    // Route::resource('admins', App\Http\Controllers\Admin\AdminsController::class);
+    // Route::get('admins/{adminId}/delete', [App\Http\Controllers\Admin\AdminsController::class, 'destroy'])->name('admins.delete');
 });
 
 //Instructor Interface

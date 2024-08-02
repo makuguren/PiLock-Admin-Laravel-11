@@ -1,7 +1,13 @@
 <div>
-    @include('admin.events.create')
-    @include('admin.events.view')
-    @include('admin.events.delete')
+    @can('Create Events')
+        @include('admin.events.create')
+    @endcan
+    @can('View Events')
+        @include('admin.events.view')
+    @endcan
+    @can('Delete Events')
+        @include('admin.events.delete')
+    @endcan
 
     <div class="p-6">
         <div class="flex flex-row">

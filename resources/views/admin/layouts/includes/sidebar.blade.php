@@ -20,7 +20,7 @@
         <div class="h-4"></div>
         {{-- Sidebar Content --}}
         <ul class="menu px-4 py-0">
-            {{-- @can('View Dashboard') --}}
+            @can('View Dashboard')
             <li class="mb-1 group {{ Request::is('admin/dashboard') ? 'active':'' }}">
                 <a href="{{ route('admin.dashboard.index') }}"
                     class="flex items-center py-2 px-4 hover:bg-blue-400 hover:text-white rounded-md group-[.active]:bg-blue-700 group-[.active]:text-white group-[.selected]:bg-blue-700 group-[.selected]:text-gray-200">
@@ -32,8 +32,9 @@
                     <span class="text-sm">Dashboard</span>
                 </a>
             </li>
-            {{-- @endcan --}}
+            @endcan
 
+            @can('View RFID Checker')
             <li class="mb-1 group {{ Request::is('admin/rfidchecker') ? 'active':'' }}">
                 <a href="{{ route('admin.rfidchecker.index') }}"
                     class="flex items-center py-2 px-4 hover:bg-blue-400 hover:text-white rounded-md group-[.active]:bg-blue-700 group-[.active]:text-white group-[.selected]:bg-blue-700 group-[.selected]:text-gray-200">
@@ -45,7 +46,9 @@
                     <span class="text-sm">RFID Checker</span>
                 </a>
             </li>
+            @endcan
 
+            @can('View Analytics')
             <li class="mb-1 group {{ Request::is('analytics') ? 'active':'' }}">
                 <a href="{{ url('analytics') }}"
                     class="flex items-center py-2 px-4 hover:bg-blue-400 hover:text-white rounded-md group-[.active]:bg-blue-700 group-[.active]:text-white group-[.selected]:bg-blue-700 group-[.selected]:text-gray-200">
@@ -57,7 +60,9 @@
                     <span class="text-sm">Analytics</span>
                 </a>
             </li>
+            @endcan
 
+            @can('View Attendances')
             <li>
                 <details id="disclosure-attendances">
                     <summary class="hover:bg-blue-400 hover:text-white {{ Request::is('admin/attendances') || Request::is('admin/attendances/*') ? 'group bg-blue-700 text-white':'' }}">
@@ -68,12 +73,14 @@
                         </span>Attendances
                     </summary>
                     <ul>
+                        @can('View Current Attendances')
                         <li class="">
                             <a href="{{ route('admin.attendances.current') }}"
                                 class="group text-sm flex items-center hover:text-blue-700 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">
                                 Current Attendance
                             </a>
                         </li>
+                        @endcan
                         <li class="">
                             <a href="{{ route('admin.attendances.index') }}"
                                 class="group text-sm flex items-center hover:text-blue-700 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">
@@ -83,8 +90,9 @@
                     </ul>
                 </details>
             </li>
+            @endcan
 
-            {{-- @can('View Sections') --}}
+            @can('View Sections')
             <li class="mb-1 group {{ Request::is('admin/sections') ? 'active':'' }}">
                 <a href="{{ route('admin.sections.index') }}"
                     class="flex items-center py-2 px-4 hover:bg-blue-400 hover:text-white rounded-md group-[.active]:bg-blue-700 group-[.active]:text-white group-[.selected]:bg-blue-700 group-[.selected]:text-gray-200">
@@ -96,9 +104,9 @@
                     <span class="text-sm">Sections</span>
                 </a>
             </li>
-            {{-- @endcan --}}
+            @endcan
 
-            {{-- @can('View Subjects') --}}
+            @can('View Subjects')
             <li class="mb-1 group {{ Request::is('admin/subjects') ? 'active':'' }}">
                 <a href="{{ route('admin.subjects.index') }}"
                     class="flex items-center py-2 px-4 hover:bg-blue-400 hover:text-white rounded-md group-[.active]:bg-blue-700 group-[.active]:text-white group-[.selected]:bg-blue-700 group-[.selected]:text-gray-200">
@@ -110,9 +118,9 @@
                     <span class="text-sm">Subjects</span>
                 </a>
             </li>
-            {{-- @endcan --}}
+            @endcan
 
-            {{-- @can('View Students') --}}
+            @can('View Students')
             <li>
                 <details id="disclosure-students">
                     <summary class="hover:bg-blue-400 hover:text-white {{ Request::is('admin/students') || Request::is('admin/students/*') ? 'group bg-blue-700 text-white':'' }}">
@@ -144,9 +152,9 @@
                     </ul>
                 </details>
             </li>
-            {{-- @endcan --}}
+            @endcan
 
-            {{-- @can('View Instructors') --}}
+            @can('View Instructors')
             <li>
                 <details id="disclosure-instructors">
                     <summary class="hover:bg-blue-400 hover:text-white {{ Request::is('admin/instructors') || Request::is('admin/instructors/*') ? 'group bg-blue-700 text-white':'' }}">
@@ -172,9 +180,9 @@
                     </ul>
                 </details>
             </li>
-            {{-- @endcan --}}
+            @endcan
 
-            {{-- @can('Access Events') --}}
+            @can('View Events')
             <li class="mb-1 group {{ Request::is('admin/events') ? 'active':'' }}">
                 <a href="{{ route('admin.events.index') }}"
                     class="flex items-center py-2 px-4 hover:bg-blue-400 hover:text-white rounded-md group-[.active]:bg-blue-700 group-[.active]:text-white group-[.selected]:bg-blue-700 group-[.selected]:text-gray-200">
@@ -186,9 +194,9 @@
                     <span class="text-sm">Events</span>
                 </a>
             </li>
-            {{-- @endcan --}}
+            @endcan
 
-            {{-- @can('View Schedules') --}}
+            @can('View Regular Schedules')
             <li>
                 <details id="disclosure-schedules">
                     <summary class="hover:bg-blue-400 hover:text-white {{ Request::is('admin/schedules') || Request::is('admin/schedules/makeupscheds') || Request::is('admin/schedules/makeupapprovals') ? 'group bg-blue-700 text-white':'' }}">
@@ -207,40 +215,44 @@
                                 Regular Schedules
                             </a>
                         </li>
+                        @can('View Make-Up Schedules')
                         <li class="">
                             <a href="{{ route('admin.schedules.makeup') }}"
                                 class="group text-sm flex items-center hover:text-blue-700 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">
                                 Make-Up Class Schedules
                             </a>
                         </li>
+                        @endcan
+                        @can('View Make-Up SchedApprovals')
                         <li class="">
                             <a href="{{ route('admin.schedules.approvals') }}"
                                 class="group text-sm flex items-center hover:text-blue-700 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">
                                 Make-Up Approvals
                             </a>
                         </li>
+                        @endcan
                     </ul>
                 </details>
             </li>
-            {{-- @endcan --}}
+            @endcan
 
-            {{-- @can('View Users') --}}
-            <li class="mb-1 group {{ Request::is('users') || Request::is('users/*') ? 'active':'' }}">
-                <a href="{{ url('users') }}"
+            @can('View Admins')
+            <li class="mb-1 group {{ Request::is('admin/admins') || Request::is('admin/admins/*') ? 'active':'' }}">
+                <a href="{{ route('admin.admins.index') }}"
                     class="flex items-center py-2 px-4 hover:bg-blue-400 hover:text-white rounded-md group-[.active]:bg-blue-700 group-[.active]:text-white group-[.selected]:bg-blue-700 group-[.selected]:text-gray-200">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-6 h-6 mr-1">
                         <path stroke-linecap="round" stroke-linejoin="round"
                             d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z" />
                     </svg>
-                    <span class="text-sm">Users</span>
+                    <span class="text-sm">Admins</span>
                 </a>
             </li>
-            {{-- @endcan --}}
+            @endcan
 
-            {{-- @can('View Roles') --}}
-            <li class="mb-1 group {{ Request::is('roles') || Request::is('roles/*') ? 'active':'' }}">
-                <a href="{{ url('roles') }}"
+            @can('View Roles')
+            <li class="mb-1 group {{ Request::is('admin/roles') || Request::is('admin/roles/*') ? 'active':'' }}">
+                <a href="{{ route('admin.roles.index') }}"
                     class="flex items-center py-2 px-4 hover:bg-blue-400 hover:text-white rounded-md group-[.active]:bg-blue-700 group-[.active]:text-white group-[.selected]:bg-blue-700 group-[.selected]:text-gray-200">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-6 h-6 mr-1">
@@ -250,11 +262,11 @@
                     <span class="text-sm">Roles</span>
                 </a>
             </li>
-            {{-- @endcan --}}
+            @endcan
 
-            {{-- @can('View Permissions') --}}
-            <li class="mb-1 group {{ Request::is('permissions') ? 'active':'' }}">
-                <a href="{{ url('permissions') }}"
+            @can('View Permissions')
+            <li class="mb-1 group {{ Request::is('admin/permissions') ? 'active':'' }}">
+                <a href="{{ route('admin.permissions.index') }}"
                     class="flex items-center py-2 px-4 hover:bg-blue-400 hover:text-white rounded-md group-[.active]:bg-blue-700 group-[.active]:text-white group-[.selected]:bg-blue-700 group-[.selected]:text-gray-200">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-6 h-6 mr-1">
@@ -264,9 +276,9 @@
                     <span class="text-sm">Permissions</span>
                 </a>
             </li>
-            {{-- @endcan --}}
+            @endcan
 
-            {{-- @can('View Logs') --}}
+            @can('View Logs')
             <li class="mb-1 group {{ Request::is('admin/logs') ? 'active':'' }}">
                 <a href="{{ route('admin.logs.index') }}"
                     class="flex items-center py-2 px-4 hover:bg-blue-400 hover:text-white rounded-md group-[.active]:bg-blue-700 group-[.active]:text-white group-[.selected]:bg-blue-700 group-[.selected]:text-gray-200">
@@ -278,9 +290,9 @@
                     <span class="text-sm">Logs</span>
                 </a>
             </li>
-            {{-- @endcan --}}
+            @endcan
 
-            {{-- @can('View Settings') --}}
+            @can('View Settings')
             <li class="mb-1 group {{ Request::is('admin/settings') ? 'active':'' }}">
                 <a href="{{ route('admin.settings.index') }}"
                     class="flex items-center py-2 px-4 hover:bg-blue-400 hover:text-white rounded-md group-[.active]:bg-blue-700 group-[.active]:text-white group-[.selected]:bg-blue-700 group-[.selected]:text-gray-200">
@@ -293,7 +305,7 @@
                     <span class="text-sm">Settings</span>
                 </a>
             </li>
-            {{-- @endcan --}}
+            @endcan
         </ul>
     </aside>
 </div>
