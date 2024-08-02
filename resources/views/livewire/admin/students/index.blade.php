@@ -1,6 +1,10 @@
+<x-slot:title>
+    Students
+</x-slot>
+
 <div>
     @can('Delete Students')
-    @include('admin.students.delete')
+        @include('livewire.admin.students.delete')
     @endcan
 
     <div class="p-6">

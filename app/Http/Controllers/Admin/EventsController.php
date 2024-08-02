@@ -8,10 +8,6 @@ use Illuminate\Http\Request;
 
 class EventsController extends Controller
 {
-    public function index(){
-        return view('admin.events.index');
-    }
-
     public function showEventsAPI(){
         $events = Event::all();
         if($events->count() > 0){

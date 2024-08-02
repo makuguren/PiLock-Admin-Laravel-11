@@ -1,13 +1,17 @@
+<x-slot:title>
+    Instructors
+</x-slot>
+
 <div>
     {{-- Instructors Modal --}}
     @can('Create Instructors')
-        @include('admin.instructors.create')
+        @include('livewire.admin.instructors.create')
     @endcan
     @can('Update Instructors')
-        @include('admin.instructors.edit')
+        @include('livewire.admin.instructors.edit')
     @endcan
     @can('Delete Instructors')
-        @include('admin.instructors.delete')
+        @include('livewire.admin.instructors.delete')
     @endcan
 
     <div class="p-6">
@@ -28,7 +32,7 @@
                 <span class="text-white text-sm">Add Tag UID</span>
             </a>
             @endcan
-            @can('Add Instructors')
+            @can('Create Instructors')
             <label for="add_modal" class="btn btn-ghost bg-blue-700 hover:bg-blue-500 w-55 btn-sm mt-3">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0ZM3 19.235v-.11a6.375 6.375 0 0 1 12.75 0v.109A12.318 12.318 0 0 1 9.374 21c-2.331 0-4.512-.645-6.374-1.766Z" /></svg>
                 <span class="text-white text-sm">Add Instructor</span>

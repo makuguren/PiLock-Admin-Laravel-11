@@ -9,18 +9,6 @@ use App\Http\Controllers\Controller;
 
 class SchedulesController extends Controller
 {
-    public function index(){
-        return view('admin.schedules.index');
-    }
-
-    public function makeupIndex(){
-        return view('admin.schedules.makeup');
-    }
-
-    public function approvalsIndex(){
-        return view('admin.schedules.approvals');
-    }
-
     //API Controllers/Functions
 
     //Regular Schedules

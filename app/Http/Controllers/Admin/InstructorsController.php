@@ -8,14 +8,6 @@ use App\Http\Controllers\Controller;
 
 class InstructorsController extends Controller
 {
-    public function index(){
-        return view('admin.instructors.index');
-    }
-
-    public function indextaguid(){
-        return view('admin.instructors.adduid');
-    }
-
     //API Controllers/Functions
     public function showInstructorsAPI(){
         $instructors = Instructor::all();

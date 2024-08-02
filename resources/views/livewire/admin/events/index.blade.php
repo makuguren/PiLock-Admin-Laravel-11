@@ -1,12 +1,16 @@
+<x-slot:title>
+    Events
+</x-slot>
+
 <div>
     @can('Create Events')
-        @include('admin.events.create')
+        @include('livewire.admin.events.create')
     @endcan
     @can('View Events')
-        @include('admin.events.view')
+        @include('livewire.admin.events.view')
     @endcan
     @can('Delete Events')
-        @include('admin.events.delete')
+        @include('livewire.admin.events.delete')
     @endcan
 
     <div class="p-6">
@@ -91,4 +95,4 @@
         });
 
     </script>
-</x-slot:scripts>
+</x-slot>

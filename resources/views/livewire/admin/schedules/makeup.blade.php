@@ -1,13 +1,17 @@
+<x-slot:title>
+    Make-Up Schedules
+</x-slot>
+
 <div>
     {{-- Schedules Modal --}}
     @can('Create Make-Up Schedules')
-        @include('admin.schedules.create')
+        @include('livewire.admin.schedules.create')
     @endcan
     @can('Update Make-Up Schedules')
-        @include('admin.schedules.edit')
+        @include('livewire.admin.schedules.edit')
     @endcan
     @can('Delete Make-Up Schedules')
-        @include('admin.schedules.delete')
+        @include('livewire.admin.schedules.delete')
     @endcan
 
     <div class="p-6">
@@ -138,4 +142,4 @@
             // document.getElementById('edittime_end').value = '';
         }
     </script>
-</x-slot:scripts>
+</x-slot>

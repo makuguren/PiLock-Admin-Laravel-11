@@ -13,10 +13,6 @@ use App\Http\Controllers\Controller;
 
 class LogsController extends Controller
 {
-    public function index(){
-        return view('admin.logs.index');
-    }
-
     public function attendStudentAPI(String $tag_uid){
         $student = User::where('tag_uid', $tag_uid)->first();
         $instructor = Instructor::where('tag_uid', $tag_uid)->first();

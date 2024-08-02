@@ -13,11 +13,6 @@ use App\Http\Requests\Admin\StudentFormRequest;
 class StudentsController extends Controller
 {
     public function index(){
-        return view('admin.students.index');
-    }
-
-    public function indextaguid(){
-
         // Create attendance in just one click
             // $users = User::where('section_id', '1')->get(); //Sections where scheduled assigned
             // $attendanceData = [];
@@ -34,12 +29,12 @@ class StudentsController extends Controller
             // Attendance::truncate();
             // dd("Student Attendance Deleted Successfully!");
 
-        return view('admin.students.adduid');
+        // return view('admin.students.index');
     }
 
     public function create(){
         $sections = Section::all();
-        return view('admin.students.create', ['sections' => $sections]);
+        return view('livewire.admin.students.create', ['sections' => $sections]);
     }
 
     public function storeStudent(StudentFormRequest $request){
@@ -60,7 +55,7 @@ class StudentsController extends Controller
     public function edit(int $student_id){
         $sections = Section::all();
         $student = User::findOrFail($student_id);
-        return view('admin.students.edit', [
+        return view('livewire.admin.students.edit', [
             'sections' => $sections,
             'student' => $student
         ]);

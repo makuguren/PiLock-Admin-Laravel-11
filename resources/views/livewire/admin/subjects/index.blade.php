@@ -1,13 +1,17 @@
+<x-slot:title>
+    Subjects
+</x-slot>
+
 <div>
     {{-- Subjects Modal --}}
     @can('Create Subjects')
-        @include('admin.subjects.create')
+        @include('livewire.admin.subjects.create')
     @endcan
     @can('Update Subjects')
-        @include('admin.subjects.edit')
+        @include('livewire.admin.subjects.edit')
     @endcan
     @can('Delete Subjects')
-        @include('admin.subjects.delete')
+        @include('livewire.admin.subjects.delete')
     @endcan
 
     <div class="p-6">
@@ -101,4 +105,4 @@
             // document.getElementById('editsubj_name').value = '';
         }
     </script>
-</x-slot:scripts>
+</x-slot>

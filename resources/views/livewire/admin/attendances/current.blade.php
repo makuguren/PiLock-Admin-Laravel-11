@@ -1,3 +1,7 @@
+<x-slot:title>
+    Current Attendances
+</x-slot>
+
 <div>
     <div class="p-6">
         <div class="flex flex-row gap-2">

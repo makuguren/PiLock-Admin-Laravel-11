@@ -43,84 +43,95 @@ Route::get('/auth/google/login', [SocialLoginController::class, 'handleCallback'
 
 //Admin Interface
 Route::middleware(['auth:admin', App\Http\Middleware\AdminComponentLayout::class])->prefix('admin')->name('admin.')->group(function () {
-    Route::get('/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard.index');
+
+    // Dashboard Routes
+    Route::prefix('dashboard')->group(function () {
+        Route::get('/', App\Livewire\Admin\Dashboard\Index::class)->name('dashboard.index')
+            ->middleware('permission:View Dashboard');
+    });
 
     //Student Routes
+    Route::prefix('students')->group(function () {
+        Route::get('/', App\Livewire\Admin\Students\Index::class)->name('students.index')
+            ->middleware('permission:View Students');
+    });
+
     Route::controller(App\Http\Controllers\Admin\StudentsController::class)->group(function(){
-        Route::get('students', 'index')->name('students.index');
         Route::get('students/create', 'create')->name('students.create');
         Route::post('students', 'storeStudent')->name('students.store');
         Route::get('students/{student}/edit', 'edit')->name('students.edit');
         Route::put('students/{student}', 'updateStudent')->name('students.update');
-        Route::get('students/{student}/delete', 'deleteStudent')->name('students.delete');
     });
 
     //Add Tag UID for Students Routes
-    Route::controller(App\Http\Controllers\Admin\StudentsController::class)->group(function(){
-        Route::get('students/addtaguid', 'indextaguid')->name('students.addtaguid');
+    Route::prefix('students')->group(function () {
+        Route::get('addtaguid', App\Livewire\Admin\Students\Adduid::class)->name('students.addtaguid')
+            ->middleware('permission:Add Tag UID to Students');
     });
 
     //Attendances Routes
-    Route::controller(App\Http\Controllers\Admin\AttendancesController::class)->group(function(){
-        Route::get('attendances/current', 'currentIndex')->name('attendances.current');
-        Route::get('attendances', 'index')->name('attendances.index');
+    Route::prefix('attendances')->group(function () {
+        Route::get('/', App\Livewire\Admin\Attendances\Index::class)->name('attendances.index')
+            ->middleware('permission:View Attendances');
+        Route::get('current', App\Livewire\Admin\Attendances\Current::class)->name('attendances.current')
+            ->middleware('permission:View Current Attendances');
     });
 
     //RFID Checker
-    Route::controller(App\Http\Controllers\Admin\RfidCheckerController::class)->group(function(){
-        Route::get('rfidchecker', 'index')->name('rfidchecker.index');
-    });
-
-    //Settings Routes
-    Route::controller(App\Http\Controllers\Admin\SettingsController::class)->group(function(){
-        Route::get('settings', 'index')->name('settings.index');
-        Route::post('settings', 'saveSettings')->name('settings.saveSettings');
-        Route::patch('settings', 'updateAdminProfile')->name('settings.updateProfile');
+    Route::prefix('rfidchecker')->group(function () {
+        Route::get('/', App\Livewire\Admin\RfidChecker\Index::class)->name('rfidchecker.index')
+            ->middleware('permission:View RFID Checker');
     });
 
     //Sections Routes
-    Route::controller(App\Http\Controllers\Admin\SectionsController::class)->group(function(){
-        Route::get('sections', 'index')->name('sections.index');
+    Route::prefix('sections')->group(function () {
+        Route::get('/', App\Livewire\Admin\Sections\Index::class)->name('sections.index')
+            ->middleware('permission:View Sections');
     });
 
     //Events Routes
-    Route::controller(App\Http\Controllers\Admin\EventsController::class)->group(function(){
-        Route::get('events', 'index')->name('events.index');
+    Route::prefix('events')->group(function () {
+        Route::get('/', App\Livewire\Admin\Events\Index::class)->name('events.index')
+            ->middleware('permission:View Events');
     });
 
     //Subjects Routes
-    Route::controller(App\Http\Controllers\Admin\SubjectsController::class)->group(function(){
-        Route::get('subjects', 'index')->name('subjects.index');
+    Route::prefix('subjects')->group(function () {
+        Route::get('/', App\Livewire\Admin\Subjects\Index::class)->name('subjects.index')
+            ->middleware('permission:View Subjects');
     });
 
-    //Instructors Routes
-    Route::controller(App\Http\Controllers\Admin\InstructorsController::class)->group(function(){
-        Route::get('instructors', 'index')->name('instructors.index');
-    });
-
-    //Add Tag UID for Instructor Routes
-    Route::controller(App\Http\Controllers\Admin\InstructorsController::class)->group(function(){
-        Route::get('instructors/addtaguid', 'indextaguid')->name('instructors.addtaguid');
+    //Instructors Routes with Tag UID
+    Route::prefix('instructors')->group(function () {
+        Route::get('/', App\Livewire\Admin\Instructors\Index::class)->name('instructors.index')
+            ->middleware('permission:View Instructors');
+        Route::get('addtaguid', App\Livewire\Admin\Instructors\Adduid::class)->name('instructors.addtaguid')
+            ->middleware('permission:Add Tag UID to Instructors');
     });
 
     //Schedules Routes
-    Route::controller(App\Http\Controllers\Admin\SchedulesController::class)->group(function(){
-        Route::get('schedules', 'index')->name('schedules.index');
-        Route::get('schedules/makeupscheds', 'makeupIndex')->name('schedules.makeup');
-        Route::get('schedules/makeupapprovals', 'approvalsIndex')->name('schedules.approvals');
+    Route::prefix('schedules')->group(function () {
+        Route::get('/', App\Livewire\Admin\Schedules\Index::class)->name('schedules.index')
+            ->middleware('permission:View Regular Schedules');
+        Route::get('makeupscheds', App\Livewire\Admin\Schedules\Makeup::class)->name('schedules.makeup')
+            ->middleware('permission:View Make-Up Schedules');
+        Route::get('makeupapprovals', App\Livewire\Admin\Schedules\Approvals::class)->name('schedules.approvals')
+            ->middleware('permission:View Make-Up SchedApprovals');
     });
 
     //Logs
-    Route::controller(App\Http\Controllers\Admin\LogsController::class)->group(function(){
-        Route::get('logs', 'index')->name('logs.index');
+    Route::prefix('logs')->group(function () {
+        Route::get('/', App\Livewire\Admin\Logs\Index::class)->name('logs.index')
+            ->middleware('permission:View Logs');
     });
 
-    // Roles and Permissions Routes
+    //Permissions Routes
     Route::prefix('permissions')->group(function () {
         Route::get('/', App\Livewire\Admin\Permissions\Index::class)->name('permissions.index')
             ->middleware('permission:View Permissions');
     });
 
+    //Roles Routes
     Route::prefix('roles')->group(function () {
         Route::get('/', App\Livewire\Admin\Roles\Index::class)->name('roles.index')
             ->middleware('permission:View Roles');
@@ -143,12 +154,20 @@ Route::middleware(['auth:admin', App\Http\Middleware\AdminComponentLayout::class
         Route::put('admins/{admin}', 'update')->name('admins.update');
     });
 
+    //Settings Routes
+    Route::controller(App\Http\Controllers\Admin\SettingsController::class)->group(function(){
+        Route::get('settings', 'index')->name('settings.index');
+        Route::post('settings', 'saveSettings')->name('settings.saveSettings');
+        Route::patch('settings', 'updateAdminProfile')->name('settings.updateProfile');
+    });
+
     // Route::resource('admins', App\Http\Controllers\Admin\AdminsController::class);
     // Route::get('admins/{adminId}/delete', [App\Http\Controllers\Admin\AdminsController::class, 'destroy'])->name('admins.delete');
 });
 
 //Instructor Interface
 Route::middleware(['auth:instructor', App\Http\Middleware\InstructorComponentLayout::class])->prefix('instructor')->name('instructor.')->group(function () {
+
     //Dashboard Routes
     Route::get('dashboard', [App\Http\Controllers\Instructor\DashboardController::class, 'index'])->name('dashboard.index');
 

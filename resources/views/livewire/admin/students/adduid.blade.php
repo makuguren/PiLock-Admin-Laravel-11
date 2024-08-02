@@ -1,3 +1,7 @@
+<x-slot:title>
+    Add Tag UID Students
+</x-slot>
+
 <div>
     <div class="p-6">
         <div class="flex flex-row">

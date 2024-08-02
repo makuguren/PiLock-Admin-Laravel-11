@@ -1,13 +1,17 @@
+<x-slot:title>
+    Sections
+</x-slot>
+
 <div>
     {{-- Sections Modal --}}
     @can('Create Sections')
-        @include('admin.sections.create')
+        @include('livewire.admin.sections.create')
     @endcan
     @can('Update Sections')
-        @include('admin.sections.edit')
+        @include('livewire.admin.sections.edit')
     @endcan
     @can('Delete Sections')
-        @include('admin.sections.delete')
+        @include('livewire.admin.sections.delete')
     @endcan
 
     <div class="p-6">

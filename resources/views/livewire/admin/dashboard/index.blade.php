@@ -1,3 +1,6 @@
+
+<x-slot:title>Dashboard</x-slot>
+
 <div>
     <div class="p-6">
         <div class="flex flex-row">

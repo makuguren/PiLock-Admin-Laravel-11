@@ -1,3 +1,7 @@
+<x-slot:title>
+    Make-Up Approvals
+</x-slot>
+
 <div>
     <div class="p-6">
         <div class="flex flex-row">
@@ -85,9 +89,9 @@
                         @endforelse
                     </tbody>
                 </table>
-                {{-- <div class="mt-3">
+                <div class="mt-3">
                     {{ $schedules->links() }}
-                </div> --}}
+                </div>
             </div>
         </div>
     </div>

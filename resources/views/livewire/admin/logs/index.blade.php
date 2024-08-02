@@ -1,3 +1,7 @@
+<x-slot:title>
+    Logs
+</x-slot>
+
 <div>
     <div class="p-6">
         <div class="flex flex-row">

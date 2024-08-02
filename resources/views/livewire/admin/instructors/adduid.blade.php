@@ -1,3 +1,7 @@
+<x-slot:title>
+    Add Tag UID Instructors
+</x-slot>
+
 <div>
     <div class="p-6">
         <div class="flex flex-row">
@@ -94,4 +98,4 @@
         }
 
     </script>
-</x-slot:scripts>
+</x-slot>
