@@ -17,8 +17,8 @@ class StudentsController extends Controller implements HasMiddleware
     public static function middleware(): array
     {
         return [
-            new Middleware('permission:Create Student', only: ['create', 'storeStudent']),
-            new Middleware('permission:Update Student', only: ['edit', 'updateStudent']),
+            new Middleware('permission:Create Students', only: ['create', 'storeStudent']),
+            new Middleware('permission:Update Students', only: ['edit', 'updateStudent']),
         ];
     }
 
