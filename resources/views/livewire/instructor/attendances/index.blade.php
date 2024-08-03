@@ -1,5 +1,9 @@
+<x-slot:title>
+    Attendances
+</x-slot>
+
 <div>
-    @include('instructor.attendances.dlpdf')
+    @include('livewire.instructor.attendances.dlpdf')
     <div class="p-6">
         <div class="flex flex-row gap-2">
             <div class="flex flex-col w-full">
@@ -140,4 +144,4 @@
             document.getElementById('dlpdfdate').value = '';
         }
     </script>
-</x-slot:scripts>
+</x-slot>

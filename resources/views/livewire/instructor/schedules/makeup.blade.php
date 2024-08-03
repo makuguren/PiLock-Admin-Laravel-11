@@ -1,8 +1,12 @@
+<x-slot:title>
+    Make-Up Schedules
+</x-slot>
+
 <div>
     {{-- Make-Up Class Schedule Modal --}}
-    @include('instructor.schedules.create')
-    @include('instructor.schedules.edit')
-    @include('instructor.schedules.delete')
+    @include('livewire.instructor.schedules.create')
+    @include('livewire.instructor.schedules.edit')
+    @include('livewire.instructor.schedules.delete')
 
     <div class="p-6">
         <div class="flex flex-row">
@@ -150,5 +154,5 @@
             // document.getElementById('edittime_end').value = '';
         }
     </script>
-</x-slot:scripts>
+</x-slot>
 

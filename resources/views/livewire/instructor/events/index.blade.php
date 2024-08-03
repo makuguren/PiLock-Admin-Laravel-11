@@ -1,5 +1,9 @@
+<x-slot:title>
+    Events
+</x-slot>
+
 <div>
-    @include('instructor.events.view')
+    @include('livewire.instructor.events.view')
 
     <div class="p-6">
         <div class="flex flex-row">
@@ -41,4 +45,4 @@
             document.getElementById('addevent_end').value = '';
         }
     </script>
-</x-slot:scripts>
+</x-slot>

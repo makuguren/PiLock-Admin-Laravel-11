@@ -169,22 +169,24 @@ Route::middleware(['auth:admin', App\Http\Middleware\AdminComponentLayout::class
 Route::middleware(['auth:instructor', App\Http\Middleware\InstructorComponentLayout::class])->prefix('instructor')->name('instructor.')->group(function () {
 
     //Dashboard Routes
-    Route::get('dashboard', [App\Http\Controllers\Instructor\DashboardController::class, 'index'])->name('dashboard.index');
+    Route::prefix('dashboard')->group(function () {
+        Route::get('/', App\Livewire\Instructor\Dashboard\Index::class)->name('dashboard.index');
+    });
 
     //Attendances Routes
-    Route::controller(App\Http\Controllers\Instructor\AttendancesController::class)->group(function () {
-        Route::get('attendances', 'index')->name('attendances.index');
+    Route::prefix('attendances')->group(function () {
+        Route::get('/', App\Livewire\Instructor\Attendances\Index::class)->name('attendances.index');
     });
 
     //Schedule Routes
-    Route::controller(App\Http\Controllers\Instructor\SchedulesController::class)->group(function () {
-        Route::get('schedules', 'index')->name('schedules.index');
-        Route::get('makeupscheds', 'makeupIndex')->name('schedules.makeup');
+    Route::prefix('schedules')->group(function () {
+        Route::get('/', App\Livewire\Instructor\Schedules\Index::class)->name('schedules.index');
+        Route::get('makeupscheds', App\Livewire\Instructor\Schedules\Makeup::class)->name('schedules.makeup');
     });
 
     //Events Routes
-    Route::controller(App\Http\Controllers\Instructor\EventsController::class)->group(function () {
-        Route::get('events', 'index')->name('events.index');
+    Route::prefix('events')->group(function () {
+        Route::get('/', App\Livewire\Instructor\Events\Index::class)->name('events.index');
     });
 
     //Profile Routes

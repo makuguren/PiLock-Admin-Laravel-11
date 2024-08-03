@@ -18,9 +18,9 @@
             </a>
         </div>
         <div class="h-4"></div>
+
         {{-- Sidebar Content --}}
         <ul class="menu px-4 py-0">
-            {{-- @can('View Dashboard') --}}
             <li class="mb-1 group {{ Request::is('instructor/dashboard') ? 'active':'' }}">
                 <a href="{{ route('instructor.dashboard.index') }}"
                     class="flex items-center py-2 px-4 hover:bg-blue-400 hover:text-white rounded-md group-[.active]:bg-blue-700 group-[.active]:text-white group-[.selected]:bg-blue-700 group-[.selected]:text-gray-200">
@@ -32,7 +32,6 @@
                     <span class="text-sm">Dashboard</span>
                 </a>
             </li>
-            {{-- @endcan --}}
 
             <li>
                 <details id="disclosure-attendances">
@@ -44,12 +43,6 @@
                         </span>Attendances
                     </summary>
                     <ul>
-                        {{-- <li class="">
-                            <a href="{{ route('instructor.attendances.current') }}"
-                                class="group text-sm flex items-center hover:text-blue-700 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">
-                                Current Attendance
-                            </a>
-                        </li> --}}
                         <li class="">
                             <a href="{{ route('instructor.attendances.index') }}"
                                 class="group text-sm flex items-center hover:text-blue-700 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">
@@ -60,7 +53,6 @@
                 </details>
             </li>
 
-            {{-- @can('Access Events') --}}
             <li class="mb-1 group {{ Request::is('instructor/events') ? 'active':'' }}">
                 <a href="{{ route('instructor.events.index') }}"
                     class="flex items-center py-2 px-4 hover:bg-blue-400 hover:text-white rounded-md group-[.active]:bg-blue-700 group-[.active]:text-white group-[.selected]:bg-blue-700 group-[.selected]:text-gray-200">
@@ -72,12 +64,10 @@
                     <span class="text-sm">Events</span>
                 </a>
             </li>
-            {{-- @endcan --}}
 
-            {{-- @can('View Schedules') --}}
             <li>
                 <details id="disclosure-schedules">
-                    <summary class="hover:bg-blue-400 hover:text-white {{ Request::is('instructor/schedules') || Request::is('instructor/makeupscheds') ? 'group bg-blue-700 text-white':'' }}">
+                    <summary class="hover:bg-blue-400 hover:text-white {{ Request::is('instructor/schedules') || Request::is('instructor/schedules/makeupscheds') ? 'group bg-blue-700 text-white':'' }}">
                         <span>
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="currentColor" class="w-6 h-6 mr-1">
@@ -102,9 +92,14 @@
                     </ul>
                 </details>
             </li>
-            {{-- @endcan --}}
 
-            {{-- @can('View Settings') --}}
+            <li class="mb-1 group {{ Request::is('instructor/seatplan') ? 'active':'' }}">
+                <a href="{{ route('instructor.seatplan.index') }}"
+                    class="flex items-center py-2 px-4 hover:bg-blue-400 hover:text-white rounded-md group-[.active]:bg-blue-700 group-[.active]:text-white group-[.selected]:bg-blue-700 group-[.selected]:text-gray-200">
+                    <span class="text-sm">Seat Plan</span>
+                </a>
+            </li>
+
             <li class="mb-1 group {{ Request::is('instructor/settings') ? 'active':'' }}">
                 <a href="{{ route('instructor.settings.index') }}"
                     class="flex items-center py-2 px-4 hover:bg-blue-400 hover:text-white rounded-md group-[.active]:bg-blue-700 group-[.active]:text-white group-[.selected]:bg-blue-700 group-[.selected]:text-gray-200">
@@ -115,14 +110,6 @@
                         <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                     </svg>
                     <span class="text-sm">Settings</span>
-                </a>
-            </li>
-            {{-- @endcan --}}
-
-            <li class="mb-1 group {{ Request::is('instructor/seatplan') ? 'active':'' }}">
-                <a href="{{ route('instructor.seatplan.index') }}"
-                    class="flex items-center py-2 px-4 hover:bg-blue-400 hover:text-white rounded-md group-[.active]:bg-blue-700 group-[.active]:text-white group-[.selected]:bg-blue-700 group-[.selected]:text-gray-200">
-                    <span class="text-sm">Seat Plan</span>
                 </a>
             </li>
         </ul>
