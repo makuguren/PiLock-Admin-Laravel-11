@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\Auth\PasswordController;
@@ -7,10 +8,16 @@ use App\Http\Controllers\Admin\Auth\RegisteredAdminController;
 use App\Http\Controllers\Admin\Auth\AuthenticatedSessionController;
 
 Route::middleware('guest:admin')->prefix('admin')->name('admin.')->group(function () {
-    Route::get('register', [RegisteredAdminController::class, 'create'])
-                ->name('register');
 
-    Route::post('register', [RegisteredAdminController::class, 'store']);
+    // Check if the Configuration is Allow to Logged In and Register
+    $appSetting = View::shared('appSetting');
+
+    if($appSetting->isRegAdmins == '1'){
+        Route::get('register', [RegisteredAdminController::class, 'create'])
+        ->name('register');
+
+        Route::post('register', [RegisteredAdminController::class, 'store']);
+    }
 
     Route::get('login', [AuthenticatedSessionController::class, 'create'])
                 ->name('login');

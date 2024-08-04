@@ -16,6 +16,7 @@ class Setting extends Model
         'isDevInteg',
         'isRegStud',
         'isRegLoginStud',
-        'isRegInst'
+        'isRegInst',
+        'isRegAdmins'
     ];
 }

@@ -100,27 +100,29 @@
         <!-- Menu for desktop -->
         <div class="hidden sm:flex gap-2 mr-2">
             <!-- Dropdown menu -->
-            <div class="dropdown dropdown-end">
-                <button class="btn btn-ghost btn-sm text-white bg-blue-700 hover:bg-blue-500">
-                    <span class="material-symbols-outlined">how_to_reg</span>
-                    Register
-                    {{-- <i class="fa-solid fa-chevron-down"></i> --}}
-                </button>
+            @if ($appSetting->isRegLoginStud == '1' || $appSetting->isRegInst == '1' || $appSetting->isRegAdmins == '1')
+                <div class="dropdown dropdown-end">
+                    <button class="btn btn-ghost btn-sm text-white bg-blue-700 hover:bg-blue-500">
+                        <span class="material-symbols-outlined">how_to_reg</span>
+                        Register
+                        {{-- <i class="fa-solid fa-chevron-down"></i> --}}
+                    </button>
 
-                <ul tabindex="0" class="dropdown-content menu z-[1] bg-base-200 p-2 rounded-box shadow w-56 gap-2">
-                    @if (Route::has('admin.register'))
-                        <li><a href="{{ route('admin.register') }}">Admin Register</a></li>
-                    @endif
+                    <ul tabindex="0" class="dropdown-content menu z-[1] bg-base-200 p-2 rounded-box shadow w-56 gap-2">
+                        @if (Route::has('admin.register'))
+                            <li><a href="{{ route('admin.register') }}">Admin Register</a></li>
+                        @endif
 
-                    @if (Route::has('instructor.register'))
-                        <li><a href="{{ route('instructor.register') }}">Instructor Register</a></li>
-                    @endif
+                        @if (Route::has('instructor.register'))
+                            <li><a href="{{ route('instructor.register') }}">Instructor Register</a></li>
+                        @endif
 
-                    @if (Route::has('user.register'))
-                        <li><a href="{{ route('user.register') }}">Student Register</a></li>
-                    @endif
-                </ul>
-            </div>
+                        @if (Route::has('user.register'))
+                            <li><a href="{{ route('user.register') }}">Student Register</a></li>
+                        @endif
+                    </ul>
+                </div>
+            @endif
 
             <!-- Dropdown menu -->
             <div class="dropdown dropdown-end">

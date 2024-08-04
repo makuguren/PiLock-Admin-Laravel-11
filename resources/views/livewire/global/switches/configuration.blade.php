@@ -45,6 +45,14 @@
                 <input type="checkbox" wire:model="isRegInst" class="checkbox checkbox-primary" />
                 </label>
             </div>
+
+            {{-- Code Here --}}
+            <div class="form-control">
+                <label class="label cursor-pointer">
+                <span class="label-text">Enable Register Admins</span>
+                <input type="checkbox" wire:model="isRegAdmins" class="checkbox checkbox-primary" />
+                </label>
+            </div>
         </div>
     </div>
 </div>

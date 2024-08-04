@@ -20,7 +20,8 @@ class ConfigurationSeeder extends Seeder
             'isDevInteg' => '0',
             'isRegStud' => '0',
             'isRegLoginStud' => '0',
-            'isRegInst' => '0'
+            'isRegInst' => '0',
+            'isRegAdmins' => '0'
         ]);
     }
 }

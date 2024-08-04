@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\View;
 
 class Configuration extends Component
 {
-    public $isDevInteg, $isMaintenance, $isRegStud, $isRegLoginStud, $isRegInst = false;
+    public $isDevInteg, $isMaintenance, $isRegStud, $isRegLoginStud, $isRegInst, $isRegAdmins = false;
 
     public function mount(){
         // $maintenance = Setting::where('id', '1')->first();
@@ -47,6 +47,13 @@ class Configuration extends Component
             $this->isRegInst = true;
         } else {
             $this->isRegInst = false;
+        }
+
+        // Register Admins
+        if($appSetting->isRegAdmins == '1'){
+            $this->isRegAdmins = true;
+        } else {
+            $this->isRegAdmins = false;
         }
     }
 
@@ -120,6 +127,21 @@ class Configuration extends Component
         } else {
             $setting->update([
                 'isRegInst' => '0'
+            ]);
+            toastr()->success('Settings Saved Successfully');
+        }
+    }
+
+    public function updatedIsRegAdmins($isRegAdmins){
+        $setting = Setting::where('id', '1');
+        if($isRegAdmins) {
+            $setting->update([
+                'isRegAdmins' => '1'
+            ]);
+            toastr()->success('Settings Saved Successfully');
+        } else {
+            $setting->update([
+                'isRegAdmins' => '0'
             ]);
             toastr()->success('Settings Saved Successfully');
         }

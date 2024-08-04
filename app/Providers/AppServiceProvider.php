@@ -36,7 +36,8 @@ class AppServiceProvider extends ServiceProvider
                 'isDevInteg' => '0',
                 'isRegStud' => '1',
                 'isRegLoginStud' => '1',
-                'isRegInst' => '1'
+                'isRegInst' => '1',
+                'isRegAdmins' => '1'
             ];
         }
         View::share('appSetting', $websiteSetting);

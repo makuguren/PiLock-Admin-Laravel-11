@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('isRegStud')->default('0')->comment('0=No, 1=Yes')->nullable();
             $table->integer('isRegLoginStud')->default('0')->comment('0=No, 1=Yes')->nullable();
             $table->integer('isRegInst')->default('0')->comment('0=No, 1=Yes')->nullable();
+            $table->integer('isRegAdmins')->default('0')->comment('0=No, 1=Yes')->nullable();
             $table->timestamps();
         });
     }

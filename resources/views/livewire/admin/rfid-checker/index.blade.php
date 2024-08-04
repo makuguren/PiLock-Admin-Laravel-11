@@ -26,7 +26,7 @@
                     <form wire:submit.prevent="checkUIDTag">
                         <div class="w-full">
                             <label class="label-text">Tag UID</label>
-                            <input wire:model="tag_uid" id="tag_uid" class="input input-bordered bg-base-300 block w-full py-3 px-4 mb-3" name="tag_uid" id="tag_uid" autofocus type="text" placeholder="">
+                            <input wire:model="tag_uid" id="tag_uid" class="input input-bordered bg-base-300 block w-full py-3 px-4 mb-3" name="tag_uid" autofocus type="text" placeholder="">
                         </div>
                     </form>
                 </div>
@@ -71,4 +71,12 @@
 </div>
 
 <x-slot:scripts>
-</x-slot:scripts>
+    <script>
+        var input = document.getElementById("tag_uid");
+        input.addEventListener("keypress", function(event) {
+            if(event.key === "Enter") {
+                const taguid = document.getElementById("tag_uid").value = "";
+            }
+        });
+    </script>
+</x-slot>
