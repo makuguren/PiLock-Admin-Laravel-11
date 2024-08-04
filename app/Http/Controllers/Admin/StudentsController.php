@@ -106,7 +106,9 @@ class StudentsController extends Controller implements HasMiddleware
                         'student_id' => $student->student_id,
                         'tag_uid' => $student->tag_uid,
                         'name' => $student->name,
-                        'section' => $student->section->section_name
+                        'section' => $student->section->section_name ?? null,
+                        'birthdate' => $student->birthdate,
+                        'avatar' => $student->avatar
                     ];
                 })
             ], 200);
@@ -128,7 +130,9 @@ class StudentsController extends Controller implements HasMiddleware
                         'student_id' => $student->student_id,
                         'tag_uid' => $student->tag_uid,
                         'name' => $student->name,
-                        'section' => $student->section->section_name
+                        'section' => $student->section->section_name ?? null,
+                        'birthdate' => $student->birthdate,
+                        'avatar' => $student->avatar
                     ];
                 })
             ], 200);
