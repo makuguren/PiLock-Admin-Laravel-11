@@ -313,7 +313,7 @@
                         <h3 class="font-bold">Larry Sain</h3>
 
                         <!-- Role -->
-                        <span class="text-sm">Taga Solda - Team-BA</span>
+                        <span class="text-sm">Device Assembly - Team-BA</span>
 
                         <!-- Socials -->
                         <div class="flex text-accent text-xs">

@@ -92,6 +92,9 @@
             </li>
             @endcan --}}
 
+
+
+
             @can('View Sections')
             <li class="mb-1 group {{ Request::is('admin/sections') ? 'active':'' }}">
                 <a href="{{ route('admin.sections.index') }}"
