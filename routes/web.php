@@ -176,6 +176,7 @@ Route::middleware(['auth:instructor', App\Http\Middleware\InstructorComponentLay
     //Attendances Routes
     Route::prefix('attendances')->group(function () {
         Route::get('/', App\Livewire\Instructor\Attendances\Index::class)->name('attendances.index');
+        Route::get('/', App\Livewire\Instructor\Attendances\Index::class)->name('attendances.current');
     });
 
     //Schedule Routes
