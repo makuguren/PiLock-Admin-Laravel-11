@@ -62,7 +62,7 @@
             </li>
             @endcan
 
-            @can('View Attendances')
+            {{-- @can('View Attendances')
             <li>
                 <details id="disclosure-attendances">
                     <summary class="hover:bg-blue-400 hover:text-white {{ Request::is('admin/attendances') || Request::is('admin/attendances/*') ? 'group bg-blue-700 text-white':'' }}">
@@ -90,7 +90,7 @@
                     </ul>
                 </details>
             </li>
-            @endcan
+            @endcan --}}
 
             @can('View Sections')
             <li class="mb-1 group {{ Request::is('admin/sections') ? 'active':'' }}">

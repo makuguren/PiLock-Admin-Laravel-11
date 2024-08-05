@@ -70,12 +70,12 @@ Route::middleware(['auth:admin', App\Http\Middleware\AdminComponentLayout::class
     });
 
     //Attendances Routes
-    Route::prefix('attendances')->group(function () {
-        Route::get('/', App\Livewire\Admin\Attendances\Index::class)->name('attendances.index')
-            ->middleware('permission:View Attendances');
-        Route::get('current', App\Livewire\Admin\Attendances\Current::class)->name('attendances.current')
-            ->middleware('permission:View Current Attendances');
-    });
+    // Route::prefix('attendances')->group(function () {
+    //     Route::get('/', App\Livewire\Admin\Attendances\Index::class)->name('attendances.index')
+    //         ->middleware('permission:View Attendances');
+    //     Route::get('current', App\Livewire\Admin\Attendances\Current::class)->name('attendances.current')
+    //         ->middleware('permission:View Current Attendances');
+    // });
 
     //RFID Checker
     Route::prefix('rfidchecker')->group(function () {
