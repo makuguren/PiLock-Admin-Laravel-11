@@ -65,14 +65,16 @@ class Index extends Component
 
         // Getting Values from the Dialog Dropdown and Retrieve into PDF.
         $subject = Subject::where('id', $this->dlpdfsubject_id)->value('subject_code');
-        $section = Section::where('id', $this->dlpdfsection_id)->value('section_name');
+        $program = Section::where('id', $this->dlpdfsection_id)->value('program');
+        $year = Section::where('id', $this->dlpdfsection_id)->value('year');
+        $block = Section::where('id', $this->dlpdfsection_id)->value('block');
 
         $data = [
             'title' => 'Attendance for Todays Vidwo!',
             'date' => $this->dlpdfdate,
             'schedules' => $schedules,
             'subject' => $subject,
-            'section' => $section,
+            'section' => $program . ' ' . $year . $block,
             'ccsheader' => $ccsimageBase64,
             'cspcheader' => $cspcimageBase64
         ];
@@ -100,7 +102,7 @@ class Index extends Component
         // Fetch sections associated with schedules of the instructor (Dropdown Tag)
         $sections = Section::whereHas('schedules', function ($query) use ($instructorId) {
             $query->where('instructor_id', $instructorId);
-        })->pluck('section_name', 'id')->toArray();
+        })->get();
 
         // Fetch subjects associated with schedules of the instructor (Dropdown Tag)
         $subjects = Subject::whereHas('schedules', function ($query) use ($instructorId) {

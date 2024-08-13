@@ -48,7 +48,7 @@
                         @forelse ($sections as $section)
                         <tr>
                             <td><div class="font-bold">{{ $section->id }}</div></td>
-                            <td><div class="">{{ $section->section_name }}</div></td>
+                            <td><div class="">{{ $section->program }} {{ $section->year }}{{ $section->block }}</div></td>
                             <th>
                                 <div class="flex flex-row space-x-2">
                                     @can('Update Sections')
@@ -96,7 +96,9 @@
             document.getElementById('delete_modal').checked = false;
 
             //Clear all the Values in Text Inputs (Section)
-            document.getElementById('addsection_name').value = '';
+            document.getElementById('addprogram').value = '';
+            document.getElementById('addyear').value = '';
+            document.getElementById('addblock').value = '';
             // document.getElementById('editsection_name').value = '';
         }
     </script>

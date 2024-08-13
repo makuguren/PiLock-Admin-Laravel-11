@@ -21,7 +21,7 @@ class SchedulesController extends Controller
                         'id' => $schedule->id,
                         'subject' => $schedule->subject->subject_name,
                         'instructor' => $schedule->instructor->name,
-                        'section' => $schedule->section->section_name,
+                        'section' => $schedule->section->program . ' ' . $schedule->section->year . $schedule->section->block,
                         'days' => $schedule->days,
                         'time_start' => $schedule->time_start,
                         'time_end' => $schedule->time_end
@@ -45,7 +45,7 @@ class SchedulesController extends Controller
                         'id' => $schedule->id,
                         'subject' => $schedule->subject->subject_name,
                         'instructor' => $schedule->instructor->name,
-                        'section' => $schedule->section->section_name,
+                        'section' => $schedule->section->program . ' ' . $schedule->section->year . $schedule->section->block,
                         'days' => $schedule->days,
                         'time_start' => $schedule->time_start,
                         'time_end' => $schedule->time_end
@@ -70,7 +70,7 @@ class SchedulesController extends Controller
                         'id' => $schedule->id,
                         'subject' => $schedule->subject->subject_name,
                         'instructor' => $schedule->instructor->name,
-                        'section' => $schedule->section->section_name,
+                        'section' => $schedule->section->program . ' ' . $schedule->section->year . $schedule->section->block,
                         'days' => $schedule->days,
                         'time_start' => $schedule->time_start,
                         'time_end' => $schedule->time_end
@@ -115,7 +115,7 @@ class SchedulesController extends Controller
                             'sched_type' => 'Regular Class/Make-Up Schedules',
                             'subject' => $curschedule->subject->subject_name,
                             'instructor' => $curschedule->instructor->name,
-                            'section' => $curschedule->section->section_name,
+                            'section' => $curschedule->section->program . ' ' . $curschedule->section->year . $curschedule->section->block,
                             'days' => $curschedule->days,
                             'time_start' => $curschedule->time_start,
                             'time_end' => $curschedule->time_end

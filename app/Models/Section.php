@@ -16,7 +16,9 @@ class Section extends Model
 
     protected $table = 'sections';
     protected $fillable = [
-        'section_name'
+        'program',
+        'year',
+        'block'
     ];
 
     public function schedules(){

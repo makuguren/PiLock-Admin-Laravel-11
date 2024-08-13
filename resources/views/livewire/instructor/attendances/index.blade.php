@@ -35,8 +35,8 @@
                         <span class="font-medium text-sm">Select Sections</span>
                         <select wire:model="selectedSection" id="section" class="select select-bordered flex w-full items-center">
                             <option value="">All Sections</option>
-                            @foreach($sections as $id => $section)
-                                <option value="{{ $id }}">{{ $section }}</option>
+                            @foreach($sections as $section)
+                                <option value="{{ $section->id }}">{{ $section->program }} {{ $section->year }}{{ $section->block }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -97,7 +97,7 @@
                                     </div>
                                 </td>
                                 <td><div class="">{{ $schedule->instructor->name }}</div></td>
-                                <td><div class="">{{ $attendance->student->section->section_name }}</div></td>
+                                <td><div class="">{{ $attendance->student->section->program }} {{ $attendance->student->section->year }}{{ $attendance->student->section->block }}</div></td>
                                 <td><div class="">{{ $schedule->subject->subject_name }}</div></td>
                                 <td><div class="">{{ $attendance->date }}</div></td>
                                 <td>

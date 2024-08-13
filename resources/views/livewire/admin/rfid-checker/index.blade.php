@@ -62,7 +62,7 @@
 
                     <div class="w-full">
                         <label class="label-text">Section (Student)</label>
-                        <input class="input input-bordered bg-base-300 block w-full py-3 px-4 mb-3" value="{{ $info->section->section_name ?? '' }}" type="text" placeholder="" disabled>
+                        <input class="input input-bordered bg-base-300 block w-full py-3 px-4 mb-3" value="{{ $info->section->program ?? '' }} {{ $info->section->year ?? '' }}{{ $info->section->block ?? '' }}" type="text" placeholder="" disabled>
                     </div>
                 </div>
             </div>

@@ -24,7 +24,7 @@
                 <div class="overflow-x-auto">
                     @if ($curschedule)
                         <div class="text-md">Subject: {{ $curschedule->subject->subject_name }}</div>
-                        <div class="text-md">Section: {{ $curschedule->section->section_name }}</div>
+                        <div class="text-md">Section: {{ $curschedule->section->program }} {{ $curschedule->section->year }}{{ $curschedule->section->block }}</div>
                         <div class="text-md">Day: {{ $curschedule->days }}</div>
                         <div class="text-md">Time Frame: {{ $curschedule->time_start }} to {{ $curschedule->time_end }}</div>
 

@@ -43,7 +43,7 @@
                             <select wire:model="filter_section" class="select select-bordered flex w-full items-center">
                                 <option value="" selected>All Sections</option>
                                 @foreach ($sections as $section)
-                                    <option value="{{ $section->id }}">{{ $section->section_name }}</option>
+                                    <option value="{{ $section->id }}">{{ $section->program }} {{ $section->year }}{{ $section->block }}</option>
                                 @endforeach
                             </select>
                         </form>
@@ -113,7 +113,7 @@
                             <td>
                                 <div class="">
                                     @if ($log->section_id)
-                                        {{ $log->section->section_name }}
+                                        {{ $log->section->program }} {{ $log->section->year }}{{ $log->section->block }}
                                     @else
                                         No Section Found
                                     @endif

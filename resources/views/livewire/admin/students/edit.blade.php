@@ -60,7 +60,7 @@
                         <select class="select select-bordered w-full bg-base-300" name="section_id">
                             <option>--Select your Section--</option>
                             @foreach ($sections as $section)
-                            <option value="{{ $section->id }}" {{ $section->id == $student->section_id ? 'Selected':'' }}>{{ $section->section_name }}</option>
+                            <option value="{{ $section->id }}" {{ $section->id == $student->section_id ? 'Selected':'' }}>{{ $section->program }} {{ $section->year }}{{ $section->block }}</option>
                             @endforeach
                         </select>
                         @error('section_id')<small class="text-danger">{{$message}}</small> @enderror

@@ -190,7 +190,7 @@
                         </div>
                         <div class="text-md">Subject: {{ $schedulesNow->subject->subject_name }}</div>
                         <div class="text-md">Instructor: {{ $schedulesNow->instructor->name }}</div>
-                        <div class="text-md">Section: {{ $schedulesNow->section->section_name }}</div>
+                        <div class="text-md">Section: {{ $schedulesNow->section->program }} {{ $schedulesNow->section->year }}{{ $schedulesNow->section->block }}</div>
                         <div class="text-md">Day: {{ $schedulesNow->days }}</div>
                         <div class="text-md">Time Frame: {{ $schedulesNow->time_start }} to {{ $schedulesNow->time_end }}</div>
                     @else

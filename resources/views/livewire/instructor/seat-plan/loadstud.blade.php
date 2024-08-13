@@ -20,8 +20,8 @@
                     <label class="label-text">Section</label>
                     <select wire:model="section_id" id="selsection_id" class="select select-bordered bg-base-300 block w-full py-3 px-4 mb-3 form-control" required>
                         <option value="">--Select Section--</option>
-                        @foreach ($sections as $id => $section)
-                            <option value="{{ $id }}">{{ $section }}</option>
+                        @foreach ($sections as $section)
+                            <option value="{{ $section->id }}">{{ $section->program }} {{ $section->year }}{{ $section->block }}</option>
                         @endforeach
                     </select>
                     @error('section_id') <span class="error" role="alert">{{ $message }}</span> @enderror

@@ -9,19 +9,21 @@ use Livewire\WithPagination;
 class Index extends Component
 {
     use WithPagination;
-    public $section_name, $section_id;
+    public $program, $year, $block, $section_id;
 
     // Validations
     protected function rules(){
         return [
-            'section_name' => 'required|string|max:7|starts_with:BSIT,BSCS,BLIS,BSIS'
+            'program' => 'required',
+            'year' => 'required',
+            'block' => 'required'
         ];
     }
 
     public function messages(){
         return [
-            'section_name.required' => 'Fill the Section Name First',
-            'section_name.unique' => 'Section Name has already taken. Please Type Another Section.'
+            // 'section_name.required' => 'Fill the Section Name First',
+            // 'section_name.unique' => 'Section Name has already taken. Please Type Another Section.'
         ];
     }
 
@@ -45,7 +47,9 @@ class Index extends Component
         $section = Section::find($section_id);
         if($section){
             $this->section_id = $section->id;
-            $this->section_name = $section->section_name;
+            $this->program = $section->program;
+            $this->year = $section->year;
+            $this->block = $section->block;
         } else {
             return redirect()->to('/sections');
         }
@@ -55,7 +59,9 @@ class Index extends Component
         $validatedData = $this->validate();
 
         Section::where('id', $this->section_id)->update([
-            'section_name' => $validatedData['section_name']
+            'program' => $validatedData['program'],
+            'year' => $validatedData['year'],
+            'block' => $validatedData['block']
         ]);
         toastr()->success('Section Updated Successfully');
         $this->resetInput();
@@ -74,7 +80,9 @@ class Index extends Component
     }
 
     public function resetInput(){
-        $this->section_name = '';
+        $this->program = '';
+        $this->year = '';
+        $this->block = '';
     }
 
     public function render(){

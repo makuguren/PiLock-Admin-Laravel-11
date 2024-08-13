@@ -38,7 +38,7 @@ class Current extends Component
         // Fetch sections associated with schedules of the instructor (Dropdown Tag)
         $sections = Section::whereHas('schedules', function ($query) use ($instructorId) {
             $query->where('instructor_id', $instructorId);
-        })->pluck('section_name', 'id')->toArray();
+        })->get();
 
         // Fetch subjects associated with schedules of the instructor (Dropdown Tag)
         $subjects = Subject::whereHas('schedules', function ($query) use ($instructorId) {

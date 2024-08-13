@@ -68,7 +68,7 @@
                             <td>
                                 <div class="">
                                     @if ($schedule->section_id)
-                                        {{ $schedule->section->section_name }}
+                                        {{ $schedule->section->program }} {{ $schedule->section->year }}{{ $schedule->section->block }}
                                     @else
                                         No Section
                                     @endif

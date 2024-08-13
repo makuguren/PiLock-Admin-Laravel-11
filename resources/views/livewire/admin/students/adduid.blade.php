@@ -61,7 +61,7 @@
                 <div class="flex flex-wrap mb-6">
                     <div class="w-full px-3">
                         <label class="label-text">Section</label>
-                        <input class="input input-bordered bg-base-300 block w-full py-3 px-4 mb-3" name="section" id="section" value="{{ $student->section->section_name ?? '' }}" type="text" placeholder="" disabled>
+                        <input class="input input-bordered bg-base-300 block w-full py-3 px-4 mb-3" name="section" id="section" value="{{ $student->section->program ?? '' }} {{ $student->section->year ?? '' }}{{ $student->section->block ?? '' }}" type="text" placeholder="" disabled>
                     </div>
                 </div>
                 <div class="flex flex-row-reverse">

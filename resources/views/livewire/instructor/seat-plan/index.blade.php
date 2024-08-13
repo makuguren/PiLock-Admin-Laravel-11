@@ -69,8 +69,8 @@
                         <span class="font-medium text-sm">Select Sections</span>
                         <select wire:model="selectedSection" id="section" class="select select-bordered flex w-full items-center">
                             <option {{ $disabledSection }} value="">All Sections</option>
-                            @foreach($sections as $id => $section)
-                                <option value="{{ $id }}">{{ $section }}</option>
+                            @foreach($sections as $section)
+                                <option value="{{ $section->id }}">{{ $section->program }} {{ $section->year }}{{ $section->block }}</option>
                             @endforeach
                         </select>
                     </div>

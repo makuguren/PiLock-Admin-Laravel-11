@@ -8,7 +8,7 @@ use Livewire\Component;
 
 class Adduid extends Component
 {
-    public $student, $student_id, $tag_uid, $first_name, $last_name, $section_name;
+    public $student, $student_id, $tag_uid, $first_name, $last_name, $section;
     public $isDisabled = true;
 
     //Validations
@@ -48,7 +48,7 @@ class Adduid extends Component
         $this->student_id = '';
         $this->first_name = '';
         $this->last_name = '';
-        $this->section_name = '';
+        $this->section = '';
     }
 
     public function render(){
