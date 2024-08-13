@@ -7,6 +7,8 @@ use Livewire\Component;
 use App\Models\Schedules;
 use App\Models\Attendance;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Http\Client\ConnectionException;
 
 class Index extends Component
 {
@@ -18,6 +20,11 @@ class Index extends Component
         Schedules::where('id', $schedule_id)->update([
             'isAttend' => '1'
         ]);
+        try {
+            Http::post('http://10.8.0.2:5000/unlock');
+        }catch(ConnectionException $e){
+
+        }
         toastr()->success('Mark as Present Successfully!');
     }
 
