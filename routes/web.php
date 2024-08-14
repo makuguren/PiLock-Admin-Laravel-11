@@ -190,6 +190,11 @@ Route::middleware(['auth:instructor', App\Http\Middleware\InstructorComponentLay
         Route::get('/', App\Livewire\Instructor\Events\Index::class)->name('events.index');
     });
 
+    // Courses Routes
+    Route::prefix('courses')->group(function () {
+        Route::get('/', App\Livewire\Instructor\Courses\Index::class)->name('courses.index');
+    });
+
     //Profile Routes
     Route::controller(App\Http\Controllers\Instructor\SettingsController::class)->group(function () {
         Route::get('settings', 'index')->name('settings.index');

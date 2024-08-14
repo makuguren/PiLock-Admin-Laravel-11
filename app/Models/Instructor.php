@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Course;
 use App\Models\Schedules;
 use App\Models\Attendance;
 use Illuminate\Notifications\Notifiable;
@@ -53,5 +54,9 @@ class Instructor extends Authenticatable
 
     public function schedules(){
         return $this->hasMany(Schedules::class, 'instructor_id', 'id');
+    }
+
+    public function course(){
+        return $this->hasMany(Course::class, 'instructor_id', 'id');
     }
 }
