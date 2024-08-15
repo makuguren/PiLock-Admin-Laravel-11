@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\User;
+use App\Models\Course;
 use App\Models\Section;
 use App\Models\Subject;
 use App\Models\Schedules;
@@ -18,7 +19,7 @@ class Attendance extends Model
 
     protected $fillable = [
         'student_id',
-        'schedule_id',
+        'course_id',
         'isPresent',
         'isCurrent',
         'date'
@@ -26,9 +27,5 @@ class Attendance extends Model
 
     public function student(){
         return $this->belongsTo(User::class, 'student_id', 'id');
-    }
-
-    public function schedules(){
-        return $this->belongsTo(Schedules::class, 'schedule_id', 'id');
     }
 }

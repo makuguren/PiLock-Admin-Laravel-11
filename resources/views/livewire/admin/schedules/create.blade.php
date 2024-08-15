@@ -3,42 +3,27 @@
     <div class="modal-box">
       <h3 class="text-lg font-bold">Add Schedule</h3>
         <form wire:submit.prevent="saveSchedule" method="dialog" class="w-full mt-6">
+            @csrf
             <div class="flex flex-wrap mb-2">
                 <div class="w-full px-3">
-                    <label class="label-text">Subject</label>
-                    <select wire:model="subject_id" id="addsubject_id" class="select select-bordered bg-base-300 block w-full py-3 px-4 mb-3 form-control" required>
-                        <option value="">--Select Subject--</option>
-                            @foreach ($subjects as $subject)
-                                <option value="{{ $subject->id }}">{{ $subject->subject_name }}</option>
+                    <label class="label-text">Courses</label>
+                    <select wire:model="course_id" id="addcourse_id" class="select select-bordered bg-base-300 block w-full py-3 px-4 mb-3 form-control" required>
+                        <option value="">--Select Courses--</option>
+                            @foreach ($courses as $course)
+                                <option wire:click="fetchCourseDetails({{ $course->id }})" value="{{ $course->id }}">{{ $course->course_title }} | {{ $course->section->program }} {{ $course->section->year }}{{ $course->section->block }}</option>
                             @endforeach
                     </select>
-                    @error('subject_id') <span class="error" role="alert">{{ $message }}</span> @enderror
+                    @error('course_id') <span class="error" role="alert">{{ $message }}</span> @enderror
                 </div>
             </div>
+
             <div class="flex flex-wrap mb-2">
                 <div class="w-full px-3">
                     <label class="label-text">Instructor</label>
-                    <select wire:model="instructor_id" id="addinstructor_id" class="select select-bordered bg-base-300 block w-full py-3 px-4 mb-3 form-control" required>
-                        <option value="">--Select Instructor--</option>
-                            @foreach ($instructors as $instructor)
-                                <option value="{{ $instructor->id }}">{{ $instructor->name }}</option>
-                            @endforeach
-                    </select>
-                    @error('instructor_id') <span class="error" role="alert">{{ $message }}</span> @enderror
+                    <input value="{{ $instructor_name }}" id="instructor_name" class="input input-bordered bg-base-300 block w-full py-3 px-4 mb-3 form-control" type="name" disabled>
                 </div>
             </div>
-            <div class="flex flex-wrap mb-2">
-                <div class="w-full px-3">
-                    <label class="label-text">Section</label>
-                    <select wire:model="section_id" id="addsection_id" class="select select-bordered bg-base-300 block w-full py-3 px-4 mb-3 form-control" required>
-                        <option value="">--Select Section--</option>
-                        @foreach ($sections as $section)
-                            <option value="{{ $section->id }}">{{ $section->program }} {{ $section->year }}{{ $section->block }}</option>
-                        @endforeach
-                    </select>
-                    @error('section_id') <span class="error" role="alert">{{ $message }}</span> @enderror
-                </div>
-            </div>
+
             <div class="flex flex-wrap mb-2">
                 <div class="w-full px-3">
                     <label class="label-text">Days</label>

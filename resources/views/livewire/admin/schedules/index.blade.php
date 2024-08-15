@@ -39,7 +39,7 @@
                 <table class="table table-zebra">
                     <thead class="bg-base-200 rounded-md text-md">
                         <tr>
-                            <th>SUBJECT</th>
+                            <th>COURSE TITLE</th>
                             <th>INSTRUCTOR</th>
                             <th>DAYS</th>
                             <th>SECTION</th>
@@ -53,8 +53,8 @@
                         <tr>
                             <td>
                                 <div class="">
-                                    @if ($schedule->subject_id)
-                                        {{ $schedule->subject->subject_name }}
+                                    @if ($schedule->course_id)
+                                        {{ $schedule->course->course_title }}
                                     @else
                                         No Subject
                                     @endif
@@ -62,8 +62,8 @@
                             </td>
                             <td>
                                 <div class="">
-                                    @if ($schedule->instructor_id)
-                                        {{ $schedule->instructor->name }}
+                                    @if ($schedule->course_id)
+                                        {{ $schedule->course->instructor->name }}
                                     @else
                                         No Instructor
                                     @endif
@@ -72,8 +72,8 @@
                             <td><div class="">{{ $schedule->days }}</div></td>
                             <td>
                                 <div class="">
-                                    @if ($schedule->section_id)
-                                        {{ $schedule->section->program }} {{ $schedule->section->year }}{{ $schedule->section->block }}
+                                    @if ($schedule->course_id)
+                                        {{ $schedule->course->section->program }} {{ $schedule->course->section->year }}{{ $schedule->course->section->block }}
                                     @else
                                         No Section
                                     @endif

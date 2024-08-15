@@ -4,6 +4,8 @@ namespace App\Models;
 
 use App\Models\User;
 use App\Models\Section;
+use App\Models\Schedules;
+use App\Models\Attendance;
 use App\Models\Instructor;
 use App\Models\EnrolledCourse;
 use Illuminate\Database\Eloquent\Model;
@@ -24,7 +26,7 @@ class Course extends Model
     ];
 
     public function section(){
-        return $this->belongsTo(Section::class, 'section_id', 'id');
+        return $this->hasMany(Section::class, 'section_id', 'id');
     }
 
     public function instructor(){
@@ -33,5 +35,14 @@ class Course extends Model
 
     public function enrolledCourse(){
         return $this->hasMany(EnrolledCourse::class, 'course_id', 'id');
+    }
+
+    public function schedules(){
+        return $this->hasMany(Schedules::class);
+    }
+
+
+    public function attendance(){
+        return $this->hasMany(Attendance::class);
     }
 }

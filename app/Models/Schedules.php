@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Course;
 use App\Models\Section;
 use App\Models\Subject;
 use App\Models\SeatPlan;
@@ -17,7 +18,7 @@ class Schedules extends Model
     protected $table = 'schedules';
 
     protected $fillable = [
-        'subject_id',
+        'course_id',
         'instructor_id',
         'section_id',
         'days',
@@ -32,6 +33,10 @@ class Schedules extends Model
         return $this->belongsTo(Subject::class, 'subject_id', 'id');
     }
 
+    public function course(){
+        return $this->belongsTo(Course::class, 'course_id', 'id');
+    }
+
     public function instructor(){
         return $this->belongsTo(Instructor::class, 'instructor_id', 'id');
     }
@@ -40,11 +45,15 @@ class Schedules extends Model
         return $this->belongsTo(Section::class, 'section_id', 'id');
     }
 
-    public function attendance(){
-        return $this->hasMany(Attendance::class, 'schedule_id', 'id');
+    public function attendances(){
+        return $this->hasMany(Attendance::class);
     }
 
     public function seatplan(){
         return $this->hasMany(SeatPlan::class, 'schedule_id', 'id');
+    }
+
+    public function student(){
+        return $this->belongsTo(User::class, 'student_id', 'id');
     }
 }

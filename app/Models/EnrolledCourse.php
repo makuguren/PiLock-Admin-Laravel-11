@@ -21,6 +21,6 @@ class EnrolledCourse extends Model
     }
 
     public function student(){
-        return $this->hasMany(User::class, 'student_id', 'id');
+        return $this->belongsTo(User::class, 'student_id', 'id');
     }
 }
