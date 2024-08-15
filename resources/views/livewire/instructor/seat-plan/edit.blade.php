@@ -14,7 +14,7 @@
                     <div class="font-medium">Filtering</div>
 
                     <a href="{{ route('instructor.seatplan.index') }}" class="btn btn-ghost bg-blue-700 hover:bg-blue-500 w-55 btn-sm">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" /></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-big-left"><path d="M18 15h-6v4l-7-7 7-7v4h6v6z"/></svg>
                         <span class="text-white text-sm">SeatPlan View</span>
                     </a>
                 </div>
@@ -25,12 +25,16 @@
                         <select wire:model="selectedSection" id="section" class="select select-bordered flex w-full items-center">
                             <option {{ $disabledSection }} value="">All Sections</option>
                             @foreach($sections as $section)
-                                <option value="{{ $section->id }}">{{ $section->program }} {{ $section->year }}{{ $section->block }}</option>
+                                <option value="{{ $section->id }}">
+                                    {{ optional($section->course->first())->course_title ?? 'No Course Title' }} -
+                                    {{ $section->program }}
+                                    {{ $section->year }}{{ $section->block }}
+                                </option>
                             @endforeach
                         </select>
                     </div>
 
-                    <div class="w-full">
+                    {{-- <div class="w-full">
                         <span class="font-medium text-sm">Select Subjects</span>
                         <select wire:model="selectedSubject" id="subject" class="select select-bordered flex w-full items-center">
                             <option {{ $disabledSubject }} value="">All Subjects</option>
@@ -38,7 +42,7 @@
                                 <option value="{{ $id }}">{{ $subject }}</option>
                             @endforeach
                         </select>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
@@ -59,7 +63,7 @@
                     <div class="font-medium">Unassigned Students</div>
 
                     <label for="load_stud" class="btn btn-ghost bg-blue-700 hover:bg-blue-500 w-55 btn-sm">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99" /></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-refresh-cw"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg>
                         <span class="text-white text-sm">Load Students</span>
                     </label>
                 </div>

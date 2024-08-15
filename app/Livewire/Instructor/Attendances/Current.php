@@ -53,7 +53,7 @@ class Current extends Component
             // ->with('attendance.student') // Eager load relationships (Old Version)
 
             ->with(['attendance' => function ($query) {
-                $query->where('isCurrent', '0'); //Filter attendance where isCurrent to 0
+                $query->where('isCurrent', '1'); //Filter attendance where isCurrent to 0
                 $query->where('date', 'like', '%'.$this->selectedDate.'%'); //Filter Date
             }, 'attendance.student']) // Eager load relationships
 

@@ -25,24 +25,45 @@ class Course extends Model
         'course_key'
     ];
 
-    public function section(){
-        return $this->hasMany(Section::class, 'section_id', 'id');
-    }
-
+    // Admin Interface
     public function instructor(){
         return $this->belongsTo(Instructor::class, 'instructor_id', 'id');
+    }
+
+    public function section(){
+        return $this->belongsTo(Section::class, 'section_id', 'id');
+    }
+
+    // Instructor Interface
+    public function attendance(){
+        return $this->hasMany(Attendance::class, 'course_id', 'id');
     }
 
     public function enrolledCourse(){
         return $this->hasMany(EnrolledCourse::class, 'course_id', 'id');
     }
 
-    public function schedules(){
-        return $this->hasMany(Schedules::class);
+    public function seatplan(){
+        return $this->hasMany(SeatPlan::class, 'course_id', 'id');
+    }
+
+    public function schedule(){
+        return $this->hasMany(Schedules::class, 'course_id', 'id');
     }
 
 
-    public function attendance(){
-        return $this->hasMany(Attendance::class);
-    }
+
+
+    // public function enrolledCourse(){
+    //     return $this->hasMany(EnrolledCourse::class, 'course_id', 'id');
+    // }
+
+    // public function schedules(){
+    //     return $this->hasMany(Schedules::class);
+    // }
+
+
+    // public function attendance(){
+    //     return $this->hasMany(Attendance::class);
+    // }
 }

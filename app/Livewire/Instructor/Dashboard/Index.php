@@ -3,6 +3,7 @@
 namespace App\Livewire\Instructor\Dashboard;
 
 use Carbon\Carbon;
+use App\Models\Course;
 use Livewire\Component;
 use App\Models\Schedules;
 use App\Models\Attendance;
@@ -45,14 +46,25 @@ class Index extends Component
             $this->greetMessage = 'Good Evening';
         }
 
-        $curschedule = Schedules::where('instructor_id', Auth::user()->id)
-                                ->where('isApproved', '1')
-                                ->where('isCurrent', '1')
-                                ->first();
+        $query = Course::where('instructor_id', Auth::id())
+            ->with(['schedule' => function ($query) {
+                $query->where('isApproved', '1');
+                $query->where('isCurrent', '1');
+            }, 'schedule']);
+
+        $courses = $query->get();
+        // $courses = $query->first()->schedule->first();
+
+        // foreach ($courses as $course) {
+        //     foreach ($course->schedule as $schedule) {
+        //         dd($schedule->id);
+        //     }
+        // }
+
         $totalPresent = Attendance::where('isCurrent', '1')->where('isPresent', '1')->count();
         $totalStudents = Attendance::where('isCurrent', '1')->count();
         return view('livewire.instructor.dashboard.index',[
-            'curschedule' => $curschedule,
+            'courses' => $courses,
             'totalPresent' => $totalPresent,
             'totalStudents' => $totalStudents,
             'greetMessage' => $this->greetMessage

@@ -3,6 +3,7 @@
 namespace App\Livewire\Instructor\SeatPlan;
 
 use App\Models\User;
+use App\Models\Course;
 use App\Models\Section;
 use App\Models\Subject;
 use Livewire\Component;
@@ -18,6 +19,8 @@ class Index extends Component
 
     public $disabledSection, $disabledSubject = '';
 
+    public $seat_id, $student_name, $seat_number;
+
     public function updatedSelectedSection($value){
         $this->selectedSection = $value;
         $this->selectedSubject = null;
@@ -31,21 +34,38 @@ class Index extends Component
         // $this->resetPage();
     }
 
+    public function viewSeat($seat_id){
+        // View the Modal
+        $this->dispatch('view_seat_modal');
+
+        $seatQuery = SeatPlan::findOrFail($seat_id);
+
+        if($seatQuery){
+            $this->seat_id = $seatQuery->id;
+            $this->student_name = $seatQuery->student->name;
+            $this->seat_number = $seatQuery->seat_number;
+        }
+    }
+
     public function render(){
         $instructor_id = Auth::id();
 
         // Fetch sections associated with schedules of the instructor (Dropdown Tag)
-        $sections = Section::whereHas('schedules', function ($query) use ($instructor_id) {
+        // $sections = Section::whereHas('schedules', function ($query) use ($instructor_id) {
+        //     $query->where('instructor_id', $instructor_id);
+        // })->get();
+
+        $sections = Section::whereHas('course', function ($query) use ($instructor_id) {
             $query->where('instructor_id', $instructor_id);
-        })->get();
+        })->with('course')->get();
 
         // Fetch subjects associated with schedules of the instructor (Dropdown Tag)
-        $subjects = Subject::whereHas('schedules', function ($query) use ($instructor_id) {
-            $query->where('instructor_id', $instructor_id);
-        })->pluck('subject_name', 'id')->toArray();
+        // $subjects = Subject::whereHas('schedules', function ($query) use ($instructor_id) {
+        //     $query->where('instructor_id', $instructor_id);
+        // })->pluck('subject_name', 'id')->toArray();
 
 
-        $queryFetchSeats = Schedules::where('instructor_id', $instructor_id)
+        $queryFetchSeats = Course::where('instructor_id', $instructor_id)
                             ->with(['seatplan' => function ($query) {
                                 $query->orderBy('seat_number');
                             }, 'seatplan.student'])
@@ -74,7 +94,7 @@ class Index extends Component
         return view('livewire.instructor.seat-plan.index', [
             'seatplans' => $queryFetchSeats,
             'sections' => $sections,
-            'subjects' => $subjects
+            // 'subjects' => $subjects
         ]);
     }
 }

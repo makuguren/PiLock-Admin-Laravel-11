@@ -3,6 +3,8 @@
 </x-slot>
 
 <div>
+    @include('livewire.instructor.seat-plan.view');
+
     {{-- <ul wire:sortable="updateTaskOrder">
         @foreach ($seatplan as $seatplan)
             <li wire:sortable.item="{{ $task->id }}" wire:key="task-{{ $task->id }}">
@@ -53,7 +55,7 @@
             </div>
 
             <a href="{{ route('instructor.seatplan.assign') }}" class="btn btn-ghost bg-red-700 hover:bg-red-500 w-55 btn-sm mt-3">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" /></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-armchair"><path d="M19 9V6a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v3"/><path d="M3 16a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5a2 2 0 0 0-4 0v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V11a2 2 0 0 0-4 0z"/><path d="M5 18v2"/><path d="M19 18v2"/></svg>
                 <span class="text-white text-sm">Edit SeatPlan</span>
             </a>
         </div>
@@ -70,12 +72,16 @@
                         <select wire:model="selectedSection" id="section" class="select select-bordered flex w-full items-center">
                             <option {{ $disabledSection }} value="">All Sections</option>
                             @foreach($sections as $section)
-                                <option value="{{ $section->id }}">{{ $section->program }} {{ $section->year }}{{ $section->block }}</option>
+                                <option value="{{ $section->id }}">
+                                    {{ optional($section->course->first())->course_title ?? 'No Course Title' }} -
+                                    {{ $section->program }}
+                                    {{ $section->year }}{{ $section->block }}
+                                </option>
                             @endforeach
                         </select>
                     </div>
 
-                    <div class="w-full">
+                    {{-- <div class="w-full">
                         <span class="font-medium text-sm">Select Subjects</span>
                         <select wire:model="selectedSubject" id="subject" class="select select-bordered flex w-full items-center">
                             <option {{ $disabledSubject }} value="">All Subjects</option>
@@ -83,7 +89,7 @@
                                 <option value="{{ $id }}">{{ $subject }}</option>
                             @endforeach
                         </select>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>

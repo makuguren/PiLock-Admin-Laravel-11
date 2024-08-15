@@ -3,17 +3,19 @@
 namespace App\Livewire\Instructor\SeatPlan;
 
 use App\Models\User;
+use App\Models\Course;
 use App\Models\Section;
 use App\Models\Subject;
 use Livewire\Component;
 use App\Models\SeatPlan;
 use App\Models\Schedules;
+use App\Models\EnrolledCourse;
 use Illuminate\Support\Facades\Auth;
 
 class EditSP extends Component
 {
     public $seat_id, $student_name, $seat_number;
-    public $subject_id, $section_id;
+    public $subject_id, $course_id;
 
     public $selectedSection = null;
     public $selectedSubject = null;
@@ -34,20 +36,24 @@ class EditSP extends Component
     }
 
     public function loadStudentsData(){
-        $schedule = Schedules::where('subject_id', $this->subject_id)->where('section_id', $this->section_id)->first();
-        $students = User::where('section_id', $this->section_id)->get();
+        // Retrieve Course ID from the Dropdown
+        // dd('Course ID: ' . $this->course_id);
 
-        if($schedule){
-            foreach ($students as $student) {
+        $courses = Course::where('id', $this->course_id)->first();
+        $enrolledCourses = EnrolledCourse::where('course_id', $this->course_id)->get();
+
+        if($courses){
+            foreach ($enrolledCourses as $enrolledCourse) {
 
                 SeatPlan::updateOrCreate([
-                    'student_id' => $student->id,
-                    'schedule_id' => $schedule->id
+                    'student_id' => $enrolledCourse->student_id,
+                    'course_id' => $enrolledCourse->course_id
                 ]);
-
-                toastr()->success('Load Students Successfully!');
-                $this->dispatch('close-modal');
             }
+
+            toastr()->success('Load Students Successfully!');
+            $this->dispatch('close-modal');
+
         } else {
             dd("No Schedules Found!");
         }
@@ -95,18 +101,18 @@ class EditSP extends Component
         $instructor_id = Auth::id();
 
         // Fetch sections associated with schedules of the instructor (Dropdown Tag)
-        $sections = Section::whereHas('schedules', function ($query) use ($instructor_id) {
+        $sections = Section::whereHas('course', function ($query) use ($instructor_id) {
             $query->where('instructor_id', $instructor_id);
-        })->get();
+        })->with('course')->get();
 
         // Fetch subjects associated with schedules of the instructor (Dropdown Tag)
-        $subjects = Subject::whereHas('schedules', function ($query) use ($instructor_id) {
-            $query->where('instructor_id', $instructor_id);
-        })->pluck('subject_name', 'id')->toArray();
+        // $subjects = Subject::whereHas('schedules', function ($query) use ($instructor_id) {
+        //     $query->where('instructor_id', $instructor_id);
+        // })->pluck('subject_name', 'id')->toArray();
 
 
         // Query to Fetch Attendances
-        $queryFetchStudents = Schedules::where('instructor_id', $instructor_id)
+        $queryFetchStudents = Course::where('instructor_id', $instructor_id)
                             ->with(['seatplan' => function ($query) {
                                 $query->whereNull('seat_number');
                                 $query->orderBy('seat_number');
@@ -130,7 +136,7 @@ class EditSP extends Component
                             }
 
 
-        $queryFetchSeats = Schedules::where('instructor_id', $instructor_id)
+        $queryFetchSeats = Course::where('instructor_id', $instructor_id)
                             ->with(['seatplan' => function ($query) {
                                 $query->orderBy('seat_number');
                             }, 'seatplan.student'])
@@ -156,7 +162,7 @@ class EditSP extends Component
             'seatplans' => $queryFetchSeats,
             'fetchStudentsList' => $queryFetchStudents,
             'sections' => $sections,
-            'subjects' => $subjects
+            // 'subjects' => $subjects
         ])->layout('instructor.layouts.seatplan');
     }
 }

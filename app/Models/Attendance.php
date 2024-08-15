@@ -20,11 +20,13 @@ class Attendance extends Model
     protected $fillable = [
         'student_id',
         'course_id',
+        'date',
+        'time_end',
         'isPresent',
-        'isCurrent',
-        'date'
+        'isCurrent'
     ];
 
+    // Instructor Interface
     public function student(){
         return $this->belongsTo(User::class, 'student_id', 'id');
     }

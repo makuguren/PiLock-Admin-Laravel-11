@@ -29,31 +29,40 @@ class Schedules extends Model
         'isAttend'
     ];
 
-    public function subject(){
-        return $this->belongsTo(Subject::class, 'subject_id', 'id');
-    }
-
+    // Admin Interface
     public function course(){
         return $this->belongsTo(Course::class, 'course_id', 'id');
-    }
-
-    public function instructor(){
-        return $this->belongsTo(Instructor::class, 'instructor_id', 'id');
     }
 
     public function section(){
         return $this->belongsTo(Section::class, 'section_id', 'id');
     }
 
-    public function attendances(){
-        return $this->hasMany(Attendance::class);
-    }
+    // public function subject(){
+    //     return $this->belongsTo(Subject::class, 'subject_id', 'id');
+    // }
 
-    public function seatplan(){
-        return $this->hasMany(SeatPlan::class, 'schedule_id', 'id');
-    }
+    // public function course(){
+    //     return $this->belongsTo(Course::class, 'course_id', 'id');
+    // }
 
-    public function student(){
-        return $this->belongsTo(User::class, 'student_id', 'id');
-    }
+    // public function instructor(){
+    //     return $this->belongsTo(Instructor::class, 'instructor_id', 'id');
+    // }
+
+    // public function section(){
+    //     return $this->belongsTo(Section::class, 'section_id', 'id');
+    // }
+
+    // public function attendances(){
+    //     return $this->hasMany(Attendance::class);
+    // }
+
+    // public function seatplan(){
+    //     return $this->hasMany(SeatPlan::class, 'schedule_id', 'id');
+    // }
+
+    // public function student(){
+    //     return $this->belongsTo(User::class, 'student_id', 'id');
+    // }
 }
