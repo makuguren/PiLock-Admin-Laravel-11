@@ -26,8 +26,8 @@ class Index extends Component
         $totalSubjects = Subject::count();
         $totalSections = Section::count();
         $totalEvents = Event::count();
-        $schedulesNow = Schedules::where('isCurrent', '1')->first();
         $eventsNow = Event::where('isCurrent', '1')->first();
+        $schedulesNow = Schedules::where('isCurrent', '1')->first();
 
         // $setting = Setting::where('id', '1')->first();
 

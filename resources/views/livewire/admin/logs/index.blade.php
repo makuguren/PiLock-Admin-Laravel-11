@@ -26,36 +26,16 @@
                 <div class="flex flex-col md:flex-row gap-5">
 
                     <div class="w-full">
-                        <span class="font-medium text-sm">Select Subject</span>
-                        <form wire:submit="filter_subject">
-                            <select wire:model="filter_subject" class="select select-bordered flex w-full items-center">
-                                <option value="" selected>All Subjects</option>
-                                @foreach ($subjects as $subject)
-                                    <option value="{{ $subject->id }}">{{ $subject->subject_name }}</option>
-                                @endforeach
-                            </select>
-                        </form>
-                    </div>
-
-                    <div class="w-full">
-                        <span class="font-medium text-sm">Select Section</span>
-                        <form wire:submit="filter_section">
-                            <select wire:model="filter_section" class="select select-bordered flex w-full items-center">
-                                <option value="" selected>All Sections</option>
-                                @foreach ($sections as $section)
-                                    <option value="{{ $section->id }}">{{ $section->program }} {{ $section->year }}{{ $section->block }}</option>
-                                @endforeach
-                            </select>
-                        </form>
-                    </div>
-
-                    <div class="w-full">
-                        <span class="font-medium text-sm">Select Instructor</span>
-                        <form wire:submit="filter_instructor">
-                            <select wire:model="filter_instructor" class="select select-bordered flex w-full items-center">
-                                <option value="" selected>All Instructors</option>
-                                @foreach ($instructors as $instructor)
-                                    <option value="{{ $instructor->id }}">{{ $instructor->name }}</option>
+                        <span class="font-medium text-sm">Select Courses and Section</span>
+                        <form wire:submit="filter_coursesec">
+                            <select wire:model="filter_coursesec" class="select select-bordered flex w-full items-center">
+                                <option value="" selected>All Course & Section</option>
+                                @foreach ($courses as $course)
+                                    <option value="{{ $course->id }}">{{ $course->course_title }} -
+                                        {{ $course->section->program }}
+                                        {{ $course->section->year }}{{ $course->section->block }} -
+                                        {{ $course->instructor->name }}
+                                    </option>
                                 @endforeach
                             </select>
                         </form>
@@ -83,7 +63,7 @@
                             <th>STUDENT ID</th>
                             <th>NAME</th>
                             <th>SECTION</th>
-                            <th>SUBJECT</th>
+                            <th>COURSE TITLE</th>
                             <th>INSTRUCTOR</th>
                             <th>DATE</th>
                             <th>TIME</th>
@@ -112,8 +92,8 @@
                             </td>
                             <td>
                                 <div class="">
-                                    @if ($log->section_id)
-                                        {{ $log->section->program }} {{ $log->section->year }}{{ $log->section->block }}
+                                    @if ($log->course_id)
+                                        {{ $log->course->section->program }} {{ $log->course->section->year }}{{ $log->course->section->block }}
                                     @else
                                         No Section Found
                                     @endif
@@ -121,17 +101,17 @@
                             </td>
                             <td>
                                 <div class="">
-                                    @if ($log->subject_id)
-                                        {{ $log->subject->subject_name }}
+                                    @if ($log->course_id)
+                                        {{ $log->course->course_title }}
                                     @else
-                                        No Subject Found
+                                        No Course Title Found
                                     @endif
                                 </div>
                             </td>
                             <td>
                                 <div class="">
-                                    @if ($log->instructor_id)
-                                        {{ $log->instructor->name }}
+                                    @if ($log->course_id)
+                                        {{ $log->course->instructor->name }}
                                     @else
                                         No Instructor Found
                                     @endif

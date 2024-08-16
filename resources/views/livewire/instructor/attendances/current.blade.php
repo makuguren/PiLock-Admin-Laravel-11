@@ -24,23 +24,16 @@
                 </div>
 
                 <div class="flex flex-col md:flex-row gap-5">
-
                     <div class="w-full">
-                        <span class="font-medium text-sm">Select Sections</span>
-                        <select wire:model="selectedSection" id="section" class="select select-bordered flex w-full items-center">
-                            <option value="">All Sections</option>
-                            @foreach($sections as $section)
-                                <option value="{{ $section->id }}">{{ $section->program }} {{ $section->year }}{{ $section->block }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-
-                    <div class="w-full">
-                        <span class="font-medium text-sm">Select Subjects</span>
-                        <select wire:model="selectedSubject" id="subject" class="select select-bordered flex w-full items-center">
-                            <option value="">All Subjects</option>
-                            @foreach($subjects as $id => $subject)
-                                <option value="{{ $id }}">{{ $subject }}</option>
+                        <span class="font-medium text-sm">Select Course and Sections</span>
+                        <select wire:model="selectedCourseSection" id="section" class="select select-bordered flex w-full items-center">
+                            <option value="">All Course and Section</option>
+                            @foreach($courseSecs as $courseSec)
+                                <option value="{{ $courseSec->id }}">
+                                    {{ $courseSec->course_title ?? 'No Course Title' }} -
+                                    {{ $courseSec->section->program }}
+                                    {{ $courseSec->section->year }}{{ $courseSec->section->block }}
+                                </option>
                             @endforeach
                         </select>
                     </div>
@@ -57,7 +50,7 @@
 
         <div class="w-full mb-6"></div>
 
-        <div wire:poll.1s class="bg-base-100 border-gray-100 shadow-md shadow-black/5 p-6 rounded-md">
+        <div wire:poll.1000ms class="bg-base-100 border-gray-100 shadow-md shadow-black/5 p-6 rounded-md">
             <div class="overflow-x-auto">
                 <table class="table table-zebra">
                     <thead class="bg-base-200 rounded-md text-md">
@@ -72,8 +65,8 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($schedules as $schedule)
-                            @foreach ($schedule->attendance as $attendance)
+                        @forelse ($courses as $course)
+                            @foreach ($course->attendance as $attendance)
                             <tr>
                                 <td><div class="font-bold">{{ $attendance->student->student_id }}</div></td>
                                 <td>
@@ -90,9 +83,9 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td><div class="">{{ $schedule->instructor->name }}</div></td>
+                                <td><div class="">{{ $course->instructor->name }}</div></td>
                                 <td><div class="">{{ $attendance->student->section->program }} {{ $attendance->student->section->year }}{{ $attendance->student->section->block }}</div></td>
-                                <td><div class="">{{ $schedule->subject->subject_name }}</div></td>
+                                <td><div class="">{{ $course->course_title }}</div></td>
                                 <td><div class="">{{ $attendance->date }}</div></td>
                                 <td>
                                     <div class="">
@@ -123,19 +116,3 @@
         </div>
     </div>
 </div>
-
-<x-slot:scripts>
-    <script>
-        window.addEventListener('close-modal', event => {
-            document.getElementById('download_pdf_modal').checked = false;
-        });
-
-        function cancel_dlpdf(){
-            document.getElementById('download_pdf_modal').checked = false;
-
-            document.getElementById('selsection_id').value = '';
-            document.getElementById('selsubject_id').value = '';
-            document.getElementById('dlpdfdate').value = '';
-        }
-    </script>
-</x-slot>

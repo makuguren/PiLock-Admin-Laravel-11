@@ -14,15 +14,20 @@ class SeatPlan extends Model
     protected $table = 'seat_plan';
     protected $fillable = [
         'student_id',
-        'schedule_id',
+        'course_id',
         'seat_number'
     ];
 
+    // Instructor Interface
     public function student(){
         return $this->belongsTo(User::class, 'student_id', 'id');
     }
 
-    public function schedule(){
-        return $this->belongsTo(Schedules::class, 'schedule_id', 'id');
-    }
+    // public function student(){
+    //     return $this->belongsTo(User::class, 'student_id', 'id');
+    // }
+
+    // public function schedule(){
+    //     return $this->belongsTo(Schedules::class, 'schedule_id', 'id');
+    // }
 }

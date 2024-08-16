@@ -62,15 +62,16 @@ class User extends Authenticatable
         return $this->belongsTo(Section::class, 'section_id', 'id');
     }
 
-    public function attendance(){
-        return $this->hasMany(Attendance::class, 'student_id', 'id');
-    }
 
-    public function seatplan(){
-        return $this->hasMany(User::class, 'student_id', 'id');
-    }
+    // public function attendance(){
+    //     return $this->hasMany(Attendance::class, 'student_id', 'id');
+    // }
 
-    public function enrolledCourse(){
-        return $this->belongsTo(EnrolledCourse::class, 'student_id', 'id');
-    }
+    // public function seatplan(){
+    //     return $this->hasMany(User::class, 'student_id', 'id');
+    // }
+
+    // public function enrolledCourse(){
+    //     return $this->hasMany(EnrolledCourse::class, 'student_id', 'id');
+    // }
 }

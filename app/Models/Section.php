@@ -20,19 +20,25 @@ class Section extends Model
         'block'
     ];
 
-    public function schedules(){
-        return $this->hasMany(Schedules::class, 'section_id', 'id');
-    }
 
+    // Instructor Interface
     public function course(){
         return $this->hasMany(Course::class, 'section_id', 'id');
     }
 
-    public function users(){
-        return $this->hasMany(User::class, 'section_id', 'id');
-    }
+    // public function schedules(){
+    //     return $this->hasMany(Schedules::class, 'section_id', 'id');
+    // }
 
-    public function logs(){
-        return $this->hasMany(Log::class, 'section_id', 'id');
-    }
+    // public function course(){
+    //     return $this->hasMany(Course::class, 'section_id', 'id');
+    // }
+
+    // public function users(){
+    //     return $this->hasMany(User::class, 'section_id', 'id');
+    // }
+
+    // public function logs(){
+    //     return $this->hasMany(Log::class, 'section_id', 'id');
+    // }
 }

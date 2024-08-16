@@ -19,15 +19,15 @@ class Subject extends Model
         'subject_name'
     ];
 
-    public function schedules(){
-        return $this->hasMany(Schedules::class, 'subject_id', 'id');
-    }
+    // public function schedules(){
+    //     return $this->hasMany(Schedules::class, 'subject_id', 'id');
+    // }
 
-    public function scheduleNow(){
-        return $this->hasMany(ScheduleNow::class, 'subject_id', 'id');
-    }
+    // public function scheduleNow(){
+    //     return $this->hasMany(ScheduleNow::class, 'subject_id', 'id');
+    // }
 
-    public function logs(){
-        return $this->hasMany(Log::class, 'subject_id', 'id');
-    }
+    // public function logs(){
+    //     return $this->hasMany(Log::class, 'subject_id', 'id');
+    // }
 }

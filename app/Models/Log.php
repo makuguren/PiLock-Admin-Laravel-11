@@ -16,26 +16,17 @@ class Log extends Model
     protected $table = 'logs';
     protected $fillable = [
         'student_id',
-        'section_id',
-        'subject_id',
-        'instructor_id',
+        'course_id',
         'time',
         'date'
     ];
 
+    // Admin Interface
     public function student(){
         return $this->belongsTo(User::class, 'student_id', 'id');
     }
 
-    public function section(){
-        return $this->belongsTo(Section::class, 'section_id', 'id');
-    }
-
-    public function subject(){
-        return $this->belongsTo(Subject::class, 'subject_id', 'id');
-    }
-
-    public function instructor(){
-        return $this->belongsTo(Instructor::class, 'instructor_id', 'id');
+    public function course(){
+        return $this->belongsTo(Course::class, 'course_id', 'id');
     }
 }

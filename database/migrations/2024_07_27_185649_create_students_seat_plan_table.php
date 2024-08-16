@@ -14,13 +14,13 @@ return new class extends Migration
         Schema::create('seat_plan', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('student_id');
-            $table->unsignedBigInteger('schedule_id');
+            $table->unsignedBigInteger('course_id');
             $table->integer('seat_number')->nullable();
             $table->timestamps();
 
             // Foreign Key
             $table->foreign('student_id')->references('id')->on('users');
-            $table->foreign('schedule_id')->references('id')->on('schedules');
+            $table->foreign('course_id')->references('id')->on('courses');
         });
     }
 

@@ -19,9 +19,9 @@ class SchedulesController extends Controller
                 'schedules' => $schedules->map(function ($schedule) {
                     return [
                         'id' => $schedule->id,
-                        'subject' => $schedule->subject->subject_name,
-                        'instructor' => $schedule->instructor->name,
-                        'section' => $schedule->section->program . ' ' . $schedule->section->year . $schedule->section->block,
+                        'course_title' => $schedule->course->course_title,
+                        'instructor' => $schedule->course->instructor->name,
+                        'section' => $schedule->course->section->program . ' ' . $schedule->course->section->year . $schedule->course->section->block,
                         'days' => $schedule->days,
                         'time_start' => $schedule->time_start,
                         'time_end' => $schedule->time_end
@@ -43,9 +43,9 @@ class SchedulesController extends Controller
                 'schedule' => $schedules->map(function ($schedule) {
                     return [
                         'id' => $schedule->id,
-                        'subject' => $schedule->subject->subject_name,
-                        'instructor' => $schedule->instructor->name,
-                        'section' => $schedule->section->program . ' ' . $schedule->section->year . $schedule->section->block,
+                        'course_title' => $schedule->course->course_title,
+                        'instructor' => $schedule->course->instructor->name,
+                        'section' => $schedule->course->section->program . ' ' . $schedule->course->section->year . $schedule->course->section->block,
                         'days' => $schedule->days,
                         'time_start' => $schedule->time_start,
                         'time_end' => $schedule->time_end
@@ -68,9 +68,9 @@ class SchedulesController extends Controller
                 'schedules' => $schedules->map(function ($schedule) {
                     return [
                         'id' => $schedule->id,
-                        'subject' => $schedule->subject->subject_name,
-                        'instructor' => $schedule->instructor->name,
-                        'section' => $schedule->section->program . ' ' . $schedule->section->year . $schedule->section->block,
+                        'course_title' => $schedule->course->course_title,
+                        'instructor' => $schedule->course->instructor->name,
+                        'section' => $schedule->course->section->program . ' ' . $schedule->course->section->year . $schedule->course->section->block,
                         'days' => $schedule->days,
                         'time_start' => $schedule->time_start,
                         'time_end' => $schedule->time_end
@@ -113,9 +113,9 @@ class SchedulesController extends Controller
                         return [
                             'id' => $curschedule->id,
                             'sched_type' => 'Regular Class/Make-Up Schedules',
-                            'subject' => $curschedule->subject->subject_name,
-                            'instructor' => $curschedule->instructor->name,
-                            'section' => $curschedule->section->program . ' ' . $curschedule->section->year . $curschedule->section->block,
+                            'course_title' => $curschedule->course->course_title,
+                            'instructor' => $curschedule->course->instructor->name,
+                            'section' => $curschedule->course->section->program . ' ' . $curschedule->course->section->year . $curschedule->course->section->block,
                             'days' => $curschedule->days,
                             'time_start' => $curschedule->time_start,
                             'time_end' => $curschedule->time_end

@@ -14,15 +14,16 @@ return new class extends Migration
         Schema::create('attendances', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('student_id');
-            $table->unSignedBigInteger('schedule_id');
+            $table->unSignedBigInteger('course_id');
             $table->date('date')->nullable();
+            $table->time('time_end')->nullable();
             $table->integer('isPresent')->default('0')->comment('0=Absent, 1=Present')->nullable();
             $table->integer('isCurrent')->default('0')->comment('0=No, 1=Yes')->nullable();
             $table->timestamps();
 
             //Foreign Key
             $table->foreign('student_id')->references('id')->on('users');
-            $table->foreign('schedule_id')->references('id')->on('schedules');
+            $table->foreign('course_id')->references('id')->on('courses');
         });
     }
 

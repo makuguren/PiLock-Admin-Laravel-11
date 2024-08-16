@@ -30,6 +30,11 @@ Route::middleware(['auth:web', App\Http\Middleware\UserComponentLayout::class])-
     //Dashboard Routes
     Route::get('dashboard', [App\Http\Controllers\User\DashboardController::class, 'index'])->name('dashboard.index');
 
+    //Courses
+    Route::prefix('courses')->group(function() {
+        Route::get('/', App\Livewire\User\Courses\Index::class)->name('courses.index');
+    });
+
     //Profile Routes
     Route::controller(App\Http\Controllers\User\SettingsController::class)->group(function () {
         Route::get('settings', 'index')->name('settings.index');
@@ -190,9 +195,14 @@ Route::middleware(['auth:instructor', App\Http\Middleware\InstructorComponentLay
         Route::get('/', App\Livewire\Instructor\Events\Index::class)->name('events.index');
     });
 
-    // Courses Routes
+    //Courses Routes
     Route::prefix('courses')->group(function () {
         Route::get('/', App\Livewire\Instructor\Courses\Index::class)->name('courses.index');
+    });
+
+    //Students Routes
+    Route::prefix('students')->group(function() {
+        Route::get('/', App\Livewire\Instructor\Students\Index::class)->name('students.index');
     });
 
     //Profile Routes
