@@ -18,7 +18,7 @@
             </div>
 
             <label for="download_pdf_modal" class="btn btn-ghost bg-red-700 hover:bg-red-500 w-55 btn-sm mt-3">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" /></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-download"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
                 <span class="text-white text-sm">Download PDF</span>
             </label>
         </div>
@@ -30,23 +30,16 @@
                 </div>
 
                 <div class="flex flex-col md:flex-row gap-5">
-
                     <div class="w-full">
-                        <span class="font-medium text-sm">Select Sections</span>
-                        <select wire:model="selectedSection" id="section" class="select select-bordered flex w-full items-center">
-                            <option value="">All Sections</option>
-                            @foreach($sections as $section)
-                                <option value="{{ $section->id }}">{{ $section->program }} {{ $section->year }}{{ $section->block }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-
-                    <div class="w-full">
-                        <span class="font-medium text-sm">Select Subjects</span>
-                        <select wire:model="selectedSubject" id="subject" class="select select-bordered flex w-full items-center">
-                            <option value="">All Subjects</option>
-                            @foreach($subjects as $id => $subject)
-                                <option value="{{ $id }}">{{ $subject }}</option>
+                        <span class="font-medium text-sm">Select Course and Sections</span>
+                        <select wire:model="selectedCourseSection" id="section" class="select select-bordered flex w-full items-center">
+                            <option value="">All Course and Section</option>
+                            @foreach($courseSecs as $courseSec)
+                                <option value="{{ $courseSec->id }}">
+                                    {{ $courseSec->course_title ?? 'No Course Title' }} -
+                                    {{ $courseSec->section->program }}
+                                    {{ $courseSec->section->year }}{{ $courseSec->section->block }}
+                                </option>
                             @endforeach
                         </select>
                     </div>
@@ -63,7 +56,7 @@
 
         <div class="w-full mb-6"></div>
 
-        <div wire:poll.1s class="bg-base-100 border-gray-100 shadow-md shadow-black/5 p-6 rounded-md">
+        <div wire:poll.1000ms class="bg-base-100 border-gray-100 shadow-md shadow-black/5 p-6 rounded-md">
             <div class="overflow-x-auto">
                 <table class="table table-zebra">
                     <thead class="bg-base-200 rounded-md text-md">
@@ -78,8 +71,8 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($schedules as $schedule)
-                            @foreach ($schedule->attendance as $attendance)
+                        @forelse ($courses as $course)
+                            @foreach ($course->attendance as $attendance)
                             <tr>
                                 <td><div class="font-bold">{{ $attendance->student->student_id }}</div></td>
                                 <td>
@@ -96,9 +89,9 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td><div class="">{{ $schedule->instructor->name }}</div></td>
+                                <td><div class="">{{ $course->instructor->name }}</div></td>
                                 <td><div class="">{{ $attendance->student->section->program }} {{ $attendance->student->section->year }}{{ $attendance->student->section->block }}</div></td>
-                                <td><div class="">{{ $schedule->subject->subject_name }}</div></td>
+                                <td><div class="">{{ $course->course_title }}</div></td>
                                 <td><div class="">{{ $attendance->date }}</div></td>
                                 <td>
                                     <div class="">
@@ -123,7 +116,7 @@
                     </tbody>
                 </table>
                 <div class="mt-3">
-                    {{-- {{ $instructors->links() }} --}}
+                    {{-- {{ $courses->links() }} --}}
                 </div>
             </div>
         </div>

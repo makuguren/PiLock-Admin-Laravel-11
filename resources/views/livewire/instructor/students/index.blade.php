@@ -27,6 +27,32 @@
             </a> --}}
         </div>
 
+        <div class="bg-base-100 border-gray-100 shadow-md shadow-black/5 p-6 rounded-md">
+            <div class="overflow-x-auto">
+                <div class="flex justify-between mb-4 items-start">
+                    <div class="font-medium">Filtering</div>
+                </div>
+
+                <div class="flex flex-col md:flex-row gap-5">
+                    <div class="w-full">
+                        <span class="font-medium text-sm">Select Course and Sections</span>
+                        <select wire:model="selectedCourseSection" id="section" class="select select-bordered flex w-full items-center">
+                            <option value="">All Course and Section</option>
+                            @foreach($courseSecs as $courseSec)
+                                <option value="{{ $courseSec->id }}">
+                                    {{ $courseSec->course_title ?? 'No Course Title' }} -
+                                    {{ $courseSec->section->program }}
+                                    {{ $courseSec->section->year }}{{ $courseSec->section->block }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="w-full mb-6"></div>
+
         <div wire:poll.1000ms class="bg-base-100 border-gray-100 shadow-md shadow-black/5 p-6 rounded-md">
             <div class="overflow-x-auto">
                 <table class="table">

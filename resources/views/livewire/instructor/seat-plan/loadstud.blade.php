@@ -20,11 +20,11 @@
                     <label class="label-text">Course & Section</label>
                     <select wire:model="course_id" id="selsection_id" class="select select-bordered bg-base-300 block w-full py-3 px-4 mb-3 form-control" required>
                         <option value="">--Select Courses & Section--</option>
-                        @foreach ($sections as $section)
-                            <option value="{{ optional($section->course->first())->id }}">
-                                {{ optional($section->course->first())->course_title ?? 'No Course Title' }}  -
-                                {{ $section->program }}
-                                {{ $section->year }}{{ $section->block }}
+                        @foreach($courseSecs as $courseSec)
+                            <option value="{{ $courseSec->id }}">
+                                {{ $courseSec->course_title ?? 'No Course Title' }} -
+                                {{ $courseSec->section->program }}
+                                {{ $courseSec->section->year }}{{ $courseSec->section->block }}
                             </option>
                         @endforeach
                     </select>

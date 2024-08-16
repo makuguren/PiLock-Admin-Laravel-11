@@ -69,27 +69,17 @@
                 <div class="flex flex-col md:flex-row gap-5">
                     <div class="w-full">
                         <span class="font-medium text-sm">Select Sections</span>
-                        <select wire:model="selectedSection" id="section" class="select select-bordered flex w-full items-center">
+                        <select wire:model="selectedCourseSection" id="section" class="select select-bordered flex w-full items-center">
                             <option {{ $disabledSection }} value="">All Sections</option>
-                            @foreach($sections as $section)
-                                <option value="{{ $section->id }}">
-                                    {{ optional($section->course->first())->course_title ?? 'No Course Title' }} -
-                                    {{ $section->program }}
-                                    {{ $section->year }}{{ $section->block }}
+                            @foreach($courseSecs as $courseSec)
+                                <option value="{{ $courseSec->id }}">
+                                    {{ $courseSec->course_title ?? 'No Course Title' }} -
+                                    {{ $courseSec->section->program }}
+                                    {{ $courseSec->section->year }}{{ $courseSec->section->block }}
                                 </option>
                             @endforeach
                         </select>
                     </div>
-
-                    {{-- <div class="w-full">
-                        <span class="font-medium text-sm">Select Subjects</span>
-                        <select wire:model="selectedSubject" id="subject" class="select select-bordered flex w-full items-center">
-                            <option {{ $disabledSubject }} value="">All Subjects</option>
-                            @foreach($subjects as $id => $subject)
-                                <option value="{{ $id }}">{{ $subject }}</option>
-                            @endforeach
-                        </select>
-                    </div> --}}
                 </div>
             </div>
         </div>

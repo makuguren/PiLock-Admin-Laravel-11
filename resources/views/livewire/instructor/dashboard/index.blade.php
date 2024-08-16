@@ -41,7 +41,7 @@
                             @endif
                         @endforeach
                     @endforeach
-{{--
+                    {{--
                     @if ($courses != null)
                         <div class="text-md">Course Title: {{ optional($courses)->course->course_title }}</div>
                         <div class="text-md">Section: {{ optional($courses)->course->section->program }}

@@ -17,21 +17,14 @@ class EditSP extends Component
     public $seat_id, $student_name, $seat_number;
     public $subject_id, $course_id;
 
-    public $selectedSection = null;
-    public $selectedSubject = null;
+    public $selectedCourseSection = null;
 
     public $disabledSection, $disabledSubject = '';
 
-    public function updatedSelectedSection($value){
-        $this->selectedSection = $value;
-        $this->selectedSubject = null;
+    public function updatedSelectedCourseSection($value){
         $this->disabledSection = 'disabled';
-        // $this->resetPage();
-    }
-
-    public function updatedSelectedSubject($value){
-        $this->selectedSubject = $value;
-        $this->disabledSubject = 'disabled';
+        $this->selectedCourseSection = $value;
+        // $this->selectedSubject = null;
         // $this->resetPage();
     }
 
@@ -100,68 +93,52 @@ class EditSP extends Component
     public function render(){
         $instructor_id = Auth::id();
 
-        // Fetch sections associated with schedules of the instructor (Dropdown Tag)
-        $sections = Section::whereHas('course', function ($query) use ($instructor_id) {
+        // Fetch Courses with Section associated with Courses of the instructor (Dropdown Tag)
+        $courseSecs = Course::whereHas('section', function ($query) use ($instructor_id) {
             $query->where('instructor_id', $instructor_id);
-        })->with('course')->get();
+        })->with('section')->get();
 
-        // Fetch subjects associated with schedules of the instructor (Dropdown Tag)
-        // $subjects = Subject::whereHas('schedules', function ($query) use ($instructor_id) {
-        //     $query->where('instructor_id', $instructor_id);
-        // })->pluck('subject_name', 'id')->toArray();
-
-
-        // Query to Fetch Attendances
+        // Query to Show Courses where the Instructor is based to Current Loggedin with, Fetch the SeatPlan of the Student(Model).
         $queryFetchStudents = Course::where('instructor_id', $instructor_id)
-                            ->with(['seatplan' => function ($query) {
-                                $query->whereNull('seat_number');
-                                $query->orderBy('seat_number');
-                            }, 'seatplan.student'])
+                ->with(['seatplan' => function ($query) {
+                    $query->whereNull('seat_number');
+                    $query->orderBy('seat_number');
+                }, 'seatplan.student'])
 
-                            // Fetch Section based on Dropdown Selected
-                            ->when($this->selectedSection, function ($query) {
-                                    $query->where('section_id', $this->selectedSection);
-                            })
+                // Filter Seatplan(Students) from Course(Course_id) based on Dropdown Selected
+                ->when($this->selectedCourseSection, function ($query) {
+                        $query->where('id', $this->selectedCourseSection);
+                });
 
-                            // Fetch Subject Based on Dropdown Selected
-                            ->when($this->selectedSubject, function ($query) {
-                                $query->where('subject_id', $this->selectedSubject);
-                            });
-
-                            // Return an empty collection if no section and subject are selected
-                            if (is_null($this->selectedSection) && is_null($this->selectedSubject)) {
-                                $queryFetchStudents = collect();
-                            } else {
-                                $queryFetchStudents = $queryFetchStudents->get();
-                            }
+                // Return an empty collection if no courses and section are selected
+                if (is_null($this->selectedCourseSection)) {
+                    $queryFetchStudents = collect();
+                } else {
+                    $queryFetchStudents = $queryFetchStudents->get();
+                }
 
 
         $queryFetchSeats = Course::where('instructor_id', $instructor_id)
-                            ->with(['seatplan' => function ($query) {
-                                $query->orderBy('seat_number');
-                            }, 'seatplan.student'])
+                ->with(['seatplan' => function ($query) {
+                    $query->orderBy('seat_number');
+                }, 'seatplan.student'])
 
-                            // Fetch Section based on Dropdown Selected
-                            ->when($this->selectedSection, function ($query) {
-                                $query->where('section_id', $this->selectedSection);
-                            })
+                // Filter Seatplan(Students) from Course(Course_id) based on Dropdown Selected
+                ->when($this->selectedCourseSection, function ($query) {
+                    $query->where('id', $this->selectedCourseSection);
+                });
 
-                            // Fetch Subject Based on Dropdown Selected
-                            ->when($this->selectedSubject, function ($query) {
-                                $query->where('subject_id', $this->selectedSubject);
-                            });
-
-                            // Return an empty collection if no section and subject are selected
-                            if (is_null($this->selectedSection) && is_null($this->selectedSubject)) {
-                                $queryFetchSeats = collect();
-                            } else {
-                                $queryFetchSeats = $queryFetchSeats->get();
-                            }
+                // Return an empty collection if no courses and section are selected
+                if (is_null($this->selectedCourseSection)) {
+                    $queryFetchSeats = collect();
+                } else {
+                    $queryFetchSeats = $queryFetchSeats->get();
+                }
 
         return view('livewire.instructor.seat-plan.edit', [
             'seatplans' => $queryFetchSeats,
             'fetchStudentsList' => $queryFetchStudents,
-            'sections' => $sections,
+            'courseSecs' => $courseSecs,
             // 'subjects' => $subjects
         ])->layout('instructor.layouts.seatplan');
     }
