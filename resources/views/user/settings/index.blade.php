@@ -46,7 +46,6 @@
                         <div class="w-full px-3">
                             <label class="label-text">Student ID</label>
                             <input class="input input-bordered bg-base-300 block w-full py-3 px-4 mb-3 form-control" name="student_id" value="{{ $user->student_id }}" id="" type="text" placeholder="" disabled>
-                            @error('student_id')<small class="text-danger">{{$message}}</small> @enderror
                         </div>
                     </div>
 
@@ -59,7 +58,6 @@
                                 <option value="{{ $section->id }}" {{ $section->id == $user->section_id ? 'Selected':'' }}>{{ $section->program }} {{ $section->year }}{{ $section->block }}</option>
                                 @endforeach
                             </select>
-                            @error('section_id')<small class="text-danger">{{$message}}</small> @enderror
                         </div>
                     </div>
 

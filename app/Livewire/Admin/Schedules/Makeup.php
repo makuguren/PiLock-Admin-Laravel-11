@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Admin\Schedules;
 
+use App\Models\Course;
 use App\Models\Section;
 use App\Models\Subject;
 use Livewire\Component;
@@ -12,14 +13,13 @@ use Livewire\WithPagination;
 class Makeup extends Component
 {
     use WithPagination;
-    public $schedule_id, $subject_id, $instructor_id, $section_id, $days, $time_start, $time_end;
+    public $schedule_id, $course_id, $days, $time_start, $time_end;
+    public $instructor_name;
 
     //Validations
     protected function rules(){
         return [
-            'subject_id' => 'required|integer',
-            'instructor_id' => 'required|integer',
-            'section_id' => 'required|integer',
+            'course_id' => 'required|integer',
             'days' => 'required|string',
             'time_start' => 'required',
             'time_end' => 'required'
@@ -31,14 +31,19 @@ class Makeup extends Component
     }
     //Validations End
 
+    public function fetchCourseDetails(int $course_id){
+        $fetchCourse = Course::find($course_id);
+        if($fetchCourse){
+            $this->instructor_name = $fetchCourse->instructor->name;
+        }
+    }
+
     //Save Schedule
     public function saveSchedule(){
         $validatedData = $this->validate();
 
         Schedules::create([
-            'subject_id' => $validatedData['subject_id'],
-            'instructor_id' => $validatedData['instructor_id'],
-            'section_id' => $validatedData['section_id'],
+            'course_id' => $validatedData['course_id'],
             'days' => $validatedData['days'],
             'time_start' => $validatedData['time_start'],
             'time_end' => $validatedData['time_end'],
@@ -56,9 +61,8 @@ class Makeup extends Component
         $schedule = Schedules::find($schedule_id);
         if($schedule){
             $this->schedule_id = $schedule->id;
-            $this->subject_id = $schedule->subject_id;
-            $this->instructor_id = $schedule->instructor_id;
-            $this->section_id = $schedule->section_id;
+            $this->course_id = $schedule->course_id;
+            $this->instructor_name = $schedule->course->instructor->name;
             $this->days = $schedule->days;
             $this->time_start = $schedule->time_start;
             $this->time_end = $schedule->time_end;
@@ -71,9 +75,7 @@ class Makeup extends Component
         $validatedData = $this->validate();
 
         Schedules::where('id', $this->schedule_id)->update([
-            'subject_id' => $validatedData['subject_id'],
-            'instructor_id' => $validatedData['instructor_id'],
-            'section_id' => $validatedData['section_id'],
+            'course_id' => $validatedData['course_id'],
             'days' => $validatedData['days'],
             'time_start' => $validatedData['time_start'],
             'time_end' => $validatedData['time_end'],
@@ -97,9 +99,7 @@ class Makeup extends Component
     }
 
     public function resetInput(){
-        $this->subject_id = '';
-        $this->instructor_id = '';
-        $this->section_id = '';
+        $this->course_id = '';
         $this->days = '';
         $this->time_start = '';
         $this->time_end = '';
@@ -109,9 +109,11 @@ class Makeup extends Component
         $subjects = Subject::all();
         $instructors = Instructor::all();
         $sections = Section::all();
+        $courses = Course::all();
         $schedules = Schedules::where('isMakeUp', '1')->paginate(10);
         return view('livewire.admin.schedules.makeup' , [
             'schedules' => $schedules,
+            'courses' => $courses,
             'subjects' => $subjects,
             'instructors' => $instructors,
             'sections' => $sections

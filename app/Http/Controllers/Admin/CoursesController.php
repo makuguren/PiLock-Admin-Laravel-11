@@ -44,7 +44,7 @@ class CoursesController extends Controller
                         'course_section' => $enrolledCourse->course->section->program . ' ' . $enrolledCourse->course->section->year . $enrolledCourse->course->section->block ?? null,
                         'course_instructor' => $enrolledCourse->course->instructor->name,
                         'student_id' => $enrolledCourse->student_id,
-                        'studentTag_uid' => $enrolledCourse->tag_uid,
+                        'studentTag_uid' => $enrolledCourse->student->tag_uid,
                         'student_number' => $enrolledCourse->student->student_id,
                         'student_name' => $enrolledCourse->student->name,
                         'student_section' => $enrolledCourse->student->section->program . ' ' . $enrolledCourse->student->section->year . $enrolledCourse->student->section->block ?? null,
