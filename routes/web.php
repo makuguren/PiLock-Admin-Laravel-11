@@ -30,9 +30,15 @@ Route::middleware(['auth:web', App\Http\Middleware\UserComponentLayout::class])-
     //Dashboard Routes
     Route::get('dashboard', [App\Http\Controllers\User\DashboardController::class, 'index'])->name('dashboard.index');
 
-    //Courses
-    Route::prefix('courses')->group(function() {
+    //Courses Routes
+    Route::prefix('courses')->group(function () {
         Route::get('/', App\Livewire\User\Courses\Index::class)->name('courses.index');
+        Route::get('enrolledcourses', App\Livewire\User\Courses\Enrolled::class)->name('courses.enrolled');
+    });
+
+    // Schedules Routes
+    Route::prefix('schedules')->group(function () {
+        Route::get('/', App\Livewire\User\Schedules\Index::class)->name('schedules.index');
     });
 
     //Profile Routes

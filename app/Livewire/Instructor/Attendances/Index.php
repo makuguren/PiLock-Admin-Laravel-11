@@ -101,24 +101,30 @@ class Index extends Component
             $query->where('instructor_id', $instructorId);
         })->with('section')->get();
 
-        // Query to Show Courses where the Instructor is based to Current Loggedin with, Fetch the Attendances of the Student(Model).
-        $query = Course::where('instructor_id', $instructorId)
-            // ->with('attendance.student') // Eager load relationships (Old Version)
+        // Another Method of Query to Fetch Attendance based Instructor Current LoggedIn
+        // Fetch Course IDs of the instructor (based on Course-Section relationship)
+        $getCourseId = Course::whereHas('section', function ($query) use ($instructorId) {
+            $query->where('instructor_id', $instructorId);
+        })->pluck('id')->toArray();
 
-            ->with(['attendance' => function ($query) {
-                $query->where('isCurrent', '0'); //Filter attendance where isCurrent to 0
-                $query->where('date', 'like', '%'.$this->selectedDate.'%'); //Filter Date
-            }, 'attendance.student']) // Eager load relationships
+        // Fetch attendances based on the course IDs, where 'isCurrent' is 0 and filter by the selected date
+        $attendances = Attendance::whereIn('course_id', $getCourseId)
+            ->where('isCurrent', '0')
+            ->when($this->selectedDate, function ($query) {
+                $query->where('date', 'like', '%' . $this->selectedDate . '%');
+            })
 
-            // Filter Attendances(Students) from Course(Course_id) based on Dropdown Selected
+            // Selected CourseID(Course Subject with Section) on Dropdown
             ->when($this->selectedCourseSection, function ($query) {
-                    $query->where('id', $this->selectedCourseSection);
-            });
+                // Filter by selected course section
+                $query->where('course_id', $this->selectedCourseSection);
+            })
 
-        $courses = $query->get();
+            ->with('student') // Eager load the student relationship (Modal)
+            ->get();
 
         return view('livewire.instructor.attendances.index',[
-            'courses' => $courses,
+            'attendances' => $attendances,
             'courseSecs' => $courseSecs
         ]);
     }

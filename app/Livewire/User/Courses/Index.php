@@ -52,7 +52,7 @@ class Index extends Component
 
     public function render(){
         $courses = Course::all();
-        $checkEnrollCourse = EnrolledCourse::where('student_id', Auth::id())->first();
+        $checkEnrollCourse = EnrolledCourse::where('student_id', Auth::id())->pluck('course_id')->toArray();
         return view('livewire.user.courses.index', [
             'courses' => $courses,
             'checkEnrollCourse' => $checkEnrollCourse

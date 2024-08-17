@@ -31,7 +31,7 @@ class Index extends Component
 
     public function render(){
 
-        // Greetings from the Admins (Good Morning, Afternoon, and Evening)
+        // Greetings from the Instructors (Good Morning, Afternoon, and Evening)
         $getHour = Carbon::now()->timezone('Asia/Manila')->format('H');
         if($getHour > 0){
             $this->greetMessage = 'Good Morning';
@@ -46,25 +46,19 @@ class Index extends Component
             $this->greetMessage = 'Good Evening';
         }
 
-        $query = Course::where('instructor_id', Auth::id())
-            ->with(['schedule' => function ($query) {
-                $query->where('isApproved', '1');
-                $query->where('isCurrent', '1');
-            }, 'schedule']);
+        // Fetch Current Schedules based on Instructor Logged In.
+        $getCourseId = Course::where('instructor_id', Auth::id())->pluck('id')->toArray();
+        $schedules = Schedules::whereIn('course_id', $getCourseId)
+                ->where('isApproved', '1')
+                ->where('isCurrent', '1')
+                ->get();
 
-        $courses = $query->get();
-        // $courses = $query->first()->schedule->first();
-
-        // foreach ($courses as $course) {
-        //     foreach ($course->schedule as $schedule) {
-        //         dd($schedule->id);
-        //     }
-        // }
 
         $totalPresent = Attendance::where('isCurrent', '1')->where('isPresent', '1')->count();
         $totalStudents = Attendance::where('isCurrent', '1')->count();
         return view('livewire.instructor.dashboard.index',[
-            'courses' => $courses,
+            // 'courses' => $courses,
+            'schedules' => $schedules,
             'totalPresent' => $totalPresent,
             'totalStudents' => $totalStudents,
             'greetMessage' => $this->greetMessage
