@@ -71,27 +71,26 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($courses as $course)
-                            @foreach ($course->attendance as $attendance)
+                        @forelse ($attendances as $attendance)
                             <tr>
                                 <td><div class="font-bold">{{ $attendance->student->student_id }}</div></td>
                                 <td>
                                     <div class="flex items-center gap-3">
                                         <div class="avatar">
-                                          <div class="mask mask-squircle h-12 w-12">
+                                        <div class="mask mask-squircle h-12 w-12">
                                             <img
-                                              src="{{ $attendance->student->avatar ?? '' }}" />
-                                          </div>
+                                            src="{{ $attendance->student->avatar ?? '' }}" />
+                                        </div>
                                         </div>
                                         <div>
-                                          <div class="font-bold">{{ $attendance->student->name }}</div>
-                                          <div class="text-sm opacity-50">{{ $attendance->student->email }}</div>
+                                        <div class="font-bold">{{ $attendance->student->name }}</div>
+                                        <div class="text-sm opacity-50">{{ $attendance->student->email }}</div>
                                         </div>
                                     </div>
                                 </td>
-                                <td><div class="">{{ $course->instructor->name }}</div></td>
+                                <td><div class="">{{ $attendance->course->instructor->name }}</div></td>
                                 <td><div class="">{{ $attendance->student->section->program }} {{ $attendance->student->section->year }}{{ $attendance->student->section->block }}</div></td>
-                                <td><div class="">{{ $course->course_title }}</div></td>
+                                <td><div class="">{{ $attendance->course->course_title }}</div></td>
                                 <td><div class="">{{ $attendance->date }}</div></td>
                                 <td>
                                     <div class="">
@@ -109,9 +108,10 @@
                                     </div>
                                 </td>
                             </tr>
-                            @endforeach
                         @empty
-
+                            <tr>
+                                <td class="font-bold text-md">No Attendandes Found</td>
+                            </tr>
                         @endforelse
                     </tbody>
                 </table>

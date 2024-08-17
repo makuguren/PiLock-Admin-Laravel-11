@@ -115,7 +115,7 @@ class LogsController extends Controller
         // If enrolledCourse is not found, the student is not enrolled in the course for the current schedule
         if (!$enrolledCourse) {
             return response()->json([
-                'status' => 404,
+                'status' => 403,
                 'status_message' => 'You are not allowed to enter your class!'
             ], 404);
         }

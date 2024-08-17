@@ -28,7 +28,8 @@
                         <div class="">Lorem ipsum dolor sit amet consectetur adipisicing elit. At ipsa commodi tempora qui libero. Temporibus veritatis debitis fugiat deserunt recusandae aspernatur magni unde. Commodi temporibus, suscipit amet qui error dolorem?</div>
                         <div class="mt-3">Instructor: {{ $course->instructor->name }}</div>
 
-                        {{-- @if ($checkEnrollCourse->course_id == $course->id)
+                        {{-- Check if the Course is Enrolled or Not. --}}
+                        @if(in_array($course->id, $checkEnrollCourse))
                             <label class="btn bg-blue-700 hover:bg-blue-500 text-white mt-6">
                                 You are Enrolled!
                             </label>
@@ -36,11 +37,8 @@
                             <label for="enrollment_modal" wire:click="getCourseDetail({{ $course->id }})" class="btn bg-red-700 hover:bg-red-500 text-white mt-6">
                                 Enroll Me!
                             </label>
-                        @endif --}}
+                        @endif
 
-                        <label for="enrollment_modal" wire:click="getCourseDetail({{ $course->id }})" class="btn bg-red-700 hover:bg-red-500 text-white mt-6">
-                            Enroll Me!
-                        </label>
                     </div>
                 @empty
                     No Courses Found!

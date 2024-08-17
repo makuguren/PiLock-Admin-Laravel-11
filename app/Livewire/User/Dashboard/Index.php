@@ -2,15 +2,22 @@
 
 namespace App\Livewire\User\Dashboard;
 
+use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Section;
 use Livewire\Component;
+use App\Models\Schedules;
+use App\Models\Attendance;
+use App\Models\EnrolledCourse;
 use Illuminate\Support\Facades\Auth;
+use Livewire\WithPagination;
 
 class Index extends Component
 {
     public $student_id, $section_id, $birthdate;
+    public $greetMessage;
 
+    use WithPagination;
 
     //Validations
     protected function rules(){
@@ -49,16 +56,51 @@ class Index extends Component
     }
 
     public function render(){
+        // Fetch Current Schedule based on Student's Enrolled Course
+        $getCourseId = EnrolledCourse::where('student_id', Auth::id())->pluck('course_id')->toArray();
+        $schedules = Schedules::whereIn('course_id', $getCourseId)
+                ->where('isApproved', '1')
+                ->where('isCurrent', '1')
+                ->get();
+
+        // Greetings from the Instructors (Good Morning, Afternoon, and Evening)
+        $getHour = Carbon::now()->timezone('Asia/Manila')->format('H');
+        if($getHour > 0){
+            $this->greetMessage = 'Good Morning';
+        }
+        if($getHour > 5){
+            $this->greetMessage = 'Good Morning';
+        }
+        if($getHour > 11){
+            $this->greetMessage = 'Good Afternoon';
+        }
+        if($getHour > 17){
+            $this->greetMessage = 'Good Evening';
+        }
+
+        // Fetch Attendance based on Students
+        $attendances = Attendance::where('student_id', Auth::id())
+                ->where('isCurrent', '0')
+                ->orderBy('date', 'ASC')
+                ->paginate(5);
+
+        // Check if the Student's Update their Details
         $sections = Section::all();
         $checked = 'checked';
         if(Auth::user()->student_id == NULL || Auth::user()->section_id == NULL || Auth::user()->birthdate == NULL){
             return view('livewire.user.dashboard.index', [
                 'checked' => $checked,
-                'sections' => $sections
+                'sections' => $sections,
+                'greetMessage' => $this->greetMessage,
+                'schedules' => $schedules,
+                'attendances' => $attendances
             ]);
         } else {
             return view('livewire.user.dashboard.index', [
-                'sections' => $sections
+                'sections' => $sections,
+                'greetMessage' => $this->greetMessage,
+                'schedules' => $schedules,
+                'attendances' => $attendances
             ]);
         }
     }

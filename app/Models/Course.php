@@ -35,7 +35,7 @@ class Course extends Model
     }
 
     // Instructor Interface
-    public function attendance(){
+    public function attendance(){ //Current Attendance View
         return $this->hasMany(Attendance::class, 'course_id', 'id');
     }
 
@@ -50,20 +50,4 @@ class Course extends Model
     public function schedule(){
         return $this->hasMany(Schedules::class, 'course_id', 'id');
     }
-
-
-
-
-    // public function enrolledCourse(){
-    //     return $this->hasMany(EnrolledCourse::class, 'course_id', 'id');
-    // }
-
-    // public function schedules(){
-    //     return $this->hasMany(Schedules::class);
-    // }
-
-
-    // public function attendance(){
-    //     return $this->hasMany(Attendance::class);
-    // }
 }
