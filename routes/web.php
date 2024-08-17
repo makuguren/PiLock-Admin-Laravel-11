@@ -94,6 +94,12 @@ Route::middleware(['auth:admin', App\Http\Middleware\AdminComponentLayout::class
             ->middleware('permission:View RFID Checker');
     });
 
+    // Analytics Routes
+    Route::prefix('analytics')->group(function () {
+        Route::get('/', App\Livewire\Admin\Analytics\Index::class)->name('analytics.index')
+            ->middleware('permission:View Analytics');
+    });
+
     //Sections Routes
     Route::prefix('sections')->group(function () {
         Route::get('/', App\Livewire\Admin\Sections\Index::class)->name('sections.index')
@@ -106,10 +112,10 @@ Route::middleware(['auth:admin', App\Http\Middleware\AdminComponentLayout::class
             ->middleware('permission:View Events');
     });
 
-    //Subjects Routes
-    Route::prefix('subjects')->group(function () {
-        Route::get('/', App\Livewire\Admin\Subjects\Index::class)->name('subjects.index')
-            ->middleware('permission:View Subjects');
+    //Courses Routes
+    Route::prefix('courses')->group(function () {
+        Route::get('/', App\Livewire\Admin\Courses\Index::class)->name('courses.index')
+            ->middleware('permission:View Courses');
     });
 
     //Instructors Routes with Tag UID

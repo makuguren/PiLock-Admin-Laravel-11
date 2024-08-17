@@ -22,16 +22,12 @@ class SettingsController extends Controller
     public function updateProfile(Request $request){
         $userprofile = User::where('id', Auth::user()->id);
         $validatedData = $request->validate([
-            'student_id' => 'required|string',
-            'section_id' => 'required|integer',
             'birthdate' => 'required',
             'user_theme' => 'nullable|string'
         ]);
 
         $userprofile->update([
             'user_theme' => $validatedData['user_theme'],
-            'student_id' => $validatedData['student_id'],
-            'section_id' => $validatedData['section_id'],
             'birthdate' => $validatedData['birthdate']
         ]);
 

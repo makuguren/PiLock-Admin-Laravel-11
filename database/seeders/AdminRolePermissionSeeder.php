@@ -30,10 +30,10 @@ class AdminRolePermissionSeeder extends Seeder
             'Update Sections',
             'Delete Sections',
 
-            'View Subjects',
-            'Create Subjects',
-            'Update Subjects',
-            'Delete Subjects',
+            'View Courses',
+            'Create Courses',
+            'Update Courses',
+            'Delete Courses',
 
             'View Students',
             'Create Students',
