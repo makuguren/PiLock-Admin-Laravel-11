@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CoursesController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\LogsController;
@@ -34,3 +35,7 @@ Route::post('attendinst/{tag_uid}', [LogsController::class, 'attendInstructorAPI
 
 //Show All Events
 Route::get('events/', [EventsController::class, 'showEventsAPI']);
+
+// Show All Courses
+Route::get('courses/', [CoursesController::class, 'showCoursesAPI']);
+Route::get('enrolledcourses/', [CoursesController::class, 'showEnrolledCoursesAPI']);
