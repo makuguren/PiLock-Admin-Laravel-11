@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('enrolledcourses', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('course_id');
-            $table->unsignedBigInteger('student_id');
+            $table->unsignedBigInteger('course_id')->nullable();
+            $table->unsignedBigInteger('student_id')->nullable();
             $table->timestamps();
 
             // Foreign Key
-            $table->foreign('course_id')->references('id')->on('courses');
-            $table->foreign('student_id')->references('id')->on('users');
+            $table->foreign('course_id')->references('id')->on('courses')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreign('student_id')->references('id')->on('users')->cascadeOnUpdate()->cascadeOnDelete();
         });
     }
 

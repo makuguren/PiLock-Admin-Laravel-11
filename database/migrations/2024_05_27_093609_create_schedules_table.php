@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('schedules', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('course_id');
+            $table->unsignedBigInteger('course_id')->nullable();
             $table->string('days');
             $table->time('time_start');
             $table->time('time_end');
@@ -24,7 +24,7 @@ return new class extends Migration
             $table->timestamps();
 
             // Foreign Key
-            $table->foreign('course_id')->references('id')->on('courses');
+            $table->foreign('course_id')->references('id')->on('courses')->cascadeOnUpdate()->cascadeOnDelete();
         });
     }
 

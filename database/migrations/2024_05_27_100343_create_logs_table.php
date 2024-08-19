@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('logs', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('student_id');
-            $table->unsignedBigInteger('course_id');
+            $table->unsignedBigInteger('student_id')->nullable();
+            $table->unsignedBigInteger('course_id')->nullable();
             $table->time('time')->nullable();
             $table->date('date')->nullable();
             $table->timestamps();

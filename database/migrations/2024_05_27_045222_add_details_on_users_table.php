@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('user_theme')->nullable();
 
             //Foreign Key
-            $table->foreign('section_id')->references('id')->on('sections');
+            $table->foreign('section_id')->references('id')->on('sections')->cascadeOnUpdate()->cascadeOnDelete();
         });
     }
 
