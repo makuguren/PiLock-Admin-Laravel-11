@@ -26,21 +26,32 @@
             {{-- Code Here --}}
             <form action="{{ route('admin.admins.store') }}" method="POST" enctype="multipart/form-data" class="w-full">
                 @csrf
-                <div class="flex flex-wrap mb-2">
+                <div class="flex flex-wrap mb-3">
                     <div class="w-full px-3">
                         <label class="label-text">Name</label>
                         <input class="input input-bordered bg-base-300 block w-full py-3 px-4 mb-3" name="name" type="text" placeholder="">
                         @error('name')<small class="text-danger">{{$message}}</small> @enderror
                     </div>
                 </div>
-                <div class="flex flex-wrap mb-2">
+                <div class="flex flex-wrap mb-4">
+                    <div class="w-full px-3">
+                        <label class="label-text">Gender</label>
+                        <select class="select select-bordered w-full bg-base-300" name="gender">
+                            <option>--Select Gender--</option>
+                            <option value="1">Male</option>
+                            <option value="2">Female</option>
+                        </select>
+                        @error('gender')<small class="text-danger">{{$message}}</small> @enderror
+                    </div>
+                </div>
+                <div class="flex flex-wrap mb-3">
                     <div class="w-full px-3">
                         <label class="label-text">Email</label>
                         <input class="input input-bordered bg-base-300 block w-full py-3 px-4 mb-3" name="email" type="email" placeholder="">
                         @error('email')<small class="text-danger">{{$message}}</small> @enderror
                     </div>
                 </div>
-                <div class="flex flex-wrap mb-2">
+                <div class="flex flex-wrap mb-3">
                     <div class="w-full px-3">
                         <label class="label-text">Password</label>
                         <input class="input input-bordered bg-base-300 block w-full py-3 px-4 mb-3" name="password" type="password" placeholder="">

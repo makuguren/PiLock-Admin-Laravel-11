@@ -74,6 +74,7 @@
                         <th>TAG UID</th>
                         <th>NAME AND EMAIL</th>
                         <th>YEAR AND SECTION</th>
+                        <th>GENDER</th>
                         <th>ACTION</th>
                       </tr>
                     </thead>
@@ -118,6 +119,19 @@
                                             {{ $student->section->program }} {{ $student->section->year }}{{ $student->section->block }}
                                         @else
                                             No Section Assigned
+                                        @endif
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="">
+                                        @if ($student->gender)
+                                            @if ($student->gender == '1')
+                                                Male
+                                            @elseif ($student->gender == '2')
+                                                Female
+                                            @endif
+                                        @else
+                                            No Gender Assigned
                                         @endif
                                     </div>
                                 </td>

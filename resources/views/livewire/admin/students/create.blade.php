@@ -45,12 +45,7 @@
                 </div>
 
                 <div class="flex flex-wrap mb-6">
-                    <div class="w-full md:w-1/2 px-3 mb-3 md:mb-0">
-                        <label class="label-text" for="grid-birthdate">Birthdate</label>
-                        <input class="input input-bordered w-full bg-base-300" name="birthdate" type="date" placeholder="">
-                        @error('birthdate')<small class="text-danger">{{$message}}</small> @enderror
-                    </div>
-                    <div class="w-full md:w-1/2 px-3">
+                    <div class="w-full md:w-1/3 px-3">
                         <label class="label-text" for="">Section</label>
                         <select class="select select-bordered w-full bg-base-300" name="section_id">
                             <option>--Select your Section--</option>
@@ -59,6 +54,22 @@
                             @endforeach
                         </select>
                         @error('section_id')<small class="text-danger">{{$message}}</small> @enderror
+                    </div>
+
+                    <div class="w-full md:w-1/3 px-3">
+                        <label class="label-text" for="">Gender</label>
+                        <select class="select select-bordered w-full bg-base-300" name="gender">
+                            <option>--Select Gender--</option>
+                            <option value="1">Male</option>
+                            <option value="2">Female</option>
+                        </select>
+                        @error('gender')<small class="text-danger">{{$message}}</small> @enderror
+                    </div>
+
+                    <div class="w-full md:w-1/3 px-3 mb-3 md:mb-0">
+                        <label class="label-text" for="grid-birthdate">Birthdate</label>
+                        <input class="input input-bordered w-full bg-base-300" name="birthdate" type="date" placeholder="">
+                        @error('birthdate')<small class="text-danger">{{$message}}</small> @enderror
                     </div>
                 </div>
 

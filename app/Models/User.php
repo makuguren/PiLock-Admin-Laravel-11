@@ -30,6 +30,7 @@ class User extends Authenticatable
         'avatar',
         'student_id',
         'tag_uid',
+        'gender',
         'birthdate',
         'section_id',
         'user_theme'

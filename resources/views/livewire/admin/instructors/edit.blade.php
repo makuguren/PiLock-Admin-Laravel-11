@@ -10,6 +10,17 @@
                     @error('name') <span class="error" role="alert">{{ $message }}</span> @enderror
                 </div>
             </div>
+            <div class="flex flex-wrap mb-2">
+                <div class="w-full px-3">
+                    <label class="label-text">Gender</label>
+                    <select wire:model="gender" id="editgender" class="select select-bordered bg-base-300 block w-full py-3 px-4 mb-3 form-control" required>
+                        <option value="">--Select Gender--</option>
+                        <option value="1">Male</option>
+                        <option value="2">Female</option>
+                    </select>
+                    @error('gender') <span class="error" role="alert">{{ $message }}</span> @enderror
+                </div>
+            </div>
             <div class="flex flex-wrap mb-3">
                 <div class="w-full px-3">
                     <label class="label-text">Email</label>

@@ -28,6 +28,7 @@ class AdminsController extends Controller implements HasMiddleware
     public function store(Request $request){
         $request->validate([
             'name' => 'required|string|max:255',
+            'gender' => 'required|integer',
             'email' => 'required|email|max:255|unique:admins,email',
             'password' => 'required|string|min:8|max:20',
             'roles' => 'required'
@@ -35,6 +36,7 @@ class AdminsController extends Controller implements HasMiddleware
 
         $admin = Admin::create([
                         'name' => $request->name,
+                        'gender' => $request->gender,
                         'email' => $request->email,
                         'password' => Hash::make($request->password),
                     ]);
@@ -57,12 +59,14 @@ class AdminsController extends Controller implements HasMiddleware
     public function update(Request $request, Admin $admin){
         $request->validate([
             'name' => 'required|string|max:255',
+            'gender' => 'required|integer',
             'password' => 'nullable|string|min:8|max:20',
             'roles' => 'required'
         ]);
 
         $data = [
             'name' => $request->name,
+            'gender' => $request->gender,
             'email' => $request->email,
         ];
 
