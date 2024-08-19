@@ -40,6 +40,7 @@ class AdminRolePermissionSeeder extends Seeder
             'Update Students',
             'Delete Students',
             'Add Tag UID to Students',
+            'Disable RFID',
 
             'View Instructors',
             'Create Instructors',
