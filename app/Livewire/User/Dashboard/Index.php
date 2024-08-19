@@ -14,8 +14,8 @@ use Livewire\WithPagination;
 
 class Index extends Component
 {
-    public $student_id, $section_id, $birthdate;
-    public $greetMessage;
+    public $student_id, $section_id, $gender, $program, $year, $block, $birthdate;
+    public $greetMessage, $genderGreeting;
 
     use WithPagination;
 
@@ -23,7 +23,10 @@ class Index extends Component
     protected function rules(){
         return [
             'student_id' => 'required|string|unique:users,student_id',
-            'section_id' => 'required|integer',
+            'program' => 'required|string',
+            'year' => 'required|integer',
+            'block' => 'required|string',
+            'gender' => 'required|integer',
             'birthdate' => 'required'
         ];
     }
@@ -37,10 +40,27 @@ class Index extends Component
     public function updateStudentInfo(){
         $validatedData = $this->validate();
 
+        // Check if the Section is Not Exists then Create the Section before Executing
+        $checkSection = Section::where('program', $this->program)->where('year', $this->year)->where('block', $this->block)->first();
+
+        if($checkSection == NULL){
+            Section::create([
+                'program' => $validatedData['program'],
+                'year' => $validatedData['year'],
+                'block' => $validatedData['block'],
+            ]);
+        }
+
+        // Find the Section and Update the StudentInfo
+        $sectionId = Section::where('program', $this->program)->where('year', $this->year)->where('block', $this->block)->first();
+        $this->section_id = $sectionId->id;
+
+        // Update StudentInfo
         $studentInfo = User::findOrFail(Auth::user()->id);
         $studentInfo->update([
             'student_id' => $validatedData['student_id'],
-            'section_id' => $validatedData['section_id'],
+            'section_id' => $this->section_id,
+            'gender' => $validatedData['gender'],
             'birthdate' => $validatedData['birthdate']
         ]);
 
@@ -78,6 +98,14 @@ class Index extends Component
             $this->greetMessage = 'Good Evening';
         }
 
+        // Greetings from Users (Mr. and Mrs.) based on Gender.
+        if(Auth::user()->gender == '1'){
+            $this->genderGreeting = 'Mr.';
+        }
+        if(Auth::user()->gender == '2'){
+            $this->genderGreeting = 'Ms.';
+        }
+
         // Fetch Attendance based on Students
         $attendances = Attendance::where('student_id', Auth::id())
                 ->where('isCurrent', '0')
@@ -93,14 +121,16 @@ class Index extends Component
                 'sections' => $sections,
                 'greetMessage' => $this->greetMessage,
                 'schedules' => $schedules,
-                'attendances' => $attendances
+                'attendances' => $attendances,
+                'genderGreeting' => $this->genderGreeting
             ]);
         } else {
             return view('livewire.user.dashboard.index', [
                 'sections' => $sections,
                 'greetMessage' => $this->greetMessage,
                 'schedules' => $schedules,
-                'attendances' => $attendances
+                'attendances' => $attendances,
+                'genderGreeting' => $this->genderGreeting
             ]);
         }
     }

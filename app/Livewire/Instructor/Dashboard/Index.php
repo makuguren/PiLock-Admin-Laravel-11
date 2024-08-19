@@ -13,7 +13,7 @@ use Illuminate\Http\Client\ConnectionException;
 
 class Index extends Component
 {
-    public $greetMessage;
+    public $greetMessage, $genderGreeting;
 
     public function markPresent(int $schedule_id){
         $markpresent = Schedules::findOrFail($schedule_id);
@@ -46,6 +46,14 @@ class Index extends Component
             $this->greetMessage = 'Good Evening';
         }
 
+        // Greetings from Instructor (Mr. and Mrs.) based on Gender.
+        if(Auth::user()->gender == '1'){
+            $this->genderGreeting = 'Mr.';
+        }
+        if(Auth::user()->gender == '2'){
+            $this->genderGreeting = 'Ms.';
+        }
+
         // Fetch Current Schedules based on Instructor Logged In.
         $getCourseId = Course::where('instructor_id', Auth::id())->pluck('id')->toArray();
         $schedules = Schedules::whereIn('course_id', $getCourseId)
@@ -61,7 +69,8 @@ class Index extends Component
             'schedules' => $schedules,
             'totalPresent' => $totalPresent,
             'totalStudents' => $totalStudents,
-            'greetMessage' => $this->greetMessage
+            'greetMessage' => $this->greetMessage,
+            'genderGreeting' => $this->genderGreeting
         ]);
     }
 }

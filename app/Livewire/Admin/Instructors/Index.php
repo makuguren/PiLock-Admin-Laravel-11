@@ -11,12 +11,13 @@ use Illuminate\Database\QueryException;
 class Index extends Component
 {
     use WithPagination;
-    public $name, $email, $password, $instructor_id;
+    public $name, $gender, $email, $password, $instructor_id;
 
     // Validations
     protected function rules(){
         return [
             'name' => 'required|string|max:255',
+            'gender' => 'required|integer',
             'email' => 'required|email|max:255|unique:instructors,email',
             'password' => 'required|string|min:8|max:20'
         ];
@@ -39,6 +40,7 @@ class Index extends Component
 
         Instructor::create([
             'name' => $validatedData['name'],
+            'gender' => $validatedData['gender'],
             'email' => $validatedData['email'],
             'password' => Hash::make($validatedData['password'])
         ]);
@@ -54,6 +56,7 @@ class Index extends Component
         if($instructor){
             $this->instructor_id = $instructor->id;
             $this->name = $instructor->name;
+            $this->gender = $instructor->gender;
             $this->email = $instructor->email;
         } else {
             return redirect()->to('/instructors');
@@ -63,12 +66,14 @@ class Index extends Component
     public function updateInstructor(){
         $validatedData = $this->validate([
             'name' => 'required|string|max:255',
+            'gender' => 'required|integer',
             'email' => 'required|email|max:255',
             'password' => 'nullable|string|min:8|max:20'
         ]);
 
         $data = [
             'name' => $validatedData['name'],
+            'gender' => $validatedData['gender'],
             'email' => $validatedData['email'],
         ];
 
@@ -103,6 +108,7 @@ class Index extends Component
 
     public function resetInput(){
         $this->name = '';
+        $this->gender = '';
         $this->email = '';
         $this->password = '';
     }

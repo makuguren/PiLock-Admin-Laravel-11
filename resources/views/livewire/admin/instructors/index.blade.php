@@ -48,6 +48,7 @@
                             <th>ID</th>
                             <th>TAG UID</th>
                             <th>NAME</th>
+                            <th>GENDER</th>
                             <th>EMAIL</th>
                             <th>ACTION</th>
                         </tr>
@@ -66,6 +67,19 @@
                                 </div>
                             </td>
                             <td><div class="">{{ $instructor->name }}</div></td>
+                            <td>
+                                <div class="">
+                                    @if ($instructor->gender)
+                                        @if ($instructor->gender == '1')
+                                            Male
+                                        @elseif ($instructor->gender == '2')
+                                            Female
+                                        @endif
+                                    @else
+                                        No Gender Assigned
+                                    @endif
+                                </div>
+                            </td>
                             <td><div class="">{{ $instructor->email }}</div></td>
                             <th>
                                 <div class="flex flex-row space-x-2">
@@ -115,6 +129,7 @@
 
             //Clear all the Values in Text Inputs (Instructors)
             document.getElementById('addinst_name').value = '';
+            document.getElementById('addgender').value = '';
             document.getElementById('addinst_email').value = '';
             document.getElementById('addinst_password').value = '';
 

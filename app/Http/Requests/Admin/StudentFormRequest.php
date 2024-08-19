@@ -24,8 +24,9 @@ class StudentFormRequest extends FormRequest
         return [
             'student_id' => 'required|string|unique:users,student_id',
             'name' => 'required|string',
-            'birthdate' => 'required|date',
             'section_id' => 'required|integer',
+            'gender' => 'required|integer',
+            'birthdate' => 'required|date',
             'email' => 'required|string|email|lowercase|unique:users,email',
             'password' => 'required|string|min:8|max:20'
         ];

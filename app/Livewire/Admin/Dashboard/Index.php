@@ -13,6 +13,7 @@ use Livewire\Component;
 use App\Models\Schedules;
 use App\Models\Instructor;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\View;
 use Illuminate\Http\Client\ConnectionException;
@@ -22,6 +23,7 @@ class Index extends Component
     public $greetMessage;
     public $programs, $programData;
     public $countRFIDData, $countEventData;
+    public $genderGreeting;
 
     public function getStudProgCount(){
         // Count the Number of Students Registered Per Program
@@ -137,6 +139,14 @@ class Index extends Component
             $this->greetMessage = 'Good Evening';
         }
 
+        // Greetings from Admins (Mr. and Mrs.) based on Gender.
+        if(Auth::user()->gender == '1'){
+            $this->genderGreeting = 'Mr.';
+        }
+        if(Auth::user()->gender == '2'){
+            $this->genderGreeting = 'Ms.';
+        }
+
         return view('livewire.admin.dashboard.index', [
             'totalStudents' => $totalStudents,
             'totalSchedules' => $totalSchedules,
@@ -148,6 +158,7 @@ class Index extends Component
             'schedulesNow' => $schedulesNow,
             'eventsNow' => $eventsNow,
             'greetMessage' => $this->greetMessage,
+            'genderGreeting' => $this->genderGreeting
         ]);
     }
 }

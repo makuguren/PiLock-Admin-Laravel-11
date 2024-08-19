@@ -32,6 +32,7 @@
                         <tr>
                             <th>ID</th>
                             <th>NAME</th>
+                            <th>GENDER</th>
                             <th>EMAIL</th>
                             <th>ROLES</th>
                             <th>ACTION</th>
@@ -42,6 +43,19 @@
                         <tr>
                             <td><div class="font-bold">{{ $admin->id }}</div></td>
                             <td><div class="">{{ $admin->name }}</div></td>
+                            <td>
+                                <div class="">
+                                    @if ($admin->gender)
+                                        @if ($admin->gender == '1')
+                                            Male
+                                        @elseif ($admin->gender == '2')
+                                            Female
+                                        @endif
+                                    @else
+                                        No Gender Assigned
+                                    @endif
+                                </div>
+                            </td>
                             <td><div class="">{{ $admin->email }}</div></td>
                             <td>
                                 @if (!empty($admin->getRoleNames()))

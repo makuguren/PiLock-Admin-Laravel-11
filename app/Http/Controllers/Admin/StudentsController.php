@@ -49,8 +49,9 @@ class StudentsController extends Controller implements HasMiddleware
         User::create([
             'student_id' => $validatedData['student_id'],
             'name' => $validatedData['name'],
-            'birthdate' => $validatedData['birthdate'],
             'section_id' => $validatedData['section_id'],
+            'gender' => $validatedData['gender'],
+            'birthdate' => $validatedData['birthdate'],
             'email' => $validatedData['email'],
             'password' => Hash::make($validatedData['password'])
         ]);
@@ -71,16 +72,18 @@ class StudentsController extends Controller implements HasMiddleware
         $validatedData = $request->validate([
             'student_id' => 'required|string',
             'name' => 'required|string',
-            'birthdate' => 'required|date',
             'section_id' => 'required|integer',
+            'gender' => 'required|integer',
+            'birthdate' => 'required|date',
             'email' => 'required|string|email|lowercase',
         ]);
 
         $data = [
             'student_id' => $validatedData['student_id'],
             'name' => $validatedData['name'],
-            'birthdate' => $validatedData['birthdate'],
             'section_id' => $validatedData['section_id'],
+            'gender' => $validatedData['gender'],
+            'birthdate' => $validatedData['birthdate'],
             'email' => $validatedData['email'],
         ];
 
