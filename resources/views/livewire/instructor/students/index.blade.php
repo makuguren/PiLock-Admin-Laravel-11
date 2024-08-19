@@ -81,7 +81,7 @@
                                             <div class="avatar">
                                               <div class="mask mask-squircle h-12 w-12">
                                                 <img
-                                                  src="{{ $enrolledstd->avatar ?? '' }}" />
+                                                  src="{{ $enrolledstd->student->avatar ?? '' }}" />
                                               </div>
                                             </div>
                                             <div>

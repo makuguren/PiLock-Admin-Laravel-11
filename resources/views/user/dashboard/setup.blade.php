@@ -14,19 +14,6 @@
             </div>
         </div>
 
-        {{-- <div class="flex flex-wrap mb-2">
-            <div class="w-full px-3">
-                <label class="label-text">Section</label>
-                <select wire:model="section_id" id="addsection_id" class="select select-bordered bg-base-300 block w-full py-3 px-4 mb-3 form-control" required>
-                    <option value="">--Select Section--</option>
-                    @foreach ($sections as $section)
-                        <option value="{{ $section->id }}">{{ $section->program }} {{ $section->year }}{{ $section->block }}</option>
-                    @endforeach
-                </select>
-                @error('section_id') <span class="error" role="alert">{{ $message }}</span> @enderror
-            </div>
-        </div> --}}
-
         <div class="flex flex-wrap mb-2">
             <div class="w-full px-3">
                 <label class="label-text">Programs</label>

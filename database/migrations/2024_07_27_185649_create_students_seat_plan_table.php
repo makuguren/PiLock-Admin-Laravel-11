@@ -13,14 +13,14 @@ return new class extends Migration
     {
         Schema::create('seat_plan', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('student_id');
-            $table->unsignedBigInteger('course_id');
+            $table->unsignedBigInteger('student_id')->nullable();
+            $table->unsignedBigInteger('course_id')->nullable();
             $table->integer('seat_number')->nullable();
             $table->timestamps();
 
             // Foreign Key
-            $table->foreign('student_id')->references('id')->on('users');
-            $table->foreign('course_id')->references('id')->on('courses');
+            $table->foreign('student_id')->references('id')->on('users')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreign('course_id')->references('id')->on('courses')->cascadeOnUpdate()->cascadeOnDelete();
         });
     }
 
