@@ -2,7 +2,7 @@
 <input type="checkbox" id="updateInfo_modal" class="modal-toggle" {{ $checked ?? '' }}/>
 <div class="modal" role="dialog">
   <div class="modal-box">
-    <h3 class="text-lg font-bold">Setting Up your Information!</h3>
+    <h3 class="text-lg font-bold">Setting Up your Information</h3>
     <h3 class="text-sm">Please Setup your Information for the First time to Continue.</h3>
     <form wire:submit.prevent="updateStudentInfo" method="dialog" class="w-full mt-6">
         @csrf
