@@ -15,7 +15,7 @@ use Livewire\WithPagination;
 class Index extends Component
 {
     public $student_id, $section_id, $birthdate;
-    public $greetMessage;
+    public $greetMessage, $genderGreeting;
 
     use WithPagination;
 
@@ -78,6 +78,14 @@ class Index extends Component
             $this->greetMessage = 'Good Evening';
         }
 
+        // Greetings from Users (Mr. and Mrs.) based on Gender.
+        if(Auth::user()->gender == '1'){
+            $this->genderGreeting = 'Mr.';
+        }
+        if(Auth::user()->gender == '2'){
+            $this->genderGreeting = 'Ms.';
+        }
+
         // Fetch Attendance based on Students
         $attendances = Attendance::where('student_id', Auth::id())
                 ->where('isCurrent', '0')
@@ -93,14 +101,16 @@ class Index extends Component
                 'sections' => $sections,
                 'greetMessage' => $this->greetMessage,
                 'schedules' => $schedules,
-                'attendances' => $attendances
+                'attendances' => $attendances,
+                'genderGreeting' => $this->genderGreeting
             ]);
         } else {
             return view('livewire.user.dashboard.index', [
                 'sections' => $sections,
                 'greetMessage' => $this->greetMessage,
                 'schedules' => $schedules,
-                'attendances' => $attendances
+                'attendances' => $attendances,
+                'genderGreeting' => $this->genderGreeting
             ]);
         }
     }
