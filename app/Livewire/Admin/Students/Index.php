@@ -48,7 +48,7 @@ class Index extends Component
 
     public function destroyRFID(){
         User::where('id', $this->student_id)->update([
-            'tag_uid' => '0'
+            'tag_uid' => null
         ]);
         toastr()->success('TagUID Disabled Successfully');
         $this->dispatch('close-modal');
