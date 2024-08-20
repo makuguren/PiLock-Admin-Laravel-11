@@ -136,6 +136,10 @@ Route::middleware(['auth:admin', App\Http\Middleware\AdminComponentLayout::class
             ->middleware('permission:View Make-Up SchedApprovals');
     });
 
+    // Route::controller(App\Http\Controllers\Admin\SchedulesController::class)->group(function(){
+    //     Route::post('schedules/import', 'importSchedule')->name('schedules.import');
+    // });
+
     //Logs
     Route::prefix('logs')->group(function () {
         Route::get('/', App\Livewire\Admin\Logs\Index::class)->name('logs.index')
