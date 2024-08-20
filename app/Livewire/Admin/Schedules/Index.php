@@ -52,15 +52,20 @@ class Index extends Component
     // }
 
     public function importSchedule(){
+        // dd($this->import_file);
+        // dd($this->file_path);
 
-        $path = $this->import_file->storeAs('imports', 'schedules.csv');
+        // $path = $this->import_file->storeAs('imports', 'schedules.csv');
 
         // Perform the import
-        Excel::import(new CourseImport, storage_path('app/' . $path));
-        Excel::import(new ScheduleImport, storage_path('app/' . $path));
+        // Excel::import(new CourseImport, storage_path('app/' . $path));
+        // Excel::import(new ScheduleImport, storage_path('app/' . $path));
 
         // Optionally delete the file after import
-        Storage::delete($path);
+        // Storage::delete($path);
+
+        Excel::import(new CourseImport, 'schedule.csv');
+        Excel::import(new ScheduleImport, 'schedule.csv');
 
         toastr()->success('Schedules Imported Successfully');
         $this->dispatch('close-modal');
