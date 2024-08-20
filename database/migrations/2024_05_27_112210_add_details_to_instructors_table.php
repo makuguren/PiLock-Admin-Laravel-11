@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::table('instructors', function (Blueprint $table) {
             $table->string('tag_uid')->unique()->nullable();
+            $table->tinyInteger('gender')->default('0')->comment('0=None, 1=Male, 2=Female')->nullable();
+            $table->string('instructor_theme')->nullable();
         });
     }
 
@@ -23,6 +25,8 @@ return new class extends Migration
     {
         Schema::table('instructors', function (Blueprint $table) {
             $table->dropColumn('tag_uid');
+            $table->dropColumn('gender');
+            $table->dropColumn('instructor_theme');
         });
     }
 };

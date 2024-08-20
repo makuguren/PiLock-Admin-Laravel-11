@@ -46,8 +46,8 @@
                     </div>
 
                     <div class="w-full">
-                        <label class="label-text">Student / Instructor ID</label>
-                        <input class="input input-bordered bg-base-300 block w-full py-3 px-4 mb-3" value="{{ $info->student_id ?? '' }}" type="text" placeholder="" disabled>
+                        <label class="label-text">Student ID</label>
+                        <input class="input input-bordered bg-base-300 block w-full py-3 px-4 mb-3" value="{{ $info ? $info->student_id : $info->id ?? '' }}" type="text" placeholder="" disabled>
                     </div>
 
                     <div class="w-full">

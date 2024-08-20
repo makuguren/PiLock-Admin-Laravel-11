@@ -42,6 +42,9 @@
 
     {{-- @vite('resources/js/script.js') --}}
 
+    {{-- ApexCharts --}}
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
     {{ $scripts ?? '' }}
 
     @livewireScripts

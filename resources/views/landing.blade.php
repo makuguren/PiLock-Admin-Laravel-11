@@ -155,7 +155,7 @@
         </div>
     </nav>
 
-    <section class="flex justify-center gap-10 h-screen" id="body">
+    <section class="lg:flex lg:flex-row justify-center gap-10 h-screen" id="body">
         <div class="flex flex-col place-content-center items-left gap-6 text-white text-justify lg:w-1/2">
             <h1 class="text-5xl font-bold">Pi:Lock System</h1>
 
@@ -176,7 +176,7 @@
             </div> --}}
         </div>
 
-        <div class="flex flex-col place-content-center items-center lg:w-1/3">
+        <div class="flex flex-col lg:place-content-center items-center lg:w-1/3">
             <img src="{{ asset('assets/images/pilock-dark.png') }}" style="max-width: 100%; max-height: 100%" srcset="">
         </div>
     </section>

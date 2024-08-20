@@ -41,4 +41,16 @@ class Index extends Component
         toastr()->success('Student Deleted Successfully');
         $this->dispatch('close-modal');
     }
+
+    public function disableRFID(int $student_id){
+        $this->student_id = $student_id;
+    }
+
+    public function destroyRFID(){
+        User::where('id', $this->student_id)->update([
+            'tag_uid' => '0'
+        ]);
+        toastr()->success('TagUID Disabled Successfully');
+        $this->dispatch('close-modal');
+    }
 }

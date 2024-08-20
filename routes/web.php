@@ -30,6 +30,17 @@ Route::middleware(['auth:web', App\Http\Middleware\UserComponentLayout::class])-
     //Dashboard Routes
     Route::get('dashboard', [App\Http\Controllers\User\DashboardController::class, 'index'])->name('dashboard.index');
 
+    //Courses Routes
+    Route::prefix('courses')->group(function () {
+        Route::get('/', App\Livewire\User\Courses\Index::class)->name('courses.index');
+        Route::get('enrolledcourses', App\Livewire\User\Courses\Enrolled::class)->name('courses.enrolled');
+    });
+
+    // Schedules Routes
+    Route::prefix('schedules')->group(function () {
+        Route::get('/', App\Livewire\User\Schedules\Index::class)->name('schedules.index');
+    });
+
     //Profile Routes
     Route::controller(App\Http\Controllers\User\SettingsController::class)->group(function () {
         Route::get('settings', 'index')->name('settings.index');
@@ -83,6 +94,12 @@ Route::middleware(['auth:admin', App\Http\Middleware\AdminComponentLayout::class
             ->middleware('permission:View RFID Checker');
     });
 
+    // Analytics Routes
+    Route::prefix('analytics')->group(function () {
+        Route::get('/', App\Livewire\Admin\Analytics\Index::class)->name('analytics.index')
+            ->middleware('permission:View Analytics');
+    });
+
     //Sections Routes
     Route::prefix('sections')->group(function () {
         Route::get('/', App\Livewire\Admin\Sections\Index::class)->name('sections.index')
@@ -95,10 +112,10 @@ Route::middleware(['auth:admin', App\Http\Middleware\AdminComponentLayout::class
             ->middleware('permission:View Events');
     });
 
-    //Subjects Routes
-    Route::prefix('subjects')->group(function () {
-        Route::get('/', App\Livewire\Admin\Subjects\Index::class)->name('subjects.index')
-            ->middleware('permission:View Subjects');
+    //Courses Routes
+    Route::prefix('courses')->group(function () {
+        Route::get('/', App\Livewire\Admin\Courses\Index::class)->name('courses.index')
+            ->middleware('permission:View Courses');
     });
 
     //Instructors Routes with Tag UID
@@ -190,9 +207,14 @@ Route::middleware(['auth:instructor', App\Http\Middleware\InstructorComponentLay
         Route::get('/', App\Livewire\Instructor\Events\Index::class)->name('events.index');
     });
 
-    // Courses Routes
+    //Courses Routes
     Route::prefix('courses')->group(function () {
         Route::get('/', App\Livewire\Instructor\Courses\Index::class)->name('courses.index');
+    });
+
+    //Students Routes
+    Route::prefix('students')->group(function() {
+        Route::get('/', App\Livewire\Instructor\Students\Index::class)->name('students.index');
     });
 
     //Profile Routes

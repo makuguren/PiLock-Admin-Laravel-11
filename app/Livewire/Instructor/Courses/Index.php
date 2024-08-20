@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Crypt;
 
 class Index extends Component
 {
-    public $course_id, $course_code, $course_title, $section_id, $course_key;
+    public $cpCourseKey, $course_id, $course_code, $course_title, $section_id, $course_key;
 
     //Validations
     protected function rules(){
@@ -89,12 +89,17 @@ class Index extends Component
         $this->course_key = '';
     }
 
+    public function copyCourseCode(String $course_code){
+        $this->cpCourseKey = $course_code;
+    }
+
     public function render(){
         $sections = Section::all();
         $courses = Course::where('instructor_id', Auth::user()->id)->get();
         return view('livewire.instructor.courses.index', [
             'sections' => $sections,
-            'courses' => $courses
+            'courses' => $courses,
+            'cpCourseKey' => $this->cpCourseKey,
         ]);
     }
 }

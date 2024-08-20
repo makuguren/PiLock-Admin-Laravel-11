@@ -2,30 +2,26 @@
 
 namespace App\Livewire\Instructor\Attendances;
 
+use App\Models\Course;
 use App\Models\Section;
 use App\Models\Subject;
 use Livewire\Component;
-use Barryvdh\DomPDF\Facade\PDF;
 use App\Models\Schedules;
 use App\Models\Attendance;
 use Livewire\WithPagination;
+use Barryvdh\DomPDF\Facade\PDF;
 use Illuminate\Support\Facades\Auth;
 
 class Index extends Component
 {
     use WithPagination;
 
-    public $selectedSection, $selectedSubject, $selectedDate;
-    public $dlpdfsection_id, $dlpdfsubject_id, $dlpdfdate;
+    public $selectedCourseSection, $selectedSubject, $selectedDate;
+    public $dlpdfcourse_id, $dlpdfdate;
 
-    public function updatedSelectedSection($value){
-        $this->selectedSection = $value;
+    public function updatedSelectedCourseSection($value){
+        $this->selectedCourseSection = $value;
         // $this->selectedSubject = null;
-        $this->resetPage();
-    }
-
-    public function updatedSelectedSubject($value){
-        $this->selectedSubject = $value;
         $this->resetPage();
     }
 
@@ -45,35 +41,37 @@ class Index extends Component
         $instructorId = Auth::id();
         //Fetch attendance pdf based on the Instructor Selected
 
-        $query = Schedules::where('instructor_id', $instructorId)
-                            // ->with('attendance.student') // Eager load relationships (Old Version)
+        // Query to Show Courses where the Instructor is based to Current Loggedin with, Fetch the Attendances of the Student(Model).
+        $query = Course::where('instructor_id', $instructorId)
+            // ->with('attendance.student') // Eager load relationships (Old Version)
 
-                            ->with(['attendance' => function ($query) {
-                                $query->where('isCurrent', '0'); //Filter attendance where isCurrent to 0
-                                $query->where('date', 'like', '%'.$this->dlpdfdate.'%'); //Filter Date
-                            }, 'attendance.student']) // Eager load relationships
+            ->with(['attendance' => function ($query) {
+                $query->where('isCurrent', '0'); //Filter attendance where isCurrent to 0
+                $query->where('date', 'like', '%'.$this->selectedDate.'%'); //Filter Date
+            }, 'attendance.student']) // Eager load relationships
 
-                            ->when($this->dlpdfsection_id, function ($query) {
-                                    $query->where('section_id', $this->dlpdfsection_id);
-                            })
+            // Fetch Section based on Dropdown Selected
+            ->when($this->dlpdfcourse_id, function ($query) {
+                    $query->where('id', $this->dlpdfcourse_id);
+            });
 
-                            ->when($this->dlpdfsubject_id, function ($query) {
-                                $query->where('subject_id', $this->dlpdfsubject_id);
-                            });
-
-        $schedules = $query->get();
+        $courses = $query->get();
 
         // Getting Values from the Dialog Dropdown and Retrieve into PDF.
-        $subject = Subject::where('id', $this->dlpdfsubject_id)->value('subject_code');
-        $program = Section::where('id', $this->dlpdfsection_id)->value('program');
-        $year = Section::where('id', $this->dlpdfsection_id)->value('year');
-        $block = Section::where('id', $this->dlpdfsection_id)->value('block');
+        // dd($this->dlpdfcourse_id);
+
+        $section_id = Course::where('id', $this->dlpdfcourse_id)->value('section_id');
+        $course_code = Course::where('id', $this->dlpdfcourse_id)->value('course_code');
+
+        $program = Section::where('id', $section_id)->value('program');
+        $year = Section::where('id', $section_id)->value('year');
+        $block = Section::where('id', $section_id)->value('block');
 
         $data = [
             'title' => 'Attendance for Todays Vidwo!',
             'date' => $this->dlpdfdate,
-            'schedules' => $schedules,
-            'subject' => $subject,
+            'courses' => $courses,
+            'course_code' => $course_code,
             'section' => $program . ' ' . $year . $block,
             'ccsheader' => $ccsimageBase64,
             'cspcheader' => $cspcimageBase64
@@ -90,8 +88,7 @@ class Index extends Component
     }
 
     public function resetInput(){
-        $this->dlpdfsection_id = '';
-        $this->dlpdfsubject_id = '';
+        $this->dlpdfcourse_id = '';
         $this->dlpdfdate = '';
     }
 
@@ -99,42 +96,36 @@ class Index extends Component
 
         $instructorId = Auth::id();
 
-        // Fetch sections associated with schedules of the instructor (Dropdown Tag)
-        $sections = Section::whereHas('schedules', function ($query) use ($instructorId) {
+        // Fetch Courses with Section associated with Courses of the instructor (Dropdown Tag)
+        $courseSecs = Course::whereHas('section', function ($query) use ($instructorId) {
             $query->where('instructor_id', $instructorId);
-        })->get();
+        })->with('section')->get();
 
-        // Fetch subjects associated with schedules of the instructor (Dropdown Tag)
-        $subjects = Subject::whereHas('schedules', function ($query) use ($instructorId) {
+        // Another Method of Query to Fetch Attendance based Instructor Current LoggedIn
+        // Fetch Course IDs of the instructor (based on Course-Section relationship)
+        $getCourseId = Course::whereHas('section', function ($query) use ($instructorId) {
             $query->where('instructor_id', $instructorId);
-        })->pluck('subject_name', 'id')->toArray();
+        })->pluck('id')->toArray();
 
+        // Fetch attendances based on the course IDs, where 'isCurrent' is 0 and filter by the selected date
+        $attendances = Attendance::whereIn('course_id', $getCourseId)
+            ->where('isCurrent', '0')
+            ->when($this->selectedDate, function ($query) {
+                $query->where('date', 'like', '%' . $this->selectedDate . '%');
+            })
 
-        // Fetch schedules based on selected section (if any)
-        $query = Schedules::where('instructor_id', $instructorId)
-                            // ->with('attendance.student') // Eager load relationships (Old Version)
+            // Selected CourseID(Course Subject with Section) on Dropdown
+            ->when($this->selectedCourseSection, function ($query) {
+                // Filter by selected course section
+                $query->where('course_id', $this->selectedCourseSection);
+            })
 
-                            ->with(['attendance' => function ($query) {
-                                $query->where('isCurrent', '0'); //Filter attendance where isCurrent to 0
-                                $query->where('date', 'like', '%'.$this->selectedDate.'%'); //Filter Date
-                            }, 'attendance.student']) // Eager load relationships
-
-                            // Fetch Section based on Dropdown Selected
-                            ->when($this->selectedSection, function ($query) {
-                                    $query->where('section_id', $this->selectedSection);
-                            })
-
-                            // Fetch Subject Based on Dropdown Selected
-                            ->when($this->selectedSubject, function ($query) {
-                                $query->where('subject_id', $this->selectedSubject);
-                            });
-
-        $schedules = $query->get();
+            ->with('student') // Eager load the student relationship (Modal)
+            ->get();
 
         return view('livewire.instructor.attendances.index',[
-            'schedules' => $schedules,
-            'subjects' => $subjects,
-            'sections' => $sections
+            'attendances' => $attendances,
+            'courseSecs' => $courseSecs
         ]);
     }
 }

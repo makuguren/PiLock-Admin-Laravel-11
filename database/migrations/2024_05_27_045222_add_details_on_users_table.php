@@ -16,12 +16,13 @@ return new class extends Migration
             $table->string('tag_uid')->unique()->nullable();
             $table->unsignedBigInteger('section_id')->nullable();
             $table->date('birthdate')->nullable();
+            $table->tinyInteger('gender')->default('0')->comment('0=None, 1=Male, 2=Female')->nullable();
             $table->string('google_id')->unique()->nullable();
             $table->string('avatar')->nullable();
             $table->string('user_theme')->nullable();
 
             //Foreign Key
-            $table->foreign('section_id')->references('id')->on('sections');
+            $table->foreign('section_id')->references('id')->on('sections')->cascadeOnUpdate()->cascadeOnDelete();
         });
     }
 

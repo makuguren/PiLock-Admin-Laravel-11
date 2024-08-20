@@ -60,7 +60,7 @@ Schedule::call(function () {
         ]);
 
 
-        //Update isCurrent to 0 in the Attendance for Regular Class if the Event is Going to Start
+        //Update isCurrent to 0 in the Attendance View for Regular Class if the Event is Going to Start
         $schedule = Schedules::where('isMakeUp','0')->where('isCurrent', '1')->first();
         if($schedule){
             $users = DB::table('attendances')->where('isCurrent', '1')->get();
@@ -80,39 +80,53 @@ Schedule::call(function () {
             }
         }
 
-        //Also, Update isCurrent to 0 in the Regular Class if the Event is Going to Start
+        //Also, Update isCurrent to 0 in the Regular Class Schedules if the Event is Going to Start
         Schedules::where('isMakeUp','0')->where('isCurrent', '1')->update([
             'isCurrent' => '0',
             'isAttend' => '0'
         ]);
 
     } else {
+        // Make-Up Schedules
+        // 1.1.A Generate Attendance before Executing Make-Up Class Schedules
+        // 1.1.B Find the Make-Up Class Schedule First
         $makeupsched = $makeupscheds_start->first();
+
+        // 1,2 If the Make-Up Class Schedule is Existed
         if($makeupsched){
-            //Make-Up Schedules
-            //Generate Attendance before Executing Regular Schedules
-            $users = DB::table('users')->where('section_id', $makeupsched->section_id)->get(); //Sections where scheduled assigned
+
+            // 1.3.A Instead of Matching Sections, we're matching course and enrolled subjects
+            // 1.3.B Fetch the Schedules(Course_id) for matching to enrolledCourses(Course_id)
+
+            // 1.4 Find the EnrolledCourse where the Course_id is equal to schedule(Course_id)
+            $queryMakeUpScheds = DB::table('enrolledcourses')->where('course_id', $makeupsched->course_id)->get();
+
+            // 1.5 Starting to Push all Enrolled Student to Attendance Table
             $attendanceData = [];
 
-            foreach ($users as $user) {
+            // 1.6 Using foreach, Fetch all the data from EnrolledCourses and Insert to Attendance Table
+            foreach ($queryMakeUpScheds as $enrolledStudCourse) {
                 $attendanceData[] = [
-                    'student_id' => $user->id,
-                    'schedule_id' => $makeupsched->id,
+                    'student_id' => $enrolledStudCourse->student_id,
+                    'course_id' => $enrolledStudCourse->course_id,
                     'date' => $date,
+                    'time_end' => $makeupsched->time_end,
                     'isCurrent' => '1'
                 ];
             }
             DB::table('attendances')->insert($attendanceData);
 
-            //Update the Schedule Current = 1
+            //1.7 Update the Make-Up Class Schedule Current = 1
             $makeupscheds_start->update([
                 'isCurrent' => '1'
             ]);
 
+
+
             //Update isCurrent to 0 in the Attendance if the Make-Up Classes is Going to Start
             $schedule = Schedules::where('isMakeUp','0')->where('isCurrent', '1')->first();
             if($schedule){
-                $users = DB::table('attendances')->where('isCurrent', '1')->get();
+                $users = DB::table('attendances')->where('time_end', $time)->where('isCurrent', '1')->get();
                 $attendanceData = [];
 
                 foreach ($users as $user) {
@@ -136,28 +150,41 @@ Schedule::call(function () {
             ]);
 
         } else {
-            //Regular Schedules
-            //Generate Attendance before Executing Regular Schedules
+            // Regular Schedules
+            // 1.1.A: Generate Attendance before Executing Regular Schedules
+            // 1.1.B Find the Regular Schedule Start First
             $schedule = $scheds_start->first();
+
+            // 1.2 If the Regular Schedule is Existed
             if($schedule){
-                $users = DB::table('users')->where('section_id', $schedule->section_id)->get(); //Sections where scheduled assigned
+
+                // 1.3.A Instead of Matching Sections, we're matching course and enrolled subjects
+                // 1.3.B Fetch the Schedules(Course_id) for matching to enrolledCourses(Course_id)
+
+                // 1.4 Find the EnrolledCourse where the Course_id is equal to schedule(Course_id)
+                $queryRegularScheds = DB::table('enrolledcourses')->where('course_id', $schedule->course_id)->get();
+
+                // 1.5 Starting to Push all Enrolled Student to Attendance Table
                 $attendanceData = [];
 
-                foreach ($users as $user) {
+                // 1.6 Using foreach, Fetch all the data from EnrolledCourses and Insert to Attendance Table
+                foreach ($queryRegularScheds as $enrolledStudCourse) {
                     $attendanceData[] = [
-                        'student_id' => $user->id,
+                        'student_id' => $enrolledStudCourse->student_id,
+                        'course_id' => $enrolledStudCourse->course_id,
                         'date' => $date,
-                        'schedule_id' => $schedule->id,
+                        'time_end' => $schedule->time_end,
                         'isCurrent' => '1'
                     ];
                 }
                 DB::table('attendances')->insert($attendanceData);
-            }
 
-            //Update the Regular Schedule isCurrent = 1
-            $scheds_start->update([
-                'isCurrent' => '1'
-            ]);
+
+                // 1.7 Update the Regular Schedule isCurrent = 1
+                $scheds_start->update([
+                    'isCurrent' => '1'
+                ]);
+            }
         }
     }
 
@@ -169,7 +196,7 @@ Schedule::call(function () {
     //Update isCurrent = 0 if the Regular Schedule reaches Time_End
     $schedule = $scheds_end->first();
     if($schedule){
-        $users = DB::table('attendances')->where('isCurrent', '1')->get();
+        $users = DB::table('attendances')->where('time_end', $time)->where('isCurrent', '1')->get();
         $attendanceData = [];
 
         foreach ($users as $user) {

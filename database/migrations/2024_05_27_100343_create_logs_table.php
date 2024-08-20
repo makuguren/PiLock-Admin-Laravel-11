@@ -13,19 +13,15 @@ return new class extends Migration
     {
         Schema::create('logs', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('student_id');
-            $table->unsignedBigInteger('section_id');
-            $table->unsignedBigInteger('subject_id');
-            $table->unsignedBigInteger('instructor_id');
+            $table->unsignedBigInteger('student_id')->nullable();
+            $table->unsignedBigInteger('course_id')->nullable();
             $table->time('time')->nullable();
             $table->date('date')->nullable();
             $table->timestamps();
 
             //Foreign Key
             $table->foreign('student_id')->references('id')->on('users')->cascadeOnUpdate()->cascadeOnDelete();
-            $table->foreign('section_id')->references('id')->on('sections')->cascadeOnUpdate()->cascadeOnDelete();
-            $table->foreign('subject_id')->references('id')->on('subjects')->cascadeOnUpdate()->cascadeOnDelete();
-            $table->foreign('instructor_id')->references('id')->on('instructors')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreign('course_id')->references('id')->on('courses')->cascadeOnUpdate()->cascadeOnDelete();
         });
     }
 

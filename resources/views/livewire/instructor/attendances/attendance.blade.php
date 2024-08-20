@@ -69,7 +69,7 @@
 <div class="table-container">
     <table class="info-table">
         <tr>
-            <td>Subject Code: {{ $subject }}</td>
+            <td>Subject Code: {{ $course_code }}</td>
             <td>Instructor: {{ Auth::user()->name }}</td>
             <td>Date: {{ $date }}</td>
         </tr>
@@ -81,8 +81,8 @@
             <th>EMAIL</th>
             <th>IS PRESENT</th>
         </tr>
-        @foreach ($schedules as $schedule)
-            @foreach ($schedule->attendance as $attendance)
+        @foreach ($courses as $course)
+            @foreach ($course->attendance as $attendance)
                 <tr>
                     <td>{{ $attendance->student->student_id }}</td>
                     <td>{{ $attendance->student->name }}</td>
