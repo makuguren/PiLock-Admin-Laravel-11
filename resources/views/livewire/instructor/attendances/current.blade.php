@@ -3,6 +3,8 @@
 </x-slot>
 
 <div>
+    @include('livewire.instructor.attendances.student')
+
     <div class="p-6">
         <div class="flex flex-row gap-2">
             <div class="flex flex-col w-full">
@@ -15,6 +17,12 @@
                     <li class="text-gray-600 mr-2 font-medium">Current Attendances</li>
                 </ul>
             </div>
+
+            <label for="addStudent_modal" class="btn btn-ghost bg-blue-700 hover:bg-blue-500 w-55 btn-sm mt-3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-round-pen"><path d="M2 21a8 8 0 0 1 10.821-7.487"/><path d="M21.378 16.626a1 1 0 0 0-3.004-3.004l-4.01 4.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z"/><circle cx="10" cy="8" r="5"/></svg>
+                <span class="text-white text-sm">Add Student Temporarily</span>
+            </label>
+
         </div>
 
         <div class="bg-base-100 border-gray-100 shadow-md shadow-black/5 p-6 rounded-md">
@@ -116,3 +124,20 @@
         </div>
     </div>
 </div>
+
+<x-slot:scripts>
+    <script>
+        window.addEventListener('close-modal', event => {
+            document.getElementById('addStudent_modal').checked = false;
+        });
+
+        function cancel_student(){
+            document.getElementById('addStudent_modal').checked = false;
+
+            document.getElementById('addstud_search').value = '';
+            document.getElementById('addstud_name').value = '';
+            document.getElementById('addstud_section').value = '';
+            document.getElementById('addstud_courseId').value = '';
+        }
+    </script>
+</x-slot>

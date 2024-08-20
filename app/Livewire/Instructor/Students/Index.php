@@ -40,6 +40,7 @@ class Index extends Component
         ]);
 
         toastr()->success("Student Added Successfully!");
+        $this->resetInput();
         $this->dispatch('close-modal');
     }
 
@@ -52,6 +53,13 @@ class Index extends Component
 
         toastr()->success("Student Added Successfully!");
         $this->dispatch('close-modal');
+    }
+
+    public function resetInput(){
+        $this->search_student = '';
+        $this->name = '';
+        $this->section = '';
+        $this->course_id = '';
     }
 
     public function render(){
