@@ -6,6 +6,7 @@
     @include('livewire.instructor.courses.create')
     @include('livewire.instructor.courses.edit')
     @include('livewire.instructor.courses.delete')
+    @include('livewire.instructor.courses.code')
 
     <div class="p-6">
         <div class="flex flex-row gap-2">
@@ -57,8 +58,12 @@
                                             <span class="text-white text-sm">Delete</span>
                                         </label>
 
-                                        {{-- <input type="text" class="lg:hidden" value="{{ Crypt::decryptString($course->course_key) }}" id="course_key"> --}}
-                                        <button onclick="copyCourseCode()" wire:click="copyCourseCode('{{ Crypt::decryptString($course->course_key) }}')" value="{{ $cpCourseKey }}" id="course_key" class="btn btn-ghost bg-orange-700 hover:bg-orange-500 btn-sm text-white">Copy Course Code</button>
+                                        <label for="code_modal" wire:click="copyCourseCode('{{ Crypt::decryptString($course->course_key) }}')" class="btn btn-ghost bg-orange-700 hover:bg-orange-500 btn-sm">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash-2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>
+                                            <span class="text-white text-sm">Copy Course Code</span>
+                                        </label>
+
+                                        {{-- <button onclick="copyCourseCode()" wire:click="copyCourseCode('{{ Crypt::decryptString($course->course_key) }}')" value="{{ $cpCourseKey }}" id="course_key" class="btn btn-ghost bg-orange-700 hover:bg-orange-500 btn-sm text-white">Copy Course Code</button> --}}
                                     </div>
                                 </th>
                             </tr>
@@ -87,6 +92,7 @@
             document.getElementById('create_modal').checked = false;
             document.getElementById('edit_modal').checked = false;
             document.getElementById('delete_modal').checked = false;
+            document.getElementById('code_modal').checked = false;
 
             document.getElementById('addcourse_code').value = '';
             document.getElementById('addcourse_title').value = '';
@@ -101,12 +107,8 @@
 
         function copyCourseCode(){
             var cpCourseCode = document.getElementById("course_key");
-            console.log(cpCourseCode.value);
-
             navigator.clipboard.writeText(cpCourseCode.value);
-
-            // Alert the copied text
-            alert("Copied the text: " + cpCourseCode.value);
+            console.log(cpCourseCode.value);
         }
     </script>
 </x-slot>
