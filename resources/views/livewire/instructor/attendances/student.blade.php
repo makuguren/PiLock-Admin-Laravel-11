@@ -1,8 +1,8 @@
-<input type="checkbox" id="create_modal" class="modal-toggle" />
+<input type="checkbox" id="addStudent_modal" class="modal-toggle" />
 <div dialog wire:ignore.self class="modal modal-bottom sm:modal-middle" role="dialog">
     <div class="modal-box">
       <h3 class="text-lg font-bold">Add Student</h3>
-        <form wire:submit.prevent="addStudCourse" method="dialog" class="w-full mt-6">
+        <form wire:submit.prevent="addStudAttendance" method="dialog" class="w-full mt-6">
             @csrf
             <div class="flex flex-row mb-2 place-items-center">
                 <div class="w-full px-3">

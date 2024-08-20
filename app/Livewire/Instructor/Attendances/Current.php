@@ -2,11 +2,14 @@
 
 namespace App\Livewire\Instructor\Attendances;
 
+use Carbon\Carbon;
+use App\Models\User;
 use App\Models\Course;
 use App\Models\Section;
 use App\Models\Subject;
 use Livewire\Component;
 use App\Models\Schedules;
+use App\Models\Attendance;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,6 +18,7 @@ class Current extends Component
     use WithPagination;
 
     public $selectedCourseSection, $selectedSubject, $selectedDate;
+    public $search_student, $student_id, $name, $section, $course_id;
 
     public function updatedSelectedCourseSection($value){
         $this->selectedCourseSection = $value;
@@ -25,6 +29,45 @@ class Current extends Component
     public function updatedSelectedDate($value){
         $this->selectedDate = $value;
         $this->resetPage();
+    }
+
+    public function findStudent(){
+        $student = User::where('name', $this->search_student)->first();
+        if($student){
+            $this->student_id = $student->id;
+            $this->name = $student->name;
+            $this->section = $student->section->program . ' ' . $student->section->year . $student->section->block;
+        } else {
+            toastr()->error("Can't Find Student!");
+        }
+    }
+
+    public function addStudAttendance(){
+        $datetime = Carbon::now('Asia/Manila');
+        $schedule = Schedules::where('isCurrent', '1')->first();
+
+        $validatedData = $this->validate([
+            'course_id' => 'required|integer',
+        ]);
+
+        Attendance::create([
+            'student_id' => $this->student_id,
+            'course_id' => $validatedData['course_id'],
+            'date' => $datetime->toDateString(),
+            'time_end' => $schedule->time_end,
+            'isCurrent' => '1'
+        ]);
+
+        toastr()->success("Student Student Added Successfully!");
+        $this->resetInput();
+        $this->dispatch('close-modal');
+    }
+
+    public function resetInput(){
+        $this->search_student = '';
+        $this->course_id = '';
+        $this->name = '';
+        $this->section = '';
     }
 
     public function render(){

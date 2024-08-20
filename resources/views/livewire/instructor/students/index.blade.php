@@ -139,6 +139,11 @@
         function cancel_student(){
             document.getElementById('create_modal').checked = false;
             document.getElementById('unenroll_modal').checked = false;
+
+            document.getElementById('addstud_search').value = '';
+            document.getElementById('addstud_name').value = '';
+            document.getElementById('addstud_section').value = '';
+            document.getElementById('addstud_courseId').value = '';
         }
     </script>
 </x-slot>
