@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Instructor\Students;
 
+use App\Models\User;
 use App\Models\Course;
 use Livewire\Component;
 use App\Models\EnrolledCourse;
@@ -10,10 +11,47 @@ use Illuminate\Support\Facades\Auth;
 class Index extends Component
 {
     public $selectedCourseSection;
+    public $enroll_id, $student_id, $course_id, $search_student, $name, $section;
 
     public function updatedSelectedCourseSection($value){
         $this->selectedCourseSection = $value;
         // $this->resetPage();
+    }
+
+    public function findStudent(){
+        $student = User::where('name', $this->search_student)->first();
+        if($student) {
+            $this->student_id = $student->id;
+            $this->name = $student->name;
+            $this->section = $student->section->program . ' ' . $student->section->year . $student->section->block;
+        } else {
+            toastr()->error("Can't Find Student!");
+        }
+    }
+
+    public function addStudCourse(){
+        $validatedData = $this->validate([
+            'course_id' => 'required|integer',
+        ]);
+
+        EnrolledCourse::create([
+            'course_id' => $validatedData['course_id'],
+            'student_id' => $this->student_id
+        ]);
+
+        toastr()->success("Student Added Successfully!");
+        $this->dispatch('close-modal');
+    }
+
+    public function unenrollStud(int $enroll_id){
+        $this->enroll_id = $enroll_id;
+    }
+
+    public function destroyEnrolledStud(){
+        EnrolledCourse::findOrFail($this->enroll_id)->delete();
+
+        toastr()->success("Student Added Successfully!");
+        $this->dispatch('close-modal');
     }
 
     public function render(){

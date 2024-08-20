@@ -35,7 +35,6 @@
                             <th>CODE</th>
                             <th>TITLE</th>
                             <th>SECTION</th>
-                            <th>ENROLLMENT KEY</th>
                             <th>ACTION</th>
                         </tr>
                     </thead>
@@ -46,7 +45,6 @@
                                 <td><div class="">{{ $course->course_code }}</div></td>
                                 <td><div class="">{{ $course->course_title }}</div></td>
                                 <td><div class="">{{ $course->section->program }} {{ $course->section->year }}{{ $course->section->block }}</div></td>
-                                <td><div class="">{{ Crypt::decryptString($course->course_key) }}</div></td>
                                 <th>
                                     <div class="flex flex-row space-x-2">
                                         <label for="edit_modal" wire:click="editCourse({{ $course->id }})" class="btn btn-ghost bg-blue-700 hover:bg-blue-500 btn-sm">
@@ -58,6 +56,9 @@
                                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash-2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>
                                             <span class="text-white text-sm">Delete</span>
                                         </label>
+
+                                        {{-- <input type="text" class="lg:hidden" value="{{ Crypt::decryptString($course->course_key) }}" id="course_key"> --}}
+                                        <button onclick="copyCourseCode()" wire:click="copyCourseCode('{{ Crypt::decryptString($course->course_key) }}')" value="{{ $cpCourseKey }}" id="course_key" class="btn btn-ghost bg-orange-700 hover:bg-orange-500 btn-sm text-white">Copy Course Code</button>
                                     </div>
                                 </th>
                             </tr>
@@ -96,6 +97,16 @@
             // document.getElementById('editcourse_title').value = '';
             // document.getElementById('editsection_id').value = '';
             // document.getElementById('editcourse_key').value = '';
+        }
+
+        function copyCourseCode(){
+            var cpCourseCode = document.getElementById("course_key");
+            console.log(cpCourseCode.value);
+
+            navigator.clipboard.writeText(cpCourseCode.value);
+
+            // Alert the copied text
+            alert("Copied the text: " + cpCourseCode.value);
         }
     </script>
 </x-slot>
