@@ -13,6 +13,7 @@ use App\Imports\CourseImport;
 use Livewire\WithFileUploads;
 use App\Imports\ScheduleImport;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Storage;
 
 class Index extends Component
@@ -117,9 +118,15 @@ class Index extends Component
     }
 
     public function destroySchedule(){
-        Schedules::find($this->schedule_id)->delete();
-        toastr()->success('Schedule Deleted Successfully');
-        $this->dispatch('close-modal');
+        try{
+            Schedules::find($this->schedule_id)->delete();
+            toastr()->success('Schedule Deleted Successfully');
+            $this->dispatch('close-modal');
+
+        } catch (QueryException $ex){
+            toastr()->error('Unable to Delete Schedule!' . $ex->getMessage());
+            $this->dispatch('close-modal');
+        }
     }
 
     public function resetInput(){

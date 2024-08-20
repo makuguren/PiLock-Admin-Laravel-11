@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Section;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Illuminate\Database\QueryException;
 
 class Index extends Component
 {
@@ -37,9 +38,15 @@ class Index extends Component
     }
 
     public function destroyStudent(){
-        User::findOrFail($this->student_id)->delete();
-        toastr()->success('Student Deleted Successfully');
-        $this->dispatch('close-modal');
+        try{
+            User::findOrFail($this->student_id)->delete();
+            toastr()->success('Student Deleted Successfully');
+            $this->dispatch('close-modal');
+
+        } catch (QueryException $ex){
+            toastr()->error('Unable to Delete Student!' . $ex->getMessage());
+            $this->dispatch('close-modal');
+        }
     }
 
     public function disableRFID(int $student_id){

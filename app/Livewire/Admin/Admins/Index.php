@@ -4,6 +4,7 @@ namespace App\Livewire\Admin\Admins;
 
 use App\Models\Admin;
 use Livewire\Component;
+use Illuminate\Database\QueryException;
 
 class Index extends Component
 {
@@ -14,9 +15,15 @@ class Index extends Component
     }
 
     public function destroyUser(){
-        Admin::findOrFail($this->admin_id)->delete();
-        toastr()->success('Admin Deleted Successfully');
-        $this->dispatch('close-modal');
+        try{
+            Admin::findOrFail($this->admin_id)->delete();
+            toastr()->success('Admin Deleted Successfully');
+            $this->dispatch('close-modal');
+
+        } catch (QueryException $ex){
+            toastr()->error('Unable to Delete Admin!' . $ex->getMessage());
+            $this->dispatch('close-modal');
+        }
     }
 
     public function render(){

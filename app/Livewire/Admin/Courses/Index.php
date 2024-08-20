@@ -89,9 +89,15 @@ class Index extends Component
     }
 
     public function destroyCourse(){
-        Course::find($this->course_id)->delete();
-        toastr()->success('Course Deleted Successfully');
-        $this->dispatch('close-modal');
+        try{
+            Course::find($this->course_id)->delete();
+            toastr()->success('Course Deleted Successfully');
+            $this->dispatch('close-modal');
+
+        } catch (QueryException $ex){
+            toastr()->error('Unable to Delete Course!' . $ex->getMessage());
+            $this->dispatch('close-modal');
+        }
     }
 
     public function resetInput(){

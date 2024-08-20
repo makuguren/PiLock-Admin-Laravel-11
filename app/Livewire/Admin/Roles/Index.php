@@ -4,6 +4,7 @@ namespace App\Livewire\Admin\Roles;
 
 use Livewire\Component;
 use Spatie\Permission\Models\Role;
+use Illuminate\Database\QueryException;
 use Illuminate\Routing\Controllers\Middleware;
 
 class Index extends Component
@@ -66,9 +67,15 @@ class Index extends Component
     }
 
     public function destroyRole(){
-        Role::find($this->role_id)->delete();
-        toastr()->success('Role Deleted Successfully');
-        $this->dispatch('close-modal');
+        try{
+            Role::find($this->role_id)->delete();
+            toastr()->success('Role Deleted Successfully');
+            $this->dispatch('close-modal');
+
+        } catch (QueryException $ex){
+            toastr()->error('Unable to Delete Role!' . $ex->getMessage());
+            $this->dispatch('close-modal');
+        }
     }
 
     public function resetInput(){
