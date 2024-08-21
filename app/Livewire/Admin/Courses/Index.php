@@ -16,13 +16,17 @@ class Index extends Component
 {
     use WithPagination;
     public $course_id, $course_code, $course_title, $section_id, $instructor_id, $course_key;
+    public $program, $year, $block;
 
     //Validations
     protected function rules(){
         return [
             'course_code' => 'required|string',
             'course_title' => 'required|string',
-            'section_id' => 'required|integer',
+            // 'section_id' => 'required|integer',
+            'program' => 'required|string',
+            'year' => 'required|integer',
+            'block' => 'required|string',
             'instructor_id' => 'required|integer',
             'course_key' => 'required|string',
         ];
@@ -39,15 +43,32 @@ class Index extends Component
 
     //Save Course
     public function saveCourse(){
+        // dd($this->program . $this->year . $this->block);
         $validatedData = $this->validate();
+
+        // Check if the Section is Not Exists then Create the Section before Executing
+        $checkSection = Section::where('program', $this->program)->where('year', $this->year)->where('block', $this->block)->first();
+
+        if($checkSection == NULL){
+            Section::create([
+                'program' => $validatedData['program'],
+                'year' => $validatedData['year'],
+                'block' => $validatedData['block'],
+            ]);
+        }
+
+        // Find the Section and Update the StudentInfo
+        $sectionId = Section::where('program', $this->program)->where('year', $this->year)->where('block', $this->block)->first();
+        $this->section_id = $sectionId->id;
 
         Course::create([
             'course_code' => $validatedData['course_code'],
             'course_title' => $validatedData['course_title'],
-            'section_id' => $validatedData['section_id'],
+            'section_id' => $this->section_id,
             'instructor_id' => $validatedData['instructor_id'],
             'course_key' => Crypt::encryptString($validatedData['course_key'])
         ]);
+
         toastr()->success('Course Added Successfully');
         $this->resetInput();
         $this->dispatch('close-modal');
@@ -60,7 +81,10 @@ class Index extends Component
             $this->course_id = $course->id;
             $this->course_code = $course->course_code;
             $this->course_title = $course->course_title;
-            $this->section_id = $course->section_id;
+            $this->program = $course->section->program;
+            $this->year = $course->section->year;
+            $this->block = $course->section->block;
+            // $this->section_id = $course->section_id;
             $this->instructor_id = $course->instructor_id;
             $this->course_key = Crypt::decryptString($course->course_key);
         } else {
@@ -71,10 +95,25 @@ class Index extends Component
     public function updateCourse(){
         $validatedData = $this->validate();
 
+        // Check if the Section is Not Exists then Create the Section before Executing
+        $checkSection = Section::where('program', $this->program)->where('year', $this->year)->where('block', $this->block)->first();
+
+        if($checkSection == NULL){
+            Section::create([
+                'program' => $validatedData['program'],
+                'year' => $validatedData['year'],
+                'block' => $validatedData['block'],
+            ]);
+        }
+
+        // Find the Section and Update the StudentInfo
+        $sectionId = Section::where('program', $this->program)->where('year', $this->year)->where('block', $this->block)->first();
+        $this->section_id = $sectionId->id;
+
         Course::where('id', $this->course_id)->update([
             'course_code' => $validatedData['course_code'],
             'course_title' => $validatedData['course_title'],
-            'section_id' => $validatedData['section_id'],
+            'section_id' => $this->section_id,
             'instructor_id' => $validatedData['instructor_id'],
             'course_key' => Crypt::encryptString($validatedData['course_key'])
         ]);

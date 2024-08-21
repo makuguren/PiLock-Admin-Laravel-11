@@ -110,8 +110,13 @@
             document.getElementById('addcourse_code').value = '';
             document.getElementById('addcourse_title').value = '';
             document.getElementById('addinstructor_id').value = '';
-            document.getElementById('addsection_id').value = '';
+            // document.getElementById('addsection_id').value = '';
             document.getElementById('addcourse_key').value = '';
+
+            document.getElementById('addprogram').value = '';
+            document.getElementById('addyear').value = '';
+            document.getElementById('addblock').value = '';
+
 
             // document.getElementById('editcourse_code').value = '';
             // document.getElementById('editcourse_title').value = '';
