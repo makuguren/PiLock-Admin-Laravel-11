@@ -11,7 +11,7 @@ use Illuminate\Database\QueryException;
 class Index extends Component
 {
     use WithPagination;
-    public $name, $gender, $email, $password, $instructor_id;
+    public $name, $gender, $email, $password, $instructor_id, $taguid;
 
     // Validations
     protected function rules(){
@@ -104,6 +104,24 @@ class Index extends Component
             toastr()->error('Unable to Delete Instructor!');
             $this->dispatch('close-modal');
         }
+    }
+
+    public function disableRFID(int $taguid){
+        // dd($taguid);
+        $this->taguid = $taguid;
+    }
+
+    public function destroyRFID(){
+        Instructor::findOrFail($this->taguid)->update([
+            'tag_uid' => null
+        ]);
+
+        // User::where('id', $this->taguid)->update([
+        //     'tag_uid' => null
+        // ]);
+
+        toastr()->success('TagUID Disabled Successfully');
+        $this->dispatch('close-modal');
     }
 
     public function resetInput(){

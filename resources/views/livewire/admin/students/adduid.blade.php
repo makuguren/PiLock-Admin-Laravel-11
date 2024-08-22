@@ -71,7 +71,7 @@
     </div>
 </div>
 
-<x-slot:scirpts>
+<x-slot:scripts>
     <script>
         $(document).ready(function() {
             $('#tag_uid').focus();

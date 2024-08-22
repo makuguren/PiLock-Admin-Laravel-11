@@ -5,6 +5,8 @@
 <div>
     @can('Delete Students')
         @include('livewire.admin.students.delete')
+    @endcan
+    @can('Disable RFID')
         @include('livewire.admin.students.disablerfid')
     @endcan
 
