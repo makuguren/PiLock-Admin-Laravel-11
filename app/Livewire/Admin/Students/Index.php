@@ -12,7 +12,7 @@ class Index extends Component
 {
     use WithPagination;
 
-    public $student_id, $filter_section, $query = '';
+    public $student_id, $taguid, $filter_section, $query = '';
 
     public function filter_section(){
         $this->resetPage();
@@ -49,14 +49,19 @@ class Index extends Component
         }
     }
 
-    public function disableRFID(int $student_id){
-        $this->student_id = $student_id;
+    public function disableRFID(int $taguid){
+        $this->taguid = $taguid;
     }
 
     public function destroyRFID(){
-        User::where('id', $this->student_id)->update([
+        User::findOrFail($this->taguid)->update([
             'tag_uid' => null
         ]);
+
+        // User::where('id', $this->taguid)->update([
+        //     'tag_uid' => null
+        // ]);
+
         toastr()->success('TagUID Disabled Successfully');
         $this->dispatch('close-modal');
     }
