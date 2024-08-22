@@ -92,13 +92,13 @@
         </div>
 
         <!-- Menu for desktop -->
-        <ul class="hidden menu sm:menu-horizontal gap-2">
+        {{-- <ul class="hidden menu sm:menu-horizontal gap-2">
             <li><a>Home</a></li>
             <li><a>About</a></li>
             <li><a>Members</a></li>
             <li><a>Blog</a></li>
             <li><a>Contact</a></li>
-        </ul>
+        </ul> --}}
 
         <!-- Menu for desktop -->
         <div class="hidden sm:flex gap-2 mr-2">
@@ -201,10 +201,10 @@
 
                     <div class="flex flex-col gap-2">
                         <!-- Name -->
-                        <h3 class="font-bold">Mark Glen Miguel</h3>
+                        <h3 class="font-bold">Mark Glen S. Miguel</h3>
 
                         <!-- Role -->
-                        <span class="text-sm">Programmer - D'Logics</span>
+                        <span class="text-sm">Programmer, UI Designer, Database Designer - D'Logics</span>
 
                         <!-- Socials -->
                         {{-- <div class="flex text-accent text-xs">
@@ -230,10 +230,10 @@
 
                     <div class="flex flex-col gap-2">
                         <!-- Name -->
-                        <h3 class="font-bold">Mark Angelo Fulledo</h3>
+                        <h3 class="font-bold">Mark Angelo S. Fulledo</h3>
 
                         <!-- Role -->
-                        <span class="text-sm">Project Head - D'Logics</span>
+                        <span class="text-sm">Project Head, QA Tester - D'Logics</span>
 
                         <!-- Socials -->
                         {{-- <div class="flex text-accent text-xs">
@@ -255,14 +255,14 @@
                 <!-- Member -->
                 <div class="flex gap-4">
                     <!-- Photo -->
-                    <img alt="Logo" src="{{ asset('assets/images/members/sombrero.jpg') }}" class="rounded-full w-24" />
+                    <img alt="Logo" src="{{ asset('assets/images/members/sombrero.jpeg') }}" class="rounded-full w-24" />
 
                     <div class="flex flex-col gap-2">
                         <!-- Name -->
-                        <h3 class="font-bold">Anne Nicole Sombrero</h3>
+                        <h3 class="font-bold">Anne Nicole A. Sombrero</h3>
 
                         <!-- Role -->
-                        <span class="text-sm">Document Writter / Database Designer - D'Logics</span>
+                        <span class="text-sm">Documentation Writer, Database Designer - D'Logics</span>
 
                         <!-- Socials -->
                         {{-- <div class="flex text-accent text-xs">
@@ -284,14 +284,14 @@
                 <!-- Member -->
                 <div class="flex gap-4">
                     <!-- Photo -->
-                    <img alt="Logo" src="/avatar.png" class="rounded-full w-24" />
+                    <img alt="Logo" src="{{ asset('assets/images/members/eloisa.jpg') }}" class="rounded-full w-24" />
 
                     <div class="flex flex-col gap-2">
                         <!-- Name -->
-                        <h3 class="font-bold">Eloisa Celaje</h3>
+                        <h3 class="font-bold">Eloisa A. Celaje</h3>
 
                         <!-- Role -->
-                        <span class="text-sm">Document Writter / UI Designer - D'Logics</span>
+                        <span class="text-sm">Document Writer, UI Designer - D'Logics</span>
 
                         <!-- Socials -->
                         {{-- <div class="flex text-accent text-xs">
@@ -313,14 +313,14 @@
                 <!-- Member -->
                 <div class="flex gap-4">
                     <!-- Photo -->
-                    <img alt="Logo" src="/avatar.png" class="rounded-full w-24" />
+                    <img alt="Logo" src="{{ asset('assets/images/members/larry.png') }}" class="rounded-full w-24" />
 
                     <div class="flex flex-col gap-2">
                         <!-- Name -->
-                        <h3 class="font-bold">Larry Sain</h3>
+                        <h3 class="font-bold">Lary C. Sain</h3>
 
                         <!-- Role -->
-                        <span class="text-sm">Document Writter - Team-BA</span>
+                        <span class="text-sm">Programmer, Database Designer, UI Designer - Team-BA</span>
 
                         <!-- Socials -->
                         {{-- <div class="flex text-accent text-xs">
@@ -346,10 +346,10 @@
 
                     <div class="flex flex-col gap-2">
                         <!-- Name -->
-                        <h3 class="font-bold">Alfred Joseph Baltazar</h3>
+                        <h3 class="font-bold">Alfred Joseph T. Baltazar</h3>
 
                         <!-- Role -->
-                        <span class="text-sm">Project Head / Programmer - Team-BA</span>
+                        <span class="text-sm">Project Head, Database Designer, Programmer - Team-BA</span>
 
                         <!-- Socials -->
                         {{-- <div class="flex text-accent text-xs">
@@ -375,10 +375,10 @@
 
                     <div class="flex flex-col gap-2">
                         <!-- Name -->
-                        <h3 class="font-bold">Jovita Neverio</h3>
+                        <h3 class="font-bold">Jovita Z. Neverio</h3>
 
                         <!-- Role -->
-                        <span class="text-sm">Document Writter - Team-BA</span>
+                        <span class="text-sm">UI Designer, Documentation, Writer - Team-BA</span>
 
                         <!-- Socials -->
                         {{-- <div class="flex text-accent text-xs">

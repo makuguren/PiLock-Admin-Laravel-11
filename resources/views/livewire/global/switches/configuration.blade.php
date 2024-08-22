@@ -4,7 +4,7 @@
             <div class="font-medium">Database Configuration</div>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-2 mb-6">
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-2 mb-6">
             {{-- Code Here --}}
             <div class="form-control">
                 <button wire:click="truncateAttendances" class="btn bg-red-700 hover:bg-red-500 text-white">
@@ -18,6 +18,30 @@
                 <button wire:click="truncateEnrolledCourses" class="btn bg-red-700 hover:bg-red-500 text-white">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash-2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>
                     Truncate EnrolledCourses
+                </button>
+            </div>
+
+            {{-- Code Here --}}
+            <div class="form-control">
+                <button wire:click="truncateScheds" class="btn bg-red-700 hover:bg-red-500 text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash-2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>
+                    Truncate Schedules
+                </button>
+            </div>
+
+            {{-- Code Here --}}
+            <div class="form-control">
+                <button wire:click="truncateLogs" class="btn bg-red-700 hover:bg-red-500 text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash-2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>
+                    Truncate Logs
+                </button>
+            </div>
+
+            {{-- Code Here --}}
+            <div class="form-control">
+                <button wire:click="truncateSeatPlan" class="btn bg-red-700 hover:bg-red-500 text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash-2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>
+                    Truncate Seat Plan
                 </button>
             </div>
 

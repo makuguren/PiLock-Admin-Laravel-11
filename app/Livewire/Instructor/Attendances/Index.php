@@ -9,7 +9,7 @@ use Livewire\Component;
 use App\Models\Schedules;
 use App\Models\Attendance;
 use Livewire\WithPagination;
-use Barryvdh\DomPDF\Facade\PDF;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Auth;
 
 class Index extends Component
@@ -77,7 +77,7 @@ class Index extends Component
             'cspcheader' => $cspcimageBase64
         ];
 
-        $pdf = PDF::loadView('livewire.instructor.attendances.attendance', $data);
+        $pdf = Pdf::loadView('livewire.instructor.attendances.attendance', $data);
 
         $this->resetInput();
         $this->dispatch('close-modal');

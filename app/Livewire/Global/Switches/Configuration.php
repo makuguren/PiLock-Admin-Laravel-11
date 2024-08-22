@@ -2,11 +2,14 @@
 
 namespace App\Livewire\Global\Switches;
 
+use App\Models\Log;
 use App\Models\User;
 use App\Models\Course;
 use App\Models\Section;
 use App\Models\Setting;
 use Livewire\Component;
+use App\Models\SeatPlan;
+use App\Models\Schedules;
 use App\Models\Attendance;
 use App\Models\Instructor;
 use App\Models\EnrolledCourse;
@@ -173,6 +176,39 @@ class Configuration extends Component
             toastr()->success('Truncate EnrolledCourses Successfully');
             Schema::enableForeignKeyConstraints();
         } catch(QueryException $ex) {
+            toastr()->error($ex->getMessage());
+        }
+    }
+
+    public function truncateScheds(){
+        try{
+            Schema::disableForeignKeyConstraints();
+            Schedules::truncate();
+            toastr()->success('Truncate Schedules Successfully');
+            Schema::enableForeignKeyConstraints();
+        } catch(QueryException $ex) {
+            toastr()->error($ex->getMessage());
+        }
+    }
+
+    public function truncateLogs(){
+        try {
+            Schema::disableForeignKeyConstraints();
+            Log::truncate();
+            toastr()->success('Truncate Logs Successfully');
+            Schema::enableForeignKeyConstraints();
+        } catch (QueryException $ex) {
+            toastr()->error($ex->getMessage());
+        }
+    }
+
+    public function truncateSeatPlan(){
+        try {
+            Schema::disableForeignKeyConstraints();
+            SeatPlan::truncate();
+            toastr()->success('Truncate Seat Plan Successfully');
+            Schema::enableForeignKeyConstraints();
+        } catch (QueryException $ex) {
             toastr()->error($ex->getMessage());
         }
     }

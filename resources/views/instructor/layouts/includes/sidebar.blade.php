@@ -11,7 +11,7 @@
 
         <div data-sveltekit-preload-data class="bg-base-100 sticky top-0 z-20 hidden items-center gap-2 bg-opacity-90 px-4 py-2 backdrop-blur lg:flex ">
             <!-- Drawer Logo -->
-            <a href="{{ route('instructor.dashboard.index') }}" aria-current="page" aria-label="Homepage" class="flex-0 btn btn-ghost px-2"
+            <a wire:navigate.hover href="{{ route('instructor.dashboard.index') }}" aria-current="page" aria-label="Homepage" class="flex-0 btn btn-ghost px-2"
                 data-svelte-h="svelte-nce89e">
                 <img src="{{ asset('assets/images/pilock-white.png') }}" alt="" class="w-10 h-10 rounded object-cover">
                 <span class="text-lg font-bold">{{ $appSetting->website_name ?? 'Pi:Lock | Instructor' }}</span>
@@ -22,7 +22,7 @@
         {{-- Sidebar Content --}}
         <ul class="menu px-4 py-0">
             <li class="mb-1 group {{ Request::is('instructor/dashboard') ? 'active':'' }}">
-                <a href="{{ route('instructor.dashboard.index') }}"
+                <a wire:navigate.hover href="{{ route('instructor.dashboard.index') }}"
                     class="flex items-center py-2 px-4 hover:bg-blue-400 hover:text-white rounded-md group-[.active]:bg-blue-700 group-[.active]:text-white group-[.selected]:bg-blue-700 group-[.selected]:text-gray-200">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-gauge"><path d="M15.6 2.7a10 10 0 1 0 5.7 5.7"/><circle cx="12" cy="12" r="2"/><path d="M13.4 10.6 19 5"/></svg>
                     <span class="text-sm">Dashboard</span>
@@ -38,14 +38,14 @@
                     </summary>
                     <ul>
                         <li class="">
-                            <a href="{{ route('instructor.attendances.current') }}"
+                            <a wire:navigate.hover href="{{ route('instructor.attendances.current') }}"
                                 class="group text-sm flex items-center hover:text-blue-700 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">
                                 Current Attendance
                             </a>
                         </li>
 
                         <li class="">
-                            <a href="{{ route('instructor.attendances.index') }}"
+                            <a wire:navigate.hover href="{{ route('instructor.attendances.index') }}"
                                 class="group text-sm flex items-center hover:text-blue-700 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">
                                 All Attendances
                             </a>
@@ -55,7 +55,7 @@
             </li>
 
             <li class="mb-1 group {{ Request::is('instructor/events') ? 'active':'' }}">
-                <a href="{{ route('instructor.events.index') }}"
+                <a wire:navigate.hover href="{{ route('instructor.events.index') }}"
                     class="flex items-center py-2 px-4 hover:bg-blue-400 hover:text-white rounded-md group-[.active]:bg-blue-700 group-[.active]:text-white group-[.selected]:bg-blue-700 group-[.selected]:text-gray-200">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar-days"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M16 14h.01"/><path d="M8 18h.01"/><path d="M12 18h.01"/><path d="M16 18h.01"/></svg>
                     <span class="text-sm">Events</span>
@@ -63,7 +63,7 @@
             </li>
 
             <li class="mb-1 group {{ Request::is('instructor/courses') ? 'active':'' }}">
-                <a href="{{ route('instructor.courses.index') }}"
+                <a wire:navigate.hover href="{{ route('instructor.courses.index') }}"
                     class="flex items-center py-2 px-4 hover:bg-blue-400 hover:text-white rounded-md group-[.active]:bg-blue-700 group-[.active]:text-white group-[.selected]:bg-blue-700 group-[.selected]:text-gray-200">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-folder"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg>
                     <span class="text-sm">Courses</span>
@@ -71,7 +71,7 @@
             </li>
 
             <li class="mb-1 group {{ Request::is('instructor/students') ? 'active':'' }}">
-                <a href="{{ route('instructor.students.index') }}"
+                <a wire:navigate.hover href="{{ route('instructor.students.index') }}"
                     class="flex items-center py-2 px-4 hover:bg-blue-400 hover:text-white rounded-md group-[.active]:bg-blue-700 group-[.active]:text-white group-[.selected]:bg-blue-700 group-[.selected]:text-gray-200">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
                     <span class="text-sm">Students</span>
@@ -87,13 +87,13 @@
                     </summary>
                     <ul>
                         <li class="">
-                            <a href="{{ route('instructor.schedules.index') }}"
+                            <a wire:navigate.hover href="{{ route('instructor.schedules.index') }}"
                                 class="group text-sm flex items-center hover:text-blue-700 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">
                                 Your Schedules
                             </a>
                         </li>
                         <li class="">
-                            <a href="{{ route('instructor.schedules.makeup') }}"
+                            <a wire:navigate.hover href="{{ route('instructor.schedules.makeup') }}"
                                 class="group text-sm flex items-center hover:text-blue-700 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">
                                 Make-Up Class Schedules
                             </a>
@@ -103,7 +103,7 @@
             </li>
 
             <li class="mb-1 group {{ Request::is('instructor/seatplan') ? 'active':'' }}">
-                <a href="{{ route('instructor.seatplan.index') }}"
+                <a wire:navigate.hover href="{{ route('instructor.seatplan.index') }}"
                     class="flex items-center py-2 px-4 hover:bg-blue-400 hover:text-white rounded-md group-[.active]:bg-blue-700 group-[.active]:text-white group-[.selected]:bg-blue-700 group-[.selected]:text-gray-200">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-armchair"><path d="M19 9V6a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v3"/><path d="M3 16a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5a2 2 0 0 0-4 0v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V11a2 2 0 0 0-4 0z"/><path d="M5 18v2"/><path d="M19 18v2"/></svg>
                     <span class="text-sm">Seat Plan</span>
@@ -111,7 +111,7 @@
             </li>
 
             <li class="mb-1 group {{ Request::is('instructor/settings') ? 'active':'' }}">
-                <a href="{{ route('instructor.settings.index') }}"
+                <a wire:navigate.hover href="{{ route('instructor.settings.index') }}"
                     class="flex items-center py-2 px-4 hover:bg-blue-400 hover:text-white rounded-md group-[.active]:bg-blue-700 group-[.active]:text-white group-[.selected]:bg-blue-700 group-[.selected]:text-gray-200">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-settings"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
                     <span class="text-sm">Settings</span>

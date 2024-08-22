@@ -17,7 +17,7 @@ class SettingsController extends Controller implements HasMiddleware
     {
         return [
             new Middleware('permission:View Settings', only: ['index']),
-            new Middleware('permission:Update Settings', only: ['saveSettings', 'updateAdminProfile']),
+            new Middleware('permission:Update Settings', only: ['saveSettings']),
         ];
     }
 

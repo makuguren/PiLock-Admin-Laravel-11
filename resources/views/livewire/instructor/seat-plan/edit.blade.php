@@ -13,7 +13,7 @@
                 <div class="flex justify-between mb-4 items-start">
                     <div class="font-medium">Filtering</div>
 
-                    <a href="{{ route('instructor.seatplan.index') }}" class="btn btn-ghost bg-blue-700 hover:bg-blue-500 w-55 btn-sm">
+                    <a wire:navigate.hover href="{{ route('instructor.seatplan.index') }}" class="btn btn-ghost bg-blue-700 hover:bg-blue-500 w-55 btn-sm">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-big-left"><path d="M18 15h-6v4l-7-7 7-7v4h6v6z"/></svg>
                         <span class="text-white text-sm">SeatPlan View</span>
                     </a>

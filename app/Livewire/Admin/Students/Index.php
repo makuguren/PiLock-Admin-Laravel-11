@@ -50,6 +50,7 @@ class Index extends Component
     }
 
     public function disableRFID(int $taguid){
+        // dd($taguid);
         $this->taguid = $taguid;
     }
 
