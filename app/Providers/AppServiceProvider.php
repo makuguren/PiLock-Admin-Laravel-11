@@ -2,11 +2,12 @@
 
 namespace App\Providers;
 
-use App\Models\Setting;
-use Illuminate\Support\Facades\View;
-use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\Log;
 use Exception;
+use App\Models\Setting;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\View;
+use Barryvdh\Debugbar\Facades\Debugbar;
+use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -41,5 +42,6 @@ class AppServiceProvider extends ServiceProvider
             ];
         }
         View::share('appSetting', $websiteSetting);
+        Debugbar::disable();
     }
 }

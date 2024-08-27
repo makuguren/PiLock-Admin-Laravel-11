@@ -66,7 +66,8 @@
                             <th>COURSE TITLE</th>
                             <th>INSTRUCTOR</th>
                             <th>DATE</th>
-                            <th>TIME</th>
+                            <th>TIME IN</th>
+                            <th>TIME OUT</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -118,7 +119,16 @@
                                 </div>
                             </td>
                             <td><div class="">{{ $log->date }}</div></td>
-                            <td><div class="">{{ $log->time }}</div></td>
+                            <td><div class="">{{ $log->time_in }}</div></td>
+                            <td>
+                                <div class="">
+                                    @if ($log->time_out)
+                                        {{ $log->time_out }}
+                                    @else
+                                        No Time Out
+                                    @endif
+                                </div>
+                            </td>
                         </tr>
                         @empty
                             <tr>
