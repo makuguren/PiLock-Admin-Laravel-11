@@ -214,6 +214,7 @@ Route::middleware(['auth:instructor', App\Http\Middleware\InstructorComponentLay
     //Courses Routes
     Route::prefix('courses')->group(function () {
         Route::get('/', App\Livewire\Instructor\Courses\Index::class)->name('courses.index');
+        Route::get('blockedstudents', App\Livewire\Instructor\Courses\BlockedStudents::class)->name('courses.blocked');
     });
 
     //Students Routes

@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Instructor\Students;
 
+use App\Models\BlockedStudentCourses;
 use App\Models\User;
 use App\Models\Course;
 use Livewire\Component;
@@ -11,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 class Index extends Component
 {
     public $selectedCourseSection;
-    public $enroll_id, $student_id, $course_id, $search_student, $name, $section;
+    public $enroll_id, $student_id, $course_id, $search_student, $name, $section, $blkcourse_id, $blkstudent_id;
 
     public function updatedSelectedCourseSection($value){
         $this->selectedCourseSection = $value;
@@ -52,6 +53,24 @@ class Index extends Component
         EnrolledCourse::findOrFail($this->enroll_id)->delete();
 
         toastr()->success("Student Added Successfully!");
+        $this->dispatch('close-modal');
+    }
+
+    public function blockStudCourse(int $student_id, int $course_id, int $enroll_id){
+        $this->blkstudent_id = $student_id;
+        $this->blkcourse_id = $course_id;
+        $this->enroll_id = $enroll_id;
+    }
+
+    public function destroyEnrollNBlockStud(){
+        BlockedStudentCourses::create([
+            'student_id' => $this->blkstudent_id,
+            'course_id' => $this->blkcourse_id,
+        ]);
+
+        EnrolledCourse::findOrFail($this->enroll_id)->delete();
+
+        toastr()->success("Student has been blocked Successfully!");
         $this->dispatch('close-modal');
     }
 

@@ -62,12 +62,28 @@
                 </a>
             </li>
 
-            <li class="mb-1 group {{ Request::is('instructor/courses') ? 'active':'' }}">
-                <a wire:navigate.hover href="{{ route('instructor.courses.index') }}"
-                    class="flex items-center py-2 px-4 hover:bg-blue-400 hover:text-white rounded-md group-[.active]:bg-blue-700 group-[.active]:text-white group-[.selected]:bg-blue-700 group-[.selected]:text-gray-200">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-folder"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg>
-                    <span class="text-sm">Courses</span>
-                </a>
+            <li>
+                <details id="disclosure-courses">
+                    <summary class="hover:bg-blue-400 hover:text-white {{ Request::is('instructor/courses') || Request::is('instructor/courses/blockedstudents') ? 'group bg-blue-700 text-white':'' }}">
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-folder"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg>
+                        </span>Courses
+                    </summary>
+                    <ul>
+                        <li class="">
+                            <a wire:navigate.hover href="{{ route('instructor.courses.index') }}"
+                                class="group text-sm flex items-center hover:text-blue-700 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">
+                                Your Courses
+                            </a>
+                        </li>
+                        <li class="">
+                            <a wire:navigate.hover href="{{ route('instructor.courses.blocked') }}"
+                                class="group text-sm flex items-center hover:text-blue-700 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">
+                                Blocked Students
+                            </a>
+                        </li>
+                    </ul>
+                </details>
             </li>
 
             <li class="mb-1 group {{ Request::is('instructor/students') ? 'active':'' }}">

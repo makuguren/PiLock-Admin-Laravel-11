@@ -2,6 +2,7 @@
 
 namespace App\Livewire\User\Courses;
 
+use App\Models\BlockedStudentCourses;
 use App\Models\Course;
 use Livewire\Component;
 use App\Models\EnrolledCourse;
@@ -38,12 +39,19 @@ class Index extends Component
     public function enrollCourse(){
         // Check if the Enrollment is Correct
         if(Crypt::decryptString($this->decrypted_Coursekey) == $this->course_key){
-            EnrolledCourse::create([
-                'course_id' => $this->course_id,
-                'student_id' => Auth::id()
-            ]);
-            toastr()->success('Course Enrolled Successfully!');
-            $this->dispatch('close-modal');
+
+            // Check if the Student is Blocked from the Instructor Assigned Course
+            $blockstud = BlockedStudentCourses::where('course_id', $this->course_id)->where('student_id', Auth::id())->first();
+            if($blockstud) {
+                toastr()->error('You have been blocked in this Course.');
+            } else {
+                EnrolledCourse::create([
+                    'course_id' => $this->course_id,
+                    'student_id' => Auth::id()
+                ]);
+                toastr()->success('Course Enrolled Successfully!');
+                $this->dispatch('close-modal');
+            }
         } else {
             toastr()->error('Course Key is Invalid. Please Try Again.');
             $this->dispatch('invalid-Coursekey');
