@@ -4,6 +4,16 @@
         Settings
     </x-slot:title>
 
+    {{-- @include('admin.settings.modals.trunattendances')
+    @include('admin.settings.modals.truncourses')
+    @include('admin.settings.modals.trunenrolled')
+    @include('admin.settings.modals.truninst')
+    @include('admin.settings.modals.trunlogs')
+    @include('admin.settings.modals.trunscheds')
+    @include('admin.settings.modals.trunseatplan')
+    @include('admin.settings.modals.trunsections')
+    @include('admin.settings.modals.trunstudents') --}}
+
     <div class="p-6">
         <div class="flex flex-row">
             <div class="flex flex-col w-full">

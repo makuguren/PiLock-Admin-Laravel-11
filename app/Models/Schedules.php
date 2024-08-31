@@ -24,6 +24,7 @@ class Schedules extends Model
         'days',
         'time_start',
         'time_end',
+        'isCurrent',
         'isMakeUp',
         'isApproved',
         'isAttend'

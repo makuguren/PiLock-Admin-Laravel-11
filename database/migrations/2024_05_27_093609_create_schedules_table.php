@@ -14,12 +14,12 @@ return new class extends Migration
         Schema::create('schedules', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('course_id')->nullable();
-            $table->string('days');
+            $table->enum('days', ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']);
             $table->time('time_start');
             $table->time('time_end');
             $table->tinyInteger('isMakeUp')->default('0')->comment('0=Regular, 1=MakeUp');
             $table->tinyInteger('isApproved')->default('1')->comment('0=Pending, 1=Approved, 2=Declined');
-            $table->tinyInteger('isCurrent')->default('0')->comment('0=No, 1=Yes');
+            $table->tinyInteger('isCurrent')->comment('0=No, 1=Yes');
             $table->tinyInteger('isAttend')->default('0')->comment('0=No, 1=Yes');
             $table->timestamps();
 

@@ -6,6 +6,7 @@ use App\Models\Event;
 use Livewire\Component;
 use Livewire\Attributes\On;
 use Illuminate\Database\QueryException;
+use App\Rules\NoEventOverlap;
 
 class Index extends Component
 {
@@ -23,9 +24,13 @@ class Index extends Component
         return [
             'title' => 'required|string',
             'description' => 'required|string',
-            'date' => 'required',
+            'date' => 'required|date',
             'event_start' => 'required',
-            'event_end' => 'required'
+            'event_end' => 'required|after:event_start',
+
+            'event_end' => [
+                new NoEventOverlap($this->date, $this->event_start, $this->event_end)
+            ],
         ];
     }
 

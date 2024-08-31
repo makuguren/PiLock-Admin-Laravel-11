@@ -3,6 +3,7 @@
 </x-slot>
 
 <div>
+    @include('livewire.admin.logs.download')
     <div class="p-6">
         <div class="flex flex-row gap-2">
             <div class="flex flex-col w-full">
@@ -15,6 +16,11 @@
                     <li class="text-gray-600 mr-2 font-medium">Logs</li>
                 </ul>
             </div>
+
+            <label for="download_logs_modal" class="btn btn-ghost bg-red-700 hover:bg-red-500 w-55 btn-sm mt-3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-download"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+                <span class="text-white text-sm">Download Logs</span>
+            </label>
         </div>
 
         <div class="bg-base-100 border-gray-100 shadow-md shadow-black/5 p-6 rounded-md">
@@ -143,5 +149,16 @@
             </div>
         </div>
     </div>
-
 </div>
+
+<x-slot:scripts>
+    <script>
+        window.addEventListener('close-modal', event => {
+            document.getElementById('download_logs_modal').checked = false;
+        });
+
+        function cancel_logs(){
+            document.getElementById('download_logs_modal').checked = false;
+        }
+    </script>
+</x-slot>

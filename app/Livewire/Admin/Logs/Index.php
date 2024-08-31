@@ -9,6 +9,7 @@ use App\Models\Section;
 use App\Models\Subject;
 use Livewire\Component;
 use App\Models\Instructor;
+use App\Exports\LogsExport;
 use Livewire\WithPagination;
 
 class Index extends Component
@@ -16,6 +17,7 @@ class Index extends Component
     use WithPagination;
 
     public $filter_coursesec, $filter_instructor, $filter_date = '';
+    public $dlsection_id, $dlfromdate, $dltodate;
 
     public function filter_coursesec(){
         $this->resetPage();
@@ -27,6 +29,11 @@ class Index extends Component
 
     public function filter_date(){
         $this->resetPage();
+    }
+
+    public function downloadLogs(){
+        $this->dispatch('close-modal');
+        return (new LogsExport($this->dlsection_id, $this->dlfromdate, $this->dltodate))->download('logsreport.xlsx');
     }
 
     public function render(){

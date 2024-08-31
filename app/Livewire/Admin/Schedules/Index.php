@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Admin\Schedules;
 
+use Carbon\Carbon;
 use App\Models\Course;
 use App\Models\Section;
 use App\Models\Subject;
@@ -12,6 +13,7 @@ use Livewire\WithPagination;
 use App\Imports\CourseImport;
 use Livewire\WithFileUploads;
 use App\Imports\ScheduleImport;
+use App\Rules\NoScheduleOverlap;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Storage;
@@ -21,16 +23,29 @@ class Index extends Component
     use WithPagination;
     use WithFileUploads;
 
-    public $schedule_id, $course_id, $days, $time_start, $time_end;
+    public $schedule_id, $course_id, $days, $time_start, $time_end, $isCurrent;
     public $instructor_name, $import_file, $isDisableButton;
 
     //Validations
+    // protected function rules(){
+    //     return [
+    //         'course_id' => 'required|integer',
+    //         'days' => 'required|string',
+    //         'time_start' => 'required',
+    //         'time_end' => 'required',
+    //     ];
+    // }
+
     protected function rules(){
         return [
             'course_id' => 'required|integer',
-            'days' => 'required|string',
+            'days' => 'required|in:Sunday,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday',
             'time_start' => 'required',
-            'time_end' => 'required'
+            'time_end' => 'required|after:time_start',
+
+            'time_end' => [
+                new NoScheduleOverlap($this->course_id, $this->days, $this->time_start, $this->time_end)
+            ],
         ];
     }
 
@@ -76,7 +91,29 @@ class Index extends Component
     public function saveSchedule(){
         $validatedData = $this->validate();
 
-        Schedules::create($validatedData);
+        //Check if the Schedule is Beyond
+        $datetime = Carbon::now('Asia/Manila');
+        $day = $datetime->format('l');
+        $time = $datetime->toTimeString();
+        $date = $datetime->toDateString();
+
+        // Create ScheduleData
+        $scheduleData = [
+            'course_id' => $validatedData['course_id'],
+            'days' => $validatedData['days'],
+            'time_start' => $validatedData['time_start'],
+            'time_end' => $validatedData['time_end'],
+            'isApproved' => '1',
+            'isMakeUp' => '0',
+            'isCurrent' => '0',
+        ];
+
+        // Check if the Schedule Start is Beyond at the Current Time
+        if($this->time_start <= $time && $this->days === $day){
+            $scheduleData['isCurrent'] = '1';
+        }
+
+        Schedules::create($scheduleData);
         toastr()->success('Schedule Added Successfully');
         $this->resetInput();
         $this->dispatch('close-modal');

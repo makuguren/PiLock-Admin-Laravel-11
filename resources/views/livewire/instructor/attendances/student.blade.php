@@ -21,7 +21,7 @@
                 <div class="w-full px-3">
                     <label class="label-text">Name</label>
                     <input wire:model="name" id="addstud_name" class="input input-bordered bg-base-300 block w-full py-3 px-4 mb-3 form-control" type="text" disabled>
-                    @error('name') <span class="error" role="alert">{{ $message }}</span> @enderror
+                    @error('student_id') <span class="error" role="alert">{{ $message }}</span> @enderror
                 </div>
             </div>
 

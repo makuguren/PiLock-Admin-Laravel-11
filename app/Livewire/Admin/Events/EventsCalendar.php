@@ -2,8 +2,10 @@
 
 namespace App\Livewire\Admin\Events;
 
+use Carbon\Carbon;
 use App\Models\Event;
 use Livewire\Attributes\On;
+use App\Rules\NoEventOverlap;
 use Illuminate\Support\Collection;
 use Makuguren\LivewireCalendar\LivewireCalendar;
 
@@ -37,9 +39,43 @@ class EventsCalendar extends LivewireCalendar
         $this->dispatch('viewEvent', $eventId);
     }
 
+    // //Update the Date of Event by Drag and Drop
+    // public function onEventDropped($eventId, $year, $month, $day){
+    //     Event::where('id', $eventId)->update(['date' => $year . '-' .$month . '-' . $day]);
+    //     toastr()->success('Event Updated Successfully');
+    // }
+
     //Update the Date of Event by Drag and Drop
     public function onEventDropped($eventId, $year, $month, $day){
-        Event::where('id', $eventId)->update(['date' => $year . '-' .$month . '-' . $day]);
+        $event = Event::find($eventId);
+
+        if (!$event) {
+            toastr()->error('Event not found.');
+            return;
+        }
+        // Construct the new date
+        $newDate = Carbon::createFromDate($year, $month, $day)->format('Y-m-d');
+
+        // Check for overlap using the custom rule
+        $validator = \Validator::make(
+            [
+                'date' => $newDate,
+                'event_start' => $event->event_start,
+                'event_end' => $event->event_end,
+            ],
+            [
+                'date' => [new NoEventOverlap($newDate, $event->event_start, $event->event_end)],
+            ]
+        );
+
+        // If validation fails, display an error message
+        if ($validator->fails()) {
+            toastr()->error('This event overlaps with another event on the same date and time. Please drag and drop to another date.');
+            return;
+        }
+
+        // Update the event's date if no overlap is detected
+        $event->update(['date' => $newDate]);
         toastr()->success('Event Updated Successfully');
     }
 }

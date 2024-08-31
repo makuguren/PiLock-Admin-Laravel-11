@@ -164,8 +164,10 @@ class Configuration extends Component
             Attendance::truncate();
             toastr()->success('Truncate Attendances Successfully');
             Schema::enableForeignKeyConstraints();
+            $this->dispatch('close-modal');
         } catch(QueryException $ex) {
             toastr()->error($ex->getMessage());
+            $this->dispatch('close-modal');
         }
     }
 
@@ -175,8 +177,10 @@ class Configuration extends Component
             EnrolledCourse::truncate();
             toastr()->success('Truncate EnrolledCourses Successfully');
             Schema::enableForeignKeyConstraints();
+            $this->dispatch('close-modal');
         } catch(QueryException $ex) {
             toastr()->error($ex->getMessage());
+            $this->dispatch('close-modal');
         }
     }
 
@@ -186,8 +190,10 @@ class Configuration extends Component
             Schedules::truncate();
             toastr()->success('Truncate Schedules Successfully');
             Schema::enableForeignKeyConstraints();
+            $this->dispatch('close-modal');
         } catch(QueryException $ex) {
             toastr()->error($ex->getMessage());
+            $this->dispatch('close-modal');
         }
     }
 
@@ -197,8 +203,10 @@ class Configuration extends Component
             Log::truncate();
             toastr()->success('Truncate Logs Successfully');
             Schema::enableForeignKeyConstraints();
+            $this->dispatch('close-modal');
         } catch (QueryException $ex) {
             toastr()->error($ex->getMessage());
+            $this->dispatch('close-modal');
         }
     }
 
@@ -208,8 +216,10 @@ class Configuration extends Component
             SeatPlan::truncate();
             toastr()->success('Truncate Seat Plan Successfully');
             Schema::enableForeignKeyConstraints();
+            $this->dispatch('close-modal');
         } catch (QueryException $ex) {
             toastr()->error($ex->getMessage());
+            $this->dispatch('close-modal');
         }
     }
 
@@ -219,8 +229,10 @@ class Configuration extends Component
             Course::truncate();
             toastr()->success('Truncate Courses Successfully');
             Schema::enableForeignKeyConstraints();
+            $this->dispatch('close-modal');
         } catch(QueryException $ex) {
             toastr()->error($ex->getMessage());
+            $this->dispatch('close-modal');
         }
     }
 
@@ -230,8 +242,10 @@ class Configuration extends Component
             User::truncate();
             toastr()->success('Truncate Students Successfully');
             Schema::enableForeignKeyConstraints();
+            $this->dispatch('close-modal');
         } catch(QueryException $ex) {
             toastr()->error($ex->getMessage());
+            $this->dispatch('close-modal');
         }
     }
 
@@ -241,8 +255,10 @@ class Configuration extends Component
             Instructor::truncate();
             toastr()->success('Truncate Instructors Successfully');
             Schema::enableForeignKeyConstraints();
+            $this->dispatch('close-modal');
         } catch(QueryException $ex) {
             toastr()->error($ex->getMessage());
+            $this->dispatch('close-modal');
         }
     }
 
@@ -252,8 +268,10 @@ class Configuration extends Component
             Section::truncate();
             toastr()->success('Truncate Sections Successfully');
             Schema::enableForeignKeyConstraints();
+            $this->dispatch('close-modal');
         } catch(QueryException $ex) {
             toastr()->error($ex->getMessage());
+            $this->dispatch('close-modal');
         }
     }
 

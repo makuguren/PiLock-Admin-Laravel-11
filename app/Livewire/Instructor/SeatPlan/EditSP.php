@@ -52,18 +52,25 @@ class EditSP extends Component
         }
     }
 
-    public function updateSeat($student_id, $seat_number){
-        $updateSeat = SeatPlan::where('student_id', $student_id);
-        $seatQuery = $updateSeat->get();
+    public function updateSeat($student_id, $seat_number)
+    {
+        // dd($this->selectedCourseSection);
+        // Check if the seat number is already occupied
+        $existingSeatPlan = SeatPlan::where('course_id', $this->selectedCourseSection)->where('seat_number', $seat_number)->first();
 
-        if($seatQuery->isNotEmpty()){
-            $updateSeat->update([
-                'seat_number' => $seat_number
-            ]);
-            toastr()->success('Updated Seat Number Successfully');
-        } else {
-            toastr()->error('No Seats Number Found!');
+        if ($existingSeatPlan) {
+            // If seat is occupied, handle the situation
+            toastr()->error('The seat is already occupied!');
+            return;
         }
+
+        // Update or create the seat plan for the student
+        $seatPlan = SeatPlan::updateOrCreate(
+            ['student_id' => $student_id],
+            ['seat_number' => $seat_number]
+        );
+
+        toastr()->success('Updated Seat Number Successfully');
     }
 
     public function viewSeat($seat_id){

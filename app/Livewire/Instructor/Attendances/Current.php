@@ -12,6 +12,8 @@ use App\Models\Schedules;
 use App\Models\Attendance;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
 
 class Current extends Component
 {
@@ -46,12 +48,24 @@ class Current extends Component
         $datetime = Carbon::now('Asia/Manila');
         $schedule = Schedules::where('isCurrent', '1')->first();
 
+        // Custom validation rule
         $validatedData = $this->validate([
             'course_id' => 'required|integer',
+            'student_id' => [
+                'required',
+                'integer',
+                function ($attribute, $value, $fail) {
+                    if (Attendance::where('student_id', $value)
+                        ->where('course_id', $this->course_id)
+                        ->exists()) {
+                        $fail('This Student has been already added into attendances.');
+                    }
+                },
+            ],
         ]);
 
         Attendance::create([
-            'student_id' => $this->student_id,
+            'student_id' => $validatedData['student_id'],
             'course_id' => $validatedData['course_id'],
             'date' => $datetime->toDateString(),
             'time_end' => $schedule->time_end,
