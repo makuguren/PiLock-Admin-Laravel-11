@@ -24,7 +24,7 @@ return new class extends Migration
             $table->timestamps();
 
             // Foreign Key
-            $table->foreign('course_id')->references('id')->on('courses')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreign('course_id')->references('id')->on('courses');
         });
     }
 

@@ -5,6 +5,7 @@ namespace App\Livewire\Admin\Sections;
 use App\Models\Section;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Illuminate\Database\QueryException;
 
 class Index extends Component
 {
@@ -74,9 +75,15 @@ class Index extends Component
     }
 
     public function destroySection(){
-        Section::find($this->section_id)->delete();
-        toastr()->success('Section Deleted Successfully');
-        $this->dispatch('close-modal');
+        try{
+            Section::find($this->section_id)->delete();
+            toastr()->success('Section Deleted Successfully');
+            $this->dispatch('close-modal');
+
+        } catch (QueryException $ex){
+            toastr()->error('Unable to Delete Section!' . $ex->getMessage());
+            $this->dispatch('close-modal');
+        }
     }
 
     public function resetInput(){

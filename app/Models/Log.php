@@ -17,7 +17,8 @@ class Log extends Model
     protected $fillable = [
         'student_id',
         'course_id',
-        'time',
+        'time_in',
+        'time_out',
         'date'
     ];
 

@@ -67,35 +67,38 @@
         <!-- Menu for mobile -->
         <div class="dropdown dropdown-end sm:hidden">
             <button class="btn btn-ghost">
-                <i class="fa-solid fa-bars text-lg"></i>
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
             </button>
 
             <ul tabindex="0" class="dropdown-content menu z-[1] bg-base-200 p-4 rounded-box shadow w-64 gap-2">
-                <li><a>About</a></li>
-                <li><a>Team</a></li>
-                <li>
-                    <h2 class="menu-title">Features</h2>
-                    <ul>
-                        <li><a>Tech tools</a></li>
-                        <li><a>Podcast</a></li>
-                        <li><a>Community</a></li>
-                    </ul>
-                </li>
-                <a class="btn btn-ghost btn-primary btn-sm">
-                    <i class="fa-solid fa-rocket"></i>
-                    Access
-                </a>
+                @auth('admin')
+                    <li><a href="{{ route('admin.dashboard.index') }}">Admin Dashboard</a></li>
+                @else
+                    <li><a href="{{ route('admin.login') }}">Admin Login</a></li>
+                @endauth
+
+                @auth('instructor')
+                    <li><a href="{{ route('instructor.dashboard.index') }}">Instructor Dashboard</a></li>
+                @else
+                    <li><a href="{{ route('instructor.login') }}">Instructor Login</a></li>
+                @endauth
+
+                @auth('web')
+                    <li><a href="{{ route('user.dashboard.index') }}">Student Dashboard</a></li>
+                @else
+                    <li><a href="{{ route('user.login') }}">Student Login</a></li>
+                @endauth
             </ul>
         </div>
 
         <!-- Menu for desktop -->
-        <ul class="hidden menu sm:menu-horizontal gap-2">
+        {{-- <ul class="hidden menu sm:menu-horizontal gap-2">
             <li><a>Home</a></li>
             <li><a>About</a></li>
             <li><a>Members</a></li>
             <li><a>Blog</a></li>
             <li><a>Contact</a></li>
-        </ul>
+        </ul> --}}
 
         <!-- Menu for desktop -->
         <div class="hidden sm:flex gap-2 mr-2">
@@ -155,31 +158,35 @@
         </div>
     </nav>
 
-    <section class="lg:flex lg:flex-row justify-center gap-10 h-screen" id="body">
-        <div class="flex flex-col place-content-center items-left gap-6 text-white text-justify lg:w-1/2">
-            <h1 class="text-5xl font-bold">Pi:Lock System</h1>
+    <section class="flex flex-col lg:flex-row justify-center gap-10 h-screen p-4" id="body">
+        <!-- Text Content -->
+        <div class="flex flex-col justify-center items-start gap-6 text-white text-justify lg:w-1/2 lg:items-left">
+            <h1 class="text-3xl lg:text-5xl font-bold">Pi:Lock System</h1>
 
-            <span class="">
+            <p class="text-base lg:text-lg">
                 Welcome to Pi:Lock System – your ultimate solution for secure, automated door locking. Our system leverages the power of Raspberry Pi and Laravel 11 to offer seamless schedule-based authentication, ensuring your spaces are protected and accessible only at the right times. Experience the future of security with Pi:Lock System.
-            </span>
+            </p>
 
-            {{-- <div class="flex gap-4">
-                <a class="btn btn-ghost bg-green-700 hover:bg-green-500 text-white">
+            <!-- Uncomment this section if needed -->
+            {{-- <div class="flex flex-col lg:flex-row gap-4">
+                <a class="btn btn-ghost bg-green-700 hover:bg-green-500 text-white px-4 py-2 rounded">
                     Get started
                     <i class="fa-solid fa-arrow-right text-sm"></i>
                 </a>
 
-                <a class="btn btn-ghost btn-neutral">
+                <a class="btn btn-ghost bg-neutral-700 hover:bg-neutral-500 text-white px-4 py-2 rounded">
                     See our blog
                     <i class="fa-solid fa-blog"></i>
                 </a>
             </div> --}}
         </div>
 
-        <div class="flex flex-col lg:place-content-center items-center lg:w-1/3">
-            <img src="{{ asset('assets/images/pilock-dark.png') }}" style="max-width: 100%; max-height: 100%" srcset="">
+        <!-- Image -->
+        <div class="flex flex-col justify-center items-center lg:w-1/3">
+            <img src="{{ asset('assets/images/pilock-dark.png') }}" alt="Pi:Lock System" class="w-full h-auto max-w-md">
         </div>
     </section>
+
 
     <section class="bg-base-100 p-10">
         <div class="flex flex-col items-center gap-8">
@@ -190,17 +197,17 @@
                 <!-- Member -->
                 <div class="flex gap-4">
                     <!-- Photo -->
-                    <img alt="Logo" src="/avatar.png" class="rounded-full w-24" />
+                    <img alt="Logo" src="{{ asset('assets/images/members/mayor.jpg') }}" class="rounded-full w-24" />
 
                     <div class="flex flex-col gap-2">
                         <!-- Name -->
-                        <h3 class="font-bold">Mark Glen Miguel</h3>
+                        <h3 class="font-bold">Mark Glen S. Miguel</h3>
 
                         <!-- Role -->
-                        <span class="text-sm">Programmer - D'Logics</span>
+                        <span class="text-sm">Programmer, UI Designer, Database Designer - D'Logics</span>
 
                         <!-- Socials -->
-                        <div class="flex text-accent text-xs">
+                        {{-- <div class="flex text-accent text-xs">
                             <a class="btn btn-ghost btn-sm btn-circle">
                                 <i class="fa-brands fa-github text-lg"></i>
                             </a>
@@ -212,24 +219,24 @@
                             <a class="btn btn-ghost btn-sm btn-circle">
                                 <i class="fa-brands fa-facebook text-lg"></i>
                             </a>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
 
                 <!-- Member -->
                 <div class="flex gap-4">
                     <!-- Photo -->
-                    <img alt="Logo" src="/avatar.png" class="rounded-full w-24" />
+                    <img alt="Logo" src="{{ asset('assets/images/members/fulledo.jpg') }}" class="rounded-full w-24" />
 
                     <div class="flex flex-col gap-2">
                         <!-- Name -->
-                        <h3 class="font-bold">Mark Angelo Fulledo</h3>
+                        <h3 class="font-bold">Mark Angelo S. Fulledo</h3>
 
                         <!-- Role -->
-                        <span class="text-sm">Project Head - D'Logics</span>
+                        <span class="text-sm">Project Head, QA Tester - D'Logics</span>
 
                         <!-- Socials -->
-                        <div class="flex text-accent text-xs">
+                        {{-- <div class="flex text-accent text-xs">
                             <a class="btn btn-ghost btn-sm btn-circle">
                                 <i class="fa-brands fa-github text-lg"></i>
                             </a>
@@ -241,24 +248,24 @@
                             <a class="btn btn-ghost btn-sm btn-circle">
                                 <i class="fa-brands fa-facebook text-lg"></i>
                             </a>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
 
                 <!-- Member -->
                 <div class="flex gap-4">
                     <!-- Photo -->
-                    <img alt="Logo" src="/avatar.png" class="rounded-full w-24" />
+                    <img alt="Logo" src="{{ asset('assets/images/members/sombrero.jpeg') }}" class="rounded-full w-24" />
 
                     <div class="flex flex-col gap-2">
                         <!-- Name -->
-                        <h3 class="font-bold">Anne Nicole Sombrero</h3>
+                        <h3 class="font-bold">Anne Nicole A. Sombrero</h3>
 
                         <!-- Role -->
-                        <span class="text-sm">Document / Database Designer - D'Logics</span>
+                        <span class="text-sm">Documentation Writer, Database Designer - D'Logics</span>
 
                         <!-- Socials -->
-                        <div class="flex text-accent text-xs">
+                        {{-- <div class="flex text-accent text-xs">
                             <a class="btn btn-ghost btn-sm btn-circle">
                                 <i class="fa-brands fa-github text-lg"></i>
                             </a>
@@ -270,24 +277,24 @@
                             <a class="btn btn-ghost btn-sm btn-circle">
                                 <i class="fa-brands fa-facebook text-lg"></i>
                             </a>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
 
                 <!-- Member -->
                 <div class="flex gap-4">
                     <!-- Photo -->
-                    <img alt="Logo" src="/avatar.png" class="rounded-full w-24" />
+                    <img alt="Logo" src="{{ asset('assets/images/members/eloisa.jpg') }}" class="rounded-full w-24" />
 
                     <div class="flex flex-col gap-2">
                         <!-- Name -->
-                        <h3 class="font-bold">Eloisa Celaje</h3>
+                        <h3 class="font-bold">Eloisa A. Celaje</h3>
 
                         <!-- Role -->
-                        <span class="text-sm">Document / UI Designer - D'Logics</span>
+                        <span class="text-sm">Document Writer, UI Designer - D'Logics</span>
 
                         <!-- Socials -->
-                        <div class="flex text-accent text-xs">
+                        {{-- <div class="flex text-accent text-xs">
                             <a class="btn btn-ghost btn-sm btn-circle">
                                 <i class="fa-brands fa-github text-lg"></i>
                             </a>
@@ -299,24 +306,24 @@
                             <a class="btn btn-ghost btn-sm btn-circle">
                                 <i class="fa-brands fa-facebook text-lg"></i>
                             </a>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
 
                 <!-- Member -->
                 <div class="flex gap-4">
                     <!-- Photo -->
-                    <img alt="Logo" src="/avatar.png" class="rounded-full w-24" />
+                    <img alt="Logo" src="{{ asset('assets/images/members/larry.png') }}" class="rounded-full w-24" />
 
                     <div class="flex flex-col gap-2">
                         <!-- Name -->
-                        <h3 class="font-bold">Larry Sain</h3>
+                        <h3 class="font-bold">Lary C. Sain</h3>
 
                         <!-- Role -->
-                        <span class="text-sm">Pancit Canton Chef - Team-BA</span>
+                        <span class="text-sm">Programmer, Database Designer, UI Designer - Team-BA</span>
 
                         <!-- Socials -->
-                        <div class="flex text-accent text-xs">
+                        {{-- <div class="flex text-accent text-xs">
                             <a class="btn btn-ghost btn-sm btn-circle">
                                 <i class="fa-brands fa-github text-lg"></i>
                             </a>
@@ -328,24 +335,24 @@
                             <a class="btn btn-ghost btn-sm btn-circle">
                                 <i class="fa-brands fa-facebook text-lg"></i>
                             </a>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
 
                 <!-- Member -->
                 <div class="flex gap-4">
                     <!-- Photo -->
-                    <img alt="Logo" src="/avatar.png" class="rounded-full w-24" />
+                    <img alt="Logo" src="{{ asset('assets/images/members/baltazar.jpg') }}" class="rounded-full w-24" />
 
                     <div class="flex flex-col gap-2">
                         <!-- Name -->
-                        <h3 class="font-bold">Alfred Joseph Baltazar</h3>
+                        <h3 class="font-bold">Alfred Joseph T. Baltazar</h3>
 
                         <!-- Role -->
-                        <span class="text-sm">Project Head / Programmer - Team-BA</span>
+                        <span class="text-sm">Project Head, Database Designer, Programmer - Team-BA</span>
 
                         <!-- Socials -->
-                        <div class="flex text-accent text-xs">
+                        {{-- <div class="flex text-accent text-xs">
                             <a class="btn btn-ghost btn-sm btn-circle">
                                 <i class="fa-brands fa-github text-lg"></i>
                             </a>
@@ -357,24 +364,24 @@
                             <a class="btn btn-ghost btn-sm btn-circle">
                                 <i class="fa-brands fa-facebook text-lg"></i>
                             </a>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
 
                 <!-- Member -->
                 <div class="flex gap-4">
                     <!-- Photo -->
-                    <img alt="Logo" src="/avatar.png" class="rounded-full w-24" />
+                    <img alt="Logo" src="{{ asset('assets/images/members/neverio.jpg') }}" class="rounded-full w-24" />
 
                     <div class="flex flex-col gap-2">
                         <!-- Name -->
-                        <h3 class="font-bold">Jovita Neverio</h3>
+                        <h3 class="font-bold">Jovita Z. Neverio</h3>
 
                         <!-- Role -->
-                        <span class="text-sm">Document - Team-BA</span>
+                        <span class="text-sm">UI Designer, Documentation, Writer - Team-BA</span>
 
                         <!-- Socials -->
-                        <div class="flex text-accent text-xs">
+                        {{-- <div class="flex text-accent text-xs">
                             <a class="btn btn-ghost btn-sm btn-circle">
                                 <i class="fa-brands fa-github text-lg"></i>
                             </a>
@@ -386,7 +393,7 @@
                             <a class="btn btn-ghost btn-sm btn-circle">
                                 <i class="fa-brands fa-facebook text-lg"></i>
                             </a>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>

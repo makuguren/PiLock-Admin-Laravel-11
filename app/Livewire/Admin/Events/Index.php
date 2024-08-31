@@ -5,6 +5,7 @@ namespace App\Livewire\Admin\Events;
 use App\Models\Event;
 use Livewire\Component;
 use Livewire\Attributes\On;
+use Illuminate\Database\QueryException;
 
 class Index extends Component
 {
@@ -88,13 +89,19 @@ class Index extends Component
     //Delete Event
     public function destroyEvent(){
         // dd($this->eventId);
-        $event = Event::find($this->eventId)->delete();
-        toastr()->success('Event Deleted Successfully');
-        $this->resetInput();
-        $this->dispatch('close-modal');
+        try{
+            $event = Event::find($this->eventId)->delete();
+            toastr()->success('Event Deleted Successfully');
+            $this->resetInput();
+            $this->dispatch('close-modal');
 
-        //Syncronize the Data to Eventscalendar.php
-        $this->dispatch('eventSync', $event);
+            //Syncronize the Data to Eventscalendar.php
+            $this->dispatch('eventSync', $event);
+
+        } catch (QueryException $ex){
+            toastr()->error('Unable to Delete Event!' . $ex->getMessage());
+            $this->dispatch('close-modal');
+        }
     }
 
     public function resetInput(){

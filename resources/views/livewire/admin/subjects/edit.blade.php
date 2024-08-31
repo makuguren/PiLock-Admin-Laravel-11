@@ -20,7 +20,7 @@
                 </div>
             </div>
 
-            <div class="flex flex-wrap mb-2">
+            {{-- <div class="flex flex-wrap mb-2">
                 <div class="w-full px-3">
                     <label class="label-text">Section</label>
                     <select wire:model="section_id" id="editsection_id" class="select select-bordered bg-base-300 block w-full py-3 px-4 mb-3 form-control" required>
@@ -30,6 +30,52 @@
                         @endforeach
                     </select>
                     @error('section_id') <span class="error" role="alert">{{ $message }}</span> @enderror
+                </div>
+            </div> --}}
+
+            <div class="flex flex-wrap mb-2">
+                <div class="w-full px-3">
+                    <label class="label-text">Programs</label>
+                    <select wire:model="program" id="addprogram" class="select select-bordered bg-base-300 block w-full py-3 px-4 mb-3 form-control" required>
+                        <option value="">--Select Program--</option>
+                        <option value="BSIT">BSIT</option>
+                        <option value="BSCS">BSCS</option>
+                        <option value="BLIS">BLIS</option>
+                        <option value="BSIS">BSIS</option>
+                    </select>
+                    @error('program') <span class="error" role="alert">{{ $message }}</span> @enderror
+                </div>
+            </div>
+
+            <div class="flex flex-wrap mb-2">
+                <div class="w-full px-3">
+                    <label class="label-text">Year</label>
+                    <select wire:model="year" id="addyear" class="select select-bordered bg-base-300 block w-full py-3 px-4 mb-3 form-control" required>
+                        <option value="">--Select Year--</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
+                    @error('year') <span class="error" role="alert">{{ $message }}</span> @enderror
+                </div>
+            </div>
+
+            <div class="flex flex-wrap mb-2">
+                <div class="w-full px-3">
+                    <label class="label-text">Block</label>
+                    <select wire:model="block" id="addblock" class="select select-bordered bg-base-300 block w-full py-3 px-4 mb-3 form-control" required>
+                        <option value="">--Select Block--</option>
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                        <option value="D">D</option>
+                        <option value="E">E</option>
+                        <option value="F">F</option>
+                        <option value="G">G</option>
+                        <option value="H">H</option>
+                    </select>
+                    @error('block') <span class="error" role="alert">{{ $message }}</span> @enderror
                 </div>
             </div>
 

@@ -9,6 +9,7 @@ use Livewire\Component;
 use App\Models\Schedules;
 use App\Models\Instructor;
 use Livewire\WithPagination;
+use Illuminate\Database\QueryException;
 
 class Makeup extends Component
 {
@@ -93,9 +94,15 @@ class Makeup extends Component
     }
 
     public function destroySchedule(){
-        Schedules::find($this->schedule_id)->delete();
-        toastr()->success('Make-Up Schedule Deleted Successfully');
-        $this->dispatch('close-modal');
+        try{
+            Schedules::find($this->schedule_id)->delete();
+            toastr()->success('Make-Up Schedule Deleted Successfully');
+            $this->dispatch('close-modal');
+
+        } catch (QueryException $ex){
+            toastr()->error('Unable to Delete Make-Up Schedule!'  . $ex->getMessage());
+            $this->dispatch('close-modal');
+        }
     }
 
     public function resetInput(){

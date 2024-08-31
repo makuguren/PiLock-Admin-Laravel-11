@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('student_id')->nullable();
             $table->unsignedBigInteger('course_id')->nullable();
-            $table->time('time')->nullable();
+            $table->time('time_in')->nullable();
+            $table->time('time_out')->nullable();
             $table->date('date')->nullable();
             $table->timestamps();
 

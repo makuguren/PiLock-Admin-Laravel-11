@@ -9,8 +9,9 @@ use App\Models\Schedules;
 use App\Models\Attendance;
 use App\Models\Instructor;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Models\EnrolledCourse;
+use App\Http\Controllers\Controller;
+use Illuminate\Database\QueryException;
 
 class LogsController extends Controller
 {
@@ -128,7 +129,7 @@ class LogsController extends Controller
                 'student_id' => $student->id,
                 'course_id' => $enrolledCourse->course_id,
                 'date' => $datetime->toDateString(),
-                'time' => $datetime->toTimeString()
+                'time_in' => $datetime->toTimeString()
             ]);
 
 
@@ -150,6 +151,35 @@ class LogsController extends Controller
         }
     }
 
+    public function exitStudentAPI(int $tag_uid){
+        $datetime = Carbon::now('Asia/Manila');
+        $studentId = User::where('tag_uid', $tag_uid)->pluck('id');
+        $log = Log::where('student_id', $studentId)->whereNull('time_out');
+
+        try {
+            if($log){
+                $log->update([
+                    'time_out' => $datetime->toTimeString()
+                ]);
+
+                return response()->json([
+                    'status' => 200,
+                    'message' => 'Time Out Logs Successfully!'
+                ], 200);
+            } else {
+                return response()->json([
+                    'status' => 404,
+                    'message' => 'No Logs Found!'
+                ], 404);
+            }
+
+        } catch (QueryException){
+            return response()->json([
+                'status' => 404,
+                'message' => 'No Students Found!'
+            ], 404);
+        }
+    }
 
     public function attendInstructorAPI(int $tag_uid){
         $instructor = Instructor::where('tag_uid', $tag_uid)->first();
@@ -179,5 +209,4 @@ class LogsController extends Controller
             ], 404);
         }
     }
-
 }

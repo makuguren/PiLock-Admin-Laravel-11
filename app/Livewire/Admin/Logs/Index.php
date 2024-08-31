@@ -32,7 +32,7 @@ class Index extends Component
     public function render(){
         $logs = Log::where('date', 'like', '%'.$this->filter_date.'%')
                     ->where('course_id', 'like', '%'.$this->filter_coursesec.'%')
-                    ->orderBy('time', 'DESC')
+                    ->orderBy('time_in', 'DESC')
                     ->paginate(10);
 
         $instructors = Instructor::all();

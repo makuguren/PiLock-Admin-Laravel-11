@@ -5,10 +5,25 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Event;
 use App\Models\Schedules;
 use Illuminate\Http\Request;
+use App\Imports\CourseImport;
+use App\Imports\ScheduleImport;
 use App\Http\Controllers\Controller;
+use Maatwebsite\Excel\Facades\Excel;
 
 class SchedulesController extends Controller
 {
+    // public function importSchedule(Request $request){
+    //     $request->validate([
+    //         'file_path' => ['required', 'file'],
+    //     ]);
+
+    //     Excel::import(new CourseImport, $request->file('file_path'));
+    //     Excel::import(new ScheduleImport, $request->file('file_path'));
+
+    //     return redirect()->back();
+    //     toastr()->success('Schedules Imported Successfully');
+    // }
+
     //API Controllers/Functions
 
     //Regular Schedules

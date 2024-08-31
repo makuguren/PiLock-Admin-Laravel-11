@@ -4,6 +4,7 @@ namespace App\Livewire\Admin\Permissions;
 
 use Livewire\Component;
 use Livewire\WithPagination;
+use Illuminate\Database\QueryException;
 use Spatie\Permission\Models\Permission;
 
 class Index extends Component
@@ -69,9 +70,15 @@ class Index extends Component
     }
 
     public function destroyPermission(){
-        Permission::find($this->permission_id)->delete();
-        toastr()->success('Permission Deleted Successfully');
-        $this->dispatch('close-modal');
+        try{
+            Permission::find($this->permission_id)->delete();
+            toastr()->success('Permission Deleted Successfully');
+            $this->dispatch('close-modal');
+
+        } catch (QueryException $ex){
+            toastr()->error('Unable to Delete Permission!' . $ex->getMessage());
+            $this->dispatch('close-modal');
+        }
     }
 
     public function resetInput(){

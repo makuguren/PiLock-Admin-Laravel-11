@@ -5,6 +5,8 @@
 <div>
     @can('Delete Students')
         @include('livewire.admin.students.delete')
+    @endcan
+    @can('Disable RFID')
         @include('livewire.admin.students.disablerfid')
     @endcan
 
@@ -21,13 +23,13 @@
                 </ul>
             </div>
             @can('Add Tag UID to Students')
-            <a href="{{ route('admin.students.addtaguid') }}" class="btn btn-ghost bg-green-700 hover:bg-green-500 w-55 btn-sm mt-3">
+            <a wire:navigate.hover href="{{ route('admin.students.addtaguid') }}" class="btn btn-ghost bg-green-700 hover:bg-green-500 w-55 btn-sm mt-3">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-id-card"><path d="M16 10h2"/><path d="M16 14h2"/><path d="M6.17 15a3 3 0 0 1 5.66 0"/><circle cx="9" cy="11" r="2"/><rect x="2" y="5" width="20" height="14" rx="2"/></svg>
                 <span class="text-white text-sm">Add Tag UID</span>
             </a>
             @endcan
             @can('Create Students')
-            <a href="{{ route('admin.students.create') }}" class="btn btn-ghost bg-blue-700 hover:bg-blue-500 w-55 btn-sm mt-3">
+            <a wire:navigate.hover href="{{ route('admin.students.create') }}" class="btn btn-ghost bg-blue-700 hover:bg-blue-500 w-55 btn-sm mt-3">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-round-pen"><path d="M2 21a8 8 0 0 1 10.821-7.487"/><path d="M21.378 16.626a1 1 0 0 0-3.004-3.004l-4.01 4.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z"/><circle cx="10" cy="8" r="5"/></svg>
                 <span class="text-white text-sm">Add Student</span>
             </a>
@@ -65,7 +67,7 @@
 
         <div class="w-full mb-6"></div>
 
-        <div wire:poll.1000ms class="bg-base-100 border-gray-100 shadow-md shadow-black/5 p-6 rounded-md">
+        <div class="bg-base-100 border-gray-100 shadow-md shadow-black/5 p-6 rounded-md">
             <div class="overflow-x-auto">
                 <table class="table">
                     <!-- head -->
@@ -139,7 +141,7 @@
                                 <th>
                                     <div class="flex flex-row space-x-2">
                                         @can('Update Students')
-                                        <a href="{{ route('admin.students.edit', $student->id) }}" class="btn btn-ghost bg-blue-700 hover:bg-blue-500 btn-sm h-8">
+                                        <a wire:navigate.hover href="{{ route('admin.students.edit', $student->id) }}" class="btn btn-ghost bg-blue-700 hover:bg-blue-500 btn-sm h-8">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
                                             <span class="text-white text-sm">Edit</span>
                                         </a>

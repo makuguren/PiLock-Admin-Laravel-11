@@ -14,7 +14,7 @@ class Adduid extends Component
     //Validations
     protected function rules(){
         return [
-            'tag_uid' => 'required|string|unique:users,tag_uid',
+            'tag_uid' => 'required|string|unique:users,tag_uid|unique:instructors,tag_uid',
             'student_id' => 'required'
         ];
     }

@@ -9,12 +9,20 @@ use Livewire\Component;
 use App\Models\Schedules;
 use App\Models\Instructor;
 use Livewire\WithPagination;
+use App\Imports\CourseImport;
+use Livewire\WithFileUploads;
+use App\Imports\ScheduleImport;
+use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Storage;
 
 class Index extends Component
 {
     use WithPagination;
+    use WithFileUploads;
+
     public $schedule_id, $course_id, $days, $time_start, $time_end;
-    public $instructor_name;
+    public $instructor_name, $import_file, $isDisableButton;
 
     //Validations
     protected function rules(){
@@ -36,6 +44,32 @@ class Index extends Component
         if($fetchCourse){
             $this->instructor_name = $fetchCourse->instructor->name;
         }
+    }
+
+    // public function enableButton(){
+    //     $this->isDisableButton = true;
+    //     sleep(10);
+    //     $this->isDisableButton = false;
+    // }
+
+    public function importSchedule(){
+        // dd($this->import_file);
+        // dd($this->file_path);
+
+        // $path = $this->import_file->storeAs('imports', 'schedules.csv');
+
+        // Perform the import
+        // Excel::import(new CourseImport, storage_path('app/' . $path));
+        // Excel::import(new ScheduleImport, storage_path('app/' . $path));
+
+        // Optionally delete the file after import
+        // Storage::delete($path);
+
+        Excel::import(new CourseImport, 'schedule.csv');
+        Excel::import(new ScheduleImport, 'schedule.csv');
+
+        toastr()->success('Schedules Imported Successfully');
+        $this->dispatch('close-modal');
     }
 
     //Save Schedule
@@ -84,9 +118,15 @@ class Index extends Component
     }
 
     public function destroySchedule(){
-        Schedules::find($this->schedule_id)->delete();
-        toastr()->success('Schedule Deleted Successfully');
-        $this->dispatch('close-modal');
+        try{
+            Schedules::find($this->schedule_id)->delete();
+            toastr()->success('Schedule Deleted Successfully');
+            $this->dispatch('close-modal');
+
+        } catch (QueryException $ex){
+            toastr()->error('Unable to Delete Schedule!' . $ex->getMessage());
+            $this->dispatch('close-modal');
+        }
     }
 
     public function resetInput(){
@@ -107,7 +147,8 @@ class Index extends Component
             'courses' => $courses,
             'subjects' => $subjects,
             'instructors' => $instructors,
-            'sections' => $sections
+            'sections' => $sections,
+            'isDisableButton' => $this->isDisableButton,
         ]);
     }
 }

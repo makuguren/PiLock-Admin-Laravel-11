@@ -6,12 +6,13 @@ use App\Models\User;
 use App\Models\Section;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Illuminate\Database\QueryException;
 
 class Index extends Component
 {
     use WithPagination;
 
-    public $student_id, $filter_section, $query = '';
+    public $student_id, $taguid, $filter_section, $query = '';
 
     public function filter_section(){
         $this->resetPage();
@@ -37,19 +38,31 @@ class Index extends Component
     }
 
     public function destroyStudent(){
-        User::findOrFail($this->student_id)->delete();
-        toastr()->success('Student Deleted Successfully');
-        $this->dispatch('close-modal');
+        try{
+            User::findOrFail($this->student_id)->delete();
+            toastr()->success('Student Deleted Successfully');
+            $this->dispatch('close-modal');
+
+        } catch (QueryException $ex){
+            toastr()->error('Unable to Delete Student!' . $ex->getMessage());
+            $this->dispatch('close-modal');
+        }
     }
 
-    public function disableRFID(int $student_id){
-        $this->student_id = $student_id;
+    public function disableRFID(int $taguid){
+        // dd($taguid);
+        $this->taguid = $taguid;
     }
 
     public function destroyRFID(){
-        User::where('id', $this->student_id)->update([
-            'tag_uid' => '0'
+        User::findOrFail($this->taguid)->update([
+            'tag_uid' => null
         ]);
+
+        // User::where('id', $this->taguid)->update([
+        //     'tag_uid' => null
+        // ]);
+
         toastr()->success('TagUID Disabled Successfully');
         $this->dispatch('close-modal');
     }

@@ -2,9 +2,20 @@
 
 namespace App\Livewire\Global\Switches;
 
+use App\Models\Log;
+use App\Models\User;
+use App\Models\Course;
+use App\Models\Section;
 use App\Models\Setting;
 use Livewire\Component;
+use App\Models\SeatPlan;
+use App\Models\Schedules;
+use App\Models\Attendance;
+use App\Models\Instructor;
+use App\Models\EnrolledCourse;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\QueryException;
 
 class Configuration extends Component
 {
@@ -144,6 +155,105 @@ class Configuration extends Component
                 'isRegAdmins' => '0'
             ]);
             toastr()->success('Settings Saved Successfully');
+        }
+    }
+
+    public function truncateAttendances(){
+        try {
+            Schema::disableForeignKeyConstraints();
+            Attendance::truncate();
+            toastr()->success('Truncate Attendances Successfully');
+            Schema::enableForeignKeyConstraints();
+        } catch(QueryException $ex) {
+            toastr()->error($ex->getMessage());
+        }
+    }
+
+    public function truncateEnrolledCourses(){
+        try {
+            Schema::disableForeignKeyConstraints();
+            EnrolledCourse::truncate();
+            toastr()->success('Truncate EnrolledCourses Successfully');
+            Schema::enableForeignKeyConstraints();
+        } catch(QueryException $ex) {
+            toastr()->error($ex->getMessage());
+        }
+    }
+
+    public function truncateScheds(){
+        try{
+            Schema::disableForeignKeyConstraints();
+            Schedules::truncate();
+            toastr()->success('Truncate Schedules Successfully');
+            Schema::enableForeignKeyConstraints();
+        } catch(QueryException $ex) {
+            toastr()->error($ex->getMessage());
+        }
+    }
+
+    public function truncateLogs(){
+        try {
+            Schema::disableForeignKeyConstraints();
+            Log::truncate();
+            toastr()->success('Truncate Logs Successfully');
+            Schema::enableForeignKeyConstraints();
+        } catch (QueryException $ex) {
+            toastr()->error($ex->getMessage());
+        }
+    }
+
+    public function truncateSeatPlan(){
+        try {
+            Schema::disableForeignKeyConstraints();
+            SeatPlan::truncate();
+            toastr()->success('Truncate Seat Plan Successfully');
+            Schema::enableForeignKeyConstraints();
+        } catch (QueryException $ex) {
+            toastr()->error($ex->getMessage());
+        }
+    }
+
+    public function truncateCourses(){
+        try {
+            Schema::disableForeignKeyConstraints();
+            Course::truncate();
+            toastr()->success('Truncate Courses Successfully');
+            Schema::enableForeignKeyConstraints();
+        } catch(QueryException $ex) {
+            toastr()->error($ex->getMessage());
+        }
+    }
+
+    public function truncateStudents(){
+        try {
+            Schema::disableForeignKeyConstraints();
+            User::truncate();
+            toastr()->success('Truncate Students Successfully');
+            Schema::enableForeignKeyConstraints();
+        } catch(QueryException $ex) {
+            toastr()->error($ex->getMessage());
+        }
+    }
+
+    public function truncateInstructors(){
+        try {
+            Schema::disableForeignKeyConstraints();
+            Instructor::truncate();
+            toastr()->success('Truncate Instructors Successfully');
+            Schema::enableForeignKeyConstraints();
+        } catch(QueryException $ex) {
+            toastr()->error($ex->getMessage());
+        }
+    }
+
+    public function truncateSections(){
+        try {
+            Schema::disableForeignKeyConstraints();
+            Section::truncate();
+            toastr()->success('Truncate Sections Successfully');
+            Schema::enableForeignKeyConstraints();
+        } catch(QueryException $ex) {
+            toastr()->error($ex->getMessage());
         }
     }
 
