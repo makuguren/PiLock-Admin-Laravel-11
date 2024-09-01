@@ -1,4 +1,6 @@
 <!-- Implement Code here for Header Body -->
+{{-- @include('admin.layouts.includes.logout') --}}
+
 <nav class="navbar bg-base-100 sticky top-0 z-30">
     <div class="flex-1">
         <label aria-label="Open menu" for="drawer" class="btn btn-ghost btn-square btn-ghost drawer-button lg:hidden">
@@ -79,6 +81,12 @@
                         @csrf
                     </form>
                 </li>
+
+                {{-- <li>
+                    <label for="logout_modal">
+                        Logout Modal
+                    </label>
+                </li> --}}
             </ul>
         </div>
     </div>

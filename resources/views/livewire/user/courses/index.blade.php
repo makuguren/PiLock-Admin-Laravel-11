@@ -25,7 +25,6 @@
                     <div class="bg-base-200 border-gray-200 shadow-md shadow-black/5 p-6 rounded-md">
                         <div class="font-bold text-lg">{{ $course->course_title }}</div>
                         <div class="text-sm mb-3">{{ $course->course_code }} | {{ $course->section->program }} {{ $course->section->year }}{{ $course->section->block }}</div>
-                        <div class="">Lorem ipsum dolor sit amet consectetur adipisicing elit. At ipsa commodi tempora qui libero. Temporibus veritatis debitis fugiat deserunt recusandae aspernatur magni unde. Commodi temporibus, suscipit amet qui error dolorem?</div>
                         <div class="mt-3">Instructor: {{ $course->instructor->name }}</div>
 
                         {{-- Check if the Course is Enrolled or Not. --}}

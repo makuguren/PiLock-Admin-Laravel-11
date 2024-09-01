@@ -27,7 +27,8 @@ class Instructor extends Authenticatable
         'password',
         'gender',
         'instructor_theme',
-        'tag_uid'
+        'tag_uid',
+        'isDefaultPass'
     ];
 
     /**

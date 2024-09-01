@@ -1,8 +1,11 @@
 <?php
 
 use Livewire\Livewire;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\CheckStudentInfo;
 use App\Http\Controllers\User\ProfileController;
+use App\Http\Middleware\CheckInstructorDefaultPass;
 use App\Http\Controllers\User\SocialLoginController;
 
 Route::get('/', function () {
@@ -21,14 +24,13 @@ Route::get('/', function () {
 //     return view('user.dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
 
-//User Interface
-Route::middleware(['auth:web', App\Http\Middleware\UserComponentLayout::class])->name('user.')->group(function () {
+//User Interface || Dashboard Routes
+Route::get('dashboard', [App\Http\Controllers\User\DashboardController::class, 'index'])->name('user.dashboard.index');
+
+Route::middleware(['auth:web', App\Http\Middleware\UserComponentLayout::class, CheckStudentInfo::class])->name('user.')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
-    //Dashboard Routes
-    Route::get('dashboard', [App\Http\Controllers\User\DashboardController::class, 'index'])->name('dashboard.index');
 
     //Courses Routes
     Route::prefix('courses')->group(function () {
@@ -186,13 +188,12 @@ Route::middleware(['auth:admin', App\Http\Middleware\AdminComponentLayout::class
     // Route::get('admins/{adminId}/delete', [App\Http\Controllers\Admin\AdminsController::class, 'destroy'])->name('admins.delete');
 });
 
-//Instructor Interface
-Route::middleware(['auth:instructor', App\Http\Middleware\InstructorComponentLayout::class])->prefix('instructor')->name('instructor.')->group(function () {
+//Instructor Interface || Dashboard Routes
+Route::middleware(['auth:instructor', App\Http\Middleware\InstructorComponentLayout::class])->prefix('instructor/dashboard')->group(function () {
+    Route::get('/', App\Livewire\Instructor\Dashboard\Index::class)->name('instructor.dashboard.index');
+});
 
-    //Dashboard Routes
-    Route::prefix('dashboard')->group(function () {
-        Route::get('/', App\Livewire\Instructor\Dashboard\Index::class)->name('dashboard.index');
-    });
+Route::middleware(['auth:instructor', App\Http\Middleware\InstructorComponentLayout::class, CheckInstructorDefaultPass::class])->prefix('instructor')->name('instructor.')->group(function () {
 
     //Attendances Routes
     Route::prefix('attendances')->group(function () {

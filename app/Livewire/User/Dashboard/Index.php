@@ -115,23 +115,19 @@ class Index extends Component
         // Check if the Student's Update their Details
         $sections = Section::all();
         $checked = 'checked';
+
+        $data = [
+            'sections' => $sections,
+            'greetMessage' => $this->greetMessage,
+            'schedules' => $schedules,
+            'attendances' => $attendances,
+            'genderGreeting' => $this->genderGreeting
+        ];
+
         if(Auth::user()->student_id == NULL || Auth::user()->section_id == NULL || Auth::user()->birthdate == NULL){
-            return view('livewire.user.dashboard.index', [
-                'checked' => $checked,
-                'sections' => $sections,
-                'greetMessage' => $this->greetMessage,
-                'schedules' => $schedules,
-                'attendances' => $attendances,
-                'genderGreeting' => $this->genderGreeting
-            ]);
-        } else {
-            return view('livewire.user.dashboard.index', [
-                'sections' => $sections,
-                'greetMessage' => $this->greetMessage,
-                'schedules' => $schedules,
-                'attendances' => $attendances,
-                'genderGreeting' => $this->genderGreeting
-            ]);
+            $data['checked'] = $checked;
         }
+
+        return view('livewire.user.dashboard.index', $data);
     }
 }

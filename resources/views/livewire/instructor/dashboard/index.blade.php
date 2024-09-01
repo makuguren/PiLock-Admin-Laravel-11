@@ -3,6 +3,8 @@
 </x-slot>
 
 <div>
+    @include('livewire.instructor.dashboard.setup')
+
     <div class="p-6">
         <div class="flex flex-row">
             <div class="flex flex-col w-full">
@@ -63,3 +65,11 @@
         </div>
     </div>
 </div>
+
+<x-slot:scripts>
+    <script>
+        window.addEventListener('close-modal', $event => {
+            document.getElementById('changePass_modal').checked = false;
+        })
+    </script>
+</x-slot>

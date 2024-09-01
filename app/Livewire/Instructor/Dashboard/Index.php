@@ -7,13 +7,17 @@ use App\Models\Course;
 use Livewire\Component;
 use App\Models\Schedules;
 use App\Models\Attendance;
+use App\Models\Instructor;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Client\ConnectionException;
+use Illuminate\Validation\Rules\Password;
+use Illuminate\Support\Facades\Hash;
 
 class Index extends Component
 {
     public $greetMessage, $genderGreeting;
+    public $current_password, $password, $password_confirmation;
 
     public function markPresent(int $schedule_id){
         $markpresent = Schedules::findOrFail($schedule_id);
@@ -27,6 +31,22 @@ class Index extends Component
 
         }
         toastr()->success('Mark as Present Successfully!');
+    }
+
+    public function updateInstPassword(){
+
+        $validated = $this->validate([
+            'current_password' => ['required', 'current_password'],
+            'password' => ['required', 'string', 'min:8', 'confirmed', Password::defaults()],
+        ]);
+
+        Instructor::find(Auth::id())->update([
+            'password' => Hash::make($validated['password']),
+            'isDefaultPass' => '0'
+        ]);
+
+        toastr()->success('Password Updated Successfully');
+        $this->dispatch('close-modal');
     }
 
     public function render(){
@@ -64,13 +84,22 @@ class Index extends Component
 
         $totalPresent = Attendance::where('isCurrent', '1')->where('isPresent', '1')->count();
         $totalStudents = Attendance::where('isCurrent', '1')->count();
-        return view('livewire.instructor.dashboard.index',[
-            // 'courses' => $courses,
+
+        // Check if the Instructors Using their Default Password
+        $checked = 'checked';
+
+        $data = [
             'schedules' => $schedules,
             'totalPresent' => $totalPresent,
             'totalStudents' => $totalStudents,
             'greetMessage' => $this->greetMessage,
             'genderGreeting' => $this->genderGreeting
-        ]);
+        ];
+
+        if(Auth::user()->isDefaultPass === '1'){
+            $data['checked'] = $checked;
+        }
+
+        return view('livewire.instructor.dashboard.index', $data);
     }
 }
