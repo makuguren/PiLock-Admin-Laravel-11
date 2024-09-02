@@ -2,7 +2,7 @@
 <input type="checkbox" id="changePass_modal" class="modal-toggle" {{ $checked ?? '' }}/>
 <div class="modal" role="dialog">
   <div class="modal-box">
-    <h3 class="text-lg font-bold">Changing your Password</h3>
+    <h3 class="text-lg font-bold">Change your Password</h3>
     <h3 class="text-sm">Please Change Password first before you Proceed.</h3>
     <form wire:submit.prevent="updateInstPassword" method="dialog" class="w-full mt-6">
         @csrf

@@ -123,11 +123,15 @@ class Authenticate implements AuthenticatesRequests
             return route('admin.login');
         }
 
+        if($request->routeIs('admin.analytics.index')){
+            return route('admin.login');
+        }
+
         if($request->routeIs('admin.sections.index')){
             return route('admin.login');
         }
 
-        if($request->routeIs('admin.subjects.index')){
+        if($request->routeIs('admin.courses.index')){
             return route('admin.login');
         }
 
@@ -163,12 +167,110 @@ class Authenticate implements AuthenticatesRequests
             return route('admin.login');
         }
 
+        if($request->routeIs('admin.schedules.approvals')){
+            return route('admin.login');
+        }
+
+        if($request->routeIs('admin.admins.index')){
+            return route('admin.login');
+        }
+
+        if($request->routeIs('admin.admins.create')){
+            return route('admin.login');
+        }
+
+        if($request->routeIs('admin.roles.index')){
+            return route('admin.login');
+        }
+
+        if($request->routeIs('admin.roles.addpermission')){
+            return route('admin.login');
+        }
+
+        if($request->routeIs('admin.permissions.index')){
+            return route('admin.login');
+        }
+
         if($request->routeIs('admin.logs.index')){
             return route('admin.login');
         }
 
         if($request->routeIs('admin.settings.index')){
             return route('admin.login');
+        }
+
+        // Instructor Side
+        if($request->routeIs('instructor.dashboard.index')){
+            return route('instructor.login');
+        }
+
+        if($request->routeIs('instructor.attendances.index')){
+            return route('instructor.login');
+        }
+
+        if($request->routeIs('instructor.attendances.index')){
+            return route('instructor.login');
+        }
+
+        if($request->routeIs('instructor.attendances.current')){
+            return route('instructor.login');
+        }
+
+        if($request->routeIs('instructor.events.index')){
+            return route('instructor.login');
+        }
+
+        if($request->routeIs('instructor.courses.index')){
+            return route('instructor.login');
+        }
+
+        if($request->routeIs('instructor.courses.blocked')){
+            return route('instructor.login');
+        }
+
+        if($request->routeIs('instructor.students.index')){
+            return route('instructor.login');
+        }
+
+        if($request->routeIs('instructor.schedules.index')){
+            return route('instructor.login');
+        }
+
+        if($request->routeIs('instructor.schedules.makeup')){
+            return route('instructor.login');
+        }
+
+        if($request->routeIs('instructor.seatplan.index')){
+            return route('instructor.login');
+        }
+
+        if($request->routeIs('instructor.seatplan.assign')){
+            return route('instructor.login');
+        }
+
+        if($request->routeIs('instructor.settings.index')){
+            return route('instructor.login');
+        }
+
+        // Student Side
+        if($request->routeIs('user.dashboard.index')){
+            return route('user.login');
+        }
+
+        if($request->routeIs('user.schedules.index')){
+            return route('user.login');
+        }
+
+        if($request->routeIs('user.courses.index')){
+            return route('user.login');
+        }
+
+        if($request->routeIs('user.courses.enrolled')){
+            return route('user.login');
+        }
+
+        if($request->routeIs('user.settings.index')){
+            return route('user.login');
         }
 
         if (static::$redirectToCallback) {

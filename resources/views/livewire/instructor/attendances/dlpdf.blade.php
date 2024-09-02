@@ -23,7 +23,7 @@
                 <div class="w-full px-3">
                     <label class="label-text">Date</label>
                     <label class="flex items-center">
-                        <input type="date" wire:model="dlpdfdate" id="dlpdfdate" class="input input-bordered block form-control w-full bg-base-300 text-sm" />
+                        <input type="date" wire:model="dlpdfdate" id="dlpdfdate" class="input input-bordered block form-control w-full bg-base-300 text-sm" required />
                     </label>
                     @error('dlpdfdate') <span class="error" role="alert">{{ $message }}</span> @enderror
                 </div>
