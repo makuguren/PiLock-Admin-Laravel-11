@@ -21,7 +21,7 @@ class Makeup extends Component
     protected function rules(){
         return [
             'course_id' => 'required|integer',
-            'days' => 'required|string',
+            'days' => 'required|in:Sunday,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday',
             'time_start' => 'required',
             'time_end' => 'required'
         ];
@@ -43,14 +43,17 @@ class Makeup extends Component
     public function saveSchedule(){
         $validatedData = $this->validate();
 
-        Schedules::create([
+        $scheduleData = [
             'course_id' => $validatedData['course_id'],
             'days' => $validatedData['days'],
             'time_start' => $validatedData['time_start'],
             'time_end' => $validatedData['time_end'],
             'isApproved' => '1',
-            'isMakeUp' => '1'
-        ]);
+            'isMakeUp' => '1',
+            'isCurrent' => '0'
+        ];
+
+        Schedules::create($scheduleData);
 
         toastr()->success('Make-Up Schedule Added Successfully');
         $this->resetInput();
@@ -117,7 +120,7 @@ class Makeup extends Component
         $instructors = Instructor::all();
         $sections = Section::all();
         $courses = Course::all();
-        $schedules = Schedules::where('isMakeUp', '1')->paginate(10);
+        $schedules = Schedules::where('isMakeUp', '1')->where('isApproved', '1')->paginate(10);
         return view('livewire.admin.schedules.makeup' , [
             'schedules' => $schedules,
             'courses' => $courses,

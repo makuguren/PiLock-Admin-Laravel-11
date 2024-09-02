@@ -116,9 +116,9 @@ class Index extends Component
         ];
 
         // Check if the Schedule Start is Beyond at the Current Time
-        if($this->time_start <= $time && $this->days === $day){
-            $scheduleData['isCurrent'] = '1';
-        }
+        // if($this->time_start <= $time && $this->days === $day){
+        //     $scheduleData['isCurrent'] = '1';
+        // }
 
         Schedules::create($scheduleData);
         toastr()->success('Schedule Added Successfully');

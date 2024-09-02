@@ -23,7 +23,8 @@ class Attendance extends Model
         'date',
         'time_end',
         'isPresent',
-        'isCurrent'
+        'isCurrent',
+        'isMakeUp'
     ];
 
     // Instructor Interface

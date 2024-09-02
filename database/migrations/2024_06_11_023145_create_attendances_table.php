@@ -19,6 +19,7 @@ return new class extends Migration
             $table->time('time_end')->nullable();
             $table->integer('isPresent')->default('0')->comment('0=Absent, 1=Present')->nullable();
             $table->integer('isCurrent')->default('0')->comment('0=No, 1=Yes')->nullable();
+            $table->enum('isMakeUp', ['0','1'])->default('0')->comment('0=Regular, 1=MakeUp')->nullable();
             $table->timestamps();
 
             //Foreign Key
