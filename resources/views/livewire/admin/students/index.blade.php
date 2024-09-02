@@ -69,7 +69,7 @@
 
         <div class="bg-base-100 border-gray-100 shadow-md shadow-black/5 p-6 rounded-md">
             <div class="overflow-x-auto">
-                <table class="table">
+                <table wire:poll.1000ms class="table">
                     <!-- head -->
                     <thead>
                       <tr class="bg-base-200">
