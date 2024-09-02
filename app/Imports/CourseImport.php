@@ -7,10 +7,13 @@ use App\Models\Section;
 use App\Models\Instructor;
 use Illuminate\Support\Facades\Crypt;
 use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Concerns\Importable;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
 class CourseImport implements ToModel, WithHeadingRow
 {
+    use Importable;
+
     public function model(array $row)
     {
         // Find or create the section based on program, year, and block

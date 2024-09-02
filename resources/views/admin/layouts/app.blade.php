@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" type="image/x-icon" href="{{ asset('assets/images/pilock-dark.png') }}">
+    <link href="https://unpkg.com/filepond@^4/dist/filepond.css" rel="stylesheet" />
     <title> {{ $title ?? '' }} - {{ $appSetting->website_name ?? 'Pi:Lock | Admin' }} </title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
@@ -44,6 +45,7 @@
 
     {{-- ApexCharts --}}
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
 
     {{ $scripts ?? '' }}
 

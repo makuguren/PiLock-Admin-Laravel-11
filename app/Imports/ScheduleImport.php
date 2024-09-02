@@ -2,13 +2,16 @@
 
 namespace App\Imports;
 
-use App\Models\Schedules;
 use App\Models\Course;
+use App\Models\Schedules;
 use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Concerns\Importable;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
 class ScheduleImport implements ToModel, WithHeadingRow
 {
+    use Importable;
+
     public function model(array $row)
     {
         // Find the existing course by its course_code and section details
@@ -27,6 +30,7 @@ class ScheduleImport implements ToModel, WithHeadingRow
                 'days' => $row['day'],
                 'time_start' => $row['time_start'],
                 'time_end' => $row['time_end'],
+                'isCurrent' => '0'
             ]);
         }
 
