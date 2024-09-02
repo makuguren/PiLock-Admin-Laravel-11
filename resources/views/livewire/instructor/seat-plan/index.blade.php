@@ -3,7 +3,7 @@
 </x-slot>
 
 <div>
-    @include('livewire.instructor.seat-plan.view');
+    @include('livewire.instructor.seat-plan.preview');
 
     {{-- <ul wire:sortable="updateTaskOrder">
         @foreach ($seatplan as $seatplan)

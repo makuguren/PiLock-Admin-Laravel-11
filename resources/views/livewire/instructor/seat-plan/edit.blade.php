@@ -106,9 +106,18 @@
             document.getElementById('view_seat_modal').checked = false;
         }
 
+        function cancel_previewseat(){
+            document.getElementById('preview_seat_modal').checked = false;
+        }
+
         window.addEventListener('view_seat_modal', event => {
             const view_seat_modal = document.getElementById("view_seat_modal");
             view_seat_modal.checked = true;
+        });
+
+        window.addEventListener('preview_seat_modal', event => {
+            const preview_seat_modal = document.getElementById("preview_seat_modal");
+            preview_seat_modal.checked = true;
         });
 
         // Drag and Drop Function Below

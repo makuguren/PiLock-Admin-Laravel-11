@@ -28,7 +28,7 @@ class Index extends Component
 
     public function viewSeat($seat_id){
         // View the Modal
-        $this->dispatch('view_seat_modal');
+        $this->dispatch('preview_seat_modal');
 
         $seatQuery = SeatPlan::findOrFail($seat_id);
 
