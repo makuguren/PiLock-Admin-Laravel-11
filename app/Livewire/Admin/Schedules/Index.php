@@ -17,6 +17,7 @@ use App\Rules\NoScheduleOverlap;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Storage;
+use Maatwebsite\Excel\Validators\ValidationException;
 
 class Index extends Component
 {
@@ -68,21 +69,29 @@ class Index extends Component
     // }
 
     public function importSchedule(){
-        // Store the file in a specific path inside 'imports' folder
-        $path = $this->import_file->storeAs('imports', 'schedules.csv', 'public');
+        try {
+            // Store the file in a specific path inside 'imports' folder
+            $path = $this->import_file->storeAs('imports', 'schedules.csv', 'public');
 
-        // Get the full path using the correct disk
-        $fullPath = storage_path('app/public/' . $path);
+            // Get the full path using the correct disk
+            $fullPath = storage_path('app/public/' . $path);
 
-        // Perform the import using the full path
-        Excel::import(new CourseImport, $fullPath);
-        Excel::import(new ScheduleImport, $fullPath);
+            // Perform the import using the full path
+            Excel::import(new CourseImport, $fullPath);
+            Excel::import(new ScheduleImport, $fullPath);
 
-        // Optionally delete the file after import
-        Storage::disk('public')->delete($path);
+            // Optionally delete the file after import
+            Storage::disk('public')->delete($path);
 
-        toastr()->success('Schedules Imported Successfully');
-        $this->dispatch('close-modal');
+            toastr()->success('Schedules Imported Successfully');
+            $this->dispatch('close-modal');
+        } catch (ValidationException $e) {
+            $failures = $e->failures();
+
+            foreach ($failures as $failure) {
+                $this->addError('import_error', implode(', ', $failure->errors()));
+            }
+        }
     }
 
     //Save Schedule

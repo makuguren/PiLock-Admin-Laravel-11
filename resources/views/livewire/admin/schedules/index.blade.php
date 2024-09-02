@@ -14,7 +14,7 @@
         @include('livewire.admin.schedules.delete')
     @endcan
 
-        @include('livewire.admin.schedules.import')
+    @include('livewire.admin.schedules.import')
 
     <div class="p-6">
         <div class="flex flex-row gap-2">

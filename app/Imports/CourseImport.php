@@ -9,8 +9,9 @@ use Illuminate\Support\Facades\Crypt;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\Importable;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
+use Maatwebsite\Excel\Concerns\WithValidation;
 
-class CourseImport implements ToModel, WithHeadingRow
+class CourseImport implements ToModel, WithHeadingRow, WithValidation
 {
     use Importable;
 
@@ -45,5 +46,29 @@ class CourseImport implements ToModel, WithHeadingRow
         }
 
         return null; // Skip if no match is found
+    }
+
+    public function rules(): array
+    {
+        return [
+            '*.course_code'      => 'required|string',
+            '*.course_title'     => 'required|string|max:255',
+            '*.instructor_name'  => 'required|string|exists:instructors,name',
+            '*.program'          => 'required|string|in:BSIT,BSCS,BLIS,BSIS', // Add other valid programs as needed
+            '*.year'             => 'required|integer|between:1,4',
+            '*.block'            => 'required|string|size:1|alpha',
+        ];
+    }
+
+    public function customValidationMessages()
+    {
+        return [
+            '*.course_code.required' => 'Course code is required.',
+            '*.course_title.required' => 'Course title is required.',
+            '*.instructor_name.exists' => 'Instructor name must exist in the database.',
+            '*.program.in'            => 'Program must be BSIT or other valid codes.',
+            '*.year.between'          => 'Year must be between 1 and 4.',
+            '*.block.alpha'           => 'Block must be a single letter.',
+        ];
     }
 }

@@ -7,8 +7,9 @@ use App\Models\Schedules;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\Importable;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
+use Maatwebsite\Excel\Concerns\WithValidation;
 
-class ScheduleImport implements ToModel, WithHeadingRow
+class ScheduleImport implements ToModel, WithHeadingRow, WithValidation
 {
     use Importable;
 
@@ -35,5 +36,25 @@ class ScheduleImport implements ToModel, WithHeadingRow
         }
 
         return null; // Skip if no match is found
+    }
+
+    public function rules(): array
+    {
+        return [
+            '*.course_code' => 'required|string',
+            '*.day'         => 'required|string|in:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday',
+            '*.time_start'  => 'required',
+            '*.time_end'    => 'required|after:*.time_start',
+        ];
+    }
+
+    public function customValidationMessages()
+    {
+        return [
+            '*.course_code.required' => 'Course code is required.',
+            '*.day.required'         => 'Day is required.',
+            '*.time_start.required'  => 'Start time is required.',
+            '*.time_end.after'       => 'End time must be after the start time.',
+        ];
     }
 }

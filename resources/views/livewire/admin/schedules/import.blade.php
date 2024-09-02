@@ -3,6 +3,16 @@
     <div class="modal-box">
       <h3 class="text-lg font-bold">Import Schedule</h3>
       <h3 class="text-sm">You can import .xlsx, .csv</h3>
+
+          <!-- Display validation errors from the import -->
+        @if ($errors->has('import_error'))
+            <div class="mt-3">
+                @foreach ($errors->get('import_error') as $error)
+                    <div class="text-red-500 text-md">{{ $error }}</div>
+                @endforeach
+            </div>
+        @endif
+
         <form wire:submit.prevent="importSchedule" method="dialog" class="w-full mt-6">
             @csrf
             <div class="flex flex-wrap mb-6">
