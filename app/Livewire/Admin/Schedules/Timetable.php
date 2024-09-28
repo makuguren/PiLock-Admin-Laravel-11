@@ -9,7 +9,7 @@ use App\Models\Subject;
 use Livewire\Component;
 use App\Models\Schedules;
 use App\Models\Instructor;
-use Livewire\WithPagination;
+use Livewire\Attributes\On;
 use App\Imports\CourseImport;
 use Livewire\WithFileUploads;
 use App\Imports\ScheduleImport;
@@ -19,24 +19,14 @@ use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Validators\ValidationException;
 
-class Index extends Component
+class Timetable extends Component
 {
-    use WithPagination;
+    public $schedule_id, $instructor_name, $import_file;
+    public $course_id, $course_code, $days, $time_start, $time_end;
+
     use WithFileUploads;
 
-    public $schedule_id, $course_id, $days, $time_start, $time_end, $isCurrent;
-    public $instructor_name, $import_file, $isDisableButton;
-
-    //Validations
-    // protected function rules(){
-    //     return [
-    //         'course_id' => 'required|integer',
-    //         'days' => 'required|string',
-    //         'time_start' => 'required',
-    //         'time_end' => 'required',
-    //     ];
-    // }
-
+    // Validations
     protected function rules(){
         return [
             'course_id' => 'required|integer',
@@ -53,21 +43,7 @@ class Index extends Component
     public function updated($fields){
         $this->validateOnly($fields);
     }
-    //Validations End
-
-    public function fetchCourseDetails(int $course_id){
-        $fetchCourse = Course::find($course_id);
-        if($fetchCourse){
-            $this->instructor_name = $fetchCourse->instructor->name;
-            // $this->dispatch('instdetails', 'HelloWorld');
-        }
-    }
-
-    // public function enableButton(){
-    //     $this->isDisableButton = true;
-    //     sleep(10);
-    //     $this->isDisableButton = false;
-    // }
+    // Validations End
 
     public function importSchedule(){
         try {
@@ -92,6 +68,14 @@ class Index extends Component
             foreach ($failures as $failure) {
                 $this->addError('import_error', implode(', ', $failure->errors()));
             }
+        }
+    }
+
+    public function fetchCourseDetails($course_id){
+        $fetchCourse = Course::find($course_id);
+        if($fetchCourse){
+            $this->course_code = $fetchCourse->course_code;
+            $this->instructor_name = $fetchCourse->instructor->name;
         }
     }
 
@@ -127,18 +111,20 @@ class Index extends Component
         $this->dispatch('close-modal');
     }
 
-    //Edit Schedule
-    public function editSchedule(int $schedule_id){
+    public function viewSchedule(int $schedule_id){
+        $this->dispatch('view_schedule_modal');
+
         $schedule = Schedules::find($schedule_id);
         if($schedule){
             $this->schedule_id = $schedule->id;
             $this->course_id = $schedule->course_id;
+            $this->course_code = $schedule->course->course_code;
             $this->instructor_name = $schedule->course->instructor->name;
             $this->days = $schedule->days;
-            $this->time_start = Carbon::parse($schedule->time_start)->format('h:i');
-            $this->time_end = Carbon::parse($schedule->time_end)->format('h:i');
+            $this->time_start = Carbon::parse($schedule->time_start)->format('H:i:s');
+            $this->time_end = Carbon::parse($schedule->time_end)->format('H:i:s');
         } else {
-            return redirect()->to('/schedules');
+            return redirect()->to('/schedules/timetable');
         }
     }
 
@@ -155,11 +141,6 @@ class Index extends Component
         toastr()->success('Schedule Updated Successfully');
         $this->resetInput();
         $this->dispatch('close-modal');
-    }
-
-    //Delete Schedule
-    public function deleteSchedule(int $schedule_id){
-        $this->schedule_id = $schedule_id;
     }
 
     public function destroySchedule(){
@@ -186,14 +167,13 @@ class Index extends Component
         $instructors = Instructor::all();
         $sections = Section::all();
         $courses = Course::all();
-        $schedules = Schedules::where('isMakeUp', '0')->paginate(10);
-        return view('livewire.admin.schedules.index', [
+        $schedules = Schedules::all();
+        return view('livewire.admin.schedules.timetable', [
             'schedules' => $schedules,
             'courses' => $courses,
             'subjects' => $subjects,
             'instructors' => $instructors,
             'sections' => $sections,
-            'isDisableButton' => $this->isDisableButton,
         ]);
     }
 }

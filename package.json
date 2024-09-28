@@ -3,7 +3,9 @@
     "type": "module",
     "scripts": {
         "dev": "vite",
-        "build": "vite build"
+        "build": "vite build",
+        "seeders": "php artisan db:seed --class=AdminRolePermissionSeeder && php artisan db:seed --class=ConfigurationSeeder",
+        "start": "php artisan serve --host 0.0.0.0 --port 8000"
     },
     "devDependencies": {
         "@tailwindcss/forms": "^0.5.2",

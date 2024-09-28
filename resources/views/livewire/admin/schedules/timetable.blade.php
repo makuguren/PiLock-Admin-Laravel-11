@@ -1,5 +1,5 @@
 <x-slot:title>
-    Schedules
+    Schedules (Timetable)
 </x-slot>
 
 <div>
@@ -13,19 +13,44 @@
     @can('Delete Regular Schedules')
         @include('livewire.admin.schedules.delete')
     @endcan
+        @include('livewire.admin.schedules.view')
 
-    @include('livewire.admin.schedules.import')
+        @include('livewire.admin.schedules.import')
+
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0 auto;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+            width: calc(100% / 8);
+        }
+
+        th {
+            background-color: black;
+            color: white;
+        }
+
+        td {
+            height: 50px;
+        }
+    </style>
 
     <div class="p-6">
         <div class="flex flex-row gap-2">
             <div class="flex flex-col w-full">
-                <h1 class="font-bold text-2xl mb-2">Schedules</h1>
+                <h1 class="font-bold text-2xl mb-2">Schedules (Timetable)</h1>
                 <ul class="flex items-center text-sm mb-6">
                     <li class="mr-2">
                         <a href="#" class="text-gray-400 hover:text-gray-600 font-medium">Dashboard</a>
                     </li>
                     <li class="text-gray-600 mr-2 font-medium">/</li>
-                    <li class="text-gray-600 mr-2 font-medium">Schedules</li>
+                    <li class="text-gray-600 mr-2 font-medium">Schedules (Timetable)</li>
                 </ul>
             </div>
 
@@ -41,87 +66,56 @@
             </label>
             @endcan
 
-            <a wire:navigate.hover href="{{ route('admin.schedules.timetable') }}" class="btn btn-ghost bg-blue-700 hover:bg-blue-500 w-55 btn-sm mt-3">
+            <a wire:navigate.hover href="{{ route('admin.schedules.index') }}" class="btn btn-ghost bg-blue-700 hover:bg-blue-500 w-55 btn-sm mt-3">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-grid-3x3"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M3 15h18"/><path d="M9 3v18"/><path d="M15 3v18"/></svg>
-                <span class="text-white text-sm">TimeTable View</span>
+                <span class="text-white text-sm">Table View</span>
             </a>
         </div>
 
         <div class="bg-base-100 border-gray-100 shadow-md shadow-black/5 p-6 rounded-md">
             <div class="overflow-x-auto">
-                <table class="table table-zebra">
-                    <thead class="bg-base-200 rounded-md text-md">
+                <table>
+                    <tr>
+                        <th>TIME FRAME</th>
+                        <th>MONDAY</th>
+                        <th>TUESDAY</th>
+                        <th>WEDNESDAY</th>
+                        <th>THURSDAY</th>
+                        <th>FRIDAY</th>
+                        <th>SATURDAY</th>
+                        <th>SUNDAY</th>
+                    </tr>
+                    @foreach (range(7, 19) as $hour)
                         <tr>
-                            <th>COURSE TITLE</th>
-                            <th>INSTRUCTOR</th>
-                            <th>DAYS</th>
-                            <th>SECTION</th>
-                            <th>TIME START</th>
-                            <th>TIME END</th>
-                            <th>ACTION</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse ($schedules as $schedule)
-                        <tr>
-                            <td>
-                                <div class="">
-                                    @if ($schedule->course_id)
-                                        {{ $schedule->course->course_title }}
-                                    @else
-                                        No Subject
-                                    @endif
-                                </div>
-                            </td>
-                            <td>
-                                <div class="">
-                                    @if ($schedule->course_id)
-                                        {{ $schedule->course->instructor->name }}
-                                    @else
-                                        No Instructor
-                                    @endif
-                                </div>
-                            </td>
-                            <td><div class="">{{ $schedule->days }}</div></td>
-                            <td>
-                                <div class="">
-                                    @if ($schedule->course_id)
+                            <td>{{ date('g:i A', strtotime("$hour:00")) }} - {{ date('g:i A', strtotime(($hour + 1) . ":00")) }}</td>
+                            @foreach (['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'] as $day)
+                                @php
+                                    $schedule = $schedules->firstWhere(function ($schedule) use ($day, $hour) {
+                                        return $schedule->days == $day && $schedule->time_start->hour == $hour; // Updated field name
+                                    });
+                                @endphp
+                                @if ($schedule)
+                                    @php
+                                        $startHour = $schedule->time_start->hour;
+                                        $endHour = $schedule->time_end->hour;
+                                        $rowspan = $endHour - $startHour;
+                                    @endphp
+                                    <td wire:click="viewSchedule({{ $schedule->id }})" rowspan="{{ $rowspan }}" style="background: orange;">
+                                        {{ $schedule->course->course_code }}<br>
+                                        {{ $schedule->course->instructor->name }}<br>
                                         {{ $schedule->course->section->program }} {{ $schedule->course->section->year }}{{ $schedule->course->section->block }}
-                                    @else
-                                        No Section
+                                    </td>
+                                @else
+                                    @if (!$schedules->firstWhere(function ($schedule) use ($day, $hour) {
+                                        return $schedule->days == $day && $schedule->time_start->hour < $hour && $schedule->time_end->hour > $hour; // Updated field name
+                                    }))
+                                        <td></td>
                                     @endif
-                                </div>
-                            </td>
-                            <td><div class="">{{ Carbon\Carbon::parse($schedule->time_start)->format('h:i A') }}</div></td>
-                            <td><div class="">{{ Carbon\Carbon::parse($schedule->time_end)->format('h:i A') }}</div></td>
-                            <th>
-                                <div class="flex flex-row space-x-2">
-                                    @can('Update Regular Schedules')
-                                    <label for="edit_modal" wire:click="editSchedule({{ $schedule->id }})" class="btn btn-ghost bg-blue-700 hover:bg-blue-500 btn-sm h-8">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
-                                        <span class="text-white text-sm">Edit</span>
-                                    </label>
-                                    @endcan
-
-                                    @can('Delete Regular Schedules')
-                                    <label for="delete_modal" wire:click="deleteSchedule({{ $schedule->id }})" class="btn btn-ghost bg-red-700 hover:bg-red-500 btn-sm h-8">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash-2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>
-                                        <span class="text-white text-sm">Delete</span>
-                                    </label>
-                                    @endcan
-                                </div>
-                            </th>
+                                @endif
+                            @endforeach
                         </tr>
-                        @empty
-                            <tr>
-                                <td><div class="font-bold">No Schedules Found</div></td>
-                            </tr>
-                        @endforelse
-                    </tbody>
+                    @endforeach
                 </table>
-                <div class="mt-3">
-                    {{ $schedules->links() }}
-                </div>
             </div>
         </div>
     </div>
@@ -133,10 +127,15 @@
             document.getElementById('add_modal').checked = false;
             document.getElementById('edit_modal').checked = false;
             document.getElementById('delete_modal').checked = false;
-
             document.getElementById('import_modal').checked = false;
+            document.getElementById('view_schedule_modal').checked = false;
 
             document.getElementById('import_file').value = '';
+        });
+
+        window.addEventListener('view_schedule_modal', event => {
+            const view_schedule_modal = document.getElementById("view_schedule_modal");
+            view_schedule_modal.checked = true;
         });
 
         function cancel_sched(){
@@ -144,10 +143,11 @@
             document.getElementById('edit_modal').checked = false;
             document.getElementById('delete_modal').checked = false;
             document.getElementById('import_modal').checked = false;
+            document.getElementById('view_schedule_modal').checked = false;
 
-            document.getElementById('addsubject_id').value = '';
-            document.getElementById('addinstructor_id').value = '';
-            document.getElementById('addsection_id').value = '';
+            document.getElementById('addcourse_id').value = '';
+            document.getElementById('course_code').value = '';
+            document.getElementById('instructor_name').value = '';
             document.getElementById('adddays').value = '';
             document.getElementById('addtime_start').value = '';
             document.getElementById('addtime_end').value = '';
@@ -159,6 +159,21 @@
             // document.getElementById('editdays').value = '';
             // document.getElementById('edittime_start').value = '';
             // document.getElementById('edittime_end').value = '';
+        }
+
+        function enable_sched(){
+            document.getElementById('editcourse_id').disabled = false;
+            document.getElementById('editdays').disabled = false;
+            document.getElementById('edittime_start').disabled = false;
+            document.getElementById('edittime_end').disabled = false;
+            document.getElementById('updateBtn').disabled = false;
+            document.getElementById('deleteBtn').disabled = false;
+        }
+
+        function delete_sched(){
+            const delete_modal = document.getElementById("delete_modal");
+            delete_modal.checked = true;
+            view_schedule_modal.checked = false;
         }
 
         function disableButton() {
