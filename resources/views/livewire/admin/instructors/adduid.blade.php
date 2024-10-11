@@ -34,14 +34,14 @@
                 <div class="flex flex-wrap mb-6">
                     <div class="w-full px-3">
                         <label class="label-text">Tag UID</label>
-                        <input wire:model="tag_uid" class="input input-bordered bg-base-300 block w-full py-3 px-4 mb-3" name="tag_uid" id="tag_uid" onkeydown="focusNext(event, 'instructor_id')" autofocus type="text" placeholder="">
+                        <input wire:model="tag_uid" class="input input-bordered bg-base-300 block w-full py-3 px-4 mb-3" name="tag_uid" id="tag_uid" onkeydown="focusNext(event, 'instructor_id')" autofocus type="text" placeholder="Tap your ID">
                         @error('tag_uid')<small class="text-danger">{{$message}}</small> @enderror
                     </div>
                 </div>
                 <div class="flex flex-row mb-6 place-items-center">
                     <div class="w-full px-3">
-                        <label class="label-text">Instructor ID</label>
-                        <input wire:model="instructor_id" id="instructor_id" class="input input-bordered bg-base-300 block w-full py-3 px-4 mb-3" type="text" placeholder="">
+                        <label class="label-text">ID</label>
+                        <input wire:model="instructor_id" id="instructor_id" class="input input-bordered bg-base-300 block w-full py-3 px-4 mb-3" type="text" placeholder="Enter your ID">
                         @error('instructor_id')<small class="text-danger">{{$message}}</small> @enderror
                     </div>
 
@@ -53,11 +53,11 @@
 
                 <div class="flex flex-wrap mb-6">
                     <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                        <label class="label-text" for="grid-first-name">Instructor Name</label>
-                        <input class="input input-bordered w-full bg-base-300" name="name" value="{{ $instructor->name ?? '' }}" type="text" placeholder="" disabled>
+                        <label class="label-text" for="grid-first-name">Name</label>
+                        <input class="input input-bordered w-full bg-base-300" name="name" value="{{ $instructor->first_name ?? '' }} {{ $instructor->last_name ?? '' }}" type="text" placeholder="" disabled>
                     </div>
                     <div class="w-full md:w-1/2 px-3">
-                        <label class="label-text" for="">Instructor Email</label>
+                        <label class="label-text" for="">Email</label>
                         <input class="input input-bordered w-full bg-base-300" name="email" value="{{ $instructor->email ?? '' }}" type="text" placeholder="" disabled>
                     </div>
                 </div>

@@ -4,10 +4,16 @@
       <h3 class="text-lg font-bold">Edit Instructor</h3>
         <form wire:submit.prevent="updateInstructor" method="dialog" class="w-full mt-6">
             <div class="flex flex-wrap mb-2">
-                <div class="w-full px-3">
-                    <label class="label-text">Name</label>
-                    <input wire:model="name" id="editinst_name" class="input input-bordered bg-base-300 block w-full py-3 px-4 mb-3 form-control" type="text">
-                    @error('name') <span class="error" role="alert">{{ $message }}</span> @enderror
+                <div class="w-full md:w-1/2 px-3">
+                    <label class="label-text">First Name</label>
+                    <input wire:model="first_name" id="editinst_first" class="input input-bordered bg-base-300 block w-full py-3 px-4 mb-3 form-control" type="text">
+                    @error('first_name') <span class="error" role="alert">{{ $message }}</span> @enderror
+                </div>
+
+                <div class="w-full md:w-1/2 px-3">
+                    <label class="label-text">Last Name</label>
+                    <input wire:model="last_name" id="editinst_last" class="input input-bordered bg-base-300 block w-full py-3 px-4 mb-3 form-control" type="text">
+                    @error('last_name') <span class="error" role="alert">{{ $message }}</span> @enderror
                 </div>
             </div>
             <div class="flex flex-wrap mb-2">

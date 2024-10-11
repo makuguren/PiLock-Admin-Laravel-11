@@ -91,7 +91,7 @@
                             <td>
                                 <div class="">
                                     @if ($log->student_id)
-                                        {{ $log->student->name }}
+                                        {{ $log->student->first_name }} {{ $log->student->last_name }}
                                     @else
                                         No Student Name Found
                                     @endif
@@ -118,7 +118,7 @@
                             <td>
                                 <div class="">
                                     @if ($log->course_id)
-                                        {{ $log->course->instructor->name }}
+                                        {{ $log->course->instructor->first_name }} {{ $log->course->instructor->last_name }}
                                     @else
                                         No Instructor Found
                                     @endif

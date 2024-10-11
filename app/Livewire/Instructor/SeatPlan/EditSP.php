@@ -81,7 +81,7 @@ class EditSP extends Component
 
         if($seatQuery){
             $this->seat_id = $seatQuery->id;
-            $this->student_name = $seatQuery->student->name;
+            $this->student_name = $seatQuery->student->first_name . ' ' . $seatQuery->student->last_name;
             $this->seat_number = $seatQuery->seat_number;
         }
     }

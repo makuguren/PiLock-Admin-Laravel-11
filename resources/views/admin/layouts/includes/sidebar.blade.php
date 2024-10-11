@@ -40,7 +40,7 @@
             </li>
             @endcan
 
-            @can('View Analytics')
+            {{-- @can('View Analytics')
             <li class="mb-1 group {{ Request::is('admin/analytics') ? 'active':'' }}">
                 <a wire:navigate.hover href="{{ route('admin.analytics.index') }}"
                     class="flex items-center py-2 px-4 hover:bg-blue-400 hover:text-white rounded-md group-[.active]:bg-blue-700 group-[.active]:text-white group-[.selected]:bg-blue-700 group-[.selected]:text-gray-200">
@@ -48,7 +48,7 @@
                     <span class="text-sm">Analytics</span>
                 </a>
             </li>
-            @endcan
+            @endcan --}}
 
             {{-- @can('View Attendances')
             <li>

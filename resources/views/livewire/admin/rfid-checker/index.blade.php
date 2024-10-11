@@ -57,7 +57,7 @@
 
                     <div class="w-full">
                         <label class="label-text">Name</label>
-                        <input class="input input-bordered bg-base-300 block w-full py-3 px-4 mb-3" value="{{ $info->name ?? '' }}" type="text" placeholder="" disabled>
+                        <input class="input input-bordered bg-base-300 block w-full py-3 px-4 mb-3" value="{{ $info->first_name ?? '' }} {{ $info->last_name ?? '' }}" type="text" placeholder="" disabled>
                     </div>
 
                     <div class="w-full">

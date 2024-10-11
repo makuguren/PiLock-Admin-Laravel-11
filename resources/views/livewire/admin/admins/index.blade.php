@@ -42,7 +42,7 @@
                         @forelse ($admins as $admin)
                         <tr>
                             <td><div class="font-bold">{{ $admin->id }}</div></td>
-                            <td><div class="">{{ $admin->name }}</div></td>
+                            <td><div class="">{{ $admin->first_name }} {{ $admin->last_name }}</div></td>
                             <td>
                                 <div class="">
                                     @if ($admin->gender)

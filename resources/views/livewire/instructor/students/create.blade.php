@@ -6,7 +6,7 @@
             @csrf
             <div class="flex flex-row mb-2 place-items-center">
                 <div class="w-full px-3">
-                    <label class="label-text">Name</label>
+                    <label class="label-text">Student ID</label>
                     <input wire:model="search_student" id="addstud_search" class="input input-bordered bg-base-300 block w-full py-3 px-4 mb-3 form-control" type="text">
                     @error('search_student') <span class="error" role="alert">{{ $message }}</span> @enderror
                 </div>
@@ -18,10 +18,16 @@
             </div>
 
             <div class="flex flex-wrap mb-2">
-                <div class="w-full px-3">
-                    <label class="label-text">Name</label>
-                    <input wire:model="name" id="addstud_name" class="input input-bordered bg-base-300 block w-full py-3 px-4 mb-3 form-control" type="text" disabled>
-                    @error('name') <span class="error" role="alert">{{ $message }}</span> @enderror
+                <div class="w-full md:w-1/2 px-3">
+                    <label class="label-text">First Name</label>
+                    <input wire:model="first_name" id="addstud_fname" class="input input-bordered bg-base-300 block w-full py-3 px-4 mb-3 form-control" type="text" disabled>
+                    @error('first_name') <span class="error" role="alert">{{ $message }}</span> @enderror
+                </div>
+
+                <div class="w-full md:w-1/2 px-3">
+                    <label class="label-text">Last Name</label>
+                    <input wire:model="last_name" id="addstud_lname" class="input input-bordered bg-base-300 block w-full py-3 px-4 mb-3 form-control" type="text" disabled>
+                    @error('last_name') <span class="error" role="alert">{{ $message }}</span> @enderror
                 </div>
             </div>
 

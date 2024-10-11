@@ -20,7 +20,7 @@ class Current extends Component
     use WithPagination;
 
     public $selectedCourseSection, $selectedSubject, $selectedDate;
-    public $search_student, $student_id, $name, $section, $course_id;
+    public $search_student, $student_id, $first_name, $last_name, $section, $course_id;
 
     public function updatedSelectedCourseSection($value){
         $this->selectedCourseSection = $value;
@@ -34,10 +34,11 @@ class Current extends Component
     }
 
     public function findStudent(){
-        $student = User::where('name', $this->search_student)->first();
+        $student = User::where('student_id', $this->search_student)->first();
         if($student){
             $this->student_id = $student->id;
-            $this->name = $student->name;
+            $this->first_name = $student->first_name;
+            $this->last_name = $student->last_name;
             $this->section = $student->section->program . ' ' . $student->section->year . $student->section->block;
         } else {
             toastr()->error("Can't Find Student!");
@@ -80,7 +81,8 @@ class Current extends Component
     public function resetInput(){
         $this->search_student = '';
         $this->course_id = '';
-        $this->name = '';
+        $this->first_name = '';
+        $this->last_name = '';
         $this->section = '';
     }
 

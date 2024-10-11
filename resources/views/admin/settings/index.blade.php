@@ -75,9 +75,14 @@
                     @csrf
                     @method('patch')
                     <div class="flex flex-wrap mb-3">
-                        <div class="w-full px-3">
-                            <label class="label-text">Full Name</label>
-                            <input class="input input-bordered bg-base-300 block w-full py-3 px-4 mb-3 form-control" name="name" value="{{ $user->name }}" id="" type="text" placeholder="">
+                        <div class="w-full md:w-1/2 px-3">
+                            <label class="label-text">First Name</label>
+                            <input class="input input-bordered bg-base-300 block w-full py-3 px-4 mb-3 form-control" name="first_name" value="{{ $user->first_name }}" id="" type="text" placeholder="">
+                        </div>
+
+                        <div class="w-full md:w-1/2 px-3">
+                            <label class="label-text">Last Name</label>
+                            <input class="input input-bordered bg-base-300 block w-full py-3 px-4 mb-3 form-control" name="last_name" value="{{ $user->last_name }}" id="" type="text" placeholder="">
                         </div>
                     </div>
 

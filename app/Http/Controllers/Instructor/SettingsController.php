@@ -21,7 +21,8 @@ class SettingsController extends Controller
         $validatedData = $request->validated();
 
         $instructorprofile->update([
-            'name' => $validatedData['name'],
+            'first_name' => $validatedData['first_name'],
+            'last_name' => $validatedData['last_name'],
             'email' => $validatedData['email'],
             'instructor_theme' => $validatedData['instructor_theme']
         ]);

@@ -50,7 +50,7 @@
                 <div class="flex flex-wrap mb-6">
                     <div class="w-full px-3">
                         <label class="label-text" for="">Name</label>
-                        <input class="input input-bordered w-full bg-base-300" name="name" value="{{ $student->name ?? '' }}" type="text" placeholder="" disabled>
+                        <input class="input input-bordered w-full bg-base-300" name="name" value="{{ $student->first_name ?? '' }} {{ $student->last_name ?? '' }}" type="text" placeholder="" disabled>
                     </div>
                 </div>
 

@@ -25,7 +25,7 @@
                     @elseif (!isset($seatplansArray[$seat]))
                         <div id="{{ $seat }}" ondrop="drop(event)" ondragover="allowDrop(event)" class="box w-12 h-12 flex justify-center items-center m-1 border border-black bg-blue-700">{{ $seat }}</div>
                     @else
-                        <div wire:click="viewSeat({{ $seatplansArray[$seat]['id'] }})" id="{{ $seat }}" ondrop="drop(event)" ondragover="allowDrop(event)" class="box tooltip w-12 h-12 flex justify-center items-center m-1 border border-black bg-red-700" data-tip="{{ $seatplansArray[$seat]['student']['name'] ?? '' }}">{{ $seat }}</div>
+                        <div wire:click="viewSeat({{ $seatplansArray[$seat]['id'] }})" id="{{ $seat }}" ondrop="drop(event)" ondragover="allowDrop(event)" class="box tooltip w-12 h-12 flex justify-center items-center m-1 border border-black bg-red-700" data-tip="{{ $seatplansArray[$seat]['student']['first_name'] ?? '' }} {{ $seatplansArray[$seat]['student']['last_name'] ?? '' }}">{{ $seat }}</div>
                     @endif
                 @endforeach
             </div>

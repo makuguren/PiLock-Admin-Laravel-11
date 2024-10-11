@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 class Index extends Component
 {
     public $selectedCourseSection;
-    public $enroll_id, $student_id, $course_id, $search_student, $name, $section, $blkcourse_id, $blkstudent_id;
+    public $enroll_id, $student_id, $course_id, $search_student, $first_name, $last_name, $section, $blkcourse_id, $blkstudent_id;
 
     public function updatedSelectedCourseSection($value){
         $this->selectedCourseSection = $value;
@@ -20,10 +20,11 @@ class Index extends Component
     }
 
     public function findStudent(){
-        $student = User::where('name', $this->search_student)->first();
+        $student = User::where('student_id', $this->search_student)->first();
         if($student) {
             $this->student_id = $student->id;
-            $this->name = $student->name;
+            $this->first_name = $student->first_name;
+            $this->last_name = $student->last_name;
             $this->section = $student->section->program . ' ' . $student->section->year . $student->section->block;
         } else {
             toastr()->error("Can't Find Student!");
@@ -76,7 +77,8 @@ class Index extends Component
 
     public function resetInput(){
         $this->search_student = '';
-        $this->name = '';
+        $this->first_name = '';
+        $this->last_name = '';
         $this->section = '';
         $this->course_id = '';
     }

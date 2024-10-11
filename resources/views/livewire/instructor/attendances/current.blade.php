@@ -86,12 +86,12 @@
                                           </div>
                                         </div>
                                         <div>
-                                          <div class="font-bold">{{ $attendance->student->name }}</div>
+                                          <div class="font-bold">{{ $attendance->student->first_name }} {{ $attendance->student->last_name }}</div>
                                           <div class="text-sm opacity-50">{{ $attendance->student->email }}</div>
                                         </div>
                                     </div>
                                 </td>
-                                <td><div class="">{{ $course->instructor->name }}</div></td>
+                                <td><div class="">{{ $course->instructor->first_name }} {{ $course->instructor->last_name }}</div></td>
                                 <td><div class="">{{ $attendance->student->section->program }} {{ $attendance->student->section->year }}{{ $attendance->student->section->block }}</div></td>
                                 <td><div class="">{{ $course->course_title }}</div></td>
                                 <td><div class="">{{ $attendance->date }}</div></td>
@@ -135,7 +135,8 @@
             document.getElementById('addStudent_modal').checked = false;
 
             document.getElementById('addstud_search').value = '';
-            document.getElementById('addstud_name').value = '';
+            document.getElementById('addstud_fname').value = '';
+            document.getElementById('addstud_lname').value = '';
             document.getElementById('addstud_section').value = '';
             document.getElementById('addstud_courseId').value = '';
         }

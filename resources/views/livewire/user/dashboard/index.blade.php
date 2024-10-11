@@ -56,7 +56,7 @@
                             @forelse ($attendances as $attendance)
                                 <tr>
                                     <td><div class="">{{ $attendance->date }}</div></td>
-                                    <td><div class="">{{ $attendance->course->instructor->name }}</div></td>
+                                    <td><div class="">{{ $attendance->course->instructor->first_name }} {{ $attendance->course->instructor->last_name }}</div></td>
                                     <td><div class="">{{ $attendance->student->section->program }} {{ $attendance->student->section->year }}{{ $attendance->student->section->block }}</div></td>
                                     <td><div class="">{{ $attendance->course->course_title }}</div></td>
                                     <td>

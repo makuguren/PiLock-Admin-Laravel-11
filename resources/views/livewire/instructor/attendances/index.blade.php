@@ -83,12 +83,12 @@
                                         </div>
                                         </div>
                                         <div>
-                                        <div class="font-bold">{{ $attendance->student->name }}</div>
+                                        <div class="font-bold">{{ $attendance->student->first_name }} {{ $attendance->student->last_name }}</div>
                                         <div class="text-sm opacity-50">{{ $attendance->student->email }}</div>
                                         </div>
                                     </div>
                                 </td>
-                                <td><div class="">{{ $attendance->course->instructor->name }}</div></td>
+                                <td><div class="">{{ $attendance->course->instructor->first_name }} {{ $attendance->course->instructor->last_name }}</div></td>
                                 <td><div class="">{{ $attendance->student->section->program }} {{ $attendance->student->section->year }}{{ $attendance->student->section->block }}</div></td>
                                 <td><div class="">{{ $attendance->course->course_title }}</div></td>
                                 <td><div class="">{{ $attendance->date }}</div></td>

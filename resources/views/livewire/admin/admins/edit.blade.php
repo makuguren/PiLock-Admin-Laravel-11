@@ -28,10 +28,16 @@
                 @csrf
                 @method('PUT')
                 <div class="flex flex-wrap mb-3">
-                    <div class="w-full px-3">
-                        <label class="label-text">Name</label>
-                        <input class="input input-bordered bg-base-300 block w-full py-3 px-4 mb-3" name="name" value="{{ $admin->name }}" type="text" placeholder="">
-                        @error('name')<small class="text-danger">{{$message}}</small> @enderror
+                    <div class="w-full md:w-1/2 px-3">
+                        <label class="label-text">First Name</label>
+                        <input class="input input-bordered bg-base-300 block w-full py-3 px-4 mb-3" name="first_name" value="{{ $admin->first_name }}" type="text" placeholder="">
+                        @error('first_name')<small class="text-danger">{{$message}}</small> @enderror
+                    </div>
+
+                    <div class="w-full md:w-1/2 px-3">
+                        <label class="label-text">Last Name</label>
+                        <input class="input input-bordered bg-base-300 block w-full py-3 px-4 mb-3" name="last_name" value="{{ $admin->last_name }}" type="text" placeholder="">
+                        @error('last_name')<small class="text-danger">{{$message}}</small> @enderror
                     </div>
                 </div>
                 <div class="flex flex-wrap mb-4">
@@ -46,14 +52,13 @@
                     </div>
                 </div>
                 <div class="flex flex-wrap mb-3">
-                    <div class="w-full px-3">
+                    <div class="w-full md:w-1/2 px-3">
                         <label class="label-text">Email</label>
                         <input class="input input-bordered bg-base-300 block w-full py-3 px-4 mb-3" name="email" readonly value="{{ $admin->email }}" type="email" placeholder="">
                         @error('email')<small class="text-danger">{{$message}}</small> @enderror
                     </div>
-                </div>
-                <div class="flex flex-wrap mb-3">
-                    <div class="w-full px-3">
+
+                    <div class="w-full md:w-1/2 px-3">
                         <label class="label-text">Password</label>
                         <input class="input input-bordered bg-base-300 block w-full py-3 px-4 mb-3" name="password" type="password" placeholder="">
                         @error('password')<small class="text-danger">{{$message}}</small> @enderror

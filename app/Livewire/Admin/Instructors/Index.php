@@ -11,12 +11,13 @@ use Illuminate\Database\QueryException;
 class Index extends Component
 {
     use WithPagination;
-    public $name, $gender, $email, $password, $instructor_id, $taguid;
+    public $first_name, $last_name, $gender, $email, $password, $instructor_id, $taguid;
 
     // Validations
     protected function rules(){
         return [
-            'name' => 'required|string|max:255',
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
             'gender' => 'required|integer',
             'email' => 'required|email|max:255|unique:instructors,email',
             'password' => 'required|string|min:8|max:20'
@@ -39,7 +40,8 @@ class Index extends Component
         $validatedData = $this->validate();
 
         Instructor::create([
-            'name' => $validatedData['name'],
+            'first_name' => $validatedData['first_name'],
+            'last_name' => $validatedData['last_name'],
             'gender' => $validatedData['gender'],
             'email' => $validatedData['email'],
             'password' => Hash::make($validatedData['password'])
@@ -55,7 +57,8 @@ class Index extends Component
         $instructor = Instructor::find($instructor_id);
         if($instructor){
             $this->instructor_id = $instructor->id;
-            $this->name = $instructor->name;
+            $this->first_name = $instructor->first_name;
+            $this->last_name = $instructor->last_name;
             $this->gender = $instructor->gender;
             $this->email = $instructor->email;
         } else {
@@ -65,14 +68,16 @@ class Index extends Component
 
     public function updateInstructor(){
         $validatedData = $this->validate([
-            'name' => 'required|string|max:255',
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
             'gender' => 'required|integer',
             'email' => 'required|email|max:255',
             'password' => 'nullable|string|min:8|max:20'
         ]);
 
         $data = [
-            'name' => $validatedData['name'],
+            'first_name' => $validatedData['first_name'],
+            'last_name' => $validatedData['last_name'],
             'gender' => $validatedData['gender'],
             'email' => $validatedData['email'],
         ];
@@ -125,7 +130,8 @@ class Index extends Component
     }
 
     public function resetInput(){
-        $this->name = '';
+        $this->first_name = '';
+        $this->last_name = '';
         $this->gender = '';
         $this->email = '';
         $this->password = '';

@@ -25,7 +25,7 @@
 
                 <div class="w-full md:w-1/2 px-3">
                     <label class="label-text">Instructor</label>
-                    <input value="{{ $instructor_name ?? '' }}" id="instructor_name" class="input input-bordered bg-base-300 block w-full py-3 px-4 mb-3 form-control" type="name" disabled>
+                    <input value="{{ $instructor_fname ?? '' }} {{ $instructor_lname ?? '' }}" id="instructor_name" class="input input-bordered bg-base-300 block w-full py-3 px-4 mb-3 form-control" type="name" disabled>
                 </div>
             </div>
 

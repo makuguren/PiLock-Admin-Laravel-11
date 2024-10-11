@@ -59,7 +59,7 @@
                                     {{ $course->section->year }}{{ $course->section->block }}
                                 </div>
                             </td>
-                            <td><div class="">{{ $course->instructor->name }}</div></td>
+                            <td><div class="">{{ $course->instructor->first_name }} {{ $course->instructor->last_name }}</div></td>
                             {{-- <td><div class="">{{ $course->course_key }}</div></td> --}}
                             <th>
                                 <div class="flex flex-row space-x-2">

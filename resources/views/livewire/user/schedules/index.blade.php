@@ -45,7 +45,7 @@
                             <td>
                                 <div class="">
                                     @if ($schedule->course_id)
-                                        {{ $schedule->course->instructor->name }}
+                                        {{ $schedule->course->instructor->first_name }} {{ $schedule->course->instructor->last_name }}
                                     @else
                                         No Instructor
                                     @endif

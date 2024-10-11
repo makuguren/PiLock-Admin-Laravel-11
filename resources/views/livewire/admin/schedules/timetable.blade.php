@@ -141,7 +141,7 @@
 
                                     <td wire:click="viewSchedule({{ $schedule->id }})" rowspan="{{ $rowspan }}" style="background: orange;">
                                         {{ $schedule->course->course_code }}<br>
-                                        {{ $schedule->course->instructor->name }}<br>
+                                        @if ($schedule->course->instructor->gender == '1') MR. @else MS. @endif {{-- strtoupper($schedule->course->instructor->first_name[0]) --}} {{ strtoupper($schedule->course->instructor->last_name) }}<br>
                                         {{ $schedule->course->section->program }} {{ $schedule->course->section->year }}{{ $schedule->course->section->block }}
                                     </td>
                                 @else

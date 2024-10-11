@@ -23,7 +23,8 @@ class StudentFormRequest extends FormRequest
     {
         return [
             'student_id' => 'required|string|unique:users,student_id',
-            'name' => 'required|string',
+            'first_name' => 'required|string',
+            'last_name' => 'required|string',
             'section_id' => 'required|integer',
             'gender' => 'required|integer',
             'birthdate' => 'required|date',

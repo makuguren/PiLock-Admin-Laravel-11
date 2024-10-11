@@ -35,7 +35,7 @@ class SchedulesController extends Controller
                     return [
                         'id' => $schedule->id,
                         'course_title' => $schedule->course->course_title,
-                        'instructor' => $schedule->course->instructor->name,
+                        'instructor' => $schedule->course->instructor->first_name . ' ' . $schedule->course->instructor->last_name,
                         'section' => $schedule->course->section->program . ' ' . $schedule->course->section->year . $schedule->course->section->block,
                         'days' => $schedule->days,
                         'time_start' => $schedule->time_start,
@@ -59,7 +59,7 @@ class SchedulesController extends Controller
                     return [
                         'id' => $schedule->id,
                         'course_title' => $schedule->course->course_title,
-                        'instructor' => $schedule->course->instructor->name,
+                        'instructor' => $schedule->course->instructor->first_name . ' ' . $schedule->course->instructor->last_name,
                         'section' => $schedule->course->section->program . ' ' . $schedule->course->section->year . $schedule->course->section->block,
                         'days' => $schedule->days,
                         'time_start' => $schedule->time_start,
@@ -84,7 +84,7 @@ class SchedulesController extends Controller
                     return [
                         'id' => $schedule->id,
                         'course_title' => $schedule->course->course_title,
-                        'instructor' => $schedule->course->instructor->name,
+                        'instructor' => $schedule->course->instructor->first_name . ' ' . $schedule->course->instructor->last_name,
                         'section' => $schedule->course->section->program . ' ' . $schedule->course->section->year . $schedule->course->section->block,
                         'days' => $schedule->days,
                         'time_start' => $schedule->time_start,
@@ -129,7 +129,7 @@ class SchedulesController extends Controller
                             'id' => $curschedule->id,
                             'sched_type' => 'Regular Class/Make-Up Schedules',
                             'course_title' => $curschedule->course->course_title,
-                            'instructor' => $curschedule->course->instructor->name,
+                            'instructor' => $curschedule->course->instructor->first_name . ' ' . $curschedule->course->instructor->last_name,
                             'section' => $curschedule->course->section->program . ' ' . $curschedule->course->section->year . $curschedule->course->section->block,
                             'days' => $curschedule->days,
                             'time_start' => $curschedule->time_start,

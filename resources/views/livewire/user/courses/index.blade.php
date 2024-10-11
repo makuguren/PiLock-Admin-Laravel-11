@@ -25,7 +25,7 @@
                     <div class="bg-base-200 border-gray-200 shadow-md shadow-black/5 p-6 rounded-md">
                         <div class="font-bold text-lg">{{ $course->course_title }}</div>
                         <div class="text-sm mb-3">{{ $course->course_code }} | {{ $course->section->program }} {{ $course->section->year }}{{ $course->section->block }}</div>
-                        <div class="mt-3">Instructor: {{ $course->instructor->name }}</div>
+                        <div class="mt-3">Instructor: {{ $course->instructor->first_name }} {{ $course->instructor->last_name }}</div>
 
                         {{-- Check if the Course is Enrolled or Not. --}}
                         @if(in_array($course->id, $checkEnrollCourse))

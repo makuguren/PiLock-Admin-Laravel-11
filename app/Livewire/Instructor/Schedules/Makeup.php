@@ -15,7 +15,7 @@ class Makeup extends Component
 {
     use WithPagination;
     public $schedule_id, $course_id, $days, $time_start, $time_end;
-    public $instructor_name;
+    public $instructor_fname, $instructor_lname;
 
     //Validations
     protected function rules(){
@@ -35,7 +35,8 @@ class Makeup extends Component
     public function fetchCourseDetails(int $course_id){
         $fetchCourse = Course::find($course_id);
         if($fetchCourse){
-            $this->instructor_name = $fetchCourse->instructor->name;
+            $this->instructor_fname = $fetchCourse->instructor->first_name;
+            $this->instructor_lname = $fetchCourse->instructor->last_name;
         }
     }
 
@@ -66,7 +67,8 @@ class Makeup extends Component
         if($schedule){
             $this->schedule_id = $schedule->id;
             $this->course_id = $schedule->course_id;
-            $this->instructor_name = $schedule->course->instructor->name;
+            $this->instructor_fname = $schedule->course->instructor->first_name;
+            $this->instructor_lname = $schedule->course->instructor->last_name;
             $this->days = $schedule->days;
             $this->time_start = $schedule->time_start;
             $this->time_end = $schedule->time_end;

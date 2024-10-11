@@ -110,7 +110,8 @@ class AdminRolePermissionSeeder extends Seeder
         $superAdminUser = Admin::firstOrCreate([
             'email' => 'superadmin@gmail.com',
         ], [
-            'name' => 'Super-Admin',
+            'first_name' => 'Super',
+            'last_name' => 'Admin',
             'email' => 'superadmin@gmail.com',
             'password' => Hash::make('password'),
             'admin_theme' => 'light'

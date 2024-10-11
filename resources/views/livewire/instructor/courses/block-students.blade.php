@@ -75,7 +75,7 @@
                                         </div>
                                         </div>
                                         <div>
-                                        <div class="font-bold">{{ $blockedCourse->student->name }}</div>
+                                        <div class="font-bold">{{ $blockedCourse->student->first_name }} {{ $blockedCourse->student->last_name }}</div>
                                         <div class="text-sm opacity-50">{{ $blockedCourse->student->email }}</div>
                                         </div>
                                     </div>

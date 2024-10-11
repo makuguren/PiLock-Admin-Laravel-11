@@ -111,7 +111,7 @@
                                           </div>
                                         </div>
                                         <div>
-                                          <div class="font-bold">{{ $student->name }}</div>
+                                          <div class="font-bold">{{ $student->first_name }} {{ $student->last_name }}</div>
                                           <div class="text-sm opacity-50">{{ $student->email }}</div>
                                         </div>
                                     </div>

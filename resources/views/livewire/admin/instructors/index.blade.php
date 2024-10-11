@@ -69,7 +69,7 @@
                                     @endif
                                 </div>
                             </td>
-                            <td><div class="">{{ $instructor->name }}</div></td>
+                            <td><div class="">{{ $instructor->first_name }} {{ $instructor->last_name }}</div></td>
                             <td>
                                 <div class="">
                                     @if ($instructor->gender)
@@ -142,7 +142,8 @@
             document.getElementById('disable_modal').checked = false;
 
             //Clear all the Values in Text Inputs (Instructors)
-            document.getElementById('addinst_name').value = '';
+            document.getElementById('addinst_first').value = '';
+            document.getElementById('addinst_last').value = '';
             document.getElementById('addgender').value = '';
             document.getElementById('addinst_email').value = '';
             document.getElementById('addinst_password').value = '';

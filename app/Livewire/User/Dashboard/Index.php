@@ -14,7 +14,7 @@ use Livewire\WithPagination;
 
 class Index extends Component
 {
-    public $student_id, $section_id, $gender, $program, $year, $block, $birthdate;
+    public $full_name, $first_name, $last_name, $student_id, $section_id, $gender, $program, $year, $block, $birthdate;
     public $greetMessage, $genderGreeting;
 
     use WithPagination;
@@ -22,6 +22,8 @@ class Index extends Component
     //Validations
     protected function rules(){
         return [
+            'first_name' => 'required|string',
+            'last_name' => 'required|string',
             'student_id' => 'required|string|unique:users,student_id',
             'program' => 'required|string',
             'year' => 'required|integer',
@@ -58,6 +60,8 @@ class Index extends Component
         // Update StudentInfo
         $studentInfo = User::findOrFail(Auth::user()->id);
         $studentInfo->update([
+            'first_name' => $validatedData['first_name'],
+            'last_name' => $validatedData['last_name'],
             'student_id' => $validatedData['student_id'],
             'section_id' => $this->section_id,
             'gender' => $validatedData['gender'],
@@ -70,6 +74,8 @@ class Index extends Component
     }
 
     public function resetInput(){
+        $this->first_name = '';
+        $this->last_name = '';
         $this->student_id = '';
         $this->section_id = '';
         $this->birthdate = '';
@@ -111,6 +117,14 @@ class Index extends Component
                 ->where('isCurrent', '0')
                 ->orderBy('date', 'ASC')
                 ->paginate(5);
+
+        // Fetch Student's Full Name after Connected to Google Account
+        $this->full_name = Auth::user()->name;
+
+        // Split into First Name and Last Name (Eg. Juan Dela Cruz)
+        $nameParts = explode(' ', trim(Auth::user()->name));
+        $this->last_name = array_pop($nameParts);
+        $this->first_name = implode(' ', $nameParts);
 
         // Check if the Student's Update their Details
         $sections = Section::all();

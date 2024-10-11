@@ -32,7 +32,7 @@ class CourseImport implements ToModel, WithHeadingRow, WithValidation
         );
 
         // Find the existing instructor based on instructor name
-        $instructor = Instructor::where('name', $row['instructor_name'])->first();
+        $instructor = Instructor::where('first_name', $row['instructor_fname'])->where('last_name', $row['instructor_lname'])->first();
 
         // If the instructor exists, create or update the course
         if ($instructor) {
@@ -53,7 +53,8 @@ class CourseImport implements ToModel, WithHeadingRow, WithValidation
         return [
             '*.course_code'      => 'required|string',
             '*.course_title'     => 'required|string|max:255',
-            '*.instructor_name'  => 'required|string|exists:instructors,name',
+            '*.instructor_fname'  => 'required|string|exists:instructors,first_name',
+            '*.instructor_lname'  => 'required|string|exists:instructors,last_name',
             '*.program'          => 'required|string|in:BSIT,BSCS,BLIS,BSIS', // Add other valid programs as needed
             '*.year'             => 'required|integer|between:1,4',
             '*.block'            => 'required|string|size:1|alpha',
@@ -65,7 +66,8 @@ class CourseImport implements ToModel, WithHeadingRow, WithValidation
         return [
             '*.course_code.required' => 'Course code is required.',
             '*.course_title.required' => 'Course title is required.',
-            '*.instructor_name.exists' => 'Instructor name must exist in the database.',
+            '*.instructor_fname.exists' => 'Instructor First Name must exist in the database.',
+            '*.instructor_lname.exists' => 'Instructor Last Name must exist in the database.',
             '*.program.in'            => 'Program must be BSIT or other valid codes.',
             '*.year.between'          => 'Year must be between 1 and 4.',
             '*.block.alpha'           => 'Block must be a single letter.',

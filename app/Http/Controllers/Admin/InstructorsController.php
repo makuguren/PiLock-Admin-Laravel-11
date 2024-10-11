@@ -17,7 +17,8 @@ class InstructorsController extends Controller
                     return [
                         'id' => $instructor->id,
                         'tag_uid' => $instructor->tag_uid,
-                        'instructor_name' => $instructor->name,
+                        'instructor_fname' => $instructor->first_name,
+                        'instructor_lname' => $instructor->last_name,
                         'instructor_email' => $instructor->email
                     ];
                 })
@@ -38,7 +39,8 @@ class InstructorsController extends Controller
                     return [
                         'id' => $inst->id,
                         'tag_uid' => $inst->tag_uid,
-                        'instructor_name' => $inst->name,
+                        'instructor_fname' => $inst->first_name,
+                        'instructor_lname' => $inst->last_name,
                         'instructor_email' => $inst->email
                     ];
                 })

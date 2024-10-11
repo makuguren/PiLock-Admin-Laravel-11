@@ -53,7 +53,8 @@ class SettingsController extends Controller implements HasMiddleware
         $validatedData = $request->validated();
 
         $adminprofile->update([
-            'name' => $validatedData['name'],
+            'first_name' => $validatedData['first_name'],
+            'last_name' => $validatedData['last_name'],
             'email' => $validatedData['email'],
             'admin_theme' => $validatedData['admin_theme']
         ]);

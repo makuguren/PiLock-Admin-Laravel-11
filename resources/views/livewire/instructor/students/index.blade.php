@@ -84,7 +84,7 @@
                                               </div>
                                             </div>
                                             <div>
-                                              <div class="font-bold">{{ $enrolledstd->student->name }}</div>
+                                              <div class="font-bold">{{ $enrolledstd->student->first_name }} {{ $enrolledstd->student->last_name }}</div>
                                               <div class="text-sm opacity-50">{{ $enrolledstd->student->email }}</div>
                                             </div>
                                         </div>
@@ -101,7 +101,7 @@
                                     </td>
                                     <td>
                                         <div>
-                                            {{ $enrolledstd->course->instructor->name }}
+                                            {{ $enrolledstd->course->instructor->first_name }} {{ $enrolledstd->course->instructor->last_name }}
                                         </div>
                                     </td>
                                     <th>
@@ -148,7 +148,8 @@
             document.getElementById('unenroll_modal').checked = false;
 
             document.getElementById('addstud_search').value = '';
-            document.getElementById('addstud_name').value = '';
+            document.getElementById('addstud_fname').value = '';
+            document.getElementById('addstud_lname').value = '';
             document.getElementById('addstud_section').value = '';
             document.getElementById('addstud_courseId').value = '';
         }

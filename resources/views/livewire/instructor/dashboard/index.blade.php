@@ -8,7 +8,7 @@
     <div class="p-6">
         <div class="flex flex-row">
             <div class="flex flex-col w-full">
-                <h1 class="font-bold text-2xl mb-2">{{ $greetMessage }}, {{ $genderGreeting }} {{ Auth::user()->name }}!</h1>
+                <h1 class="font-bold text-2xl mb-2">{{ $greetMessage }}, {{ $genderGreeting }} {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}!</h1>
                 <ul class="flex items-center text-sm mb-6">
                     <li class="mr-2">
                         <a href="#" class="text-gray-400 hover:text-gray-600 font-medium">Instructor Dashboard</a>

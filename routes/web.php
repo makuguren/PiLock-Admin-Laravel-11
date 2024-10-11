@@ -71,10 +71,10 @@ Route::middleware(['auth:admin', App\Http\Middleware\AdminComponentLayout::class
     });
 
     // Analytics Routes
-    Route::prefix('analytics')->group(function () {
-        Route::get('/', App\Livewire\Admin\Analytics\Index::class)->name('analytics.index')
-            ->middleware('permission:View Analytics');
-    });
+    // Route::prefix('analytics')->group(function () {
+    //     Route::get('/', App\Livewire\Admin\Analytics\Index::class)->name('analytics.index')
+    //         ->middleware('permission:View Analytics');
+    // });
 
     //Sections Routes
     Route::prefix('sections')->group(function () {

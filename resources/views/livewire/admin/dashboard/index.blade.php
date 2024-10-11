@@ -5,7 +5,7 @@
     <div class="p-6">
         <div class="flex flex-row">
             <div class="flex flex-col w-full">
-                <h1 class="font-bold text-2xl mb-2">{{ $greetMessage }}, {{ $genderGreeting }} {{ Auth::user()->name }}!</h1>
+                <h1 class="font-bold text-2xl mb-2">{{ $greetMessage }}, {{ $genderGreeting }} {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}!</h1>
                 <ul class="flex items-center text-sm mb-6">
                     <li class="mr-2">
                         <a href="#" class="text-gray-400 hover:text-gray-600 font-medium">Admin Dashboard</a>
@@ -189,7 +189,7 @@
                             @endif
                         </div>
                         <div class="text-md">Course Title: {{ $schedulesNow->course->course_title }}</div>
-                        <div class="text-md">Instructor: {{ $schedulesNow->course->instructor->name }}</div>
+                        <div class="text-md">Instructor: {{ $schedulesNow->course->instructor->first_name }} {{ $schedulesNow->course->instructor->last_name }}</div>
                         <div class="text-md">Section: {{ $schedulesNow->course->section->program }} {{ $schedulesNow->course->section->year }}{{ $schedulesNow->course->section->block }}</div>
                         <div class="text-md">Day: {{ $schedulesNow->days }}</div>
                         <div class="text-md">Time Frame: {{ Carbon\Carbon::parse($schedulesNow->time_start)->format('h:i A') }} to {{ Carbon\Carbon::parse($schedulesNow->time_end)->format('h:i A') }}</div>

@@ -48,7 +48,8 @@ class StudentsController extends Controller implements HasMiddleware
 
         User::create([
             'student_id' => $validatedData['student_id'],
-            'name' => $validatedData['name'],
+            'first_name' => $validatedData['first_name'],
+            'last_name' => $validatedData['last_name'],
             'section_id' => $validatedData['section_id'],
             'gender' => $validatedData['gender'],
             'birthdate' => $validatedData['birthdate'],
@@ -71,7 +72,8 @@ class StudentsController extends Controller implements HasMiddleware
     public function updateStudent(Request $request, int $student_id){
         $validatedData = $request->validate([
             'student_id' => 'required|string',
-            'name' => 'required|string',
+            'first_name' => 'required|string',
+            'last_name' => 'required|string',
             'section_id' => 'required|integer',
             'gender' => 'required|integer',
             'birthdate' => 'required|date',
@@ -80,7 +82,8 @@ class StudentsController extends Controller implements HasMiddleware
 
         $data = [
             'student_id' => $validatedData['student_id'],
-            'name' => $validatedData['name'],
+            'first_name' => $validatedData['first_name'],
+            'last_name' => $validatedData['last_name'],
             'section_id' => $validatedData['section_id'],
             'gender' => $validatedData['gender'],
             'birthdate' => $validatedData['birthdate'],
@@ -108,7 +111,8 @@ class StudentsController extends Controller implements HasMiddleware
                         'id' => $student->id,
                         'student_id' => $student->student_id,
                         'tag_uid' => $student->tag_uid,
-                        'name' => $student->name,
+                        'first_name' => $student->first_name,
+                        'last_name' => $student->last_name,
                         'program' => $student->section->program ?? null,
                         'year' => $student->section->year ?? null,
                         'block' => $student->section->block ?? null,
@@ -134,7 +138,8 @@ class StudentsController extends Controller implements HasMiddleware
                         'id' => $student->id,
                         'student_id' => $student->student_id,
                         'tag_uid' => $student->tag_uid,
-                        'name' => $student->name,
+                        'first_name' => $student->first_name,
+                        'last_name' => $student->last_name,
                         'program' => $student->section->program ?? null,
                         'year' => $student->section->year ?? null,
                         'block' => $student->section->block ?? null,

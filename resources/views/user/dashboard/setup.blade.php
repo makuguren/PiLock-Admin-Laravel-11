@@ -6,6 +6,31 @@
     <h3 class="text-sm">Please Setup your Information for the First time to Continue.</h3>
     <form wire:submit.prevent="updateStudentInfo" method="dialog" class="w-full mt-6">
         @csrf
+
+        <div class="flex flex-wrap mb-2">
+            <div class="w-full px-3">
+                <label class="label-text">Full Name</label>
+                <input wire:model="full_name" id="addfull_name" class="input input-bordered bg-base-300 block w-full py-3 px-4 mb-3 form-control" type="text" disabled>
+                @error('full_name') <span class="error text-sm text-red-600 space-y-1" role="alert">{{ $message }}</span> @enderror
+            </div>
+        </div>
+
+        <div class="flex flex-wrap mb-2">
+            <div class="w-full px-3">
+                <label class="label-text">First Name</label>
+                <input wire:model="first_name" id="addfirst_name" class="input input-bordered bg-base-300 block w-full py-3 px-4 mb-3 form-control" type="text">
+                @error('first_name') <span class="error text-sm text-red-600 space-y-1" role="alert">{{ $message }}</span> @enderror
+            </div>
+        </div>
+
+        <div class="flex flex-wrap mb-2">
+            <div class="w-full px-3">
+                <label class="label-text">Last Name</label>
+                <input wire:model="last_name" id="addstudent_id" class="input input-bordered bg-base-300 block w-full py-3 px-4 mb-3 form-control" type="text">
+                @error('last_name') <span class="error text-sm text-red-600 space-y-1" role="alert">{{ $message }}</span> @enderror
+            </div>
+        </div>
+
         <div class="flex flex-wrap mb-2">
             <div class="w-full px-3">
                 <label class="label-text">Student ID</label>

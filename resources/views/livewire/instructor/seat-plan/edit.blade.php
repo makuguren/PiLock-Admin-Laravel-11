@@ -74,7 +74,7 @@
                             @foreach ($fetchStudentList->seatplan as $seatplan)
 
                                 <div class="bg-base-300">
-                                    <li class="mb-4" id="item{{ $count+1 }}" value="{{ $seatplan->student_id }}" draggable="true" ondragstart="drag(event)">{{ $seatplan->student->name }}</li>
+                                    <li class="mb-4" id="item{{ $count+1 }}" value="{{ $seatplan->student_id }}" draggable="true" ondragstart="drag(event)">{{ $seatplan->student->first_name }} {{ $seatplan->student->last_name }}</li>
                                 </div>
 
                             @endforeach

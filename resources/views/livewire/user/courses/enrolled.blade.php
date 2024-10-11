@@ -25,8 +25,8 @@
                     <div class="bg-base-200 border-gray-200 shadow-md shadow-black/5 p-6 rounded-md">
                         <div class="font-bold text-lg">{{ $enrolledCourse->course->course_title }}</div>
                         <div class="text-sm mb-3">{{ $enrolledCourse->course->course_code }} | {{ $enrolledCourse->course->section->program }} {{ $enrolledCourse->course->section->year }}{{ $enrolledCourse->course->section->block }}</div>
-                        <div class="">Lorem ipsum dolor sit amet consectetur adipisicing elit. At ipsa commodi tempora qui libero. Temporibus veritatis debitis fugiat deserunt recusandae aspernatur magni unde. Commodi temporibus, suscipit amet qui error dolorem?</div>
-                        <div class="mt-3">Instructor: {{ $enrolledCourse->course->instructor->name }}</div>
+                        {{-- <div class="">Lorem ipsum dolor sit amet consectetur adipisicing elit. At ipsa commodi tempora qui libero. Temporibus veritatis debitis fugiat deserunt recusandae aspernatur magni unde. Commodi temporibus, suscipit amet qui error dolorem?</div> --}}
+                        <div class="mt-3">Instructor: {{ $enrolledCourse->course->instructor->first_name }} {{ $enrolledCourse->course->instructor->last_name }}</div>
 
                         <label for="unenroll_modal" wire:click="getEnrolledCourseID({{ $enrolledCourse->id }})" class="btn bg-red-700 hover:bg-red-500 text-white mt-6">
                             Unenroll

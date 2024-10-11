@@ -38,10 +38,16 @@
                 </div>
 
                 <div class="flex flex-wrap mb-6">
-                    <div class="w-full px-3">
-                        <label class="label-text" for="grid-name">Name</label>
-                        <input class="input input-bordered w-full bg-base-300" name="name" value="{{ $student->name }}" type="text" placeholder="">
-                        @error('name')<small class="text-danger">{{$message}}</small> @enderror
+                    <div class="w-full md:w-1/2 px-3">
+                        <label class="label-text" for="grid-name">First Name</label>
+                        <input class="input input-bordered w-full bg-base-300" name="first_name" value="{{ $student->first_name }}" type="text" placeholder="">
+                        @error('first_name')<small class="text-danger">{{$message}}</small> @enderror
+                    </div>
+
+                    <div class="w-full md:w-1/2 px-3">
+                        <label class="label-text" for="grid-name">Last Name</label>
+                        <input class="input input-bordered w-full bg-base-300" name="last_name" value="{{ $student->last_name }}" type="text" placeholder="">
+                        @error('last_name')<small class="text-danger">{{$message}}</small> @enderror
                     </div>
                 </div>
 
