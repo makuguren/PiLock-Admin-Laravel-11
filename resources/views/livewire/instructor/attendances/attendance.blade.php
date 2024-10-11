@@ -70,7 +70,7 @@
     <table class="info-table">
         <tr>
             <td>Subject Code: {{ $course_code }}</td>
-            <td>Instructor: {{ Auth::user()->name }}</td>
+            <td>Instructor: {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</td>
             <td>Date: {{ $date }}</td>
         </tr>
     </table>
@@ -91,7 +91,7 @@
                 @endphp --}}
                 <tr>
                     <td>{{ $attendance->student->student_id }}</td>
-                    <td>{{ $attendance->student->name }}</td>
+                    <td>{{ $attendance->student->last_name }}, {{ $attendance->student->first_name }}</td>
                     <td>{{ $attendance->seat_number ?? 'N/A' }}
                     <td>
                         @if ($attendance->isPresent == '0')

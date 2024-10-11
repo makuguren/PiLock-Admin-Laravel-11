@@ -9,6 +9,7 @@ use Livewire\Component;
 use App\Models\SeatPlan;
 use App\Models\Schedules;
 use App\Models\Attendance;
+use App\Models\User;
 use Livewire\WithPagination;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Auth;
@@ -42,6 +43,7 @@ class Index extends Component
         $instructorId = Auth::id();
         //Fetch attendance pdf based on the Instructor Selected
 
+        // START QUERY TO FETCH STUDENTS SORT BY LAST NAME IN ASC ORDER
         // Query to Show Courses where the Instructor is based to Current Loggedin with, Fetch the Attendances of the Student(Model).
         $query = Course::where('instructor_id', $instructorId)
             // ->with('attendance.student') // Eager load relationships (Old Version)
@@ -58,6 +60,14 @@ class Index extends Component
             });
 
         $courses = $query->get();
+
+        // Sort by Studen's Last Name (sortBy = Ascending Order, sortByDesc = Descending Order)
+        $courses->each(function ($course) {
+            $course->attendance = $course->attendance->sortBy(function ($attendance) {
+                return $attendance->student->last_name; // Return student's last name
+            });
+        });
+        // END QUERY TO FETCH STUDENTS SORT BY LAST NAME IN ASC ORDER
 
         // Getting Values from the Dialog Dropdown and Retrieve into PDF.
         // dd($this->dlpdfcourse_id);
@@ -122,6 +132,7 @@ class Index extends Component
             $query->where('instructor_id', $instructorId);
         })->pluck('id')->toArray();
 
+        // START QUERY TO FETCH STUDENTS SORT BY LAST NAME IN ASC ORDER
         // Fetch attendances based on the course IDs, where 'isCurrent' is 0 and filter by the selected date
         $attendances = Attendance::whereIn('course_id', $getCourseId)
             ->where('isCurrent', '0')
@@ -136,7 +147,13 @@ class Index extends Component
             })
 
             ->with('student') // Eager load the student relationship (Modal)
-            ->get();
+            ->get()
+
+            // Sort by Studen's Last Name (sortBy = Ascending Order, sortByDesc = Descending Order)
+            ->sortBy(function ($attendance) {
+                return $attendance->student->last_name; // Return student's last name
+            });
+            // END QUERY TO FETCH STUDENTS SORT BY LAST NAME IN ASC ORDER
 
         return view('livewire.instructor.attendances.index',[
             'attendances' => $attendances,
