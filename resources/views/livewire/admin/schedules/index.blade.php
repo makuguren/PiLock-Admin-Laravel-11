@@ -41,7 +41,7 @@
             </label>
             @endcan
 
-            <a wire:navigate.hover href="{{ route('admin.schedules.timetable') }}" class="btn btn-ghost bg-blue-700 hover:bg-blue-500 w-55 btn-sm mt-3">
+            <a wire:navigate.hover href="{{ route('admin.schedules.timetable') }}" class="btn btn-ghost bg-orange-700 hover:bg-orange-500 w-55 btn-sm mt-3">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-grid-3x3"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M3 15h18"/><path d="M9 3v18"/><path d="M15 3v18"/></svg>
                 <span class="text-white text-sm">TimeTable View</span>
             </a>

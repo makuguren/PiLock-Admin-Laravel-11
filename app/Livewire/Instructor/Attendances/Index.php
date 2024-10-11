@@ -6,6 +6,7 @@ use App\Models\Course;
 use App\Models\Section;
 use App\Models\Subject;
 use Livewire\Component;
+use App\Models\SeatPlan;
 use App\Models\Schedules;
 use App\Models\Attendance;
 use Livewire\WithPagination;
@@ -47,12 +48,13 @@ class Index extends Component
 
             ->with(['attendance' => function ($query) {
                 $query->where('isCurrent', '0'); //Filter attendance where isCurrent to 0
-                $query->where('date', 'like', '%'.$this->selectedDate.'%'); //Filter Date
-            }, 'attendance.student']) // Eager load relationships
+                $query->where('date', 'like', '%'.$this->selectedDate.'%') //Filter Date
+                ->with('student');
+            }])
 
             // Fetch Section based on Dropdown Selected
             ->when($this->dlpdfcourse_id, function ($query) {
-                    $query->where('id', $this->dlpdfcourse_id);
+                $query->where('id', $this->dlpdfcourse_id);
             });
 
         $courses = $query->get();
@@ -66,6 +68,19 @@ class Index extends Component
         $program = Section::where('id', $section_id)->value('program');
         $year = Section::where('id', $section_id)->value('year');
         $block = Section::where('id', $section_id)->value('block');
+
+        // Prepare for Fetching Seat Number by Matching Student_id and Course_id
+        foreach ($courses as $course) {
+            foreach ($course->attendance as $attendance) {
+                // Fetch Seat Number by Matching Student_id and Course_id
+                $seatPlan = SeatPlan::where('student_id', $attendance->student->id)
+                    ->where('course_id', $attendance->course_id)
+                    ->first();
+
+                // Attach seat number to the attendance object
+                $attendance->seat_number = $seatPlan ? $seatPlan->seat_number : 'N/A';
+            }
+        }
 
         $data = [
             'title' => 'Attendance for Todays Vidwo!',

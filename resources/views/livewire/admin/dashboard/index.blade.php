@@ -170,7 +170,7 @@
 
             <div class="bg-base-100 border-gray-100 shadow-md shadow-black/5 p-6 rounded-md lg:col-span-3">
                 <div class="flex justify-between mb-4 items-start">
-                    <div class="font-medium">Today's Schedule / Events</div>
+                    <div class="font-medium">Current Schedule / Events</div>
                 </div>
                 <div wire:poll class="overflow-x-auto">
                     {{-- Checking if There's in Events --}}

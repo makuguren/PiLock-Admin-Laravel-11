@@ -89,8 +89,8 @@ class Index extends Component
         $this->course_key = '';
     }
 
-    public function copyCourseCode(String $course_code){
-        $this->cpCourseKey = $course_code;
+    public function copyEnrollmentKey(String $enrollmentKey){
+        $this->cpCourseKey = $enrollmentKey;
     }
 
     public function render(){

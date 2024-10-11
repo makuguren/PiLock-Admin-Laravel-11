@@ -58,9 +58,9 @@
                                             <span class="text-white text-sm">Delete</span>
                                         </label>
 
-                                        <label for="code_modal" wire:click="copyCourseCode('{{ Crypt::decryptString($course->course_key) }}')" class="btn btn-ghost bg-orange-700 hover:bg-orange-500 btn-sm">
+                                        <label for="code_modal" wire:click="copyEnrollmentKey('{{ Crypt::decryptString($course->course_key) }}')" class="btn btn-ghost bg-orange-700 hover:bg-orange-500 btn-sm">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-copy"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
-                                            <span class="text-white text-sm">Copy Course Code</span>
+                                            <span class="text-white text-sm">Copy Enrollment Key</span>
                                         </label>
 
                                         {{-- <button onclick="copyCourseCode()" wire:click="copyCourseCode('{{ Crypt::decryptString($course->course_key) }}')" value="{{ $cpCourseKey }}" id="course_key" class="btn btn-ghost bg-orange-700 hover:bg-orange-500 btn-sm text-white">Copy Course Code</button> --}}
@@ -105,10 +105,10 @@
             // document.getElementById('editcourse_key').value = '';
         }
 
-        function copyCourseCode(){
-            var cpCourseCode = document.getElementById("course_key");
-            navigator.clipboard.writeText(cpCourseCode.value);
-            console.log(cpCourseCode.value);
+        function copyEnrollmentKey(){
+            var cpEnrollmentKey = document.getElementById("course_key");
+            navigator.clipboard.writeText(cpEnrollmentKey.value);
+            console.log(cpEnrollmentKey.value);
         }
     </script>
 </x-slot>

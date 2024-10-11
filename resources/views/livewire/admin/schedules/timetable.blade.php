@@ -66,7 +66,7 @@
             </label>
             @endcan
 
-            <a wire:navigate.hover href="{{ route('admin.schedules.index') }}" class="btn btn-ghost bg-blue-700 hover:bg-blue-500 w-55 btn-sm mt-3">
+            <a wire:navigate.hover href="{{ route('admin.schedules.index') }}" class="btn btn-ghost bg-orange-700 hover:bg-orange-500 w-55 btn-sm mt-3">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-grid-3x3"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M3 15h18"/><path d="M9 3v18"/><path d="M15 3v18"/></svg>
                 <span class="text-white text-sm">Table View</span>
             </a>
@@ -85,7 +85,7 @@
                         <th>SATURDAY</th>
                         <th>SUNDAY</th>
                     </tr>
-                    @foreach (range(7, 19) as $hour)
+                    {{-- @foreach (range(7, 19) as $hour)
                         <tr>
                             <td>{{ date('g:i A', strtotime("$hour:00")) }} - {{ date('g:i A', strtotime(($hour + 1) . ":00")) }}</td>
                             @foreach (['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'] as $day)
@@ -108,6 +108,47 @@
                                 @else
                                     @if (!$schedules->firstWhere(function ($schedule) use ($day, $hour) {
                                         return $schedule->days == $day && $schedule->time_start->hour < $hour && $schedule->time_end->hour > $hour; // Updated field name
+                                    }))
+                                        <td></td>
+                                    @endif
+                                @endif
+                            @endforeach
+                        </tr>
+                    @endforeach --}}
+
+                    {{-- Revised Code with removing casts from the model --}}
+                    @foreach (range(7, 19) as $hour)
+                        <tr>
+                            <td>{{ date('g:i A', strtotime("$hour:00")) }} - {{ date('g:i A', strtotime(($hour + 1) . ":00")) }}</td>
+
+                            @foreach (['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'] as $day)
+                                @php
+                                    // Find the schedule for this specific day and hour
+                                    $schedule = $schedules->firstWhere(function ($schedule) use ($day, $hour) {
+                                        // Extract hours directly using PHP's strtotime to compare time_start and time_end
+                                        $scheduleStartHour = date('H', strtotime($schedule->time_start));
+                                        return $schedule->days == $day && $scheduleStartHour == $hour;
+                                    });
+                                @endphp
+
+                                @if ($schedule)
+                                    @php
+                                        // Calculate hours and rowspan based on time_start and time_end
+                                        $startHour = date('H', strtotime($schedule->time_start));
+                                        $endHour = date('H', strtotime($schedule->time_end));
+                                        $rowspan = $endHour - $startHour;
+                                    @endphp
+
+                                    <td wire:click="viewSchedule({{ $schedule->id }})" rowspan="{{ $rowspan }}" style="background: orange;">
+                                        {{ $schedule->course->course_code }}<br>
+                                        {{ $schedule->course->instructor->name }}<br>
+                                        {{ $schedule->course->section->program }} {{ $schedule->course->section->year }}{{ $schedule->course->section->block }}
+                                    </td>
+                                @else
+                                    @if (!$schedules->firstWhere(function ($schedule) use ($day, $hour) {
+                                        $scheduleStartHour = date('H', strtotime($schedule->time_start));
+                                        $scheduleEndHour = date('H', strtotime($schedule->time_end));
+                                        return $schedule->days == $day && $scheduleStartHour < $hour && $scheduleEndHour > $hour;
                                     }))
                                         <td></td>
                                     @endif

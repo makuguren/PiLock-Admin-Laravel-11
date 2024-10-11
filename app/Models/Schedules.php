@@ -67,8 +67,8 @@ class Schedules extends Model
     //     return $this->belongsTo(User::class, 'student_id', 'id');
     // }
 
-    protected $casts = [
-        'time_start' => 'datetime:H:i',
-        'time_end' => 'datetime:H:i',
-    ];
+    // protected $casts = [
+    //     'time_start' => 'datetime:H:i',
+    //     'time_end' => 'datetime:H:i',
+    // ];
 }

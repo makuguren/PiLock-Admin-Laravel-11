@@ -78,15 +78,21 @@
         <tr>
             <th>STUDENT ID</th>
             <th>NAME</th>
-            <th>EMAIL</th>
-            <th>IS PRESENT</th>
+            <th>SEAT NO.</th>
+            <th>STATUS</th>
         </tr>
         @foreach ($courses as $course)
             @foreach ($course->attendance as $attendance)
+                {{-- @php
+                    // Find the seat plan for the specific course and student
+                    $seatPlan = \App\Models\SeatPlan::where('student_id', $attendance->student->id)
+                        ->where('course_id', $attendance->course_id)
+                        ->first();
+                @endphp --}}
                 <tr>
                     <td>{{ $attendance->student->student_id }}</td>
                     <td>{{ $attendance->student->name }}</td>
-                    <td>{{ $attendance->student->email }}</td>
+                    <td>{{ $attendance->seat_number ?? 'N/A' }}
                     <td>
                         @if ($attendance->isPresent == '0')
                             ABSENT

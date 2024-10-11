@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\Section;
+use App\Models\SeatPlan;
 use App\Models\Attendance;
 use App\Models\EnrolledCourse;
 use Laravel\Sanctum\HasApiTokens;
@@ -63,6 +64,9 @@ class User extends Authenticatable
         return $this->belongsTo(Section::class, 'section_id', 'id');
     }
 
+    public function seatPlan(){
+        return $this->hasOne(SeatPlan::class, 'student_id', 'id');
+    }
 
     // public function attendance(){
     //     return $this->hasMany(Attendance::class, 'student_id', 'id');
