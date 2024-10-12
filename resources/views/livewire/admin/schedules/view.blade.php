@@ -46,7 +46,7 @@
                 </div>
             </div>
             <div class="flex flex-wrap mb-6">
-                <div class="w-full md:w-1/2 px-3">
+                <div class="w-full md:w-1/3 px-3">
                     <label class="label-text">Time Start</label>
                     <select wire:model="time_start" id="edittime_start" class="select select-bordered bg-base-300 block w-full py-3 px-4 mb-3 form-control" required disabled>
                         <option value="">--Select Time Start--</option>
@@ -68,7 +68,7 @@
                     @error('time_start') <span class="error" role="alert">{{ $message }}</span> @enderror
                 </div>
 
-                <div class="w-full md:w-1/2 px-3">
+                <div class="w-full md:w-1/3 px-3">
                     <label class="label-text">Time End</label>
                     <select wire:model="time_end" id="edittime_end" class="select select-bordered bg-base-300 block w-full py-3 px-4 mb-3 form-control" required disabled>
                         <option value="">--Select Time End--</option>
@@ -88,6 +88,12 @@
                         <option value="20:00:00">08:00 PM</option>
                     </select>
                     @error('time_end') <span class="error" role="alert">{{ $message }}</span> @enderror
+                </div>
+
+                <div class="w-full md:w-1/3 px-3">
+                    <label class="label-text">Late Duration</label>
+                    <input wire:model="lateDuration" id="editlate_duration" class="input input-bordered bg-base-300 block w-full py-3 px-4 mb-3 form-control" type="number" placeholder="0 - 60 minutes" disabled>
+                    @error('lateDuration') <span class="error" role="alert">{{ $message }}</span> @enderror
                 </div>
             </div>
             <div class="modal-action">

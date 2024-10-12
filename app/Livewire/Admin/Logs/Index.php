@@ -19,6 +19,11 @@ class Index extends Component
     public $filter_coursesec, $filter_instructor, $filter_date = '';
     public $dlsection_id, $dlfromdate, $dltodate;
 
+    public $sortField = 'time_in';
+    public $sortDirection = 'desc';
+
+    public $wirePoll = true;
+
     public function filter_coursesec(){
         $this->resetPage();
     }
@@ -31,6 +36,22 @@ class Index extends Component
         $this->resetPage();
     }
 
+    // Dynamic Table for Sorting
+    public function sortBy($field){
+        if($this->sortField  === $field) {
+            $this->sortDirection = $this->sortDirection === 'asc' ? 'desc' : 'asc';
+        } else {
+            $this->sortDirection = 'asc';
+        }
+
+        $this->sortField = $field;
+    }
+
+    public function getWirePollSwitch(bool $wirePoll){
+        sleep(2);
+        $this->wirePoll = $wirePoll;
+    }
+
     public function downloadLogs(){
         $this->dispatch('close-modal');
         return (new LogsExport($this->dlsection_id, $this->dlfromdate, $this->dltodate))->download('logsreport.xlsx');
@@ -39,7 +60,8 @@ class Index extends Component
     public function render(){
         $logs = Log::where('date', 'like', '%'.$this->filter_date.'%')
                     ->where('course_id', 'like', '%'.$this->filter_coursesec.'%')
-                    ->orderBy('time_in', 'DESC')
+                    // ->orderBy('time_in', 'DESC')
+                    ->orderBy($this->sortField, $this->sortDirection) //Order BY either ASC or DESC by Clicking table
                     ->paginate(10);
 
         $instructors = Instructor::all();

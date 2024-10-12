@@ -24,7 +24,7 @@ class Index extends Component
     use WithPagination;
     use WithFileUploads;
 
-    public $schedule_id, $course_id, $days, $time_start, $time_end, $isCurrent;
+    public $schedule_id, $course_id, $days, $time_start, $time_end, $lateDuration, $isCurrent;
     public $instructor_fname, $instructor_lname, $course_code, $import_file, $isDisableButton;
 
     //Validations
@@ -43,6 +43,7 @@ class Index extends Component
             'days' => 'required|in:Sunday,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday',
             'time_start' => 'required',
             'time_end' => 'required|after:time_start',
+            'lateDuration' => 'nullable|numeric|min:0|max:60',
 
             'time_end' => [
                 new NoScheduleOverlap($this->course_id, $this->days, $this->time_start, $this->time_end)
@@ -113,6 +114,7 @@ class Index extends Component
             'days' => $validatedData['days'],
             'time_start' => $validatedData['time_start'],
             'time_end' => $validatedData['time_end'],
+            'lateDuration' => $validatedData['lateDuration'],
             'isApproved' => '1',
             'isMakeUp' => '0',
             'isCurrent' => '0',
@@ -141,6 +143,7 @@ class Index extends Component
             $this->days = $schedule->days;
             $this->time_start = Carbon::parse($schedule->time_start)->format('H:i:s');
             $this->time_end = Carbon::parse($schedule->time_end)->format('H:i:s');
+            $this->lateDuration = $schedule->lateDuration;
         } else {
             return redirect()->to('/schedules');
         }
@@ -153,7 +156,8 @@ class Index extends Component
             'course_id' => $validatedData['course_id'],
             'days' => $validatedData['days'],
             'time_start' => $validatedData['time_start'],
-            'time_end' => $validatedData['time_end']
+            'time_end' => $validatedData['time_end'],
+            'lateDuration' => $validatedData['lateDuration'],
         ]);
 
         toastr()->success('Schedule Updated Successfully');
@@ -183,6 +187,7 @@ class Index extends Component
         $this->days = '';
         $this->time_start = '';
         $this->time_end = '';
+        $this->lateDuration = '';
     }
 
     public function render(){

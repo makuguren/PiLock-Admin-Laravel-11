@@ -172,6 +172,9 @@
             document.getElementById('view_schedule_modal').checked = false;
 
             document.getElementById('import_file').value = '';
+
+            document.getElementById('course_code').value = '';
+            document.getElementById('instructor_name').value = '';
         });
 
         window.addEventListener('view_schedule_modal', event => {
@@ -192,6 +195,7 @@
             document.getElementById('adddays').value = '';
             document.getElementById('addtime_start').value = '';
             document.getElementById('addtime_end').value = '';
+            document.getElementById('addlate_duration').value = '';
             document.getElementById('import_file').value = '';
 
             // document.getElementById('editsubject_id').value = '';
@@ -207,6 +211,7 @@
             document.getElementById('editdays').disabled = false;
             document.getElementById('edittime_start').disabled = false;
             document.getElementById('edittime_end').disabled = false;
+            document.getElementById('editlate_duration').disabled = false;
             document.getElementById('updateBtn').disabled = false;
             document.getElementById('deleteBtn').disabled = false;
         }

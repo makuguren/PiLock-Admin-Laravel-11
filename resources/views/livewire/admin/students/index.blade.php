@@ -22,8 +22,22 @@
                     <li class="text-gray-600 mr-2 font-medium">Students</li>
                 </ul>
             </div>
+
+            {{-- Buttons for Enabling Live without Reloading Page. --}}
+            @if ($wirePoll === true)
+                <button wire:click="getWirePollSwitch(false)" class="btn btn-ghost bg-green-700 hover:bg-green-500 w-55 btn-sm mt-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-id-card"><path d="M16 10h2"/><path d="M16 14h2"/><path d="M6.17 15a3 3 0 0 1 5.66 0"/><circle cx="9" cy="11" r="2"/><rect x="2" y="5" width="20" height="14" rx="2"/></svg>
+                    <span class="text-white text-sm">Live Reload ON</span>
+                </button>
+            @else
+                <button wire:click="getWirePollSwitch(true)" class="btn btn-ghost bg-red-700 hover:bg-red-500 w-55 btn-sm mt-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-id-card"><path d="M16 10h2"/><path d="M16 14h2"/><path d="M6.17 15a3 3 0 0 1 5.66 0"/><circle cx="9" cy="11" r="2"/><rect x="2" y="5" width="20" height="14" rx="2"/></svg>
+                    <span class="text-white text-sm">Live Reload OFF</span>
+                </button>
+            @endif
+
             @can('Add Tag UID to Students')
-            <a wire:navigate.hover href="{{ route('admin.students.addtaguid') }}" class="btn btn-ghost bg-green-700 hover:bg-green-500 w-55 btn-sm mt-3">
+            <a wire:navigate.hover href="{{ route('admin.students.addtaguid') }}" class="btn btn-ghost bg-orange-700 hover:bg-orange-500 w-55 btn-sm mt-3">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-id-card"><path d="M16 10h2"/><path d="M16 14h2"/><path d="M6.17 15a3 3 0 0 1 5.66 0"/><circle cx="9" cy="11" r="2"/><rect x="2" y="5" width="20" height="14" rx="2"/></svg>
                 <span class="text-white text-sm">Add Tag UID</span>
             </a>
@@ -69,19 +83,41 @@
 
         <div class="bg-base-100 border-gray-100 shadow-md shadow-black/5 p-6 rounded-md">
             <div class="overflow-x-auto">
-                <table wire:poll.1000ms class="table">
+                <table class="table">
                     <!-- head -->
                     <thead>
                       <tr class="bg-base-200">
-                        <th>STUDENT ID</th>
+                        <th>
+                            <button wire:click="sortBy('student_id')" class="focus:outline-none">
+                                STUDENT ID
+                                @if ($sortField == 'student_id')
+                                    @if ($sortDirection == 'asc')
+                                        ↑
+                                    @else
+                                        ↓
+                                    @endif
+                                @endif
+                            </button>
+                        </th>
                         <th>TAG UID</th>
-                        <th>NAME AND EMAIL</th>
+                        <th>
+                            <button wire:click="sortBy('last_name')" class="focus:outline-none">
+                                NAME AND EMAIL
+                                @if ($sortField == 'last_name')
+                                    @if ($sortDirection == 'asc')
+                                        ↑
+                                    @else
+                                        ↓
+                                    @endif
+                                @endif
+                            </button>
+                        </th>
                         <th>YEAR AND SECTION</th>
                         <th>GENDER</th>
                         <th>ACTION</th>
                       </tr>
                     </thead>
-                    <tbody>
+                    <tbody @if($wirePoll === true) wire:poll.1000ms @endif>
                         @forelse ($students as $student)
                             <tr>
                                 <td>
@@ -174,7 +210,7 @@
                 </table>
 
                 <div class="mt-3">
-                    {{-- {{ $students->links() }} --}}
+                    {{ $students->links() }}
                 </div>
             </div>
         </div>

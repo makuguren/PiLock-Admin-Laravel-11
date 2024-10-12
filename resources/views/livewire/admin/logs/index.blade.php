@@ -17,6 +17,19 @@
                 </ul>
             </div>
 
+            {{-- Buttons for Enabling Live without Reloading Page. --}}
+            @if ($wirePoll === true)
+                <button wire:click="getWirePollSwitch(false)" class="btn btn-ghost bg-green-700 hover:bg-green-500 w-55 btn-sm mt-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-id-card"><path d="M16 10h2"/><path d="M16 14h2"/><path d="M6.17 15a3 3 0 0 1 5.66 0"/><circle cx="9" cy="11" r="2"/><rect x="2" y="5" width="20" height="14" rx="2"/></svg>
+                    <span class="text-white text-sm">Live Reload ON</span>
+                </button>
+            @else
+                <button wire:click="getWirePollSwitch(true)" class="btn btn-ghost bg-red-700 hover:bg-red-500 w-55 btn-sm mt-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-id-card"><path d="M16 10h2"/><path d="M16 14h2"/><path d="M6.17 15a3 3 0 0 1 5.66 0"/><circle cx="9" cy="11" r="2"/><rect x="2" y="5" width="20" height="14" rx="2"/></svg>
+                    <span class="text-white text-sm">Live Reload OFF</span>
+                </button>
+            @endif
+
             <label for="download_logs_modal" class="btn btn-ghost bg-red-700 hover:bg-red-500 w-55 btn-sm mt-3">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-download"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
                 <span class="text-white text-sm">Download Logs</span>
@@ -61,7 +74,7 @@
 
         <div class="w-full mb-6"></div>
 
-        <div wire:poll.1000ms class="bg-base-100 border-gray-100 shadow-md shadow-black/5 p-6 rounded-md">
+        <div class="bg-base-100 border-gray-100 shadow-md shadow-black/5 p-6 rounded-md">
             <div class="overflow-x-auto">
                 <table class="table table-zebra">
                     <thead class="bg-base-200 rounded-md text-md">
@@ -72,11 +85,33 @@
                             <th>COURSE TITLE</th>
                             <th>INSTRUCTOR</th>
                             <th>DATE</th>
-                            <th>TIME IN</th>
-                            <th>TIME OUT</th>
+                            <th>
+                                <button wire:click="sortBy('time_in')" class="focus:outline-none">
+                                    TIME IN
+                                    @if ($sortField == 'time_in')
+                                        @if ($sortDirection == 'asc')
+                                            ↑
+                                        @else
+                                            ↓
+                                        @endif
+                                    @endif
+                                </button>
+                            </th>
+                            <th>
+                                <button wire:click="sortBy('time_out')" class="focus:outline-none">
+                                    TIME OUT
+                                    @if ($sortField == 'time_out')
+                                        @if ($sortDirection == 'asc')
+                                            ↑
+                                        @else
+                                            ↓
+                                        @endif
+                                    @endif
+                                </button>
+                            </th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody @if($wirePoll === true) wire:poll.1000ms @endif>
                         @forelse ($logs as $log)
                         <tr>
                             <td>

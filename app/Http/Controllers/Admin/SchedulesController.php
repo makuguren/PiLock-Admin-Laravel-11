@@ -39,7 +39,8 @@ class SchedulesController extends Controller
                         'section' => $schedule->course->section->program . ' ' . $schedule->course->section->year . $schedule->course->section->block,
                         'days' => $schedule->days,
                         'time_start' => $schedule->time_start,
-                        'time_end' => $schedule->time_end
+                        'time_end' => $schedule->time_end,
+                        'lateDuration' => $schedule->lateDuration,
                     ];
                 })
             ], 200);
@@ -63,7 +64,8 @@ class SchedulesController extends Controller
                         'section' => $schedule->course->section->program . ' ' . $schedule->course->section->year . $schedule->course->section->block,
                         'days' => $schedule->days,
                         'time_start' => $schedule->time_start,
-                        'time_end' => $schedule->time_end
+                        'time_end' => $schedule->time_end,
+                        'lateDuration' => $schedule->lateDuration,
                     ];
                 })
             ], 200);

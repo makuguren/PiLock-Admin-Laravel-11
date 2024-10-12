@@ -137,6 +137,9 @@
             document.getElementById('import_modal').checked = false;
 
             document.getElementById('import_file').value = '';
+
+            document.getElementById('course_code').value = '';
+            document.getElementById('instructor_name').value = '';
         });
 
         function cancel_sched(){
@@ -151,6 +154,7 @@
             document.getElementById('adddays').value = '';
             document.getElementById('addtime_start').value = '';
             document.getElementById('addtime_end').value = '';
+            document.getElementById('addlate_duration').value = '';
             document.getElementById('import_file').value = '';
 
             // document.getElementById('editsubject_id').value = '';
