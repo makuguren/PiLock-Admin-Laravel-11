@@ -2,7 +2,6 @@
 
 use Carbon\Carbon;
 use App\Models\Event;
-use App\Models\MakeupSchedule;
 use App\Models\Schedules;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schedule;
@@ -22,8 +21,8 @@ Schedule::call(function () {
     $scheds_end = Schedules::where('isMakeUp','0')->where('isCurrent', '1')->where('days', $day)->where('time_end', $time);
 
     //Schedules (Make-Up Class) Query
-    $makeupscheds_start = MakeupSchedule::where('isApproved', '1')->where('isCurrent', '0')->where('days', $day)->where('time_start', $time);
-    $makeupscheds_end = MakeupSchedule::where('isApproved', '1')->where('isCurrent', '1')->where('days', $day)->where('time_end', $time);
+    $makeupscheds_start = Schedules::where('isMakeUp','1')->where('isApproved', '1')->where('isCurrent', '0')->where('days', $day)->where('time_start', $time);
+    $makeupscheds_end = Schedules::where('isMakeUp','1')->where('isApproved', '1')->where('isCurrent', '1')->where('days', $day)->where('time_end', $time);
 
     //Checking if the Events is !Empty then Proceed to Events else Proceed to Schedules
     $event = $events_start->first();

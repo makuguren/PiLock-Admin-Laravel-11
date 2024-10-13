@@ -102,96 +102,54 @@ class LogsController extends Controller
             ], 404);
         }
 
-        // Check if there is a current schedule (Regular Classes)
-        if ($schedule_now) {
-            // Find the enrolled course based on the schedule and student
-            $enrolledCourse = EnrolledCourse::where('course_id', $schedule_now->course_id)
-            ->where('student_id', $student->id)
-            ->first();
-
-            // If enrolledCourse is not found, the student is not enrolled in the course for the current schedule
-            if (!$enrolledCourse) {
-                return response()->json([
-                    'status' => 403,
-                    'status_message' => 'You are not allowed to enter your class!'
-                ], 404);
-            }
-
-            // Proceed if the instructor has already tapped their ID
-            if ($schedule_now->isAttend == '1') {
-
-                // Save logs for the student
-                Log::create([
-                    'student_id' => $student->id,
-                    'course_id' => $enrolledCourse->course_id,
-                    'date' => $datetime->toDateString(),
-                    'time_in' => $datetime->toTimeString()
-                ]);
-
-
-                // Mark the student as present
-                Attendance::where('student_id', $student->id)->update([
-                    'isPresent' => '1'
-                ]);
-
-                return response()->json([
-                    'status' => 200,
-                    'status_message' => 'Saved Logs Successfully'
-                ], 200);
-
-            } else {
-                return response()->json([
-                    'status' => 401,
-                    'status_message' => 'Instructor has not tapped the ID'
-                ], 401);
-            }
-        } elseif ($makeupSched_now) {
-            // Find the enrolled course based on the schedule and student
-            $enrolledCourse = EnrolledCourse::where('course_id', $makeupSched_now->course_id)
-                    ->where('student_id', $student->id)
-                    ->first();
-
-            // If enrolledCourse is not found, the student is not enrolled in the course for the current schedule
-            if (!$enrolledCourse) {
-                return response()->json([
-                    'status' => 403,
-                    'status_message' => 'You are not allowed to enter your class!'
-                ], 404);
-            }
-
-            // Proceed if the instructor has already tapped their ID
-            if ($makeupSched_now->isAttend == '1') {
-
-                // Save logs for the student
-                Log::create([
-                    'student_id' => $student->id,
-                    'course_id' => $enrolledCourse->course_id,
-                    'date' => $datetime->toDateString(),
-                    'time_in' => $datetime->toTimeString()
-                ]);
-
-
-                // Mark the student as present
-                Attendance::where('student_id', $student->id)->update([
-                    'isPresent' => '1'
-                ]);
-
-                return response()->json([
-                    'status' => 200,
-                    'status_message' => 'Saved Logs Successfully'
-                ], 200);
-
-            } else {
-                return response()->json([
-                    'status' => 401,
-                    'status_message' => 'Instructor has not tapped the ID'
-                ], 401);
-            }
-        } else {
+        // Check if there is a current schedule
+        if (!$schedule_now) {
             return response()->json([
                 'status' => 404,
                 'status_message' => 'No Schedules Found'
             ], 404);
+        }
+
+        // Find the enrolled course based on the schedule and student
+        $enrolledCourse = EnrolledCourse::where('course_id', $schedule_now->course_id)
+                ->where('student_id', $student->id)
+                ->first();
+
+        // If enrolledCourse is not found, the student is not enrolled in the course for the current schedule
+        if (!$enrolledCourse) {
+            return response()->json([
+                'status' => 403,
+                'status_message' => 'You are not allowed to enter your class!'
+            ], 404);
+        }
+
+        // Proceed if the instructor has already tapped their ID
+        if ($schedule_now->isAttend == '1') {
+
+            // Save logs for the student
+            Log::create([
+                'student_id' => $student->id,
+                'course_id' => $enrolledCourse->course_id,
+                'date' => $datetime->toDateString(),
+                'time_in' => $datetime->toTimeString()
+            ]);
+
+
+            // Mark the student as present
+            Attendance::where('student_id', $student->id)->update([
+                'isPresent' => '1'
+            ]);
+
+            return response()->json([
+                'status' => 200,
+                'status_message' => 'Saved Logs Successfully'
+            ], 200);
+
+        } else {
+            return response()->json([
+                'status' => 401,
+                'status_message' => 'Instructor has not tapped the ID'
+            ], 401);
         }
     }
 

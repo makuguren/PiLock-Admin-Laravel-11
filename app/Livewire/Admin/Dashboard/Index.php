@@ -12,6 +12,7 @@ use App\Models\Subject;
 use Livewire\Component;
 use App\Models\Schedules;
 use App\Models\Instructor;
+use App\Models\MakeupSchedule;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
@@ -106,6 +107,7 @@ class Index extends Component
         $totalEvents = Event::count();
         $eventsNow = Event::where('isCurrent', '1')->first();
         $schedulesNow = Schedules::where('isCurrent', '1')->first();
+        $makeupClassNow = MakeupSchedule::where('isCurrent', '1')->first();
 
         // Configuration if the System Integration is either on and off using Global Variable.
         $appSetting = View::shared('appSetting');
@@ -156,6 +158,7 @@ class Index extends Component
             'totalSections' => $totalSections,
             'systeminfo' => $systeminfo,
             'schedulesNow' => $schedulesNow,
+            'makeupClassNow' => $makeupClassNow,
             'eventsNow' => $eventsNow,
             'greetMessage' => $this->greetMessage,
             'genderGreeting' => $this->genderGreeting

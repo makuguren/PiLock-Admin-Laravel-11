@@ -181,18 +181,19 @@
                         <div class="text-md">Event Start: {{ $eventsNow->event_start }}</div>
                         <div class="text-md">Event End: {{ $eventsNow->event_end }}</div>
                     @elseif ($schedulesNow)
-                        <div class="text-md">Schedule Type:
-                            @if ($schedulesNow->isMakeUp == '0')
-                                Regular Schedule
-                            @else
-                                Make-Up Schedule
-                            @endif
-                        </div>
+                        <div class="text-md">Schedule Type: Regular Class</div>
                         <div class="text-md">Course Title: {{ $schedulesNow->course->course_title }}</div>
                         <div class="text-md">Instructor: {{ $schedulesNow->course->instructor->first_name }} {{ $schedulesNow->course->instructor->last_name }}</div>
                         <div class="text-md">Section: {{ $schedulesNow->course->section->program }} {{ $schedulesNow->course->section->year }}{{ $schedulesNow->course->section->block }}</div>
                         <div class="text-md">Day: {{ $schedulesNow->days }}</div>
                         <div class="text-md">Time Frame: {{ Carbon\Carbon::parse($schedulesNow->time_start)->format('h:i A') }} to {{ Carbon\Carbon::parse($schedulesNow->time_end)->format('h:i A') }}</div>
+                    @elseif ($makeupClassNow)
+                        <div class="text-md">Schedule Type: Make-Up Class</div>
+                        <div class="text-md">Course Title: {{ $makeupClassNow->course->course_title }}</div>
+                        <div class="text-md">Instructor: {{ $makeupClassNow->course->instructor->first_name }} {{ $makeupClassNow->course->instructor->last_name }}</div>
+                        <div class="text-md">Section: {{ $makeupClassNow->course->section->program }} {{ $makeupClassNow->course->section->year }}{{ $makeupClassNow->course->section->block }}</div>
+                        <div class="text-md">Day: {{ $makeupClassNow->days }}</div>
+                        <div class="text-md">Time Frame: {{ Carbon\Carbon::parse($makeupClassNow->time_start)->format('h:i A') }} to {{ Carbon\Carbon::parse($makeupClassNow->time_end)->format('h:i A') }}</div>
                     @else
                         <div class="text-md">No Schedule / Events as of Now!</div>
                     @endif

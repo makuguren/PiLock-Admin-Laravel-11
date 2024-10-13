@@ -8,6 +8,7 @@ use App\Models\Schedules;
 use App\Models\Attendance;
 use App\Models\Instructor;
 use App\Models\EnrolledCourse;
+use App\Models\MakeupSchedule;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -49,5 +50,9 @@ class Course extends Model
 
     public function schedule(){
         return $this->hasMany(Schedules::class, 'course_id', 'id');
+    }
+
+    public function makeupSched(){
+        return $this->hasMany(MakeupSchedule::class, 'course_id', 'id');
     }
 }

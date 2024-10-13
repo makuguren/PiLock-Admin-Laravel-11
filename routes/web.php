@@ -126,11 +126,21 @@ Route::middleware(['auth:admin', App\Http\Middleware\AdminComponentLayout::class
         Route::get('/', App\Livewire\Admin\Schedules\Index::class)->name('schedules.index')
             ->middleware('permission:View Regular Schedules');
         Route::get('timetable', App\Livewire\Admin\Schedules\Timetable::class)->name('schedules.timetable');
-        Route::get('makeupscheds', App\Livewire\Admin\Schedules\Makeup::class)->name('schedules.makeup')
-            ->middleware('permission:View Make-Up Schedules');
-        Route::get('makeupapprovals', App\Livewire\Admin\Schedules\Approvals::class)->name('schedules.approvals')
-            ->middleware('permission:View Make-Up SchedApprovals');
+        Route::get('makeupscheds', App\Livewire\Admin\MakeupSched\Index::class)->name('schedules.makeup');
+            // ->middleware('permission:View Make-Up Schedules');
+        Route::get('makeupapprovals', App\Livewire\Admin\Schedules\Approvals::class)->name('schedules.approvals');
+            // ->middleware('permission:View Make-Up SchedApprovals');
     });
+
+    // Route::prefix('schedules')->group(function () {
+    //     Route::get('/', App\Livewire\Admin\Schedules\Index::class)->name('schedules.index')
+    //         ->middleware('permission:View Regular Schedules');
+    //     Route::get('timetable', App\Livewire\Admin\Schedules\Timetable::class)->name('schedules.timetable');
+    //     Route::get('makeupscheds', App\Livewire\Admin\Schedules\Makeup::class)->name('schedules.makeup')
+    //         ->middleware('permission:View Make-Up Schedules');
+    //     Route::get('makeupapprovals', App\Livewire\Admin\Schedules\Approvals::class)->name('schedules.approvals')
+    //         ->middleware('permission:View Make-Up SchedApprovals');
+    // });
 
     // Admins Routes
     Route::prefix('admins')->group(function () {

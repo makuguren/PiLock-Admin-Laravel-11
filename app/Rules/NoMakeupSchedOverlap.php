@@ -2,12 +2,11 @@
 
 namespace App\Rules;
 
-use Carbon\Carbon;
 use App\Models\Schedules;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Contracts\Validation\Rule;
+use Carbon\Carbon;
 
-class NoScheduleOverlap implements Rule
+class NoMakeupSchedOverlap implements Rule
 {
     protected $course_id;
     protected $day;

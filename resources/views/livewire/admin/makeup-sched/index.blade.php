@@ -1,50 +1,37 @@
 <x-slot:title>
-    Schedules
+    Make-Up Schedules
 </x-slot>
 
 <div>
     {{-- Schedules Modal --}}
-    @can('Create Regular Schedules')
-        @include('livewire.admin.schedules.create')
+    @can('Create Make-Up Schedules')
+        @include('livewire.admin.makeup-sched.create')
     @endcan
-    @can('Update Regular Schedules')
-        @include('livewire.admin.schedules.edit')
+    @can('Update Make-Up Schedules')
+        @include('livewire.admin.makeup-sched.edit')
     @endcan
-    @can('Delete Regular Schedules')
-        @include('livewire.admin.schedules.delete')
+    @can('Delete Make-Up Schedules')
+        @include('livewire.admin.makeup-sched.delete')
     @endcan
-
-    @include('livewire.admin.schedules.import')
 
     <div class="p-6">
-        <div class="flex flex-row gap-2">
+        <div class="flex flex-row">
             <div class="flex flex-col w-full">
-                <h1 class="font-bold text-2xl mb-2">Schedules</h1>
+                <h1 class="font-bold text-2xl mb-2">Make-Up Schedules</h1>
                 <ul class="flex items-center text-sm mb-6">
                     <li class="mr-2">
                         <a href="#" class="text-gray-400 hover:text-gray-600 font-medium">Dashboard</a>
                     </li>
                     <li class="text-gray-600 mr-2 font-medium">/</li>
-                    <li class="text-gray-600 mr-2 font-medium">Schedules</li>
+                    <li class="text-gray-600 mr-2 font-medium">Make-Up Schedules</li>
                 </ul>
             </div>
-
-            <label for="import_modal" class="btn btn-ghost bg-green-700 hover:bg-green-500 w-55 btn-sm mt-3">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sheet"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><line x1="3" x2="21" y1="9" y2="9"/><line x1="3" x2="21" y1="15" y2="15"/><line x1="9" x2="9" y1="9" y2="21"/><line x1="15" x2="15" y1="9" y2="21"/></svg>
-                <span class="text-white text-sm">Import Excel File</span>
-            </label>
-
-            @can('Create Regular Schedules')
+            {{-- @can('Create Schedules') --}}
             <label for="add_modal" class="btn btn-ghost bg-blue-700 hover:bg-blue-500 w-55 btn-sm mt-3">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar-clock"><path d="M21 7.5V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h3.5"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h5"/><path d="M17.5 17.5 16 16.3V14"/><circle cx="16" cy="16" r="6"/></svg>
                 <span class="text-white text-sm">Add Schedule</span>
             </label>
-            @endcan
-
-            <a wire:navigate.hover href="{{ route('admin.schedules.timetable') }}" class="btn btn-ghost bg-orange-700 hover:bg-orange-500 w-55 btn-sm mt-3">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-grid-3x3"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M3 15h18"/><path d="M9 3v18"/><path d="M15 3v18"/></svg>
-                <span class="text-white text-sm">TimeTable View</span>
-            </a>
+            {{-- @endcan --}}
         </div>
 
         <div class="bg-base-100 border-gray-100 shadow-md shadow-black/5 p-6 rounded-md">
@@ -114,7 +101,7 @@
                         </tr>
                         @empty
                             <tr>
-                                <td><div class="font-bold">No Schedules Found</div></td>
+                                <td><div class="font-bold">No Make-Up Schedules Found</div></td>
                             </tr>
                         @endforelse
                     </tbody>
@@ -134,10 +121,6 @@
             document.getElementById('edit_modal').checked = false;
             document.getElementById('delete_modal').checked = false;
 
-            document.getElementById('import_modal').checked = false;
-
-            document.getElementById('import_file').value = '';
-
             document.getElementById('course_code').value = '';
             document.getElementById('instructor_name').value = '';
         });
@@ -146,7 +129,6 @@
             document.getElementById('add_modal').checked = false;
             document.getElementById('edit_modal').checked = false;
             document.getElementById('delete_modal').checked = false;
-            document.getElementById('import_modal').checked = false;
 
             document.getElementById('addcourse_id').value = '';
             document.getElementById('adddays').value = '';
@@ -156,7 +138,6 @@
 
             document.getElementById('course_code').value = '';
             document.getElementById('instructor_name').value = '';
-            document.getElementById('import_file').value = '';
 
             // document.getElementById('editsubject_id').value = '';
             // document.getElementById('editinstructor_id').value = '';
@@ -164,27 +145,6 @@
             // document.getElementById('editdays').value = '';
             // document.getElementById('edittime_start').value = '';
             // document.getElementById('edittime_end').value = '';
-        }
-
-        function disableButton() {
-            let button = document.getElementById('upload-button');
-            let timerElement = document.getElementById('timer');
-            let countdown = 10;
-
-            button.disabled = true;
-            timerElement.textContent = `Please wait in ${countdown} to enable Import`;
-
-            // Start the countdown
-            let timerInterval = setInterval(function() {
-                countdown--;
-                timerElement.textContent = `Please wait in ${countdown} to enable Import`;
-
-                if (countdown <= 0) {
-                    clearInterval(timerInterval);
-                    button.disabled = false;
-                    timerElement.textContent = ''; // Clear the timer text
-                }
-            }, 1000);
         }
     </script>
 </x-slot>

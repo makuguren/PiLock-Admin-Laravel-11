@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Admin\Logs;
 
+use Carbon\Carbon;
 use App\Models\Log;
 use App\Models\User;
 use App\Models\Course;
@@ -55,6 +56,11 @@ class Index extends Component
     public function downloadLogs(){
         $this->dispatch('close-modal');
         return (new LogsExport($this->dlsection_id, $this->dlfromdate, $this->dltodate))->download('logsreport.xlsx');
+    }
+
+    // Auto Selected Filter Date based on Current Days
+    public function mount(){
+        $this->filter_date = Carbon::now('Asia/Manila')->toDateString();
     }
 
     public function render(){
