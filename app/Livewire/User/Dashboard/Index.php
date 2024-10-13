@@ -9,6 +9,7 @@ use Livewire\Component;
 use App\Models\Schedules;
 use App\Models\Attendance;
 use App\Models\EnrolledCourse;
+use App\Models\MakeupSchedule;
 use Illuminate\Support\Facades\Auth;
 use Livewire\WithPagination;
 
@@ -89,6 +90,11 @@ class Index extends Component
                 ->where('isCurrent', '1')
                 ->get();
 
+        $makeupSched = MakeupSchedule::whereIn('course_id', $getCourseId)
+                ->where('isApproved', '1')
+                ->where('isCurrent', '1')
+                ->get();
+
         // Greetings from the Instructors (Good Morning, Afternoon, and Evening)
         $getHour = Carbon::now()->timezone('Asia/Manila')->format('H');
         if($getHour > 0){
@@ -115,7 +121,7 @@ class Index extends Component
         // Fetch Attendance based on Students
         $attendances = Attendance::where('student_id', Auth::id())
                 ->where('isCurrent', '0')
-                ->orderBy('date', 'ASC')
+                ->orderBy('date', 'DESC')
                 ->paginate(5);
 
         // Fetch Student's Full Name after Connected to Google Account
@@ -134,6 +140,7 @@ class Index extends Component
             'sections' => $sections,
             'greetMessage' => $this->greetMessage,
             'schedules' => $schedules,
+            'makeupSched' => $makeupSched,
             'attendances' => $attendances,
             'genderGreeting' => $this->genderGreeting
         ];

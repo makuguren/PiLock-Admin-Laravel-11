@@ -128,7 +128,7 @@ Route::middleware(['auth:admin', App\Http\Middleware\AdminComponentLayout::class
         Route::get('timetable', App\Livewire\Admin\Schedules\Timetable::class)->name('schedules.timetable');
         Route::get('makeupscheds', App\Livewire\Admin\MakeupSched\Index::class)->name('schedules.makeup');
             // ->middleware('permission:View Make-Up Schedules');
-        Route::get('makeupapprovals', App\Livewire\Admin\Schedules\Approvals::class)->name('schedules.approvals');
+        Route::get('makeupapprovals', App\Livewire\Admin\MakeupSched\Approvals::class)->name('schedules.approvals');
             // ->middleware('permission:View Make-Up SchedApprovals');
     });
 

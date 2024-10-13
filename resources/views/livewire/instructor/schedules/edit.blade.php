@@ -9,7 +9,7 @@
                     <label class="label-text">Courses</label>
                     <select wire:model="course_id" id="addcourse_id" class="select select-bordered bg-base-300 block w-full py-3 px-4 mb-3 form-control" required>
                         <option value="">--Select Courses--</option>
-                            @foreach ($courses as $course)
+                            @foreach ($courseSecs as $course)
                                 <option wire:click="fetchCourseDetails({{ $course->id }})" value="{{ $course->id }}">{{ $course->course_title }} | {{ $course->section->program }} {{ $course->section->year }}{{ $course->section->block }}</option>
                             @endforeach
                     </select>

@@ -20,7 +20,32 @@
                 </div>
 
                 <div class="overflow-x-auto">
-                    @forelse ($schedules as $schedule)
+                    @if ($schedules->isNotEmpty())
+                        @foreach ($schedules as $schedule)
+                            <div class="text-md">Course Title: {{ $schedule->course->course_title }}</div>
+                            <div class="text-md">Section: {{ $schedule->course->section->program }}
+                                {{ $schedule->course->section->year }}{{ $schedule->course->section->block }}
+                            </div>
+
+                            <div class="text-md">Day: {{ $schedule->days }}</div>
+                            <div class="text-md">Time Frame: {{ Carbon\Carbon::parse($schedule->time_start)->format('h:i A') }} to {{ Carbon\Carbon::parse($schedule->time_end)->format('h:i A') }}</div>
+                        @endforeach
+                    @elseif ($makeupSched->isNotEmpty())
+                        @foreach ($makeupSched as $schedule)
+                            <div class="text-md">Course Title: {{ $schedule->course->course_title }}</div>
+                            <div class="text-md">Section: {{ $schedule->course->section->program }}
+                                {{ $schedule->course->section->year }}{{ $schedule->course->section->block }}
+                            </div>
+
+                            <div class="text-md">Day: {{ $schedule->days }}</div>
+                            <div class="text-md">Time Frame: {{ Carbon\Carbon::parse($schedule->time_start)->format('h:i A') }} to {{ Carbon\Carbon::parse($schedule->time_end)->format('h:i A') }}</div>
+                        @endforeach
+                    @else
+                        No Current Schedules Found
+                    @endif
+
+
+                    {{-- @forelse ($schedules as $schedule)
                         <div class="text-md">Course Title: {{ $schedule->course->course_title }}</div>
                         <div class="text-md">Section: {{ $schedule->course->section->program }}
                             {{ $schedule->course->section->year }}{{ $schedule->course->section->block }}
@@ -30,7 +55,7 @@
                         <div class="text-md">Time Frame: {{ Carbon\Carbon::parse($schedule->time_start)->format('h:i A') }} to {{ Carbon\Carbon::parse($schedule->time_end)->format('h:i A') }}</div>
                     @empty
                         No Current Schedules Found
-                    @endforelse
+                    @endforelse --}}
                 </div>
             </div>
         </div>

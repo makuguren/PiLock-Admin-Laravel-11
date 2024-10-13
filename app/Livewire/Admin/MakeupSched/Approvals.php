@@ -1,19 +1,20 @@
 <?php
 
-namespace App\Livewire\Admin\Schedules;
+namespace App\Livewire\Admin\MakeupSched;
 
+use App\Models\MakeupSchedule;
 use Livewire\Component;
 use App\Models\Schedules;
 
 class Approvals extends Component
 {
     public function render(){
-        $schedules = Schedules::where('isMakeUp', '1')->where('isApproved', '0')->paginate(10);
+        $schedules = MakeupSchedule::where('isApproved', '0')->paginate(10);
         return view('livewire.admin.schedules.approvals', ['schedules' => $schedules]);
     }
 
     public function makeupApprove(int $schedule_id){
-        $schedule = Schedules::findOrFail($schedule_id);
+        $schedule = MakeupSchedule::findOrFail($schedule_id);
         $schedule->update([
             'isApproved' => '1'
         ]);
@@ -21,7 +22,7 @@ class Approvals extends Component
     }
 
     public function makeupDecline(int $schedule_id){
-        $schedule = Schedules::findOrFail($schedule_id);
+        $schedule = MakeupSchedule::findOrFail($schedule_id);
         $schedule->update([
             'isApproved' => '2'
         ]);
