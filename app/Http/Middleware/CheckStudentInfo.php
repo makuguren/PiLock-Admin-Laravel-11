@@ -16,7 +16,7 @@ class CheckStudentInfo
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(Auth::user()->student_id == NULL || Auth::user()->section_id == NULL || Auth::user()->birthdate == NULL){
+        if(Auth::user()->student_id == NULL || Auth::user()->section_id == NULL){
             return redirect()->route('user.dashboard.index');
         }
 

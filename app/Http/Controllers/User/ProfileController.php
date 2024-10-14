@@ -34,7 +34,6 @@ class ProfileController extends Controller
         }
 
         $request->user()->student_id = $request->student_id;
-        $request->user()->birthdate = $request->birthdate;
 
         $request->user()->save();
 

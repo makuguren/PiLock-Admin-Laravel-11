@@ -10,39 +10,39 @@
         <div class="flex flex-wrap mb-2">
             <div class="w-full px-3">
                 <label class="label-text">Full Name</label>
-                <input wire:model="full_name" id="addfull_name" class="input input-bordered bg-base-300 block w-full py-3 px-4 mb-3 form-control" type="text" disabled>
-                @error('full_name') <span class="error text-sm text-red-600 space-y-1" role="alert">{{ $message }}</span> @enderror
+                <input wire:model="full_name" id="addfull_name" class="block w-full px-4 py-3 mb-3 input input-bordered bg-base-300 form-control" type="text" disabled>
+                @error('full_name') <span class="space-y-1 text-sm text-red-600 error" role="alert">{{ $message }}</span> @enderror
             </div>
         </div>
 
         <div class="flex flex-wrap mb-2">
             <div class="w-full px-3">
                 <label class="label-text">First Name</label>
-                <input wire:model="first_name" id="addfirst_name" class="input input-bordered bg-base-300 block w-full py-3 px-4 mb-3 form-control" type="text">
-                @error('first_name') <span class="error text-sm text-red-600 space-y-1" role="alert">{{ $message }}</span> @enderror
+                <input wire:model="first_name" id="addfirst_name" class="block w-full px-4 py-3 mb-3 input input-bordered bg-base-300 form-control" type="text">
+                @error('first_name') <span class="space-y-1 text-sm text-red-600 error" role="alert">{{ $message }}</span> @enderror
             </div>
         </div>
 
         <div class="flex flex-wrap mb-2">
             <div class="w-full px-3">
                 <label class="label-text">Last Name</label>
-                <input wire:model="last_name" id="addstudent_id" class="input input-bordered bg-base-300 block w-full py-3 px-4 mb-3 form-control" type="text">
-                @error('last_name') <span class="error text-sm text-red-600 space-y-1" role="alert">{{ $message }}</span> @enderror
+                <input wire:model="last_name" id="addstudent_id" class="block w-full px-4 py-3 mb-3 input input-bordered bg-base-300 form-control" type="text">
+                @error('last_name') <span class="space-y-1 text-sm text-red-600 error" role="alert">{{ $message }}</span> @enderror
             </div>
         </div>
 
         <div class="flex flex-wrap mb-2">
             <div class="w-full px-3">
                 <label class="label-text">Student ID</label>
-                <input wire:model="student_id" id="addstudent_id" class="input input-bordered bg-base-300 block w-full py-3 px-4 mb-3 form-control" type="text">
-                @error('student_id') <span class="error text-sm text-red-600 space-y-1" role="alert">{{ $message }}</span> @enderror
+                <input wire:model="student_id" id="addstudent_id" class="block w-full px-4 py-3 mb-3 input input-bordered bg-base-300 form-control" type="text">
+                @error('student_id') <span class="space-y-1 text-sm text-red-600 error" role="alert">{{ $message }}</span> @enderror
             </div>
         </div>
 
         <div class="flex flex-wrap mb-2">
             <div class="w-full px-3">
                 <label class="label-text">Programs</label>
-                <select wire:model="program" id="addprogram" class="select select-bordered bg-base-300 block w-full py-3 px-4 mb-3 form-control" required>
+                <select wire:model="program" id="addprogram" class="block w-full px-4 py-3 mb-3 select select-bordered bg-base-300 form-control" required>
                     <option value="">--Select Program--</option>
                     <option value="BSIT">BSIT</option>
                     <option value="BSCS">BSCS</option>
@@ -56,7 +56,7 @@
         <div class="flex flex-wrap mb-2">
             <div class="w-full px-3">
                 <label class="label-text">Year</label>
-                <select wire:model="year" id="addyear" class="select select-bordered bg-base-300 block w-full py-3 px-4 mb-3 form-control" required>
+                <select wire:model="year" id="addyear" class="block w-full px-4 py-3 mb-3 select select-bordered bg-base-300 form-control" required>
                     <option value="">--Select Year--</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -70,7 +70,7 @@
         <div class="flex flex-wrap mb-2">
             <div class="w-full px-3">
                 <label class="label-text">Block</label>
-                <select wire:model="block" id="addblock" class="select select-bordered bg-base-300 block w-full py-3 px-4 mb-3 form-control" required>
+                <select wire:model="block" id="addblock" class="block w-full px-4 py-3 mb-3 select select-bordered bg-base-300 form-control" required>
                     <option value="">--Select Block--</option>
                     <option value="A">A</option>
                     <option value="B">B</option>
@@ -85,10 +85,10 @@
             </div>
         </div>
 
-        <div class="flex flex-wrap mb-2">
+        <div class="flex flex-wrap mb-6">
             <div class="w-full px-3">
                 <label class="label-text">Gender</label>
-                <select wire:model="gender" id="addgender" class="select select-bordered bg-base-300 block w-full py-3 px-4 mb-3 form-control" required>
+                <select wire:model="gender" id="addgender" class="block w-full px-4 py-3 mb-3 select select-bordered bg-base-300 form-control" required>
                     <option value="">--Select Gender--</option>
                     <option value="1">Male</option>
                     <option value="2">Female</option>
@@ -97,17 +97,9 @@
             </div>
         </div>
 
-        <div class="flex flex-wrap mb-6">
-            <div class="w-full px-3">
-                <label class="label-text">Birthdate</label>
-                <input wire:model="birthdate" id="addbirthdate" class="input input-bordered bg-base-300 block w-full py-3 px-4 mb-3 form-control" type="date">
-                @error('birthdate') <span class="error text-sm text-red-600 space-y-1" role="alert">{{ $message }}</span> @enderror
-            </div>
-        </div>
-
         <div class="modal-action">
             <div class="flex flex-row-reverse space-x-2 space-x-reverse">
-                <button type="submit" class="btn btn-ghost bg-blue-700 hover:bg-blue-500 text-white">
+                <button type="submit" class="text-white bg-blue-700 btn btn-ghost hover:bg-blue-500">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-save"><path d="M15.2 3a2 2 0 0 1 1.4.6l3.8 3.8a2 2 0 0 1 .6 1.4V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/><path d="M17 21v-7a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v7"/><path d="M7 3v4a1 1 0 0 0 1 1h7"/></svg>
                     Update
                 </button>

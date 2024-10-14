@@ -34,7 +34,6 @@ class User extends Authenticatable
         'student_id',
         'tag_uid',
         'gender',
-        'birthdate',
         'section_id',
         'user_theme'
     ];

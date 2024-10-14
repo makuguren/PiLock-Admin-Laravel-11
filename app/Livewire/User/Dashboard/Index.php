@@ -30,7 +30,6 @@ class Index extends Component
             'year' => 'required|integer',
             'block' => 'required|string',
             'gender' => 'required|integer',
-            'birthdate' => 'required'
         ];
     }
 
@@ -66,7 +65,6 @@ class Index extends Component
             'student_id' => $validatedData['student_id'],
             'section_id' => $this->section_id,
             'gender' => $validatedData['gender'],
-            'birthdate' => $validatedData['birthdate']
         ]);
 
         toastr()->success('Updated Information Successfully!');
@@ -79,7 +77,6 @@ class Index extends Component
         $this->last_name = '';
         $this->student_id = '';
         $this->section_id = '';
-        $this->birthdate = '';
     }
 
     public function render(){
@@ -145,7 +142,7 @@ class Index extends Component
             'genderGreeting' => $this->genderGreeting
         ];
 
-        if(Auth::user()->student_id == NULL || Auth::user()->section_id == NULL || Auth::user()->birthdate == NULL){
+        if(Auth::user()->student_id == NULL || Auth::user()->section_id == NULL){
             $data['checked'] = $checked;
         }
 
