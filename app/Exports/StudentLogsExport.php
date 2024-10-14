@@ -5,11 +5,12 @@ namespace App\Exports;
 use App\Models\Log;
 // use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\FromQuery;
+use Maatwebsite\Excel\Concerns\WithTitle;
 use Maatwebsite\Excel\Concerns\Exportable;
-use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
+use Maatwebsite\Excel\Concerns\WithHeadings;
 
-class LogsExport implements FromQuery, WithHeadings, WithMapping
+class StudentLogsExport implements FromQuery, WithHeadings, WithMapping, WithTitle
 {
     use Exportable;
     public $course_id, $fromdate, $todate, $year;
@@ -23,7 +24,9 @@ class LogsExport implements FromQuery, WithHeadings, WithMapping
 
     public function query()
     {
-        return Log::query()->where('course_id', $this->course_id)->whereBetween('date', [$this->fromdate, $this->todate]);
+        return Log::query()
+            ->where('course_id', $this->course_id)
+            ->whereBetween('date', [$this->fromdate, $this->todate]);
     }
 
     public function headings(): array
@@ -47,10 +50,15 @@ class LogsExport implements FromQuery, WithHeadings, WithMapping
             $log->student->name,
             $log->course->section->program . ' ' . $log->course->section->year . $log->course->section->block,
             $log->course->course_title,
-            $log->course->instructor->name,
+            $log->course->instructor->first_name . ' ' . $log->course->instructor->last_name,
             $log->date,
             $log->time_in,
             $log->time_out
         ];
+    }
+
+    public function title(): string
+    {
+        return 'Student Logs ' . $this->fromdate . ' - ' . $this->todate;
     }
 }

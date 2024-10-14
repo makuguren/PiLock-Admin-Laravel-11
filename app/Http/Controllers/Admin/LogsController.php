@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Admin;
 use Carbon\Carbon;
 use App\Models\Log;
 use App\Models\User;
+use App\Models\Course;
 use App\Models\Schedules;
 use App\Models\Attendance;
+use App\Models\FacultyLog;
 use App\Models\Instructor;
 use Illuminate\Http\Request;
 use App\Models\EnrolledCourse;
@@ -195,32 +197,47 @@ class LogsController extends Controller
         }
     }
 
-    public function exitStudentAPI(int $tag_uid){
+    public function exitStudFacAPI(int $tag_uid){
         $datetime = Carbon::now('Asia/Manila');
         $studentId = User::where('tag_uid', $tag_uid)->pluck('id');
-        $log = Log::where('student_id', $studentId)->whereNull('time_out');
+        $studentLog = Log::where('student_id', $studentId)->whereNull('time_out');
 
         try {
-            if($log){
-                $log->update([
+            // Instructor Time Out
+            $instructorId = Instructor::where('tag_uid', $tag_uid)->pluck('id')->first();
+
+            if($instructorId){
+                $getCourseId = Course::where('instructor_id', $instructorId)->pluck('id')->toArray();
+
+                $facultyLog = FacultyLog::whereIn('course_id', $getCourseId)
+                    ->whereNull('time_out');
+
+                if($facultyLog){
+                    $facultyLog->update([
+                        'time_out' => $datetime->toTimeString()
+                    ]);
+
+                    return response()->json([
+                        'status' => 200,
+                        'message' => 'Instructor Time Out Logs Successfully!'
+                    ], 200);
+                }
+
+            // Student Time Out
+            } else if ($studentLog){
+                $studentLog->update([
                     'time_out' => $datetime->toTimeString()
                 ]);
 
                 return response()->json([
                     'status' => 200,
-                    'message' => 'Time Out Logs Successfully!'
+                    'message' => 'Student Time Out Logs Successfully!'
                 ], 200);
-            } else {
-                return response()->json([
-                    'status' => 404,
-                    'message' => 'No Logs Found!'
-                ], 404);
             }
-
-        } catch (QueryException){
+        } catch (QueryException) {
             return response()->json([
                 'status' => 404,
-                'message' => 'No Students Found!'
+                'message' => 'No Student or Faculty Found!'
             ], 404);
         }
     }
@@ -228,11 +245,19 @@ class LogsController extends Controller
     public function attendInstructorAPI(int $tag_uid){
         $instructor = Instructor::where('tag_uid', $tag_uid)->first();
         $schedule_now = Schedules::where('isCurrent', '1')->first();
+        $datetime = Carbon::now('Asia/Manila');
 
         if($schedule_now){
             if($instructor){
                 $schedule_now->update([
                     'isAttend' => '1'
+                ]);
+
+                // Saving Details to Faculty Logs
+                FacultyLog::create([
+                    'course_id' => $schedule_now->course->id,
+                    'time_in' => $datetime->toTimeString(),
+                    'date' => $datetime->toDateString(),
                 ]);
 
                 return response()->json([

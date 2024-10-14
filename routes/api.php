@@ -33,7 +33,7 @@ Route::get('schedules/current', [SchedulesController::class, 'showCurrentSchedAP
 Route::post('attendstud/{tag_uid}', [LogsController::class, 'attendStudentAPI']);
 Route::post('attendinst/{tag_uid}', [LogsController::class, 'attendInstructorAPI']);
 
-Route::post('exitstudent/{tag_uid}', [LogsController::class, 'exitStudentAPI']);
+Route::post('exitStudFac/{tag_uid}', [LogsController::class, 'exitStudFacAPI']);
 
 //Show All Events
 Route::get('events/', [EventsController::class, 'showEventsAPI']);
