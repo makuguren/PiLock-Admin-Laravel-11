@@ -54,11 +54,11 @@
                         <tr>
                             <th>COURSE TITLE</th>
                             <th>INSTRUCTOR</th>
-                            <th>DAYS</th>
+                            <th>DAY</th>
                             <th>SECTION</th>
                             <th>TIME START</th>
                             <th>TIME END</th>
-                            <th>ACTION</th>
+                            <th>ACTIONS</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -116,10 +116,25 @@
                                     @endphp
 
                                     @if ($currDateTime->format('l') == $schedule->days && $currDateTime->format('H:i:s') >= $schedule->time_start && $currDateTime->format('H:i:s') <= $schedule->time_end && $schedule->isCurrent == '0')
-                                        <button type="button" wire:click="executeSched({{ $schedule->id }})" class="h-8 bg-orange-700 btn btn-ghost hover:bg-orange-500 btn-sm">
-                                            <span class="text-sm text-white">Execute</span>
+                                        <button type="button" wire:click="activateSched({{ $schedule->id }})" class="h-8 bg-green-700 btn btn-ghost hover:bg-green-500 btn-sm">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-power"><path d="M12 2v10"/><path d="M18.4 6.6a9 9 0 1 1-12.77.04"/></svg>
+                                            <span class="text-sm text-white">Activate Schedule</span>
+                                        </button>
+
+                                    {{-- Code to Stop the Schedules set the Schedule, Attendances isCurrent to 0 --}}
+                                    @elseif ($currDateTime->format('l') == $schedule->days && $currDateTime->format('H:i:s') >= $schedule->time_start && $currDateTime->format('H:i:s') <= $schedule->time_end && $schedule->isCurrent == '1')
+                                        <button type="button" wire:click="deactivateSched({{ $schedule->id }})" class="h-8 bg-red-700 btn btn-ghost hover:bg-red-500 btn-sm">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-power"><path d="M12 2v10"/><path d="M18.4 6.6a9 9 0 1 1-12.77.04"/></svg>
+                                            <span class="text-sm text-white">Deactivate Schedule</span>
                                         </button>
                                     @endif
+
+                                    {{-- @if ($currDateTime->format('l') == $schedule->days && $currDateTime->format('H:i:s') >= $schedule->time_start && $currDateTime->format('H:i:s') <= $schedule->time_end && $schedule->isCurrent == '1')
+                                        <button type="button" wire:click="deactivateSched({{ $schedule->id }})" class="h-8 bg-red-700 btn btn-ghost hover:bg-red-500 btn-sm">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-power"><path d="M12 2v10"/><path d="M18.4 6.6a9 9 0 1 1-12.77.04"/></svg>
+                                            <span class="text-sm text-white">Deactivate Schedule</span>
+                                        </button>
+                                    @endif --}}
                                 </div>
                             </th>
                         </tr>

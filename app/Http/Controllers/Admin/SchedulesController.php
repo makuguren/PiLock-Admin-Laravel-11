@@ -170,12 +170,12 @@ class SchedulesController extends Controller
                         ];
                     })
                 ], 200);
-            } else {
-                return response()->json([
-                    'status' => 404,
-                    'status_message' => 'No Current Schedules/Events Found'
-                ], 404);
             }
+        } else {
+            return response()->json([
+                'status' => 404,
+                'status_message' => 'No Current Schedules/Events Found'
+            ], 404);
         }
     }
 }

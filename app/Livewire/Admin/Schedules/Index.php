@@ -100,12 +100,11 @@ class Index extends Component
         }
     }
 
-    public function executeSched($schedule_id){
+    public function activateSched($schedule_id){
         $schedule = Schedules::findOrFail($schedule_id);
 
         if($schedule){
             $enrolledCourses = EnrolledCourse::where('course_id', $schedule->course_id)->get();
-
             $attendanceData = [];
 
             foreach ($enrolledCourses as $enrolledCourse) {
@@ -122,8 +121,36 @@ class Index extends Component
             $schedule->update([
                 'isCurrent' => '1'
             ]);
-            toastr()->success('Executed Schedule Successfully!');
+            toastr()->success('Schedule Activated Successfully!');
         }
+    }
+
+    public function deactivateSched($schedule_id){
+        $schedule = Schedules::findOrFail($schedule_id);
+
+        if($schedule){
+            $attendances = Attendance::where('time_end', $schedule->time_end)->where('isCurrent', '1')->where('isMakeUp','0')->get();
+            $attendanceData = [];
+
+            foreach ($attendances as $attendance) {
+                $attendanceData[] = [
+                    'student_id' => $attendance->student_id,
+                    'isCurrent' => '0'
+                ];
+            }
+
+            foreach ($attendanceData as $data) {
+                Attendance::where('student_id', $data['student_id'])->update([
+                    'isCurrent' => $data['isCurrent']
+                ]);
+            }
+        }
+
+        $schedule->update([
+            'isCurrent' => '0',
+            'isAttend' => '0'
+        ]);
+        toastr()->success('Schedule Deactivated Successfully!');
     }
 
     // Save Schedule
@@ -225,6 +252,7 @@ class Index extends Component
         $courses = Course::all();
         $schedules = Schedules::where('isMakeUp', '0')
             ->orderBy('days', 'ASC')
+            ->orderBy('time_start', 'ASC')
             ->paginate(10);
         return view('livewire.admin.schedules.index', [
             'schedules' => $schedules,
