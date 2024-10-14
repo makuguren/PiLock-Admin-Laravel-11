@@ -34,7 +34,6 @@ return new class extends Migration
             $table->dropColumn('student_id');
             $table->dropColumn('tag_uid');
             $table->dropColumn('section_id');
-            $table->dropColumn('birthdate');
             $table->dropColumn('google_id');
             $table->dropColumn('avatar');
             $table->dropColumn('user_theme');

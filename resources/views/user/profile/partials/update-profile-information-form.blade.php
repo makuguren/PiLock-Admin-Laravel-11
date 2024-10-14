@@ -19,7 +19,7 @@
 
         <div>
             <x-input-label for="student_id" :value="__('Student ID')" />
-            <x-text-input id="student_id" name="student_id" type="text" class="block w-full mt-1" :value="old('student_id', $user->student_id)" required autofocus autocomplete="birthdate" />
+            <x-text-input id="student_id" name="student_id" type="text" class="block w-full mt-1" :value="old('student_id', $user->student_id)" required autofocus autocomplete="" />
             <x-input-error class="mt-2" :messages="$errors->get('student_id')" />
         </div>
 

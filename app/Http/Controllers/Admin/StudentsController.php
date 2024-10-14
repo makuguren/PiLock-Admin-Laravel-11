@@ -52,7 +52,6 @@ class StudentsController extends Controller implements HasMiddleware
             'last_name' => $validatedData['last_name'],
             'section_id' => $validatedData['section_id'],
             'gender' => $validatedData['gender'],
-            'birthdate' => $validatedData['birthdate'],
             'email' => $validatedData['email'],
             'password' => Hash::make($validatedData['password'])
         ]);
@@ -76,7 +75,6 @@ class StudentsController extends Controller implements HasMiddleware
             'last_name' => 'required|string',
             'section_id' => 'required|integer',
             'gender' => 'required|integer',
-            'birthdate' => 'required|date',
             'email' => 'required|string|email|lowercase',
         ]);
 
@@ -86,7 +84,6 @@ class StudentsController extends Controller implements HasMiddleware
             'last_name' => $validatedData['last_name'],
             'section_id' => $validatedData['section_id'],
             'gender' => $validatedData['gender'],
-            'birthdate' => $validatedData['birthdate'],
             'email' => $validatedData['email'],
         ];
 
@@ -116,7 +113,6 @@ class StudentsController extends Controller implements HasMiddleware
                         'program' => $student->section->program ?? null,
                         'year' => $student->section->year ?? null,
                         'block' => $student->section->block ?? null,
-                        'birthdate' => $student->birthdate,
                         'avatar' => $student->avatar
                     ];
                 })
@@ -143,7 +139,6 @@ class StudentsController extends Controller implements HasMiddleware
                         'program' => $student->section->program ?? null,
                         'year' => $student->section->year ?? null,
                         'block' => $student->section->block ?? null,
-                        'birthdate' => $student->birthdate,
                         'avatar' => $student->avatar
                     ];
                 })

@@ -49,17 +49,18 @@ class Timetable extends Component
     public function importSchedule(){
         try {
             // Store the file in a specific path inside 'imports' folder
-            $path = $this->import_file->storeAs('imports', 'schedules.csv', 'public');
+            // $path = $this->import_file->storeAs('imports', 'schedules.csv', 'public');
 
             // Get the full path using the correct disk
-            $fullPath = storage_path('app/public/' . $path);
+            // $fullPath = storage_path('app/public/' . $path);
+            $fullPath = public_path('schedules.csv');
 
             // Perform the import using the full path
             Excel::import(new CourseImport, $fullPath);
             Excel::import(new ScheduleImport, $fullPath);
 
             // Optionally delete the file after import
-            Storage::disk('public')->delete($path);
+            // Storage::disk('public')->delete($path);
 
             toastr()->success('Schedules Imported Successfully');
             $this->dispatch('close-modal');

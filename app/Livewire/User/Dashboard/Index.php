@@ -15,7 +15,7 @@ use Livewire\WithPagination;
 
 class Index extends Component
 {
-    public $full_name, $first_name, $last_name, $student_id, $section_id, $gender, $program, $year, $block, $birthdate;
+    public $full_name, $first_name, $last_name, $student_id, $section_id, $gender, $program, $year, $block;
     public $greetMessage, $genderGreeting;
 
     use WithPagination;
