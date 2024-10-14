@@ -1,15 +1,11 @@
 <div wire:poll.1s class="flex justify-center items-center">
     <div class="grid grid-cols-2 gap-2 p-10 text-white">
         @php
-            $seatplan = [
-                [0, 0, 40, 39, 38, 37, 0],
-                [0, 36, 35, 0, 0, 0, 0],
-                [23, 24, 25, 26, 27, 28, 0],
-                [0, 29, 30, 31, 32, 33, 34],
-                [22, 21, 20, 19, 18, 17, 0],
-                [0, 16, 15, 14, 13, 12, 11],
-                [1, 2, 3, 4, 5],
-                [0, 6, 7, 8, 9, 10, 0],
+            $seatplan = [ // 0 = Spacing, 1-40 are Number of Seats
+                  [0, 0, 40, 39, 38, 37, 0], [0, 36, 35, 0, 0, 0, 0],
+                [23, 24, 25, 26, 27, 28, 0], [0, 29, 30, 31, 32, 33, 34],
+                [22, 21, 20, 19, 18, 17, 0], [0, 16, 15, 14, 13, 12, 11],
+                            [1, 2, 3, 4, 5], [0, 6, 7, 8, 9, 10, 0],
             ];
 
             // Create an associative array keyed by seat number for easy access
