@@ -54,6 +54,6 @@ class NoScheduleOverlap implements Rule
 
     public function message()
     {
-        return 'Makeup: This schedule overlaps with an existing schedule on the same day and time.';
+        return 'This schedule overlaps with an existing schedule on the same day and time.';
     }
 }

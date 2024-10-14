@@ -13,6 +13,8 @@ use Livewire\WithPagination;
 use App\Imports\CourseImport;
 use Livewire\WithFileUploads;
 use App\Imports\ScheduleImport;
+use App\Models\Attendance;
+use App\Models\EnrolledCourse;
 use App\Rules\NoScheduleOverlap;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Database\QueryException;
@@ -95,6 +97,32 @@ class Index extends Component
             foreach ($failures as $failure) {
                 $this->addError('import_error', implode(', ', $failure->errors()));
             }
+        }
+    }
+
+    public function executeSched($schedule_id){
+        $schedule = Schedules::findOrFail($schedule_id);
+
+        if($schedule){
+            $enrolledCourses = EnrolledCourse::where('course_id', $schedule->course_id)->get();
+
+            $attendanceData = [];
+
+            foreach ($enrolledCourses as $enrolledCourse) {
+                $attendanceData = [
+                    'student_id' => $enrolledCourse->student_id,
+                    'course_id' => $enrolledCourse->course_id,
+                    'date' => Carbon::now('Asia/Manila')->toDateString(),
+                    'time_end' => $schedule->time_end,
+                    'isCurrent' => '1',
+                    'isMakeUp' => '0'
+                ];
+            }
+            Attendance::create($attendanceData);
+            $schedule->update([
+                'isCurrent' => '1'
+            ]);
+            toastr()->success('Executed Schedule Successfully!');
         }
     }
 
@@ -195,7 +223,9 @@ class Index extends Component
         $instructors = Instructor::all();
         $sections = Section::all();
         $courses = Course::all();
-        $schedules = Schedules::where('isMakeUp', '0')->paginate(10);
+        $schedules = Schedules::where('isMakeUp', '0')
+            ->orderBy('days', 'ASC')
+            ->paginate(10);
         return view('livewire.admin.schedules.index', [
             'schedules' => $schedules,
             'courses' => $courses,
