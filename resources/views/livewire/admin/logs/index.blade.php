@@ -53,7 +53,7 @@
                                     <option value="{{ $course->id }}">{{ $course->course_title }} -
                                         {{ $course->section->program }}
                                         {{ $course->section->year }}{{ $course->section->block }} -
-                                        {{ $course->instructor->name }}
+                                        {{ $course->instructor->first_name }} {{ $course->instructor->last_name }}
                                     </option>
                                 @endforeach
                             </select>
