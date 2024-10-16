@@ -59,7 +59,6 @@ class Makeup extends Component
             'time_end' => $validatedData['time_end'],
             'lateDuration' => $validatedData['lateDuration'],
             'isApproved' => '0',
-            'isCurrent' => '0'
         ];
 
         MakeupSchedule::create($scheduleData);
@@ -94,7 +93,6 @@ class Makeup extends Component
             'time_start' => $validatedData['time_start'],
             'time_end' => $validatedData['time_end'],
             'lateDuration' => $validatedData['lateDuration'],
-            'isMakeUp' => '1'
         ]);
 
         toastr()->success('Make-Up Schedule Updated Successfully');

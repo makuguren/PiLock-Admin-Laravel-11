@@ -40,10 +40,10 @@
                     <thead class="bg-base-200 rounded-md text-md">
                         <tr>
                             <th>ID</th>
-                            <th>COURSE CODE</th>
-                            <th>COURSE TITLE</th>
+                            <th>CODE</th>
+                            <th>TITLE</th>
                             <th>SECTION</th>
-                            <th>INSTRUCTOR</th>
+                            <th>FACULTY</th>
                             {{-- <th>COURSE KEY</th> --}}
                             <th>ACTION</th>
                         </tr>

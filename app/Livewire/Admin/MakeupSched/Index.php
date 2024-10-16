@@ -59,7 +59,6 @@ class Index extends Component
             'time_end' => $validatedData['time_end'],
             'lateDuration' => $validatedData['lateDuration'],
             'isApproved' => '1',
-            'isCurrent' => '0'
         ];
 
         MakeupSchedule::create($scheduleData);

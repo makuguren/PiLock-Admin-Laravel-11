@@ -5,7 +5,7 @@
         <form wire:submit.prevent="destroyCourse" method="dialog" class="w-full mt-6">
             <div class="flex flex-wrap mb-6">
                 <div class="w-full px-3">
-                    <h5>Are you Sure you want to Delete?</h5>
+                    <h5>Are you sure you want to permanently delete this course? This action cannot be undone.</h5>
                 </div>
             </div>
             <div class="modal-action">

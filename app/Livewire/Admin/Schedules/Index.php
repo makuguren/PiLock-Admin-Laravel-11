@@ -8,14 +8,15 @@ use App\Models\Section;
 use App\Models\Subject;
 use Livewire\Component;
 use App\Models\Schedules;
+use App\Models\Attendance;
 use App\Models\Instructor;
 use Livewire\WithPagination;
 use App\Imports\CourseImport;
 use Livewire\WithFileUploads;
-use App\Imports\ScheduleImport;
-use App\Models\Attendance;
 use App\Models\EnrolledCourse;
+use App\Imports\ScheduleImport;
 use App\Rules\NoScheduleOverlap;
+use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Storage;
@@ -108,7 +109,7 @@ class Index extends Component
             $attendanceData = [];
 
             foreach ($enrolledCourses as $enrolledCourse) {
-                $attendanceData = [
+                $attendanceData[] = [
                     'student_id' => $enrolledCourse->student_id,
                     'course_id' => $enrolledCourse->course_id,
                     'date' => Carbon::now('Asia/Manila')->toDateString(),
@@ -117,7 +118,8 @@ class Index extends Component
                     'isMakeUp' => '0'
                 ];
             }
-            Attendance::create($attendanceData);
+            DB::table('attendances')->insert($attendanceData);
+            
             $schedule->update([
                 'isCurrent' => '1'
             ]);
@@ -170,9 +172,6 @@ class Index extends Component
             'time_start' => $validatedData['time_start'],
             'time_end' => $validatedData['time_end'],
             'lateDuration' => $validatedData['lateDuration'],
-            'isApproved' => '1',
-            'isMakeUp' => '0',
-            'isCurrent' => '0',
         ];
 
         // Check if the Schedule Start is Beyond at the Current Time

@@ -13,11 +13,13 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('student_id')->unique()->nullable();
+            $table->string('first_name')->nullable();
+            $table->string('last_name')->nullable();
             $table->string('tag_uid')->unique()->nullable();
             $table->unsignedBigInteger('section_id')->nullable();
             $table->tinyInteger('gender')->default('0')->comment('0=None, 1=Male, 2=Female')->nullable();
             $table->string('google_id')->unique()->nullable();
-            $table->string('avatar', 1000)->nullable();
+            $table->text('avatar')->nullable();
             $table->string('user_theme')->nullable();
 
             //Foreign Key

@@ -18,10 +18,10 @@ return new class extends Migration
             $table->time('time_start');
             $table->time('time_end');
             $table->integer('lateDuration')->nullable();
-            $table->tinyInteger('isMakeUp')->default('0')->comment('0=Regular, 1=MakeUp');
-            $table->tinyInteger('isApproved')->default('1')->comment('0=Pending, 1=Approved, 2=Declined');
-            $table->tinyInteger('isCurrent')->comment('0=No, 1=Yes');
-            $table->tinyInteger('isAttend')->default('0')->comment('0=No, 1=Yes');
+            $table->enum('isMakeUp', ['0','1'])->default('0')->comment('0=Regular, 1=MakeUp');
+            $table->enum('isApproved', ['0','1','2'])->default('1')->comment('0=Pending, 1=Approved, 2=Declined');
+            $table->enum('isCurrent', ['0','1'])->default('0')->comment('0=No, 1=Yes');
+            $table->enum('isAttend',['0','1'])->default('0')->comment('0=No, 1=Yes');
             $table->timestamps();
 
             // Foreign Key

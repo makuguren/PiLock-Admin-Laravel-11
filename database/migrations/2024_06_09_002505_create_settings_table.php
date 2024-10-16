@@ -14,12 +14,12 @@ return new class extends Migration
         Schema::create('settings', function (Blueprint $table) {
             $table->id();
             $table->string('website_title')->nullable();
-            $table->integer('isMaintenance')->default('0')->comment('0=No, 1=Yes')->nullable();
-            $table->integer('isDevInteg')->default('0')->comment('0=No, 1=Yes')->nullable();
-            $table->integer('isRegStud')->default('0')->comment('0=No, 1=Yes')->nullable();
-            $table->integer('isRegLoginStud')->default('0')->comment('0=No, 1=Yes')->nullable();
-            $table->integer('isRegInst')->default('0')->comment('0=No, 1=Yes')->nullable();
-            $table->integer('isRegAdmins')->default('0')->comment('0=No, 1=Yes')->nullable();
+            $table->enum('isMaintenance', ['0','1'])->default('0')->comment('0=No, 1=Yes')->nullable();
+            $table->enum('isDevInteg', ['0','1'])->default('0')->comment('0=No, 1=Yes')->nullable();
+            $table->enum('isRegStud', ['0','1'])->default('0')->comment('0=No, 1=Yes')->nullable();
+            $table->enum('isRegLoginStud', ['0','1'])->default('0')->comment('0=No, 1=Yes')->nullable();
+            $table->enum('isRegInst', ['0','1'])->default('0')->comment('0=No, 1=Yes')->nullable();
+            $table->enum('isRegAdmins', ['0','1'])->default('0')->comment('0=No, 1=Yes')->nullable();
             $table->timestamps();
         });
     }

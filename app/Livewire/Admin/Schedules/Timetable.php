@@ -99,9 +99,6 @@ class Timetable extends Component
             'time_start' => $validatedData['time_start'],
             'time_end' => $validatedData['time_end'],
             'lateDuration' => $validatedData['lateDuration'],
-            'isApproved' => '1',
-            'isMakeUp' => '0',
-            'isCurrent' => '0',
         ];
 
         // Check if the Schedule Start is Beyond at the Current Time

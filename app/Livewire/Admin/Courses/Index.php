@@ -33,7 +33,13 @@ class Index extends Component
     }
     public function messages(){
         return [
-
+            'course_code.required' => 'Please enter the course code. This field is required.',
+            'course_title.required' => 'Please enter the course title. This field is required.',
+            'program.required' => 'Please select a program from the list. This field is required.',
+            'year.required' => 'Please select the year. This field is required.',
+            'block.required' => 'Please select the block. This field is required.',
+            'instructor_id.required' => 'Please select the faculty member. This field is required.',
+            'course_key.required' => 'Please enter the enrollment key. This field is required.'
         ];
     }
     public function updated($fields){
