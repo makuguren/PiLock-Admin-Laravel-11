@@ -6,33 +6,33 @@
             @csrf
             <div class="flex flex-wrap mb-2">
                 <div class="w-full px-3">
-                    <label class="label-text">Course and Section</label>
-                    <select wire:model="course_id" id="editcourse_id" class="select select-bordered bg-base-300 block w-full py-3 px-4 mb-3 form-control" required disabled>
-                        <option value="">--Select Courses--</option>
+                    <label class="label-text">Course and Section</label> <span class="text-red-600">*</span>
+                    <select wire:model="course_id" id="editcourse_id" class="select select-bordered bg-base-300 block w-full py-3 px-4 mb-1 mt-1 form-control" disabled>
+                        <option value="">--Select Course--</option>
                             @foreach ($courses as $course)
                                 <option wire:click="fetchCourseDetails({{ $course->id }})" value="{{ $course->id }}">{{ $course->course_title }} | {{ $course->section->program }} {{ $course->section->year }}{{ $course->section->block }}</option>
                             @endforeach
                     </select>
-                    @error('course_id') <span class="error" role="alert">{{ $message }}</span> @enderror
+                    @error('course_id') <span class="error mt-1 text-sm text-red-600 space-y-1" role="alert">{{ $message }}</span> @enderror
                 </div>
             </div>
 
             <div class="flex flex-wrap mb-2">
                 <div class="w-full md:w-1/2 px-3">
                     <label class="label-text">Course Code</label>
-                    <input value="{{ $course_code ?? '' }}" id="course_code" class="input input-bordered bg-base-300 block w-full py-3 px-4 mb-3 form-control" type="name" disabled>
+                    <input value="{{ $course_code ?? '' }}" id="course_code" class="input input-bordered bg-base-300 block w-full py-3 px-4 mb-1 mt-1 form-control" type="name" disabled>
                 </div>
 
                 <div class="w-full md:w-1/2 px-3">
                     <label class="label-text">Instructor</label>
-                    <input value="{{ $instructor_fname ?? '' }} {{ $instructor_lname ?? '' }}" id="instructor_name" class="input input-bordered bg-base-300 block w-full py-3 px-4 mb-3 form-control" type="name" disabled>
+                    <input value="{{ $instructor_fname ?? '' }} {{ $instructor_lname ?? '' }}" id="instructor_name" class="input input-bordered bg-base-300 block w-full py-3 px-4 mb-1 mt-1 form-control" type="name" disabled>
                 </div>
             </div>
 
             <div class="flex flex-wrap mb-2">
                 <div class="w-full px-3">
-                    <label class="label-text">Days</label>
-                    <select wire:model="days" id="editdays" class="select select-bordered bg-base-300 block w-full py-3 px-4 mb-3 form-control" required disabled>
+                    <label class="label-text">Select Day(s)</label> <span class="text-red-600">*</span>
+                    <select wire:model="days" id="editdays" class="select select-bordered bg-base-300 block w-full py-3 px-4 mb-1 mt-1 form-control" disabled>
                         <option value="">--Select Days--</option>
                         <option value="Sunday">Sunday</option>
                         <option value="Monday">Monday</option>
@@ -42,13 +42,13 @@
                         <option value="Friday">Friday</option>
                         <option value="Saturday">Saturday</option>
                     </select>
-                    @error('days') <span class="error" role="alert">{{ $message }}</span> @enderror
+                    @error('days') <span class="error mt-1 text-sm text-red-600 space-y-1" role="alert">{{ $message }}</span> @enderror
                 </div>
             </div>
             <div class="flex flex-wrap mb-6">
                 <div class="w-full md:w-1/3 px-3">
-                    <label class="label-text">Time Start</label>
-                    <select wire:model="time_start" id="edittime_start" class="select select-bordered bg-base-300 block w-full py-3 px-4 mb-3 form-control" required disabled>
+                    <label class="label-text">Time Start</label> <span class="text-red-600">*</span>
+                    <select wire:model="time_start" id="edittime_start" class="select select-bordered bg-base-300 block w-full py-3 px-4 mb-1 mt-1 form-control" disabled>
                         <option value="">--Select Time Start--</option>
                         <option value="07:00:00">07:00 AM</option>
                         <option value="08:00:00">08:00 AM</option>
@@ -65,12 +65,12 @@
                         <option value="19:00:00">07:00 PM</option>
                         <option value="20:00:00">08:00 PM</option>
                     </select>
-                    @error('time_start') <span class="error" role="alert">{{ $message }}</span> @enderror
+                    @error('time_start') <span class="error mt-1 text-sm text-red-600 space-y-1" role="alert">{{ $message }}</span> @enderror
                 </div>
 
                 <div class="w-full md:w-1/3 px-3">
-                    <label class="label-text">Time End</label>
-                    <select wire:model="time_end" id="edittime_end" class="select select-bordered bg-base-300 block w-full py-3 px-4 mb-3 form-control" required disabled>
+                    <label class="label-text">Time End</label> <span class="text-red-600">*</span>
+                    <select wire:model="time_end" id="edittime_end" class="select select-bordered bg-base-300 block w-full py-3 px-4 mb-1 mt-1 form-control" disabled>
                         <option value="">--Select Time End--</option>
                         <option value="07:00:00">07:00 AM</option>
                         <option value="08:00:00">08:00 AM</option>
@@ -87,13 +87,13 @@
                         <option value="19:00:00">07:00 PM</option>
                         <option value="20:00:00">08:00 PM</option>
                     </select>
-                    @error('time_end') <span class="error" role="alert">{{ $message }}</span> @enderror
+                    @error('time_end') <span class="error mt-1 text-sm text-red-600 space-y-1" role="alert">{{ $message }}</span> @enderror
                 </div>
 
                 <div class="w-full md:w-1/3 px-3">
-                    <label class="label-text">Late Duration</label>
-                    <input wire:model="lateDuration" id="editlate_duration" class="input input-bordered bg-base-300 block w-full py-3 px-4 mb-3 form-control" type="number" placeholder="0 - 60 minutes" disabled>
-                    @error('lateDuration') <span class="error" role="alert">{{ $message }}</span> @enderror
+                    <label class="label-text">Late Tolerance</label>
+                    <input wire:model="lateDuration" id="editlate_duration" class="input input-bordered bg-base-300 block w-full py-3 px-4 mb-1 mt-1 form-control" type="number" placeholder="0 - 60 minutes" disabled>
+                    @error('lateDuration') <span class="error mt-1 text-sm text-red-600 space-y-1" role="alert">{{ $message }}</span> @enderror
                 </div>
             </div>
             <div class="modal-action">

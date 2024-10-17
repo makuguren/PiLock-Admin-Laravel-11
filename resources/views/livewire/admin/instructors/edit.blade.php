@@ -4,41 +4,41 @@
       <h3 class="text-lg font-bold">Edit Instructor</h3>
         <form wire:submit.prevent="updateInstructor" method="dialog" class="w-full mt-6">
             <div class="flex flex-wrap mb-2">
-                <div class="w-full md:w-1/2 px-3">
-                    <label class="label-text">First Name</label>
-                    <input wire:model="first_name" id="editinst_first" class="input input-bordered bg-base-300 block w-full py-3 px-4 mb-3 form-control" type="text">
-                    @error('first_name') <span class="error" role="alert">{{ $message }}</span> @enderror
+                <div class="w-full md:w-1/2 px-3 mb-2">
+                    <label class="label-text">First Name</label> <span class="text-red-600">*</span>
+                    <input wire:model="first_name" id="editinst_first" class="input input-bordered bg-base-300 block w-full py-3 px-4 mb-1 mt-1 form-control" type="text">
+                    @error('first_name') <span class="error mt-1 text-sm text-red-600 space-y-1" role="alert">{{ $message }}</span> @enderror
                 </div>
 
                 <div class="w-full md:w-1/2 px-3">
-                    <label class="label-text">Last Name</label>
-                    <input wire:model="last_name" id="editinst_last" class="input input-bordered bg-base-300 block w-full py-3 px-4 mb-3 form-control" type="text">
-                    @error('last_name') <span class="error" role="alert">{{ $message }}</span> @enderror
+                    <label class="label-text">Last Name</label> <span class="text-red-600">*</span>
+                    <input wire:model="last_name" id="editinst_last" class="input input-bordered bg-base-300 block w-full py-3 px-4 mb-1 mt-1 form-control" type="text">
+                    @error('last_name') <span class="error mt-1 text-sm text-red-600 space-y-1" role="alert">{{ $message }}</span> @enderror
                 </div>
             </div>
             <div class="flex flex-wrap mb-2">
                 <div class="w-full px-3">
-                    <label class="label-text">Gender</label>
-                    <select wire:model="gender" id="editgender" class="select select-bordered bg-base-300 block w-full py-3 px-4 mb-3 form-control" required>
+                    <label class="label-text">Gender</label> <span class="text-red-600">*</span>
+                    <select wire:model="gender" id="editgender" class="select select-bordered bg-base-300 block w-full py-3 px-4 mb-1 mt-1 form-control" required>
                         <option value="">--Select Gender--</option>
                         <option value="1">Male</option>
                         <option value="2">Female</option>
                     </select>
-                    @error('gender') <span class="error" role="alert">{{ $message }}</span> @enderror
+                    @error('gender') <span class="error mt-1 text-sm text-red-600 space-y-1" role="alert">{{ $message }}</span> @enderror
                 </div>
             </div>
-            <div class="flex flex-wrap mb-3">
+            <div class="flex flex-wrap mb-1 mt-1">
                 <div class="w-full px-3">
-                    <label class="label-text">Email</label>
-                    <input wire:model="email" id="editinst_email" class="input input-bordered bg-base-300 block w-full py-3 px-4 mb-3 form-control" type="email">
-                    @error('email') <span class="error" role="alert">{{ $message }}</span> @enderror
+                    <label class="label-text">Email</label> <span class="text-red-600">*</span>
+                    <input wire:model="email" id="editinst_email" class="input input-bordered bg-base-300 block w-full py-3 px-4 mb-1 mt-1 form-control" type="email">
+                    @error('email') <span class="error mt-1 text-sm text-red-600 space-y-1" role="alert">{{ $message }}</span> @enderror
                 </div>
             </div>
             <div class="flex flex-wrap mb-6">
                 <div class="w-full px-3">
-                    <label class="label-text">Password</label>
-                    <input wire:model="password" id="editinst_password" class="input input-bordered bg-base-300 block w-full py-3 px-4 mb-3 form-control" type="password">
-                    @error('password') <span class="error" role="alert">{{ $message }}</span> @enderror
+                    <label class="label-text">Password</label> <span class="text-red-600">*</span>
+                    <input wire:model="password" id="editinst_password" class="input input-bordered bg-base-300 block w-full py-3 px-4 mb-1 mt-1 form-control" type="password">
+                    @error('password') <span class="error mt-1 text-sm text-red-600 space-y-1" role="alert">{{ $message }}</span> @enderror
                 </div>
             </div>
             <div class="modal-action">

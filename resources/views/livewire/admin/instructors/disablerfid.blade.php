@@ -6,7 +6,7 @@
             @csrf
             <div class="flex flex-wrap mb-6">
                 <div class="w-full px-3">
-                    <h5>Are you Sure you want to Disable RFID?</h5>
+                    <h5>Are you sure you want to disable this RFID card? This action is recommended if the card is lost or stolen.</h5>
                 </div>
             </div>
             <div class="modal-action">

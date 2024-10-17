@@ -47,7 +47,7 @@
                     <div class="w-full">
                         <span class="text-sm font-medium">Select Courses and Section</span>
                         <form wire:submit="filter_coursesec">
-                            <select wire:model="filter_coursesec" class="flex items-center w-full select select-bordered">
+                            <select wire:model="filter_coursesec" class="flex items-center w-full mt-1 select select-bordered">
                                 <option value="" selected>All Course & Section</option>
                                 @foreach ($courses as $course)
                                     <option value="{{ $course->id }}">{{ $course->course_title }} -
@@ -64,7 +64,7 @@
                         <span class="text-sm font-medium">Select Date</span>
                         <form wire:submit="filter_date">
                             <label class="flex items-center w-full">
-                                <input type="date" wire:model="filter_date" name="date" value="" class="w-full text-sm input input-bordered form-control bg-base-100" />
+                                <input type="date" wire:model="filter_date" name="date" value="" class="w-full mt-1 text-sm input input-bordered form-control bg-base-100" />
                             </label>
                         </form>
                     </div>

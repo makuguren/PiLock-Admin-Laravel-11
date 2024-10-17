@@ -1,13 +1,13 @@
 <input type="checkbox" id="download_pdf_modal" class="modal-toggle" />
 <div dialog wire:ignore.self class="modal modal-bottom sm:modal-middle" role="dialog">
     <div class="modal-box">
-      <h3 class="text-lg font-bold">Download PDF</h3>
+      <h3 class="text-lg font-bold">Export as PDF</h3>
         <form wire:submit.prevent="downloadPDF" method="dialog" class="w-full mt-6">
             <div class="flex flex-wrap mb-2">
                 <div class="w-full px-3">
-                    <label class="label-text">Select Course and Sections</label>
-                    <select wire:model="dlpdfcourse_id" id="selsection_id" class="select select-bordered bg-base-300 block w-full py-3 px-4 mb-3 form-control" required>
-                        <option value="">--Select Sections--</option>
+                    <label class="label-text">Course and Sections</label>
+                    <select wire:model="dlpdfcourse_id" id="selsection_id" class="select select-bordered bg-base-300 block w-full py-3 px-4 mt-1 mb-1 form-control" required>
+                        <option value="">--Course and Section---</option>
                         @foreach($courseSecs as $courseSec)
                             <option value="{{ $courseSec->id }}">
                                 {{ $courseSec->course_title ?? 'No Course Title' }} -
@@ -23,7 +23,7 @@
                 <div class="w-full px-3">
                     <label class="label-text">Date</label>
                     <label class="flex items-center">
-                        <input type="date" wire:model="dlpdfdate" id="dlpdfdate" class="input input-bordered block form-control w-full bg-base-300 text-sm" required />
+                        <input type="date" wire:model="dlpdfdate" id="dlpdfdate" class="input input-bordered block form-control w-full mt-1 mb-1 bg-base-300 text-sm" required />
                     </label>
                     @error('dlpdfdate') <span class="error" role="alert">{{ $message }}</span> @enderror
                 </div>

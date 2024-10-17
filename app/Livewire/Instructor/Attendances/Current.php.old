@@ -21,10 +21,6 @@ class Current extends Component
 
     public $selectedCourseSection, $selectedSubject, $selectedDate;
     public $search_student, $student_id, $first_name, $last_name, $section, $course_id;
-    public $totalStudents, $countPresent, $countAbsent;
-
-    public $sortField = 'users.last_name';
-    public $sortDirection = 'asc';
 
     public function updatedSelectedCourseSection($value){
         $this->selectedCourseSection = $value;
@@ -47,17 +43,6 @@ class Current extends Component
         } else {
             toastr()->error("Can't Find Student!");
         }
-    }
-
-    // Dynamic Table for Sorting
-    public function sortBy($field){
-        if($this->sortField  === $field) {
-            $this->sortDirection = $this->sortDirection === 'asc' ? 'desc' : 'asc';
-        } else {
-            $this->sortDirection = 'asc';
-        }
-
-        $this->sortField = $field;
     }
 
     public function addStudAttendance(){
@@ -103,11 +88,6 @@ class Current extends Component
 
     public function render(){
 
-        // Count as Number of Present and Absent
-        $this->totalStudents = Attendance::where('isCurrent', '1')->count();
-        $this->countPresent = Attendance::where('isCurrent', '1')->where('isPresent', '1')->count();
-        $this->countAbsent = Attendance::where('isCurrent', '1')->where('isPresent', '0')->count();
-
         $instructorId = Auth::id();
 
         // Fetch Courses with Section associated with Courses of the instructor (Dropdown Tag)
@@ -115,21 +95,24 @@ class Current extends Component
             $query->where('instructor_id', $instructorId);
         })->with('section')->get();
 
-        // START QUERY TO FETCH STUDENTS SORT BY LAST NAME IN ASC ORDER
-        $getCourseId = Course::whereHas('section', function ($query) use ($instructorId) {
-            $query->where('instructor_id', $instructorId);
-        })->pluck('id')->toArray();
+        // Query to Show Courses where the Instructor is based to Current Loggedin with, Fetch the Attendances of the Student(Model).
+        $query = Course::where('instructor_id', $instructorId)
+            // ->with('attendance.student') // Eager load relationships (Old Version)
 
-        $attendances = Attendance::whereIn('course_id', $getCourseId)
-            ->where('isCurrent', '1')
-            ->join('users', 'attendances.student_id', '=', 'users.id') // Join users table on attendances table (student_id) = users table (id)
-            ->orderBy($this->sortField, $this->sortDirection)
-            ->select('attendances.*') // Select attendances table
-            ->get();
-        // END QUERY TO FETCH STUDENTS SORT BY LAST NAME IN ASC ORDER
+            ->with(['attendance' => function ($query) {
+                $query->where('isCurrent', '1'); //Filter attendance where isCurrent to 0
+                $query->where('date', 'like', '%'.$this->selectedDate.'%'); //Filter Date
+            }, 'attendance.student']) // Eager load relationships
+
+            // Filter Attendances(Students) from Course(Course_id) based on Dropdown Selected
+            ->when($this->selectedCourseSection, function ($query) {
+                    $query->where('id', $this->selectedCourseSection);
+            });
+
+        $courses = $query->get();
 
         return view('livewire.instructor.attendances.current',[
-            'attendances' => $attendances,
+            'courses' => $courses,
             'courseSecs' => $courseSecs
         ]);
     }

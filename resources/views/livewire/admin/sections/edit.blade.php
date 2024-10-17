@@ -5,8 +5,8 @@
         <form wire:submit.prevent="updateSection" method="dialog" class="w-full mt-6">
             <div class="flex flex-wrap mb-2">
                 <div class="w-full px-3">
-                    <label class="label-text">Programs</label>
-                    <select wire:model="program" id="addprogram" class="select select-bordered bg-base-300 block w-full py-3 px-4 mb-3 form-control" required>
+                    <label class="label-text">Program</label> <span class="text-red-600">*</span>
+                    <select wire:model="program" id="addprogram" class="select select-bordered bg-base-300 block w-full py-3 px-4 mt-1 mb-1 form-control" required>
                         <option value="">--Select Program--</option>
                         <option value="BSIT">BSIT</option>
                         <option value="BSCS">BSCS</option>
@@ -19,8 +19,8 @@
 
             <div class="flex flex-wrap mb-2">
                 <div class="w-full px-3">
-                    <label class="label-text">Year</label>
-                    <select wire:model="year" id="addyear" class="select select-bordered bg-base-300 block w-full py-3 px-4 mb-3 form-control" required>
+                    <label class="label-text">Year</label> <span class="text-red-600">*</span>
+                    <select wire:model="year" id="addyear" class="select select-bordered bg-base-300 block w-full py-3 px-4 mt-1 mb-1 form-control" required>
                         <option value="">--Select Year--</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -33,8 +33,8 @@
 
             <div class="flex flex-wrap mb-6">
                 <div class="w-full px-3">
-                    <label class="label-text">Block</label>
-                    <select wire:model="block" id="addblock" class="select select-bordered bg-base-300 block w-full py-3 px-4 mb-3 form-control" required>
+                    <label class="label-text">Block</label> <span class="text-red-600">*</span>
+                    <select wire:model="block" id="addblock" class="select select-bordered bg-base-300 block w-full py-3 px-4 mt-1 mb-1 form-control" required>
                         <option value="">--Select Block--</option>
                         <option value="A">A</option>
                         <option value="B">B</option>

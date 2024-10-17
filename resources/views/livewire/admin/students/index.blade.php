@@ -60,7 +60,7 @@
                     <div class="w-full">
                         <form wire:submit="filter_section">
                             <span class="font-medium text-sm">Select Sections</span>
-                            <select wire:model="filter_section" class="select select-bordered flex w-full mt-1 items-center">
+                            <select wire:model.live="filter_section" class="select select-bordered flex w-full mt-1 items-center">
                                 <option value="" selected>All Sections</option>
                                 @foreach ($sections as $section)
                                     <option value="{{ $section->id }}">{{ $section->program }} {{ $section->year }}{{ $section->block }}</option>
@@ -72,7 +72,7 @@
                     <div class="w-full">
                         <form wire:submit="search">
                             <span class="font-medium text-sm">Search Students</span>
-                            <input type="text" wire:model="query" class="input input-bordered flex w-full mt-1 text-sm" placeholder="Search" />
+                            <input type="text" wire:model.live.debounce.250ms="query" class="input input-bordered flex w-full mt-1 text-sm" placeholder="Search" />
                         </form>
                     </div>
                 </div>
@@ -117,7 +117,7 @@
                         <th>ACTION</th>
                       </tr>
                     </thead>
-                    <tbody @if($wirePoll === true) wire:poll.1000ms @endif>
+                    <tbody>
                         @forelse ($students as $student)
                             <tr>
                                 <td>

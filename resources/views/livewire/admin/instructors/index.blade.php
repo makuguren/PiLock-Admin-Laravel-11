@@ -1,5 +1,5 @@
 <x-slot:title>
-    Instructors
+    Faculties
 </x-slot>
 
 <div>
@@ -20,13 +20,13 @@
     <div class="p-6">
         <div class="flex flex-row gap-2">
             <div class="flex flex-col w-full">
-                <h1 class="font-bold text-2xl mb-2">Instructors</h1>
+                <h1 class="font-bold text-2xl mb-2">Faculties</h1>
                 <ul class="flex items-center text-sm mb-6">
                     <li class="mr-2">
                         <a href="#" class="text-gray-400 hover:text-gray-600 font-medium">Dashboard</a>
                     </li>
                     <li class="text-gray-600 mr-2 font-medium">/</li>
-                    <li class="text-gray-600 mr-2 font-medium">Instructors</li>
+                    <li class="text-gray-600 mr-2 font-medium">Faculties</li>
                 </ul>
             </div>
             @can('Add Tag UID to Instructors')
@@ -38,7 +38,7 @@
             @can('Create Instructors')
             <label for="add_modal" class="btn btn-ghost bg-blue-700 hover:bg-blue-500 w-55 btn-sm mt-3">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-pen"><path d="M11.5 15H7a4 4 0 0 0-4 4v2"/><path d="M21.378 16.626a1 1 0 0 0-3.004-3.004l-4.01 4.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z"/><circle cx="10" cy="7" r="4"/></svg>
-                <span class="text-white text-sm">Add Instructor</span>
+                <span class="text-white text-sm">Add Faculty</span>
             </label>
             @endcan
         </div>
@@ -113,7 +113,7 @@
                         </tr>
                         @empty
                             <tr>
-                                <td><div class="font-bold">No Instructors Found</div></td>
+                                <td><div class="font-bold">No Faculties Found</div></td>
                             </tr>
                         @endforelse
                     </tbody>

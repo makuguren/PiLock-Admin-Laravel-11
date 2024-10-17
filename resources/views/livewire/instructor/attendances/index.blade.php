@@ -19,7 +19,7 @@
 
             <label for="download_pdf_modal" class="btn btn-ghost bg-red-700 hover:bg-red-500 w-55 btn-sm mt-3">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-download"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
-                <span class="text-white text-sm">Download PDF</span>
+                <span class="text-white text-sm">Export as PDF</span>
             </label>
         </div>
 
@@ -31,9 +31,9 @@
 
                 <div class="flex flex-col md:flex-row gap-5">
                     <div class="w-full">
-                        <span class="font-medium text-sm">Select Course and Sections</span>
-                        <select wire:model="selectedCourseSection" id="section" class="select select-bordered flex w-full items-center">
-                            <option value="">All Course and Section</option>
+                        <span class="font-medium text-sm">Course and Section</span>
+                        <select wire:model.live="selectedCourseSection" id="section" class="select select-bordered flex w-full mt-1 mb-1 items-center">
+                            <option value="">--Course and Section--</option>
                             @foreach($courseSecs as $courseSec)
                                 <option value="{{ $courseSec->id }}">
                                     {{ $courseSec->course_title ?? 'No Course Title' }} -
@@ -45,9 +45,9 @@
                     </div>
 
                     <div class="w-full">
-                        <span class="font-medium text-sm">Select Date</span>
+                        <span class="font-medium text-sm">Date</span>
                         <label class="flex items-center">
-                            <input type="date" wire:model="selectedDate" name="date" class="input input-bordered block form-control w-full bg-base-100 text-sm" />
+                            <input type="date" wire:model.live="selectedDate" name="date" class="input input-bordered block form-control w-full mt-1 mb-1 bg-base-100 text-sm" />
                         </label>
                     </div>
                 </div>
@@ -56,7 +56,7 @@
 
         <div class="w-full mb-6"></div>
 
-        <div wire:poll.1000ms class="bg-base-100 border-gray-100 shadow-md shadow-black/5 p-6 rounded-md">
+        <div class="bg-base-100 border-gray-100 shadow-md shadow-black/5 p-6 rounded-md">
             <div class="overflow-x-auto">
                 <table class="table table-zebra">
                     <thead class="bg-base-200 rounded-md text-md">
@@ -116,7 +116,7 @@
                     </tbody>
                 </table>
                 <div class="mt-3">
-                    {{-- {{ $courses->links() }} --}}
+                    {{ $attendances->links() }}
                 </div>
             </div>
         </div>

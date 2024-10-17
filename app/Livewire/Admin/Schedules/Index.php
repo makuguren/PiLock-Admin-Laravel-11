@@ -54,6 +54,15 @@ class Index extends Component
         ];
     }
 
+    public function messages(){
+        return [
+            'course_id.required' => 'Kindly select a course with section.',
+            'days.required' => 'At least one day must be selected.',
+            'time_start.required' => 'A start time must be specified.',
+            'time_end.required' => 'An end time must be specified.'
+        ];
+    }
+
     public function updated($fields){
         $this->validateOnly($fields);
     }
@@ -119,7 +128,7 @@ class Index extends Component
                 ];
             }
             DB::table('attendances')->insert($attendanceData);
-            
+
             $schedule->update([
                 'isCurrent' => '1'
             ]);

@@ -25,7 +25,7 @@
 
         </div>
 
-        <div class="bg-base-100 border-gray-100 shadow-md shadow-black/5 p-6 rounded-md">
+        {{-- <div class="bg-base-100 border-gray-100 shadow-md shadow-black/5 p-6 rounded-md">
             <div class="overflow-x-auto">
                 <div class="flex justify-between mb-4 items-start">
                     <div class="font-medium">Filtering</div>
@@ -56,44 +56,57 @@
             </div>
         </div>
 
-        <div class="w-full mb-6"></div>
+        <div class="w-full mb-6"></div> --}}
 
         <div wire:poll.1000ms class="bg-base-100 border-gray-100 shadow-md shadow-black/5 p-6 rounded-md">
+            <div class="flex justify-between mb-4 items-start">
+                <div class="font-medium">{{ $countPresent }} out of {{ $totalStudents }} are Present!</div>
+            </div>
             <div class="overflow-x-auto">
                 <table class="table table-zebra">
                     <thead class="bg-base-200 rounded-md text-md">
                         <tr>
                             <th>STUDENT ID</th>
-                            <th>NAME AND EMAIL</th>
-                            <th>INSTRUCTOR</th>
+                            <th>
+                                <button wire:click="sortBy('users.last_name')" class="focus:outline-none">
+                                    NAME AND EMAIL
+                                    @if ($sortField == 'users.last_name')
+                                        @if ($sortDirection == 'asc')
+                                            ↑
+                                        @else
+                                            ↓
+                                        @endif
+                                    @endif
+                                </button>
+                            </th>
+                            <th>FACULTY</th>
                             <th>SECTION</th>
                             <th>SUBJECT</th>
                             <th>DATE</th>
-                            <th>IS PRESENT</th>
+                            <th>STATUS</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($courses as $course)
-                            @foreach ($course->attendance as $attendance)
+                        @forelse ($attendances as $attendance)
                             <tr>
                                 <td><div class="font-bold">{{ $attendance->student->student_id }}</div></td>
                                 <td>
                                     <div class="flex items-center gap-3">
                                         <div class="avatar">
-                                          <div class="mask mask-squircle h-12 w-12">
+                                        <div class="mask mask-squircle h-12 w-12">
                                             <img
-                                              src="{{ $attendance->student->avatar ?? '' }}" />
-                                          </div>
+                                            src="{{ $attendance->student->avatar ?? '' }}" />
+                                        </div>
                                         </div>
                                         <div>
-                                          <div class="font-bold">{{ $attendance->student->first_name }} {{ $attendance->student->last_name }}</div>
-                                          <div class="text-sm opacity-50">{{ $attendance->student->email }}</div>
+                                        <div class="font-bold">{{ $attendance->student->first_name }} {{ $attendance->student->last_name }}</div>
+                                        <div class="text-sm opacity-50">{{ $attendance->student->email }}</div>
                                         </div>
                                     </div>
                                 </td>
-                                <td><div class="">{{ $course->instructor->first_name }} {{ $course->instructor->last_name }}</div></td>
+                                <td><div class="">{{ $attendance->course->instructor->first_name }} {{ $attendance->course->instructor->last_name }}</div></td>
                                 <td><div class="">{{ $attendance->student->section->program }} {{ $attendance->student->section->year }}{{ $attendance->student->section->block }}</div></td>
-                                <td><div class="">{{ $course->course_title }}</div></td>
+                                <td><div class="">{{ $attendance->course->course_title }}</div></td>
                                 <td><div class="">{{ $attendance->date }}</div></td>
                                 <td>
                                     <div class="">
@@ -111,7 +124,6 @@
                                     </div>
                                 </td>
                             </tr>
-                            @endforeach
                         @empty
 
                         @endforelse

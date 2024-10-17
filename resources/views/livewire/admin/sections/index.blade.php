@@ -39,7 +39,7 @@
                 <table class="table table-zebra">
                     <thead class="bg-base-200 rounded-md text-md">
                         <tr>
-                            <th>SECTION ID</th>
+                            <th>ID</th>
                             <th>NAME</th>
                             <th>ACTION</th>
                         </tr>

@@ -31,7 +31,7 @@
                 @csrf
                 <div class="flex flex-wrap mb-6">
                     <div class="w-full px-3">
-                        <label class="label-text">Student ID</label>
+                        <label class="label-text">Student ID</label> <span class="text-red-600">*</span>
                         <input class="w-full px-4 py-3 mt-1 mb-1 input input-bordered bg-base-300" name="student_id" value="{{ $student->student_id }}" type="text" placeholder="">
                         @error('student_id')<span class="mt-1 space-y-1 text-sm text-red-600 error">{{$message}}</span> @enderror
                     </div>
@@ -39,13 +39,13 @@
 
                 <div class="flex flex-wrap mb-4 md:mb-3">
                     <div class="w-full px-3 mb-4 md:w-1/2">
-                        <label class="label-text">First Name</label>
+                        <label class="label-text">First Name</label> <span class="text-red-600">*</span>
                         <input class="w-full px-4 py-3 mt-1 mb-1 input input-bordered bg-base-300" name="first_name" value="{{ $student->first_name }}" type="text" placeholder="">
                         @error('first_name')<span class="mt-1 space-y-1 text-sm text-red-600 error">{{$message}}</span> @enderror
                     </div>
 
                     <div class="w-full px-3 md:w-1/2">
-                        <label class="label-text">Last Name</label>
+                        <label class="label-text">Last Name</label> <span class="text-red-600">*</span>
                         <input class="w-full px-4 py-3 mt-1 mb-1 input input-bordered bg-base-300" name="last_name" value="{{ $student->last_name }}" type="text" placeholder="">
                         @error('last_name')<span class="mt-1 space-y-1 text-sm text-red-600 error">{{$message}}</span> @enderror
                     </div>
@@ -53,7 +53,7 @@
 
                 <div class="flex flex-wrap mb-1 md:mb-6">
                     <div class="w-full px-3 mb-4 md:w-1/2 md:mb-0">
-                        <label class="label-text" for="">Section</label>
+                        <label class="label-text" for="">Section</label> <span class="text-red-600">*</span>
                         <select class="w-full px-4 py-3 mt-1 mb-1 select select-bordered bg-base-300" name="section_id">
                             <option>--Select your Section--</option>
                             @foreach ($sections as $section)
@@ -64,7 +64,7 @@
                     </div>
 
                     <div class="w-full px-3 mb-4 md:w-1/2 md:mb-0">
-                        <label class="label-text" for="">Gender</label>
+                        <label class="label-text" for="">Gender</label> <span class="text-red-600">*</span>
                         <select class="w-full px-4 py-3 mt-1 mb-1 select select-bordered bg-base-300" name="gender">
                             <option>--Select Gender--</option>
                             <option value="1" {{ $student->gender == '1' ? 'Selected':'' }}>Male</option>
@@ -76,13 +76,13 @@
 
                 <div class="flex flex-wrap mb-6">
                     <div class="w-full px-3 mb-6 md:w-1/2 md:mb-0">
-                        <label class="label-text" for="grid-email">Email</label>
+                        <label class="label-text" for="grid-email">Email</label> <span class="text-red-600">*</span>
                         <input class="w-full px-4 py-3 mt-1 mb-1 input input-bordered bg-base-300" name="email" type="email" value="{{ $student->email }}" placeholder="">
                         @error('email')<span class="mt-1 space-y-1 text-sm text-red-600 error">{{$message}}</span> @enderror
                     </div>
 
                     <div class="w-full px-3 mb-6 md:w-1/2 md:mb-0">
-                        <label class="label-text" for="grid-password">Password</label>
+                        <label class="label-text" for="grid-password">Password</label> <span class="text-red-600">*</span>
                         <input class="w-full px-4 py-3 mt-1 mb-1 input input-bordered bg-base-300" name="password" type="password" placeholder="">
                         @error('password')<span class="mt-1 space-y-1 text-sm text-red-600 error">{{$message}}</span> @enderror
                     </div>

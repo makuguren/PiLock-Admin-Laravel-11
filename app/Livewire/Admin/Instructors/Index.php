@@ -26,7 +26,13 @@ class Index extends Component
 
     public function messages(){
         return [
-
+            'first_name.required' => "The first name is required. Please provide the faculty member's first name.",
+            'last_name.required' => "The last name is required. Please provide the faculty member's last name.",
+            'gender' => 'Please select a gender. This field is required.',
+            'email.required' => 'A valid email address is required. Please enter a unique email for the faculty member.',
+            'email.unique' => 'The email you provided is already in use. Please enter a different email address.',
+            'password.required' => 'The password is required. Please enter a password.',
+            'password.min' => 'The password must be between 8 and 20 characters. Ensure your password meets this requirement.'
         ];
     }
 

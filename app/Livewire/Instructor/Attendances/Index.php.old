@@ -18,7 +18,7 @@ class Index extends Component
 {
     use WithPagination;
 
-    public $selectedCourseSection = '', $selectedSubject = '', $selectedDate = '';
+    public $selectedCourseSection, $selectedSubject, $selectedDate;
     public $dlpdfcourse_id, $dlpdfdate;
 
     public function updatedSelectedCourseSection($value){
@@ -136,22 +136,24 @@ class Index extends Component
         // Fetch attendances based on the course IDs that Assigned from Instructor Logged In, where 'isCurrent' is 0 and filter by the selected date
         $attendances = Attendance::whereIn('course_id', $getCourseId)
             ->where('isCurrent', '0')
-            ->join('users', 'attendances.student_id', '=', 'users.id') // Join users table on attendances table (student_id) = users table (id)
-            ->select('attendances.*') // Select attendances table
-            // Sort by Studen's Last Name (sortBy = Ascending Order, sortByDesc = Descending Order)
-            ->orderBy('users.last_name', 'asc')
-
-            // Selected Date on Dropdown
-            ->when($this->selectedDate !== '', function ($query) {
-                $query->where('date', $this->selectedDate);
+            
+            ->when($this->selectedDate, function ($query) {
+                $query->where('date', 'like', '%' . $this->selectedDate . '%');
             })
 
             // Selected CourseID(Course Subject with Section) on Dropdown
-            ->when($this->selectedCourseSection !== '', function ($query) {
+            ->when($this->selectedCourseSection, function ($query) {
                 // Filter by selected course section
                 $query->where('course_id', $this->selectedCourseSection);
             })
-            ->paginate(10);
+
+            ->with('student') // Eager load the student relationship (Modal)
+            ->paginate(10)
+
+            // Sort by Studen's Last Name (sortBy = Ascending Order, sortByDesc = Descending Order)
+            ->sortBy(function ($attendance) {
+                return $attendance->student->last_name; // Return student's last name
+            });
             // END QUERY TO FETCH STUDENTS SORT BY LAST NAME IN ASC ORDER
 
         return view('livewire.instructor.attendances.index',[
