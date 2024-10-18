@@ -135,11 +135,11 @@
                                     {{ $faculty->date }}
                                 </td>
                                 <td>
-                                    {{ $faculty->time_in }}
+                                    {{ Carbon\Carbon::parse($faculty->time_in)->format('h:i:s A') }}
                                 </td>
                                 <td>
                                     @if ($faculty->time_out)
-                                        {{ $faculty->time_out }}
+                                        {{ Carbon\Carbon::parse($faculty->time_out)->format('h:i:s A') }}
                                     @else
                                         No Time Out
                                     @endif
@@ -249,11 +249,11 @@
                                     </div>
                                 </td>
                                 <td><div class="">{{ $log->date }}</div></td>
-                                <td><div class="">{{ $log->time_in }}</div></td>
+                                <td><div class="">{{ Carbon\Carbon::parse($log->time_in)->format('h:i:s A') }}</div></td>
                                 <td>
                                     <div class="">
                                         @if ($log->time_out)
-                                            {{ $log->time_out }}
+                                            {{ Carbon\Carbon::parse($log->time_out)->format('h:i:s A') }}
                                         @else
                                             No Time Out
                                         @endif

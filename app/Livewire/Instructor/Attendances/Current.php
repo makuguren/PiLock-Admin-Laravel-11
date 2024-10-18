@@ -120,11 +120,15 @@ class Current extends Component
             $query->where('instructor_id', $instructorId);
         })->pluck('id')->toArray();
 
-        $attendances = Attendance::whereIn('course_id', $getCourseId)
-            ->where('isCurrent', '1')
+        $attendances = Attendance::whereIn('attendances.course_id', $getCourseId)
+            ->where('attendances.isCurrent', '1')
             ->join('users', 'attendances.student_id', '=', 'users.id') // Join users table on attendances table (student_id) = users table (id)
+            ->leftJoin('seat_plan', function ($join) {
+                $join->on('attendances.student_id', '=', 'seat_plan.student_id')
+                    ->on('attendances.course_id', '=', 'seat_plan.course_id');
+            })
             ->orderBy($this->sortField, $this->sortDirection)
-            ->select('attendances.*') // Select attendances table
+            ->select('attendances.*', 'seat_plan.seat_number') // Select attendances table
             ->get();
         // END QUERY TO FETCH STUDENTS SORT BY LAST NAME IN ASC ORDER
 

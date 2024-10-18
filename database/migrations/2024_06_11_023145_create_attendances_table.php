@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('student_id')->nullable();
             $table->unSignedBigInteger('course_id')->nullable();
+            $table->time('time_attend')->nullable();
             $table->date('date')->nullable();
             $table->time('time_end')->nullable();
             $table->enum('isPresent', ['0','1'])->default('0')->comment('0=Absent, 1=Present')->nullable();

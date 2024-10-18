@@ -62,12 +62,57 @@
                     <thead class="bg-base-200 rounded-md text-md">
                         <tr>
                             <th>STUDENT ID</th>
-                            <th>NAME AND EMAIL</th>
+                            <th>
+                                <button wire:click="sortBy('users.last_name')" class="focus:outline-none">
+                                    NAME AND EMAIL
+                                    @if ($sortField == 'users.last_name')
+                                        @if ($sortDirection == 'asc')
+                                            ↑
+                                        @else
+                                            ↓
+                                        @endif
+                                    @endif
+                                </button>
+                            </th>
+                            <th>
+                                <button wire:click="sortBy('seat_plan.seat_number')" class="focus:outline-none">
+                                    SEAT NO.
+                                    @if ($sortField == 'seat_plan.seat_number')
+                                        @if ($sortDirection == 'asc')
+                                            ↑
+                                        @else
+                                            ↓
+                                        @endif
+                                    @endif
+                                </button>
+                            </th>
                             <th>INSTRUCTOR</th>
                             <th>SECTION</th>
                             <th>SUBJECT</th>
                             <th>DATE</th>
-                            <th>IS PRESENT</th>
+                            <th>
+                                <button wire:click="sortBy('time_attend')" class="focus:outline-none">
+                                    TIME
+                                    @if ($sortField == 'time_attend')
+                                        @if ($sortDirection == 'asc')
+                                            ↑
+                                        @else
+                                            ↓
+                                        @endif
+                                    @endif
+                                </button>
+                            </th>
+                            <th>
+                                <button wire:click="sortBy('isPresent')" class="focus:outline-none">
+                                    STATUS
+                                    @if ($sortField == 'isPresent')
+                                        @if ($sortDirection == 'asc')
+                                            ↑
+                                        @else
+                                            ↓
+                                        @endif
+                                    @endif
+                                </button>
                         </tr>
                     </thead>
                     <tbody>
@@ -88,10 +133,12 @@
                                         </div>
                                     </div>
                                 </td>
+                                <td><div class="">{{ $attendance->seat_number ?? 'N/A' }}</div></td>
                                 <td><div class="">{{ $attendance->course->instructor->first_name }} {{ $attendance->course->instructor->last_name }}</div></td>
                                 <td><div class="">{{ $attendance->student->section->program }} {{ $attendance->student->section->year }}{{ $attendance->student->section->block }}</div></td>
                                 <td><div class="">{{ $attendance->course->course_title }}</div></td>
                                 <td><div class="">{{ $attendance->date }}</div></td>
+                                <td><div class="">{{ $attendance->time_attend ? Carbon\Carbon::parse($attendance->time_attend)->format('h:i A') : 'No Time Logged' }}</div></td>
                                 <td>
                                     <div class="">
                                         @if ($attendance->isPresent == '0')

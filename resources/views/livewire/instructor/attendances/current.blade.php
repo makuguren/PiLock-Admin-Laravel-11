@@ -79,11 +79,45 @@
                                     @endif
                                 </button>
                             </th>
+                            <th>
+                                <button wire:click="sortBy('seat_number')" class="focus:outline-none">
+                                    SEAT NO.
+                                    @if ($sortField == 'seat_number')
+                                        @if ($sortDirection == 'asc')
+                                            ↑
+                                        @else
+                                            ↓
+                                        @endif
+                                    @endif
+                                </button>
+                            </th>
                             <th>FACULTY</th>
                             <th>SECTION</th>
                             <th>SUBJECT</th>
                             <th>DATE</th>
-                            <th>STATUS</th>
+                            <th>
+                                <button wire:click="sortBy('time_attend')" class="focus:outline-none">
+                                    TIME
+                                    @if ($sortField == 'time_attend')
+                                        @if ($sortDirection == 'asc')
+                                            ↑
+                                        @else
+                                            ↓
+                                        @endif
+                                    @endif
+                                </button>
+                            </th>
+                            <th>
+                                <button wire:click="sortBy('isPresent')" class="focus:outline-none">
+                                    STATUS
+                                    @if ($sortField == 'isPresent')
+                                        @if ($sortDirection == 'asc')
+                                            ↑
+                                        @else
+                                            ↓
+                                        @endif
+                                    @endif
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -104,10 +138,12 @@
                                         </div>
                                     </div>
                                 </td>
+                                <td><div class="">{{ $attendance->seat_number ?? 'No Seat Assigned' }}</div></td>
                                 <td><div class="">{{ $attendance->course->instructor->first_name }} {{ $attendance->course->instructor->last_name }}</div></td>
                                 <td><div class="">{{ $attendance->student->section->program }} {{ $attendance->student->section->year }}{{ $attendance->student->section->block }}</div></td>
                                 <td><div class="">{{ $attendance->course->course_title }}</div></td>
                                 <td><div class="">{{ $attendance->date }}</div></td>
+                                <td><div class="">{{ $attendance->time_attend ? Carbon\Carbon::parse($attendance->time_attend)->format('h:i A') : 'No Time Logged' }}</div></td>
                                 <td>
                                     <div class="">
                                         @if ($attendance->isPresent == '0')

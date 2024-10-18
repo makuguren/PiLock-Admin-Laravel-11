@@ -79,6 +79,7 @@
             <th>STUDENT ID</th>
             <th>NAME</th>
             <th>SEAT NO.</th>
+            <th>TIME</th>
             <th>STATUS</th>
         </tr>
         @foreach ($courses as $course)
@@ -92,7 +93,8 @@
                 <tr>
                     <td>{{ $attendance->student->student_id }}</td>
                     <td>{{ $attendance->student->last_name }}, {{ $attendance->student->first_name }}</td>
-                    <td>{{ $attendance->seat_number ?? 'N/A' }}
+                    <td>{{ $attendance->seat_number ?? 'N/A' }}</td>
+                    <td>{{ $attendance->time_attend ? Carbon\Carbon::parse($attendance->time_attend)->format('h:i A') : 'No Time Logged' }}</td>
                     <td>
                         @if ($attendance->isPresent == '0')
                             ABSENT

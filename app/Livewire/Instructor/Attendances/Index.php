@@ -21,6 +21,9 @@ class Index extends Component
     public $selectedCourseSection = '', $selectedSubject = '', $selectedDate = '';
     public $dlpdfcourse_id, $dlpdfdate;
 
+    public $sortField = 'users.last_name';
+    public $sortDirection = 'asc';
+
     public function updatedSelectedCourseSection($value){
         $this->selectedCourseSection = $value;
         // $this->selectedSubject = null;
@@ -112,6 +115,17 @@ class Index extends Component
         }, 'attendance.pdf');
     }
 
+    // Dynamic Table for Sorting
+    public function sortBy($field){
+        if($this->sortField  === $field) {
+            $this->sortDirection = $this->sortDirection === 'asc' ? 'desc' : 'asc';
+        } else {
+            $this->sortDirection = 'asc';
+        }
+
+        $this->sortField = $field;
+    }
+
     public function resetInput(){
         $this->dlpdfcourse_id = '';
         $this->dlpdfdate = '';
@@ -126,33 +140,35 @@ class Index extends Component
             $query->where('instructor_id', $instructorId);
         })->with('section')->get();
 
-        // START QUERY TO FETCH STUDENTS SORT BY LAST NAME IN ASC ORDER
-        // Another Method of Query to Fetch Attendance based Instructor Current LoggedIn
-        // Fetch Course IDs of the instructor (based on Course-Section relationship)
+        // Fetch Course IDs of the instructor based on Course-Section relationship
         $getCourseId = Course::whereHas('section', function ($query) use ($instructorId) {
             $query->where('instructor_id', $instructorId);
         })->pluck('id')->toArray();
 
-        // Fetch attendances based on the course IDs that Assigned from Instructor Logged In, where 'isCurrent' is 0 and filter by the selected date
-        $attendances = Attendance::whereIn('course_id', $getCourseId)
-            ->where('isCurrent', '0')
-            ->join('users', 'attendances.student_id', '=', 'users.id') // Join users table on attendances table (student_id) = users table (id)
-            ->select('attendances.*') // Select attendances table
-            // Sort by Studen's Last Name (sortBy = Ascending Order, sortByDesc = Descending Order)
-            ->orderBy('users.last_name', 'asc')
-
-            // Selected Date on Dropdown
+        // Fetch attendances for the logged-in instructor
+        $attendances = Attendance::whereIn('attendances.course_id', $getCourseId)
+            ->where('attendances.isCurrent', '0')
+            // Join with users table to get student information
+            ->join('users', 'attendances.student_id', '=', 'users.id')
+            // Left join with seat_plan table to get seat information
+            ->leftJoin('seat_plan', function ($join) {
+                $join->on('attendances.student_id', '=', 'seat_plan.student_id')
+                    ->on('attendances.course_id', '=', 'seat_plan.course_id');
+            })
+            // Select required fields
+            ->select('attendances.*', 'users.last_name', 'seat_plan.seat_number', 'seat_plan.course_id')
+            // Sort by student's last name in ascending order
+            ->orderBy($this->sortField, $this->sortDirection)
+            // Filter by selected date if provided
             ->when($this->selectedDate !== '', function ($query) {
-                $query->where('date', $this->selectedDate);
+                $query->where('attendances.date', $this->selectedDate);
             })
-
-            // Selected CourseID(Course Subject with Section) on Dropdown
+            // Filter by selected course section if provided
             ->when($this->selectedCourseSection !== '', function ($query) {
-                // Filter by selected course section
-                $query->where('course_id', $this->selectedCourseSection);
+                $query->where('attendances.course_id', $this->selectedCourseSection);
             })
+            // Paginate results
             ->paginate(10);
-            // END QUERY TO FETCH STUDENTS SORT BY LAST NAME IN ASC ORDER
 
         return view('livewire.instructor.attendances.index',[
             'attendances' => $attendances,

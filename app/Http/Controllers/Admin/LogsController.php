@@ -132,9 +132,18 @@ class LogsController extends Controller
 
 
                 // Mark the student as present
-                Attendance::where('student_id', $student->id)->update([
+                $updateStud = Attendance::where('student_id', $student->id)->first();
+                
+                $updateStud->update([
                     'isPresent' => '1'
                 ]);
+
+                // Update the Time Attend as well
+                if($updateStud->time_attend == NULL){
+                    $updateStud->update([
+                        'time_attend' => $datetime->toTimeString()
+                    ]);
+                }
 
                 return response()->json([
                     'status' => 200,
