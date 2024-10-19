@@ -31,12 +31,32 @@ return [
 
     'connections' => [
 
-        'sqlite' => [
-            'driver' => 'sqlite',
-            'url' => env('DB_URL'),
-            'database' => env('DB_DATABASE', database_path('database.sqlite')),
+        // 'sqlite' => [
+        //     'driver' => 'sqlite',
+        //     'url' => env('DB_URL'),
+        //     'database' => env('DB_DATABASE', database_path('database.sqlite')),
+        //     'prefix' => '',
+        //     'foreign_key_constraints' => env('DB_FOREIGN_KEYS', true),
+        // ],
+
+        'mysql_archive' => [
+            'driver' => 'mysql',
+            'url' => env('DB_URL_SECONDARY'),
+            'host' => env('DB_HOST_SECONDARY', '127.0.0.1'),
+            'port' => env('DB_PORT_SECONDARY', '3306'),
+            'database' => env('DB_DATABASE_SECONDARY', 'pilock_archive'),
+            'username' => env('DB_USERNAME_SECONDARY', 'pilock'),
+            'password' => env('DB_PASSWORD_SECONDARY', 'pilockraspberrypi'),
+            'unix_socket' => env('DB_SOCKET_SECONDARY', ''),
+            'charset' => env('DB_CHARSET_SECONDARY', 'utf8mb4'),
+            'collation' => env('DB_COLLATION_SECONDARY', 'utf8mb4_unicode_ci'),
             'prefix' => '',
-            'foreign_key_constraints' => env('DB_FOREIGN_KEYS', true),
+            'prefix_indexes' => true,
+            'strict' => true,
+            'engine' => null,
+            'options' => extension_loaded('pdo_mysql') ? array_filter([
+                PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA_SECONDARY'),
+            ]) : [],
         ],
 
         'mysql' => [

@@ -16,6 +16,7 @@
         "maatwebsite/excel": "^3.1.45",
         "makuguren/laravel-livewire-calendar": "^3.1",
         "php-flasher/flasher-toastr-laravel": "^2.0",
+        "spatie/laravel-db-snapshots": "^2.6",
         "spatie/laravel-permission": "*"
     },
     "require-dev": {

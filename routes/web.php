@@ -171,7 +171,7 @@ Route::middleware(['auth:admin', App\Http\Middleware\AdminComponentLayout::class
             ->middleware('permission:View Permissions');
     });
 
-    //Logs
+    //Logs Routes
     Route::prefix('logs')->group(function () {
         Route::get('/', App\Livewire\Admin\Logs\Index::class)->name('logs.index')
             ->middleware('permission:View Logs');
@@ -182,6 +182,11 @@ Route::middleware(['auth:admin', App\Http\Middleware\AdminComponentLayout::class
         Route::get('settings', 'index')->name('settings.index');
         Route::post('settings', 'saveSettings')->name('settings.saveSettings');
         Route::patch('settings', 'updateAdminProfile')->name('settings.updateProfile');
+    });
+
+    //Archives Routes
+    Route::prefix('archives')->group(function () {
+        Route::get('/', App\Livewire\Admin\Archives\Index::class)->name('archives.index');
     });
 
     //Attendances Routes
