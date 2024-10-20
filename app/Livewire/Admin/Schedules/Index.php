@@ -254,7 +254,6 @@ class Index extends Component
     }
 
     public function render(){
-        $subjects = Subject::all();
         $instructors = Instructor::all();
         $sections = Section::all();
         $courses = Course::all();
@@ -265,7 +264,6 @@ class Index extends Component
         return view('livewire.admin.schedules.index', [
             'schedules' => $schedules,
             'courses' => $courses,
-            'subjects' => $subjects,
             'instructors' => $instructors,
             'sections' => $sections,
             // 'isDisableButton' => $this->isDisableButton,

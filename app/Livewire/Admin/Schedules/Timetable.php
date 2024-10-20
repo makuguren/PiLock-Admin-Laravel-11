@@ -177,7 +177,6 @@ class Timetable extends Component
     }
 
     public function render(){
-        $subjects = Subject::all();
         $instructors = Instructor::all();
         $sections = Section::all();
         $courses = Course::all();
@@ -185,7 +184,6 @@ class Timetable extends Component
         return view('livewire.admin.schedules.timetable', [
             'schedules' => $schedules,
             'courses' => $courses,
-            'subjects' => $subjects,
             'instructors' => $instructors,
             'sections' => $sections,
         ]);

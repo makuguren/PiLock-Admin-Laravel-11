@@ -116,7 +116,6 @@ class Makeup extends Component
     }
 
     public function render(){
-        $subjects = Subject::all();
         $instructors = Instructor::all();
         $sections = Section::all();
         $courses = Course::all();
@@ -124,7 +123,6 @@ class Makeup extends Component
         return view('livewire.admin.schedules.makeup' , [
             'schedules' => $schedules,
             'courses' => $courses,
-            'subjects' => $subjects,
             'instructors' => $instructors,
             'sections' => $sections
         ]);
