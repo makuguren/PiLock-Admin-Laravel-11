@@ -256,3 +256,4 @@ Route::middleware(['auth:instructor', App\Http\Middleware\InstructorComponentLay
 require __DIR__.'/user-auth.php';
 require __DIR__.'/admin-auth.php';
 require __DIR__.'/instructor-auth.php';
+require __DIR__.'/archive.php';

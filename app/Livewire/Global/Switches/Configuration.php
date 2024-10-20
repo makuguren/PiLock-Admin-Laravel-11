@@ -5,6 +5,7 @@ namespace App\Livewire\Global\Switches;
 use App\Models\Log;
 use App\Models\User;
 use App\Models\Course;
+use App\Models\Archive;
 use App\Models\Section;
 use App\Models\Setting;
 use Livewire\Component;
@@ -13,9 +14,12 @@ use App\Models\Schedules;
 use App\Models\Attendance;
 use App\Models\Instructor;
 use App\Models\EnrolledCourse;
+use App\Jobs\DeactivateArchiveJob;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Log as LaravelLog;
 
 class Configuration extends Component
 {
@@ -275,7 +279,65 @@ class Configuration extends Component
         }
     }
 
+    public function activateArchive($archive_id){
+        $archive = Archive::findOrFail($archive_id);
+
+        if($archive){
+            $output = Artisan::call('snapshot:load', [
+                'name' => $archive->snapshot_data,
+                '--connection' => 'mysql_archive'
+            ]);
+
+            if($output == '0'){
+                $archive->update([
+                    'status' => '1'
+                ]);
+                $this->dispatch('close-modal');
+                toastr()->success('Snapshot Activated Successfully');
+            } else {
+                $this->dispatch('close-modal');
+                toastr()->error('Snapshot Activation Failed');
+            }
+        }
+    }
+
+    public function deactivateArchive($archive_id){
+        $archive = Archive::findOrFail($archive_id);
+
+        if($archive){
+            try {
+                // Log before calling Artisan command
+                LaravelLog::info("Attempting to rollback migrations for archive ID: {$archive_id}");
+
+                $output = Artisan::call('migrate:rollback', [
+                    '--database' => 'mysql_archive'
+                ]);
+
+                if($output == '0'){
+                    $archive->update([
+                        'status' => '0'
+                    ]);
+                    
+                    $this->dispatch('close-modal');
+                    toastr()->success('Snapshot Deactivated and Rollback Migrations Successfully');
+
+                } else {
+                    $this->dispatch('close-modal');
+                    toastr()->error('Snapshot Deactivation Failed');
+                }
+
+            } catch (\Exception $e) {
+                $this->dispatch('close-modal');
+                LaravelLog::error("Error during deactivation: " . $e->getMessage());
+                toastr()->error('An error occurred during deactivation');
+            }
+        }
+    }
+
     public function render(){
-        return view('livewire.global.switches.configuration');
+        $archives = Archive::all();
+        return view('livewire.global.switches.configuration', [
+            'archives' => $archives
+        ]);
     }
 }

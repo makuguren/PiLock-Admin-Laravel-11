@@ -8,7 +8,7 @@ use App\Models\User;
 use App\Models\Event;
 use App\Models\Section;
 use App\Models\Setting;
-use App\Models\Subject;
+use App\Models\Course;
 use Livewire\Component;
 use App\Models\Schedules;
 use App\Models\Instructor;
@@ -102,7 +102,7 @@ class Index extends Component
         $totalStudents = User::count();
         $totalSchedules = Schedules::count();
         $totalInstructors = Instructor::count();
-        $totalSubjects = Subject::count();
+        $totalCourses = Course::count();
         $totalSections = Section::count();
         $totalEvents = Event::count();
         $eventsNow = Event::where('isCurrent', '1')->first();
@@ -154,7 +154,7 @@ class Index extends Component
             'totalSchedules' => $totalSchedules,
             'totalEvents' => $totalEvents,
             'totalInstructors' => $totalInstructors,
-            'totalSubjects' => $totalSubjects,
+            'totalCourses' => $totalCourses,
             'totalSections' => $totalSections,
             'systeminfo' => $systeminfo,
             'schedulesNow' => $schedulesNow,

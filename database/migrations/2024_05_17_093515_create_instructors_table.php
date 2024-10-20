@@ -20,6 +20,10 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+            $table->string('tag_uid')->unique()->nullable();
+            $table->enum('gender', ['0','1','2'])->default('0')->comment('0=None, 1=Male, 2=Female')->nullable();
+            $table->string('instructor_theme')->nullable();
+            $table->enum('isDefaultPass', ['0','1'])->default('1')->comment('0=No, 1=Yes');
         });
     }
 

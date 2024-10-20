@@ -45,9 +45,21 @@ return [
             'driver' => 'session',
             'provider' => 'admins',
         ],
+
         'instructor' => [
             'driver' => 'session',
             'provider' => 'instructors',
+        ],
+
+        // Archive Guards
+        'archive_admin' => [
+            'driver' => 'session',
+            'provider' => 'archive_admins',
+        ],
+
+        'archive_instructor' => [
+            'driver' => 'session',
+            'provider' => 'archive_instructors',
         ],
     ],
 
@@ -82,6 +94,17 @@ return [
         'instructors' => [
             'driver' => 'eloquent',
             'model' => App\Models\Instructor::class,
+        ],
+
+        // Archive Providers
+        'archive_admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Archive\Admin::class,
+        ],
+
+        'archive_instructors' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Archive\Instructor::class,
         ],
 
         // 'users' => [
