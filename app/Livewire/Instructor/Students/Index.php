@@ -2,17 +2,23 @@
 
 namespace App\Livewire\Instructor\Students;
 
-use App\Models\BlockedStudentCourses;
 use App\Models\User;
 use App\Models\Course;
 use Livewire\Component;
+use Livewire\WithPagination;
 use App\Models\EnrolledCourse;
 use Illuminate\Support\Facades\Auth;
+use App\Models\BlockedStudentCourses;
 
 class Index extends Component
 {
+    use WithPagination;
+
     public $selectedCourseSection;
     public $enroll_id, $student_id, $course_id, $search_student, $first_name, $last_name, $section, $blkcourse_id, $blkstudent_id;
+
+    public $sortField = 'users.last_name';
+    public $sortDirection = 'asc';
 
     public function updatedSelectedCourseSection($value){
         $this->selectedCourseSection = $value;
@@ -29,6 +35,17 @@ class Index extends Component
         } else {
             toastr()->error("Can't Find Student!");
         }
+    }
+
+    // Dynamic Table for Sorting
+    public function sortBy($field){
+        if($this->sortField === $field) {
+            $this->sortDirection = $this->sortDirection === 'asc' ? 'desc' : 'asc';
+        } else {
+            $this->sortDirection = 'asc';
+        }
+
+        $this->sortField = $field;
     }
 
     public function addStudCourse(){
@@ -91,16 +108,15 @@ class Index extends Component
             $query->where('instructor_id', $instructorId);
         })->with('section')->get();
 
-        // Query to Show Courses where the Instructor is based to Current Loggedin with, Fetch the EnrolledCourse of the Student(Model).
-        $query = Course::where('instructor_id', $instructorId)
-            ->with('enrolledCourse.student')
+        $getCourseId = Course::whereHas('section', function ($query) use ($instructorId) {
+            $query->where('instructor_id', $instructorId);
+        })->pluck('id')->toArray();
 
-            // Filter EnrolledCourses based on Dropdown Selected
-            ->when($this->selectedCourseSection, function ($query) {
-                $query->where('id', $this->selectedCourseSection);
-            });
-
-        $enrolledstuds = $query->get();
+        $enrolledstuds = EnrolledCourse::whereIn('course_id', $getCourseId)
+            ->join('users', 'enrolledcourses.student_id', '=', 'users.id')
+            ->select('enrolledcourses.*', 'users.first_name', 'users.last_name')
+            ->orderBy($this->sortField, $this->sortDirection)
+            ->paginate(10);
 
         return view('livewire.instructor.students.index', [
             'enrolledstuds' => $enrolledstuds,

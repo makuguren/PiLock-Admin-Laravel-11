@@ -168,6 +168,7 @@
                 <table class="table table-zebra">
                     <thead class="rounded-md bg-base-200 text-md">
                         <tr>
+                            <th>NO.</th>
                             <th>STUDENT ID</th>
                             <th>NAME</th>
                             <th>SECTION</th>
@@ -201,8 +202,9 @@
                         </tr>
                     </thead>
                     <tbody @if($wirePoll === true) wire:poll.1000ms @endif>
-                        @forelse ($logs as $log)
+                        @forelse ($logs as $count => $log)
                             <tr>
+                                <td>{{ $count + 1 }}</td>
                                 <td>
                                     <div class="font-bold">
                                         @if ($log->student_id)
