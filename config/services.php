@@ -41,4 +41,11 @@ return [
         'redirect' => env('GOOGLE_REDIRECT'),
     ],
 
+    'google_instructor' => [
+        'client_id' => env('GOOGLE_INST_CLIENT_ID'),
+        'client_secret' => env('GOOGLE_INST_CLIENT_SECRET'),
+        'redirect' => env('GOOGLE_INST_REDIRECT'),
+    ],
+
+
 ];

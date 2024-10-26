@@ -22,6 +22,7 @@ class Instructor extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'name',
         'first_name',
         'last_name',
         'email',
@@ -29,7 +30,9 @@ class Instructor extends Authenticatable
         'gender',
         'instructor_theme',
         'tag_uid',
-        'isDefaultPass'
+        'google_id',
+        'avatar',
+        'isDefaultPass',
     ];
 
     /**

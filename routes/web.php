@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\CheckStudentInfo;
 use App\Http\Controllers\User\ProfileController;
 use App\Http\Middleware\CheckInstructorDefaultPass;
-use App\Http\Controllers\User\SocialLoginController;
 
 Route::get('/', function () {
     return view('landing');
@@ -51,9 +50,13 @@ Route::middleware(['auth:web', App\Http\Middleware\UserComponentLayout::class, C
 
 });
 
-Route::get('/socialite/google', [SocialLoginController::class, 'toProvider'])->name('socialite.login');
-Route::get('/auth/google/login', [SocialLoginController::class, 'handleCallback'])->name('auth.google.login');
+// Socialite Routes for User Authentication
+Route::get('/socialite/google', [App\Http\Controllers\User\SocialLoginController::class, 'toProvider'])->name('socialite.login');
+Route::get('/auth/google/login', [App\Http\Controllers\User\SocialLoginController::class, 'handleCallback'])->name('auth.google.login');
 
+// Socialite Routes for Instructor Authentication
+Route::get('/socialite/google/instructor', [App\Http\Controllers\Instructor\SocialLoginController::class, 'toProvider'])->name('socialite.instructor.login');
+Route::get('/auth/google/instructor/login', [App\Http\Controllers\Instructor\SocialLoginController::class, 'handleCallback'])->name('auth.instructor.google.login');
 
 //Admin Interface
 Route::middleware(['auth:admin', App\Http\Middleware\AdminComponentLayout::class])->prefix('admin')->name('admin.')->group(function () {
