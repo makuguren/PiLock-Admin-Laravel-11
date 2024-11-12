@@ -78,9 +78,9 @@
                 @endauth
 
                 @auth('faculty')
-                    <li><a href="{{ route('instructor.dashboard.index') }}">Instructor Dashboard</a></li>
+                    <li><a href="{{ route('faculty.dashboard.index') }}">Faculty Dashboard</a></li>
                 @else
-                    <li><a href="{{ route('instructor.login') }}">Instructor Login</a></li>
+                    <li><a href="{{ route('faculty.login') }}">Faculty Login</a></li>
                 @endauth
 
                 @auth('web')
@@ -116,8 +116,8 @@
                             <li><a href="{{ route('admin.register') }}">Admin Register</a></li>
                         @endif
 
-                        @if (Route::has('instructor.register'))
-                            <li><a href="{{ route('instructor.register') }}">Instructor Register</a></li>
+                        @if (Route::has('faculty.register'))
+                            <li><a href="{{ route('faculty.register') }}">Faculty Register</a></li>
                         @endif
 
                         @if (Route::has('user.register'))
@@ -143,9 +143,9 @@
                     @endauth
 
                     @auth('faculty')
-                        <li><a href="{{ route('instructor.dashboard.index') }}">Instructor Dashboard</a></li>
+                        <li><a href="{{ route('faculty.dashboard.index') }}">Faculty Dashboard</a></li>
                     @else
-                        <li><a href="{{ route('instructor.login') }}">Instructor Login</a></li>
+                        <li><a href="{{ route('faculty.login') }}">Faculty Login</a></li>
                     @endauth
 
                     @auth('web')

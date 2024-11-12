@@ -21,7 +21,7 @@ class Section extends Model
     ];
 
 
-    // Instructor Interface
+    // Faculty Interface
     public function course(){
         return $this->hasMany(Course::class, 'section_id', 'id');
     }

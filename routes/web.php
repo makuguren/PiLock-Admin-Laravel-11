@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\CheckStudentInfo;
 use App\Http\Controllers\User\ProfileController;
-use App\Http\Middleware\CheckInstructorDefaultPass;
+use App\Http\Middleware\CheckFacultyDefaultPass;
 
 Route::get('/', function () {
     return view('landing');
@@ -54,9 +54,9 @@ Route::middleware(['auth:web', App\Http\Middleware\UserComponentLayout::class, C
 Route::get('/socialite/google', [App\Http\Controllers\User\SocialLoginController::class, 'toProvider'])->name('socialite.login');
 Route::get('/auth/google/login', [App\Http\Controllers\User\SocialLoginController::class, 'handleCallback'])->name('auth.google.login');
 
-// Socialite Routes for Instructor Authentication
-Route::get('/socialite/google/instructor', [App\Http\Controllers\Instructor\SocialLoginController::class, 'toProvider'])->name('socialite.instructor.login');
-Route::get('/auth/google/instructor/login', [App\Http\Controllers\Instructor\SocialLoginController::class, 'handleCallback'])->name('auth.instructor.google.login');
+// Socialite Routes for Faculty Authentication
+Route::get('/socialite/google/instructor', [App\Http\Controllers\Faculty\SocialLoginController::class, 'toProvider'])->name('socialite.instructor.login');
+Route::get('/auth/google/instructor/login', [App\Http\Controllers\Faculty\SocialLoginController::class, 'handleCallback'])->name('auth.instructor.google.login');
 
 //Admin Interface
 Route::middleware(['auth:admin', App\Http\Middleware\AdminComponentLayout::class])->prefix('admin')->name('admin.')->group(function () {
@@ -214,49 +214,49 @@ Route::middleware(['auth:admin', App\Http\Middleware\AdminComponentLayout::class
     // Route::get('admins/{adminId}/delete', [App\Http\Controllers\Admin\AdminsController::class, 'destroy'])->name('admins.delete');
 });
 
-//Instructor Interface || Dashboard Routes
-Route::middleware(['auth:faculty', App\Http\Middleware\InstructorComponentLayout::class])->prefix('instructor/dashboard')->group(function () {
-    Route::get('/', App\Livewire\Instructor\Dashboard\Index::class)->name('instructor.dashboard.index');
+//Faculty Interface || Dashboard Routes
+Route::middleware(['auth:faculty', App\Http\Middleware\FacultyComponentLayout::class])->prefix('faculty/dashboard')->group(function () {
+    Route::get('/', App\Livewire\Faculty\Dashboard\Index::class)->name('faculty.dashboard.index');
 });
 
-Route::middleware(['auth:faculty', App\Http\Middleware\InstructorComponentLayout::class, CheckInstructorDefaultPass::class])->prefix('instructor')->name('instructor.')->group(function () {
+Route::middleware(['auth:faculty', App\Http\Middleware\FacultyComponentLayout::class, CheckFacultyDefaultPass::class])->prefix('faculty')->name('faculty.')->group(function () {
 
     //Attendances Routes
     Route::prefix('attendances')->group(function () {
-        Route::get('/', App\Livewire\Instructor\Attendances\Index::class)->name('attendances.index');
-        Route::get('current', App\Livewire\Instructor\Attendances\Current::class)->name('attendances.current');
+        Route::get('/', App\Livewire\Faculty\Attendances\Index::class)->name('attendances.index');
+        Route::get('current', App\Livewire\Faculty\Attendances\Current::class)->name('attendances.current');
     });
 
     //Events Routes
     Route::prefix('events')->group(function () {
-        Route::get('/', App\Livewire\Instructor\Events\Index::class)->name('events.index');
+        Route::get('/', App\Livewire\Faculty\Events\Index::class)->name('events.index');
     });
 
     //Courses Routes
     Route::prefix('courses')->group(function () {
-        Route::get('/', App\Livewire\Instructor\Courses\Index::class)->name('courses.index');
-        Route::get('blockedstudents', App\Livewire\Instructor\Courses\BlockedStudents::class)->name('courses.blocked');
+        Route::get('/', App\Livewire\Faculty\Courses\Index::class)->name('courses.index');
+        Route::get('blockedstudents', App\Livewire\Faculty\Courses\BlockedStudents::class)->name('courses.blocked');
     });
 
     //Students Routes
     Route::prefix('students')->group(function() {
-        Route::get('/', App\Livewire\Instructor\Students\Index::class)->name('students.index');
+        Route::get('/', App\Livewire\Faculty\Students\Index::class)->name('students.index');
     });
 
     //Schedule Routes
     Route::prefix('schedules')->group(function () {
-        Route::get('/', App\Livewire\Instructor\Schedules\Index::class)->name('schedules.index');
-        Route::get('makeupscheds', App\Livewire\Instructor\Schedules\Makeup::class)->name('schedules.makeup');
+        Route::get('/', App\Livewire\Faculty\Schedules\Index::class)->name('schedules.index');
+        Route::get('makeupscheds', App\Livewire\Faculty\Schedules\Makeup::class)->name('schedules.makeup');
     });
 
     // SeatPlan Routes
     Route::prefix('seatplan')->group(function () {
-        Route::get('/', App\Livewire\Instructor\SeatPlan\Index::class)->name('seatplan.index');
-        Route::get('assign', App\Livewire\Instructor\SeatPlan\EditSP::class)->name('seatplan.assign');
+        Route::get('/', App\Livewire\Faculty\SeatPlan\Index::class)->name('seatplan.index');
+        Route::get('assign', App\Livewire\Faculty\SeatPlan\EditSP::class)->name('seatplan.assign');
     });
 
     //Profile Routes
-    Route::controller(App\Http\Controllers\Instructor\SettingsController::class)->group(function () {
+    Route::controller(App\Http\Controllers\Faculty\SettingsController::class)->group(function () {
         Route::get('settings', 'index')->name('settings.index');
         Route::patch('settings', 'updateProfile')->name('settings.updateProfile');
     });
@@ -264,5 +264,5 @@ Route::middleware(['auth:faculty', App\Http\Middleware\InstructorComponentLayout
 
 require __DIR__.'/user-auth.php';
 require __DIR__.'/admin-auth.php';
-require __DIR__.'/instructor-auth.php';
+require __DIR__.'/faculty-auth.php';
 require __DIR__.'/archive.php';

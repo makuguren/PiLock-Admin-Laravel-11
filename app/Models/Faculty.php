@@ -59,10 +59,10 @@ class Faculty extends Authenticatable
     }
 
     // public function schedules(){
-    //     return $this->hasMany(Schedules::class, 'instructor_id', 'id');
+    //     return $this->hasMany(Schedules::class, 'faculty_id', 'id');
     // }
 
     // public function course(){
-    //     return $this->hasMany(Course::class, 'instructor_id', 'id');
+    //     return $this->hasMany(Course::class, 'faculty_id', 'id');
     // }
 }

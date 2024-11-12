@@ -1,5 +1,5 @@
 <x-slot:title>
-    Add Tag UID Instructors
+    Add Tag UID Faculties
 </x-slot>
 
 <div>

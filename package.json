@@ -4,7 +4,7 @@
     "scripts": {
         "dev": "vite",
         "build": "vite build",
-        "seeders": "php artisan db:seed --class=AdminRolePermissionSeeder && php artisan db:seed --class=ConfigurationSeeder",
+        "seeders": "php artisan db:seed --class=AdminRolePermissionSeeder && php artisan db:seed --class=ConfigurationSeeder && php artisan db:seed --class=SeatsConfigurationSeeder",
         "start": "php artisan serve --host 0.0.0.0 --port 8085"
     },
     "devDependencies": {

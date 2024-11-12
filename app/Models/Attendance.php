@@ -28,7 +28,7 @@ class Attendance extends Model
         'isMakeUp'
     ];
 
-    // Instructor Interface
+    // Faculty Interface
     public function student(){
         return $this->belongsTo(User::class, 'student_id', 'id');
     }

@@ -17,30 +17,30 @@
     <div class="p-6">
         <div class="flex flex-row">
             <div class="flex flex-col w-full">
-                <h1 class="font-bold text-2xl mb-2">Make-Up Schedules</h1>
-                <ul class="flex items-center text-sm mb-6">
+                <h1 class="mb-2 text-2xl font-bold">Make-Up Schedules</h1>
+                <ul class="flex items-center mb-6 text-sm">
                     <li class="mr-2">
-                        <a href="#" class="text-gray-400 hover:text-gray-600 font-medium">Dashboard</a>
+                        <a href="#" class="font-medium text-gray-400 hover:text-gray-600">Dashboard</a>
                     </li>
-                    <li class="text-gray-600 mr-2 font-medium">/</li>
-                    <li class="text-gray-600 mr-2 font-medium">Make-Up Schedules</li>
+                    <li class="mr-2 font-medium text-gray-600">/</li>
+                    <li class="mr-2 font-medium text-gray-600">Make-Up Schedules</li>
                 </ul>
             </div>
             {{-- @can('Create Schedules') --}}
-            <label for="add_modal" class="btn btn-ghost bg-blue-700 hover:bg-blue-500 w-55 btn-sm mt-3">
+            <label for="add_modal" class="mt-3 bg-blue-700 btn btn-ghost hover:bg-blue-500 w-55 btn-sm">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar-clock"><path d="M21 7.5V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h3.5"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h5"/><path d="M17.5 17.5 16 16.3V14"/><circle cx="16" cy="16" r="6"/></svg>
-                <span class="text-white text-sm">Add Schedule</span>
+                <span class="text-sm text-white">Add Schedule</span>
             </label>
             {{-- @endcan --}}
         </div>
 
-        <div class="bg-base-100 border-gray-100 shadow-md shadow-black/5 p-6 rounded-md">
+        <div class="p-6 border-gray-100 rounded-md shadow-md bg-base-100 shadow-black/5">
             <div class="overflow-x-auto">
                 <table class="table table-zebra">
-                    <thead class="bg-base-200 rounded-md text-md">
+                    <thead class="rounded-md bg-base-200 text-md">
                         <tr>
                             <th>COURSE TITLE</th>
-                            <th>INSTRUCTOR</th>
+                            <th>FACULTY</th>
                             <th>DAYS</th>
                             <th>SECTION</th>
                             <th>TIME START</th>
@@ -63,9 +63,9 @@
                             <td>
                                 <div class="">
                                     @if ($schedule->course_id)
-                                        {{ $schedule->course->instructor->first_name }} {{ $schedule->course->instructor->last_name }}
+                                        {{ $schedule->course->faculty->first_name }} {{ $schedule->course->faculty->last_name }}
                                     @else
-                                        No Instructor
+                                        No Faculty
                                     @endif
                                 </div>
                             </td>
@@ -84,16 +84,16 @@
                             <th>
                                 <div class="flex flex-row space-x-2">
                                     @can('Update Regular Schedules')
-                                    <label for="edit_modal" wire:click="editSchedule({{ $schedule->id }})" class="btn btn-ghost bg-blue-700 hover:bg-blue-500 btn-sm h-8">
+                                    <label for="edit_modal" wire:click="editSchedule({{ $schedule->id }})" class="h-8 bg-blue-700 btn btn-ghost hover:bg-blue-500 btn-sm">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
-                                        <span class="text-white text-sm">Edit</span>
+                                        <span class="text-sm text-white">Edit</span>
                                     </label>
                                     @endcan
 
                                     @can('Delete Regular Schedules')
-                                    <label for="delete_modal" wire:click="deleteSchedule({{ $schedule->id }})" class="btn btn-ghost bg-red-700 hover:bg-red-500 btn-sm h-8">
+                                    <label for="delete_modal" wire:click="deleteSchedule({{ $schedule->id }})" class="h-8 bg-red-700 btn btn-ghost hover:bg-red-500 btn-sm">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash-2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>
-                                        <span class="text-white text-sm">Delete</span>
+                                        <span class="text-sm text-white">Delete</span>
                                     </label>
                                     @endcan
                                 </div>
@@ -122,7 +122,7 @@
             document.getElementById('delete_modal').checked = false;
 
             document.getElementById('course_code').value = '';
-            document.getElementById('instructor_name').value = '';
+            document.getElementById('faculty_name').value = '';
         });
 
         function cancel_sched(){
@@ -137,10 +137,10 @@
             document.getElementById('addlate_duration').value = '';
 
             document.getElementById('course_code').value = '';
-            document.getElementById('instructor_name').value = '';
+            document.getElementById('faculty_name').value = '';
 
             // document.getElementById('editsubject_id').value = '';
-            // document.getElementById('editinstructor_id').value = '';
+            // document.getElementById('editfaculty_id').value = '';
             // document.getElementById('editsection_id').value = '';
             // document.getElementById('editdays').value = '';
             // document.getElementById('edittime_start').value = '';

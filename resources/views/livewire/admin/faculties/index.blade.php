@@ -3,7 +3,7 @@
 </x-slot>
 
 <div>
-    {{-- Instructors Modal --}}
+    {{-- Faculties Modal --}}
     @can('Create Instructors')
         @include('livewire.admin.faculties.create')
     @endcan
@@ -141,7 +141,7 @@
             document.getElementById('delete_modal').checked = false;
             document.getElementById('disable_modal').checked = false;
 
-            //Clear all the Values in Text Inputs (Instructors)
+            //Clear all the Values in Text Inputs (Faculties)
             document.getElementById('addfac_first').value = '';
             document.getElementById('addfac_last').value = '';
             document.getElementById('addgender').value = '';

@@ -82,7 +82,7 @@
                             <option value="{{ $faculties->id }}">{{ $faculties->first_name }} {{ $faculties->last_name }}</option>
                         @endforeach
                     </select>
-                    @error('instructor_id') <span class="mt-1 space-y-1 text-sm text-red-600 error" role="alert">{{ $message }}</span> @enderror
+                    @error('faculty_id') <span class="mt-1 space-y-1 text-sm text-red-600 error" role="alert">{{ $message }}</span> @enderror
                 </div>
             </div>
 

@@ -18,7 +18,7 @@ class Index extends Component
 {
     use WithPagination;
     public $schedule_id, $course_id, $days, $time_start, $time_end, $lateDuration;
-    public $course_code, $instructor_fname, $instructor_lname;
+    public $course_code, $faculty_fname, $faculty_lname;
 
     //Validations
     protected function rules(){
@@ -43,8 +43,8 @@ class Index extends Component
         $fetchCourse = Course::find($course_id);
         if($fetchCourse){
             $this->course_code = $fetchCourse->course_code;
-            $this->instructor_fname = $fetchCourse->instructor->first_name;
-            $this->instructor_lname = $fetchCourse->instructor->last_name;
+            $this->faculty_fname = $fetchCourse->faculty->first_name;
+            $this->faculty_lname = $fetchCourse->faculty->last_name;
         }
     }
 
@@ -75,8 +75,8 @@ class Index extends Component
             $this->schedule_id = $schedule->id;
             $this->course_id = $schedule->course_id;
             $this->course_code = $schedule->course->course_code;
-            $this->instructor_fname = $schedule->course->instructor->first_name;
-            $this->instructor_lname = $schedule->course->instructor->last_name;
+            $this->faculty_fname = $schedule->course->faculty->first_name;
+            $this->faculty_lname = $schedule->course->faculty->last_name;
             $this->days = $schedule->days;
             $this->time_start = Carbon::parse($schedule->time_start)->format('H:i:s');
             $this->time_end = Carbon::parse($schedule->time_end)->format('H:i:s');
@@ -128,16 +128,14 @@ class Index extends Component
     }
 
     public function render(){
-        $subjects = Subject::all();
-        $instructors = Faculty::all();
+        $faculties = Faculty::all();
         $sections = Section::all();
         $courses = Course::all();
         $schedules = MakeupSchedule::where('isApproved', '1')->paginate(10);
         return view('livewire.admin.makeup-sched.index', [
             'schedules' => $schedules,
             'courses' => $courses,
-            'subjects' => $subjects,
-            'instructors' => $instructors,
+            'faculties' => $faculties,
             'sections' => $sections
         ]);
     }

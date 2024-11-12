@@ -102,7 +102,7 @@
                                     @endphp
                                     <td wire:click="viewSchedule({{ $schedule->id }})" rowspan="{{ $rowspan }}" style="background: orange;">
                                         {{ $schedule->course->course_code }}<br>
-                                        {{ $schedule->course->instructor->name }}<br>
+                                        {{ $schedule->course->faculty->name }}<br>
                                         {{ $schedule->course->section->program }} {{ $schedule->course->section->year }}{{ $schedule->course->section->block }}
                                     </td>
                                 @else
@@ -199,7 +199,7 @@
             document.getElementById('import_file').value = '';
 
             // document.getElementById('editsubject_id').value = '';
-            // document.getElementById('editinstructor_id').value = '';
+            // document.getElementById('editifaculty_id').value = '';
             // document.getElementById('editsection_id').value = '';
             // document.getElementById('editdays').value = '';
             // document.getElementById('edittime_start').value = '';

@@ -19,7 +19,7 @@ class CoursesController extends Controller
                         'course_code' => $course->course_code,
                         'course_title' => $course->course_title,
                         'section' => $course->section->program . ' ' . $course->section->year . $course->section->block,
-                        'instructor' => $course->instructor->name
+                        'faculty' => $course->faculty->name
                     ];
                 })
             ], 200);
@@ -39,16 +39,21 @@ class CoursesController extends Controller
                     return [
                         'id' => $enrolledCourse->id,
                         'course_id' => $enrolledCourse->course_id,
-                        'course_code' => $enrolledCourse->course->course_code,
-                        'course_title' => $enrolledCourse->course->course_title,
-                        'course_section' => $enrolledCourse->course->section->program . ' ' . $enrolledCourse->course->section->year . $enrolledCourse->course->section->block ?? null,
-                        'course_instructor' => $enrolledCourse->course->instructor->name,
+                        'course_code' => $enrolledCourse->course->course_code ?? null,
+                        'course_title' => $enrolledCourse->course->course_title ?? null,
+                        'course_program' => $enrolledCourse->course->section->program ?? null,
+                        'course_year' => $enrolledCourse->course->section->year ?? null,
+                        'course_block' => $enrolledCourse->course->section->block ?? null,
+                        'course_facultyfname' => $enrolledCourse->course->faculty->first_name ?? null,
+                        'course_facultylname' => $enrolledCourse->course->faculty->last_name ?? null,
                         'student_id' => $enrolledCourse->student_id,
-                        'studentTag_uid' => $enrolledCourse->student->tag_uid,
-                        'student_number' => $enrolledCourse->student->student_id,
-                        'student_name' => $enrolledCourse->student->name,
-                        'student_section' => $enrolledCourse->student->section->program . ' ' . $enrolledCourse->student->section->year . $enrolledCourse->student->section->block ?? null,
-                        'student_email' => $enrolledCourse->student->email,
+                        'student_tag_uid' => $enrolledCourse->student->tag_uid ?? null,
+                        'student_number' => $enrolledCourse->student->student_id ?? null,
+                        'student_name' => $enrolledCourse->student->name ?? null,
+                        'student_program' => $enrolledCourse->student->section->program ?? null,
+                        'student_year' => $enrolledCourse->student->section->year ?? null,
+                        'student_block' => $enrolledCourse->student->section->block ?? null,
+                        'student_email' => $enrolledCourse->student->email ?? null,
                     ];
                 })
             ], 200);

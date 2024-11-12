@@ -15,7 +15,7 @@ class Makeup extends Component
 {
     use WithPagination;
     public $schedule_id, $course_id, $days, $time_start, $time_end;
-    public $instructor_name;
+    public $faculty_fname, $faculty_lname;
 
     //Validations
     protected function rules(){
@@ -35,7 +35,8 @@ class Makeup extends Component
     public function fetchCourseDetails(int $course_id){
         $fetchCourse = Course::find($course_id);
         if($fetchCourse){
-            $this->instructor_name = $fetchCourse->instructor->name;
+            $this->faculty_fname = $fetchCourse->faculty->first_name;
+            $this->faculty_lname = $fetchCourse->faculty->last_name;
         }
     }
 
@@ -66,7 +67,8 @@ class Makeup extends Component
         if($schedule){
             $this->schedule_id = $schedule->id;
             $this->course_id = $schedule->course_id;
-            $this->instructor_name = $schedule->course->instructor->name;
+            $this->faculty_fname = $schedule->course->faculty->first_name;
+            $this->faculty_lname = $schedule->course->faculty->last_name;
             $this->days = $schedule->days;
             $this->time_start = $schedule->time_start;
             $this->time_end = $schedule->time_end;
@@ -116,14 +118,14 @@ class Makeup extends Component
     }
 
     public function render(){
-        $instructors = Faculty::all();
+        $faculties = Faculty::all();
         $sections = Section::all();
         $courses = Course::all();
         $schedules = Schedules::where('isMakeUp', '1')->where('isApproved', '1')->paginate(10);
         return view('livewire.admin.schedules.makeup' , [
             'schedules' => $schedules,
             'courses' => $courses,
-            'instructors' => $instructors,
+            'faculties' => $faculties,
             'sections' => $sections
         ]);
     }

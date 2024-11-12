@@ -36,7 +36,7 @@ class StudentLogsExport implements FromQuery, WithHeadings, WithMapping, WithTit
             'NAME',
             'SECTION',
             'COURSE TITLE',
-            'INSTRUCTOR',
+            'FACULTY',
             'DATE',
             'TIME IN',
             'TIME OUT'
@@ -50,7 +50,7 @@ class StudentLogsExport implements FromQuery, WithHeadings, WithMapping, WithTit
             $log->student->name,
             $log->course->section->program . ' ' . $log->course->section->year . $log->course->section->block,
             $log->course->course_title,
-            $log->course->instructor->first_name . ' ' . $log->course->instructor->last_name,
+            $log->course->faculty->first_name . ' ' . $log->course->faculty->last_name,
             $log->date,
             $log->time_in,
             $log->time_out

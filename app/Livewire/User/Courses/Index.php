@@ -40,7 +40,7 @@ class Index extends Component
         // Check if the Enrollment is Correct
         if(Crypt::decryptString($this->decrypted_Coursekey) == $this->course_key){
 
-            // Check if the Student is Blocked from the Instructor Assigned Course
+            // Check if the Student is Blocked from the Faculty Assigned Course
             $blockstud = BlockedStudentCourses::where('course_id', $this->course_id)->where('student_id', Auth::id())->first();
             if($blockstud) {
                 toastr()->error('You have been blocked in this Course.');

@@ -6,24 +6,24 @@
     <div class="p-6">
         <div class="flex flex-row gap-2">
             <div class="flex flex-col w-full">
-                <h1 class="font-bold text-2xl mb-2">Schedules</h1>
-                <ul class="flex items-center text-sm mb-6">
+                <h1 class="mb-2 text-2xl font-bold">Schedules</h1>
+                <ul class="flex items-center mb-6 text-sm">
                     <li class="mr-2">
-                        <a href="#" class="text-gray-400 hover:text-gray-600 font-medium">Dashboard</a>
+                        <a href="#" class="font-medium text-gray-400 hover:text-gray-600">Dashboard</a>
                     </li>
-                    <li class="text-gray-600 mr-2 font-medium">/</li>
-                    <li class="text-gray-600 mr-2 font-medium">Schedules</li>
+                    <li class="mr-2 font-medium text-gray-600">/</li>
+                    <li class="mr-2 font-medium text-gray-600">Schedules</li>
                 </ul>
             </div>
         </div>
 
-        <div class="bg-base-100 border-gray-100 shadow-md shadow-black/5 p-6 rounded-md">
+        <div class="p-6 border-gray-100 rounded-md shadow-md bg-base-100 shadow-black/5">
             <div class="overflow-x-auto">
                 <table class="table table-zebra">
-                    <thead class="bg-base-200 rounded-md text-md">
+                    <thead class="rounded-md bg-base-200 text-md">
                         <tr>
                             <th>COURSE TITLE</th>
-                            <th>INSTRUCTOR</th>
+                            <th>FACULTY</th>
                             <th>DAYS</th>
                             <th>SECTION</th>
                             <th>TIME START</th>
@@ -45,9 +45,9 @@
                             <td>
                                 <div class="">
                                     @if ($schedule->course_id)
-                                        {{ $schedule->course->instructor->first_name }} {{ $schedule->course->instructor->last_name }}
+                                        {{ $schedule->course->faculty->first_name }} {{ $schedule->course->faculty->last_name }}
                                     @else
-                                        No Instructor
+                                        No Faculty
                                     @endif
                                 </div>
                             </td>

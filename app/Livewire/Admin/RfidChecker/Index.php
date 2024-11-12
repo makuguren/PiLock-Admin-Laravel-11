@@ -12,11 +12,11 @@ class Index extends Component
 
     public function checkUIDTag(){
 
-        $checkInst = Faculty::where('tag_uid', $this->tag_uid)->first();
+        $checkFaculty = Faculty::where('tag_uid', $this->tag_uid)->first();
         $checkStud = User::where('tag_uid', $this->tag_uid)->first();
 
-        if($checkInst){
-            $this->info = $checkInst;
+        if($checkFaculty){
+            $this->info = $checkFaculty;
         } else {
             $this->info = $checkStud;
         }

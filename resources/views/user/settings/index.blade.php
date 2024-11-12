@@ -31,7 +31,7 @@
                     <div class="flex flex-wrap mb-3">
                         <div class="w-full px-3">
                             <label class="label-text">Full Name</label>
-                            <input class="block w-full px-4 py-3 mb-3 input input-bordered bg-base-300 form-control" name="name" value="{{ $user->name }}" id="" type="text" placeholder="" disabled>
+                            <input class="block w-full px-4 py-3 mb-3 input input-bordered bg-base-300 form-control" name="name" value="{{ $user->first_name }} {{ $user->last_name }}" id="" type="text" placeholder="" disabled>
                         </div>
                     </div>
 

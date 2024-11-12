@@ -1,0 +1,119 @@
+<?php
+
+namespace App\Livewire\Faculty\Attendances;
+
+use Carbon\Carbon;
+use App\Models\User;
+use App\Models\Course;
+use App\Models\Section;
+use App\Models\Subject;
+use Livewire\Component;
+use App\Models\Schedules;
+use App\Models\Attendance;
+use Livewire\WithPagination;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
+
+class Current extends Component
+{
+    use WithPagination;
+
+    public $selectedCourseSection, $selectedSubject, $selectedDate;
+    public $search_student, $student_id, $first_name, $last_name, $section, $course_id;
+
+    public function updatedSelectedCourseSection($value){
+        $this->selectedCourseSection = $value;
+        // $this->selectedSubject = null;
+        $this->resetPage();
+    }
+
+    public function updatedSelectedDate($value){
+        $this->selectedDate = $value;
+        $this->resetPage();
+    }
+
+    public function findStudent(){
+        $student = User::where('student_id', $this->search_student)->first();
+        if($student){
+            $this->student_id = $student->id;
+            $this->first_name = $student->first_name;
+            $this->last_name = $student->last_name;
+            $this->section = $student->section->program . ' ' . $student->section->year . $student->section->block;
+        } else {
+            toastr()->error("Can't Find Student!");
+        }
+    }
+
+    public function addStudAttendance(){
+        $datetime = Carbon::now('Asia/Manila');
+        $schedule = Schedules::where('isCurrent', '1')->first();
+
+        // Custom validation rule
+        $validatedData = $this->validate([
+            'course_id' => 'required|integer',
+            'student_id' => [
+                'required',
+                'integer',
+                function ($attribute, $value, $fail) {
+                    if (Attendance::where('student_id', $value)
+                        ->where('course_id', $this->course_id)
+                        ->exists()) {
+                        $fail('This Student has been already added into attendances.');
+                    }
+                },
+            ],
+        ]);
+
+        Attendance::create([
+            'student_id' => $validatedData['student_id'],
+            'course_id' => $validatedData['course_id'],
+            'date' => $datetime->toDateString(),
+            'time_end' => $schedule->time_end,
+            'isCurrent' => '1'
+        ]);
+
+        toastr()->success("Student Student Added Successfully!");
+        $this->resetInput();
+        $this->dispatch('close-modal');
+    }
+
+    public function resetInput(){
+        $this->search_student = '';
+        $this->course_id = '';
+        $this->first_name = '';
+        $this->last_name = '';
+        $this->section = '';
+    }
+
+    public function render(){
+
+        $facultyId = Auth::id();
+
+        // Fetch Courses with Section associated with Courses of the Faculty (Dropdown Tag)
+        $courseSecs = Course::whereHas('section', function ($query) use ($facultyId) {
+            $query->where('faculty_id', $facultyId);
+        })->with('section')->get();
+
+        // Query to Show Courses where the Faculty is based to Current Loggedin with, Fetch the Attendances of the Student(Model).
+        $query = Course::where('faculty_id', $facultyId)
+            // ->with('attendance.student') // Eager load relationships (Old Version)
+
+            ->with(['attendance' => function ($query) {
+                $query->where('isCurrent', '1'); //Filter attendance where isCurrent to 0
+                $query->where('date', 'like', '%'.$this->selectedDate.'%'); //Filter Date
+            }, 'attendance.student']) // Eager load relationships
+
+            // Filter Attendances(Students) from Course(Course_id) based on Dropdown Selected
+            ->when($this->selectedCourseSection, function ($query) {
+                    $query->where('id', $this->selectedCourseSection);
+            });
+
+        $courses = $query->get();
+
+        return view('livewire.faculty.attendances.current',[
+            'courses' => $courses,
+            'courseSecs' => $courseSecs
+        ]);
+    }
+}

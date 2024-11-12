@@ -92,7 +92,7 @@ class Index extends Component
                 ->where('isCurrent', '1')
                 ->get();
 
-        // Greetings from the Instructors (Good Morning, Afternoon, and Evening)
+        // Greetings from the Faculties (Good Morning, Afternoon, and Evening)
         $getHour = Carbon::now()->timezone('Asia/Manila')->format('H');
         if($getHour > 0){
             $this->greetMessage = 'Good Morning';

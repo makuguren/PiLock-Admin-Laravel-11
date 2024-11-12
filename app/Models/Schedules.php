@@ -19,7 +19,6 @@ class Schedules extends Model
 
     protected $fillable = [
         'course_id',
-        'instructor_id',
         'section_id',
         'days',
         'time_start',
@@ -48,8 +47,8 @@ class Schedules extends Model
     //     return $this->belongsTo(Course::class, 'course_id', 'id');
     // }
 
-    // public function instructor(){
-    //     return $this->belongsTo(Faculty::class, 'instructor_id', 'id');
+    // public function faculty(){
+    //     return $this->belongsTo(Faculty::class, 'faculty_id', 'id');
     // }
 
     // public function section(){

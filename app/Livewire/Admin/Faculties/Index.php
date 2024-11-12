@@ -41,7 +41,7 @@ class Index extends Component
     }
     // Validations End
 
-    //Save Instructor
+    //Save Faculty
     public function saveFaculty(){
         $validatedData = $this->validate();
 

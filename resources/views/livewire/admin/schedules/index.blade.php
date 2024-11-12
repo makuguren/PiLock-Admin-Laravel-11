@@ -185,7 +185,7 @@
             document.getElementById('import_file').value = '';
 
             // document.getElementById('editsubject_id').value = '';
-            // document.getElementById('editinstructor_id').value = '';
+            // document.getElementById('editfaculty_id').value = '';
             // document.getElementById('editsection_id').value = '';
             // document.getElementById('editdays').value = '';
             // document.getElementById('edittime_start').value = '';
