@@ -1,25 +1,25 @@
-<div class="drawer-side z-40" style="scroll-behavior: smooth; scroll-padding-top: 5rem;">
+<div class="z-40 drawer-side" style="scroll-behavior: smooth; scroll-padding-top: 5rem;">
     <label for="drawer" class="drawer-overlay" aria-label="Close menu"></label>
-    <aside class="bg-base-100 w-64 h-full">
+    <aside class="w-64 h-full bg-base-100">
 
-        <div class="bg-base-100 sticky top-0 z-10 w-full gap-y-2 bg-opacity-90 px-2 py-3 backdrop-blur lg:hidden">
+        <div class="sticky top-0 z-10 w-full px-2 py-3 bg-base-100 gap-y-2 bg-opacity-90 backdrop-blur lg:hidden">
             <a href="/" aria-current="page" aria-label="Homepage" class="flex-0 btn btn-ghost" data-svelte-h="svelte-nce89e">
-                <img src="{{ asset('assets/images/pilock-white.png') }}" alt="" class="w-10 h-10 rounded object-cover">
+                <img src="{{ asset('assets/images/pilock-white.png') }}" alt="" class="object-cover w-10 h-10 rounded">
                 <span class="text-lg font-bold">{{ $appSetting->website_name ?? 'Pi:Lock | Admin' }}</span>
             </a>
         </div>
 
-        <div data-sveltekit-preload-data class="bg-base-100 sticky top-0 z-20 hidden items-center gap-2 bg-opacity-90 px-4 py-2 backdrop-blur lg:flex ">
+        <div data-sveltekit-preload-data class="sticky top-0 z-20 items-center hidden gap-2 px-4 py-2 bg-base-100 bg-opacity-90 backdrop-blur lg:flex ">
             <!-- Drawer Logo -->
-            <a wire:navigate.hover href="{{ route('admin.dashboard.index') }}" aria-current="page" aria-label="Homepage" class="flex-0 btn btn-ghost px-2"
+            <a wire:navigate.hover href="{{ route('admin.dashboard.index') }}" aria-current="page" aria-label="Homepage" class="px-2 flex-0 btn btn-ghost"
                 data-svelte-h="svelte-nce89e">
-                <img src="{{ asset('assets/images/pilock-white.png') }}" alt="" class="w-10 h-10 rounded object-cover">
+                <img src="{{ asset('assets/images/pilock-white.png') }}" alt="" class="object-cover w-10 h-10 rounded">
                 <span class="text-lg font-bold">{{ $appSetting->website_name ?? 'Pi:Lock | Admin' }}</span>
             </a>
         </div>
         <div class="h-4"></div>
         {{-- Sidebar Content --}}
-        <ul class="menu px-4 py-0">
+        <ul class="px-4 py-0 menu">
             @can('View Dashboard')
             <li class="mb-1 group {{ Request::is('admin/dashboard') ? 'active':'' }}">
                 <a wire:navigate.hover href="{{ route('admin.dashboard.index') }}"

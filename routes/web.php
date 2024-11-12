@@ -192,6 +192,12 @@ Route::middleware(['auth:admin', App\Http\Middleware\AdminComponentLayout::class
         Route::get('/', App\Livewire\Admin\Archives\Index::class)->name('archives.index');
     });
 
+    // Seat Configuration Routes
+    Route::prefix('seatsconfig')->group(function () {
+        Route::get('/', App\Livewire\Admin\SeatsConfiguration\Index::class)->name('seatsconfig.index');
+    });
+
+
     //Attendances Routes
     // Route::prefix('attendances')->group(function () {
     //     Route::get('/', App\Livewire\Admin\Attendances\Index::class)->name('attendances.index')

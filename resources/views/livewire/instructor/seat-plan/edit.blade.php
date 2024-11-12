@@ -1,6 +1,6 @@
 <x-slot:title>
     Edit Laboratory SeatPlan
-</x-slot:title>
+</x-slot>
 
 <div>
     @include('livewire.instructor.seat-plan.loadstud')
@@ -8,21 +8,21 @@
 
     <div class="p-6">
 
-        <div class="bg-base-100 border-gray-100 shadow-md shadow-black/5 p-6 rounded-md mb-6">
+        <div class="p-6 mb-6 border-gray-100 rounded-md shadow-md bg-base-100 shadow-black/5">
             <div class="overflow-x-auto">
-                <div class="flex justify-between mb-4 items-start">
+                <div class="flex items-start justify-between mb-4">
                     <div class="font-medium">Filtering</div>
 
-                    <a wire:navigate.hover href="{{ route('instructor.seatplan.index') }}" class="btn btn-ghost bg-blue-700 hover:bg-blue-500 w-55 btn-sm">
+                    <a wire:navigate.hover href="{{ route('instructor.seatplan.index') }}" class="bg-blue-700 btn btn-ghost hover:bg-blue-500 w-55 btn-sm">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-big-left"><path d="M18 15h-6v4l-7-7 7-7v4h6v6z"/></svg>
-                        <span class="text-white text-sm">SeatPlan View</span>
+                        <span class="text-sm text-white">SeatPlan View</span>
                     </a>
                 </div>
 
-                <div class="flex flex-col md:flex-row gap-5">
+                <div class="flex flex-col gap-5 md:flex-row">
                     <div class="w-full">
-                        <span class="font-medium text-sm">Select Sections</span>
-                        <select wire:model="selectedCourseSection" id="section" class="select select-bordered flex w-full items-center">
+                        <span class="text-sm font-medium">Select Sections</span>
+                        <select wire:model="selectedCourseSection" id="section" class="flex items-center w-full select select-bordered">
                             <option {{ $disabledSection }} value="">All Sections</option>
                             @foreach($courseSecs as $courseSec)
                                 <option value="{{ $courseSec->id }}">
@@ -35,8 +35,8 @@
                     </div>
 
                     {{-- <div class="w-full">
-                        <span class="font-medium text-sm">Select Subjects</span>
-                        <select wire:model="selectedSubject" id="subject" class="select select-bordered flex w-full items-center">
+                        <span class="text-sm font-medium">Select Subjects</span>
+                        <select wire:model="selectedSubject" id="subject" class="flex items-center w-full select select-bordered">
                             <option {{ $disabledSubject }} value="">All Subjects</option>
                             @foreach($subjects as $id => $subject)
                                 <option value="{{ $id }}">{{ $subject }}</option>
@@ -47,9 +47,9 @@
             </div>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
-            <div class="bg-base-100 border-gray-100 shadow-md shadow-black/5 p-6 rounded-md lg:col-span-2">
-                <div class="flex justify-between mb-4 items-start">
+        <div class="grid grid-cols-1 gap-6 mb-6 lg:grid-cols-3">
+            <div class="p-6 border-gray-100 rounded-md shadow-md bg-base-100 shadow-black/5 lg:col-span-2">
+                <div class="flex items-start justify-between mb-4">
                     <div class="font-medium">SeatPlan View</div>
                 </div>
 
@@ -58,13 +58,13 @@
                 </div>
             </div>
 
-            <div class="bg-base-100 border-gray-100 shadow-md shadow-black/5 p-6 rounded-md lg:col-span-1">
-                <div class="flex justify-between mb-4 items-start">
+            <div class="p-6 border-gray-100 rounded-md shadow-md bg-base-100 shadow-black/5 lg:col-span-1">
+                <div class="flex items-start justify-between mb-4">
                     <div class="font-medium">Unassigned Students</div>
 
-                    <label for="load_stud" class="btn btn-ghost bg-blue-700 hover:bg-blue-500 w-55 btn-sm">
+                    <label for="load_stud" class="bg-blue-700 btn btn-ghost hover:bg-blue-500 w-55 btn-sm">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-refresh-cw"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg>
-                        <span class="text-white text-sm">Load Students</span>
+                        <span class="text-sm text-white">Load Students</span>
                     </label>
                 </div>
 

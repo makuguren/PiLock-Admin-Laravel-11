@@ -13,15 +13,15 @@
     @include('admin.settings.modals.archived')
     @include('admin.settings.modals.execute')
 
-    <div class="bg-base-100 border-gray-100 shadow-md shadow-black/5 p-6 rounded-md">
-        <div class="flex justify-between mb-4 items-start">
+    <div class="p-6 border-gray-100 rounded-md shadow-md bg-base-100 shadow-black/5">
+        <div class="flex items-start justify-between mb-4">
             <div class="font-medium">Database Configuration</div>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-4 gap-2 mb-6">
+        <div class="grid grid-cols-1 gap-2 mb-6 lg:grid-cols-4">
             {{-- Code Here --}}
             <div class="form-control">
-                <label for="trunattendances_modal" class="btn bg-red-700 hover:bg-red-500 text-white">
+                <label for="trunattendances_modal" class="text-white bg-red-700 btn hover:bg-red-500">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash-2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>
                     Truncate Attendances
                 </label>
@@ -29,7 +29,7 @@
 
             {{-- Code Here --}}
             <div class="form-control">
-                <label for="trunenrolled_modal" class="btn bg-red-700 hover:bg-red-500 text-white">
+                <label for="trunenrolled_modal" class="text-white bg-red-700 btn hover:bg-red-500">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash-2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>
                     Truncate EnrolledCourses
                 </label>
@@ -37,7 +37,7 @@
 
             {{-- Code Here --}}
             <div class="form-control">
-                <label for="trunscheds_modal" class="btn bg-red-700 hover:bg-red-500 text-white">
+                <label for="trunscheds_modal" class="text-white bg-red-700 btn hover:bg-red-500">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash-2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>
                     Truncate Schedules
                 </label>
@@ -45,7 +45,7 @@
 
             {{-- Code Here --}}
             <div class="form-control">
-                <label for="trunlogs_modal" class="btn bg-red-700 hover:bg-red-500 text-white">
+                <label for="trunlogs_modal" class="text-white bg-red-700 btn hover:bg-red-500">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash-2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>
                     Truncate Logs
                 </label>
@@ -53,7 +53,7 @@
 
             {{-- Code Here --}}
             <div class="form-control">
-                <label for="trunseatplan_modal" class="btn bg-red-700 hover:bg-red-500 text-white">
+                <label for="trunseatplan_modal" class="text-white bg-red-700 btn hover:bg-red-500">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash-2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>
                     Truncate Seat Plan
                 </label>
@@ -61,7 +61,7 @@
 
             {{-- Code Here --}}
             <div class="form-control">
-                <label for="truncourses_modal" class="btn bg-red-700 hover:bg-red-500 text-white">
+                <label for="truncourses_modal" class="text-white bg-red-700 btn hover:bg-red-500">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash-2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>
                     Truncate Courses
                 </label>
@@ -69,7 +69,7 @@
 
             {{-- Code Here --}}
             <div class="form-control">
-                <label for="trunstudents_modal" class="btn bg-red-700 hover:bg-red-500 text-white">
+                <label for="trunstudents_modal" class="text-white bg-red-700 btn hover:bg-red-500">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash-2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>
                     Truncate Students
                 </label>
@@ -77,7 +77,7 @@
 
             {{-- Code Here --}}
             <div class="form-control">
-                <label for="truninst_modal" class="btn bg-red-700 hover:bg-red-500 text-white">
+                <label for="truninst_modal" class="text-white bg-red-700 btn hover:bg-red-500">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash-2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>
                     Truncate Instructors
                 </label>
@@ -85,7 +85,7 @@
 
             {{-- Code Here --}}
             <div class="form-control">
-                <label for="trunsections_modal" class="btn bg-red-700 hover:bg-red-500 text-white">
+                <label for="trunsections_modal" class="text-white bg-red-700 btn hover:bg-red-500">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash-2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>
                     Truncate Sections
                 </label>
@@ -93,57 +93,57 @@
         </div>
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-        <div class="bg-base-100 border-gray-100 shadow-md shadow-black/5 p-6 rounded-md mt-6 lg:col-span-1">
-            <div class="flex justify-between mb-4 items-start">
+    <div class="grid grid-cols-1 gap-6 mb-6 lg:grid-cols-2">
+        <div class="p-6 mt-6 border-gray-100 rounded-md shadow-md bg-base-100 shadow-black/5 lg:col-span-1">
+            <div class="flex items-start justify-between mb-4">
                 <div class="font-medium">Switches</div>
             </div>
-    
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-2 mb-6">
-    
+
+            <div class="grid grid-cols-1 gap-2 mb-6 lg:grid-cols-2">
+
                 {{-- Code Here --}}
                 <div class="form-control">
-                    <label class="label cursor-pointer">
+                    <label class="cursor-pointer label">
                     <span class="label-text">Maintenance Mode</span>
                     <input type="checkbox" wire:model="isMaintenance" class="checkbox checkbox-primary" />
                     </label>
                 </div>
-    
+
                 {{-- Code Here --}}
                 <div class="form-control">
-                    <label class="label cursor-pointer">
+                    <label class="cursor-pointer label">
                     <span class="label-text">Enable Device Integration</span>
                     <input type="checkbox" wire:model="isDevInteg" class="checkbox checkbox-primary" />
                     </label>
                 </div>
-    
+
                 {{-- Code Here --}}
                 <div class="form-control">
-                    <label class="label cursor-pointer">
+                    <label class="cursor-pointer label">
                     <span class="label-text">Enable Register Students Via Google</span>
                     <input type="checkbox" wire:model="isRegStud" class="checkbox checkbox-primary" />
                     </label>
                 </div>
-    
+
                 {{-- Code Here --}}
                 <div class="form-control">
-                    <label class="label cursor-pointer">
+                    <label class="cursor-pointer label">
                     <span class="label-text">Enable Login/Register Students</span>
                     <input type="checkbox" wire:model="isRegLoginStud" class="checkbox checkbox-primary" />
                     </label>
                 </div>
-    
+
                 {{-- Code Here --}}
                 <div class="form-control">
-                    <label class="label cursor-pointer">
+                    <label class="cursor-pointer label">
                     <span class="label-text">Enable Register Instructors</span>
                     <input type="checkbox" wire:model="isRegInst" class="checkbox checkbox-primary" />
                     </label>
                 </div>
-    
+
                 {{-- Code Here --}}
                 <div class="form-control">
-                    <label class="label cursor-pointer">
+                    <label class="cursor-pointer label">
                     <span class="label-text">Enable Register Admins</span>
                     <input type="checkbox" wire:model="isRegAdmins" class="checkbox checkbox-primary" />
                     </label>
@@ -151,27 +151,35 @@
             </div>
         </div>
 
-        <div class="bg-base-100 border-gray-100 shadow-md shadow-black/5 p-6 rounded-md mt-6 lg:col-span-1">
-            <div class="flex justify-between mb-4 items-start">
+        <div class="p-6 mt-6 border-gray-100 rounded-md shadow-md bg-base-100 shadow-black/5 lg:col-span-1">
+            <div class="flex items-start justify-between mb-4">
                 <div class="font-medium">Website Configuration</div>
             </div>
 
-            <div class="flex justify-between items-center mb-4">
+            <div class="flex items-center justify-between mb-4">
                 <div>
                     <h3 class="text-lg font-semibold">Archived Data</h3>
                     <p class="text-sm text-gray-600">Archived Data for Students and Faculties and other Configurations.</p>
                 </div>
-                <label for="archived_modal" class="btn bg-red-700 text-white hover:bg-red-500">Archived Data</label>
+                <label for="archived_modal" class="text-white bg-red-700 btn hover:bg-red-500">Archived Data</label>
             </div>
 
-            {{-- <div class="flex justify-between items-center mb-4">
+            <div class="flex items-center justify-between mb-4">
+                <div>
+                    <h3 class="text-lg font-semibold">Laboratory Seats</h3>
+                    <p class="text-sm text-gray-600">Laboratory Seats in MAC Laboratory.</p>
+                </div>
+                <label for="archived_modal" class="text-white bg-blue-700 btn hover:bg-blue-500">Configure</label>
+            </div>
+
+            {{-- <div class="flex items-center justify-between mb-4">
                 <div>
                     <h3 class="text-lg font-semibold">Tagline</h3>
                     <p class="text-sm text-gray-600">Brief description or slogan for your website</p>
                 </div>
                 <button class="btn btn-primary">Edit</button>
             </div>
-            <div class="flex justify-between items-center">
+            <div class="flex items-center justify-between">
                 <div>
                     <h3 class="text-lg font-semibold">Site Icon</h3>
                     <p class="text-sm text-gray-600">Upload a small image to be shown as favicon</p>
