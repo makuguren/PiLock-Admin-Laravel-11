@@ -7,7 +7,7 @@ use App\Models\Section;
 use App\Models\Subject;
 use App\Models\SeatPlan;
 use App\Models\Attendance;
-use App\Models\Instructor;
+use App\Models\Faculty;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -49,7 +49,7 @@ class Schedules extends Model
     // }
 
     // public function instructor(){
-    //     return $this->belongsTo(Instructor::class, 'instructor_id', 'id');
+    //     return $this->belongsTo(Faculty::class, 'instructor_id', 'id');
     // }
 
     // public function section(){

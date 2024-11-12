@@ -12,7 +12,7 @@ use Livewire\Component;
 use App\Models\SeatPlan;
 use App\Models\Schedules;
 use App\Models\Attendance;
-use App\Models\Instructor;
+use App\Models\Faculty;
 use App\Models\EnrolledCourse;
 use App\Jobs\DeactivateArchiveJob;
 use Illuminate\Support\Facades\View;
@@ -256,7 +256,7 @@ class Configuration extends Component
     public function truncateInstructors(){
         try {
             Schema::disableForeignKeyConstraints();
-            Instructor::truncate();
+            Faculty::truncate();
             toastr()->success('Truncate Instructors Successfully');
             Schema::enableForeignKeyConstraints();
             $this->dispatch('close-modal');
@@ -317,7 +317,7 @@ class Configuration extends Component
                     $archive->update([
                         'status' => '0'
                     ]);
-                    
+
                     $this->dispatch('close-modal');
                     toastr()->success('Snapshot Deactivated and Rollback Migrations Successfully');
 

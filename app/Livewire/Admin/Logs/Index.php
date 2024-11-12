@@ -10,7 +10,7 @@ use App\Models\Section;
 use App\Models\Subject;
 use Livewire\Component;
 use App\Models\FacultyLog;
-use App\Models\Instructor;
+use App\Models\Faculty;
 use Livewire\WithPagination;
 use App\Exports\StudentLogsExport;
 use App\Exports\InstructorLogsExport;
@@ -20,7 +20,7 @@ class Index extends Component
 {
     use WithPagination;
 
-    public $filter_coursesec, $filter_instructor, $filter_date = '';
+    public $filter_coursesec, $filter_faculty, $filter_date = '';
     public $dlsection_id, $dlfromdate, $dltodate;
 
     public $sortField = 'time_in';
@@ -32,9 +32,9 @@ class Index extends Component
         $this->resetPage();
     }
 
-    public function filter_instructor(){
-        $this->resetPage();
-    }
+    // public function filter_faculty(){
+    //     $this->resetPage();
+    // }
 
     public function filter_date(){
         $this->resetPage();
@@ -81,7 +81,7 @@ class Index extends Component
                     ->orderBy('time_in', 'DESC')
                     ->paginate(5);
 
-        $instructors = Instructor::all();
+        $faculties = Faculty::all();
         $courses = Course::all();
         return view('livewire.admin.logs.index', [
             'logs' => $logs,

@@ -7,7 +7,7 @@ use App\Models\Log;
 use App\Models\User;
 use App\Models\Schedules;
 use App\Models\Attendance;
-use App\Models\Instructor;
+use App\Models\Faculty;
 use Illuminate\Http\Request;
 use App\Models\EnrolledCourse;
 use App\Models\MakeupSchedule;

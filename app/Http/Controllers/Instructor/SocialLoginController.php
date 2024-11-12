@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Instructor;
 
-use App\Models\Instructor;
+use App\Models\Faculty;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -31,13 +31,13 @@ class SocialLoginController extends Controller
         if (!str_ends_with($email, '@my.cspc.edu.ph')) {
             abort(403, 'Access denied: Your email domain is not authorized to access this system. Please contact the administrator for further assistance.');
         }
-        $findInstructor = Instructor::where('google_id', $user->id)->first();
+        $findInstructor = Faculty::where('google_id', $user->id)->first();
 
         if($findInstructor){
             Auth::guard('instructor')->login($findInstructor);
             Session::regenerate();
         } elseif ($appSetting->isRegStud == '1') {
-            $user = Instructor::updateOrCreate([
+            $user = Faculty::updateOrCreate([
                 'email' => $user->getEmail(),
             ], [
                 'name' => $user->getName(),

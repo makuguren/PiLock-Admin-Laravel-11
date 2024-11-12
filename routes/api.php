@@ -17,7 +17,7 @@ Route::get('/user', function (Request $request) {
 Route::get('students/', [StudentsController::class, 'showStudentsAPI']);
 Route::get('student/{student_id}', [StudentsController::class, 'showStudentAPI']);
 
-//Instructors List
+//Faculties List
 Route::get('instructors/', [InstructorsController::class, 'showInstructorsAPI']);
 Route::get('instructor/{instructor_uid}', [InstructorsController::class, 'showInstructorAPI']);
 

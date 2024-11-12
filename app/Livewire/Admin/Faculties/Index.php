@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Livewire\Admin\Instructors;
+namespace App\Livewire\Admin\Faculties;
 
 use Livewire\Component;
-use App\Models\Instructor;
+use App\Models\Faculty;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\QueryException;
@@ -11,7 +11,7 @@ use Illuminate\Database\QueryException;
 class Index extends Component
 {
     use WithPagination;
-    public $first_name, $last_name, $gender, $email, $password, $instructor_id, $taguid;
+    public $first_name, $last_name, $gender, $email, $password, $faculty_id, $taguid;
 
     // Validations
     protected function rules(){
@@ -19,7 +19,7 @@ class Index extends Component
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
             'gender' => 'required|integer',
-            'email' => 'required|email|max:255|unique:instructors,email',
+            'email' => 'required|email|max:255|unique:faculties,email',
             'password' => 'required|string|min:8|max:20'
         ];
     }
@@ -42,10 +42,10 @@ class Index extends Component
     // Validations End
 
     //Save Instructor
-    public function saveInstructor(){
+    public function saveFaculty(){
         $validatedData = $this->validate();
 
-        Instructor::create([
+        Faculty::create([
             'first_name' => $validatedData['first_name'],
             'last_name' => $validatedData['last_name'],
             'gender' => $validatedData['gender'],
@@ -53,26 +53,26 @@ class Index extends Component
             'password' => Hash::make($validatedData['password'])
         ]);
 
-        toastr()->success('Instructor Added Successfully');
+        toastr()->success('Faculty Added Successfully');
         $this->resetInput();
         $this->dispatch('close-modal');
     }
 
-    //Edit Instructor
-    public function editInstructor(int $instructor_id){
-        $instructor = Instructor::find($instructor_id);
-        if($instructor){
-            $this->instructor_id = $instructor->id;
-            $this->first_name = $instructor->first_name;
-            $this->last_name = $instructor->last_name;
-            $this->gender = $instructor->gender;
-            $this->email = $instructor->email;
+    //Edit Faculty
+    public function editFaculty(int $faculty_id){
+        $faculty = Faculty::find($faculty_id);
+        if($faculty){
+            $this->faculty_id = $faculty->id;
+            $this->first_name = $faculty->first_name;
+            $this->last_name = $faculty->last_name;
+            $this->gender = $faculty->gender;
+            $this->email = $faculty->email;
         } else {
-            return redirect()->to('/instructors');
+            return redirect()->to('/faculties');
         }
     }
 
-    public function updateInstructor(){
+    public function updateFaculty(){
         $validatedData = $this->validate([
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
@@ -94,25 +94,25 @@ class Index extends Component
             ];
         }
 
-        Instructor::where('id', $this->instructor_id)->update($data);
-        toastr()->success('Instructor Updated Successfully');
+        Faculty::where('id', $this->faculty_id)->update($data);
+        toastr()->success('Faculty Updated Successfully');
         $this->resetInput();
         $this->dispatch('close-modal');
     }
 
-    //Delete Instructor
-    public function deleteInstructor(int $instructor_id){
-        $this->instructor_id = $instructor_id;
+    //Delete Faculty
+    public function deleteFaculty(int $faculty_id){
+        $this->faculty_id = $faculty_id;
     }
 
-    public function destroyInstructor(){
+    public function destroyFaculty(){
         try{
-            Instructor::find($this->instructor_id)->delete();
-            toastr()->success('Instructor Deleted Successfully');
+            Faculty::find($this->faculty_id)->delete();
+            toastr()->success('Faculty Deleted Successfully');
             $this->dispatch('close-modal');
 
         } catch (QueryException){
-            toastr()->error('Unable to Delete Instructor!');
+            toastr()->error('Unable to Delete Faculty!');
             $this->dispatch('close-modal');
         }
     }
@@ -123,7 +123,7 @@ class Index extends Component
     }
 
     public function destroyRFID(){
-        Instructor::findOrFail($this->taguid)->update([
+        Faculty::findOrFail($this->taguid)->update([
             'tag_uid' => null
         ]);
 
@@ -144,7 +144,7 @@ class Index extends Component
     }
 
     public function render(){
-        $instructors = Instructor::paginate(10);
-        return view('livewire.admin.instructors.index', ['instructors' => $instructors]);
+        $faculties = Faculty::paginate(10);
+        return view('livewire.admin.faculties.index', ['faculties' => $faculties]);
     }
 }

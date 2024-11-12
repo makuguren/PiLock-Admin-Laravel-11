@@ -110,11 +110,11 @@ Route::middleware(['auth:admin', App\Http\Middleware\AdminComponentLayout::class
             ->middleware('permission:Add Tag UID to Students');
     });
 
-    //Instructors Routes with Tag UID
-    Route::prefix('instructors')->group(function () {
-        Route::get('/', App\Livewire\Admin\Instructors\Index::class)->name('instructors.index')
+    //Faculties Routes with Tag UID
+    Route::prefix('faculties')->group(function () {
+        Route::get('/', App\Livewire\Admin\Faculties\Index::class)->name('faculties.index')
             ->middleware('permission:View Instructors');
-        Route::get('addtaguid', App\Livewire\Admin\Instructors\Adduid::class)->name('instructors.addtaguid')
+        Route::get('addtaguid', App\Livewire\Admin\Faculties\Adduid::class)->name('faculties.addtaguid')
             ->middleware('permission:Add Tag UID to Instructors');
     });
 
@@ -215,11 +215,11 @@ Route::middleware(['auth:admin', App\Http\Middleware\AdminComponentLayout::class
 });
 
 //Instructor Interface || Dashboard Routes
-Route::middleware(['auth:instructor', App\Http\Middleware\InstructorComponentLayout::class])->prefix('instructor/dashboard')->group(function () {
+Route::middleware(['auth:faculty', App\Http\Middleware\InstructorComponentLayout::class])->prefix('instructor/dashboard')->group(function () {
     Route::get('/', App\Livewire\Instructor\Dashboard\Index::class)->name('instructor.dashboard.index');
 });
 
-Route::middleware(['auth:instructor', App\Http\Middleware\InstructorComponentLayout::class, CheckInstructorDefaultPass::class])->prefix('instructor')->name('instructor.')->group(function () {
+Route::middleware(['auth:faculty', App\Http\Middleware\InstructorComponentLayout::class, CheckInstructorDefaultPass::class])->prefix('instructor')->name('instructor.')->group(function () {
 
     //Attendances Routes
     Route::prefix('attendances')->group(function () {

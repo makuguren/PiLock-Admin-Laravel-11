@@ -8,7 +8,7 @@ use App\Models\Section;
 use App\Models\Subject;
 use Livewire\Component;
 use App\Models\Schedules;
-use App\Models\Instructor;
+use App\Models\Faculty;
 use Livewire\WithPagination;
 use App\Models\MakeupSchedule;
 use App\Rules\NoMakeupSchedOverlap;
@@ -129,7 +129,7 @@ class Index extends Component
 
     public function render(){
         $subjects = Subject::all();
-        $instructors = Instructor::all();
+        $instructors = Faculty::all();
         $sections = Section::all();
         $courses = Course::all();
         $schedules = MakeupSchedule::where('isApproved', '1')->paginate(10);

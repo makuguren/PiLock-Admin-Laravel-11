@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Instructor\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\Instructor;
+use App\Models\Faculty;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -31,11 +31,11 @@ class RegisteredInstructorController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.Instructor::class],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.Faculty::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        $instructor = Instructor::create([
+        $instructor = Faculty::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),

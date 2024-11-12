@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Instructor;
+use App\Models\Faculty;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -10,7 +10,7 @@ class InstructorsController extends Controller
 {
     //API Controllers/Functions
     public function showInstructorsAPI(){
-        $instructors = Instructor::all();
+        $instructors = Faculty::all();
         if($instructors->count() > 0){
             return response()->json([
                 'instructors' => $instructors->map(function ($instructor) {
@@ -32,7 +32,7 @@ class InstructorsController extends Controller
     }
 
     public function showInstructorAPI(String $instructor_uid){
-        $instructor = Instructor::where('tag_uid', $instructor_uid)->get();
+        $instructor = Faculty::where('tag_uid', $instructor_uid)->get();
         if($instructor->count() > 0){
             return response()->json([
                 'instructor' => $instructor->map(function ($inst) {

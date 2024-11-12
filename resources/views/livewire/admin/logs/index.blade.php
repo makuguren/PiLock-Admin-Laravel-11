@@ -53,7 +53,7 @@
                                     <option value="{{ $course->id }}">{{ $course->course_title }} -
                                         {{ $course->section->program }}
                                         {{ $course->section->year }}{{ $course->section->block }} -
-                                        {{ $course->instructor->first_name }} {{ $course->instructor->last_name }}
+                                        {{ $course->faculty->first_name }} {{ $course->faculty->last_name }}
                                     </option>
                                 @endforeach
                             </select>
@@ -97,8 +97,8 @@
                             <tr>
                                 <td>
                                     <div class="font-bold">
-                                        @if ($faculty->course->instructor_id)
-                                            {{ $faculty->course->instructor->id }}
+                                        @if ($faculty->course->faculty_id)
+                                            {{ $faculty->course->faculty->id }}
                                         @else
                                             No ID
                                         @endif
@@ -107,7 +107,7 @@
                                 <td>
                                     <div class="">
                                         @if ($faculty->course_id)
-                                            {{ $faculty->course->instructor->first_name }} {{ $faculty->course->instructor->last_name }}
+                                            {{ $faculty->course->faculty->first_name }} {{ $faculty->course->faculty->last_name }}
                                         @else
                                             No Faculty Name
                                         @endif
@@ -173,7 +173,7 @@
                             <th>NAME</th>
                             <th>SECTION</th>
                             <th>COURSE TITLE</th>
-                            <th>INSTRUCTOR</th>
+                            <th>FACULTY</th>
                             <th>DATE</th>
                             <th>
                                 <button wire:click="sortBy('time_in')" class="focus:outline-none">
@@ -244,9 +244,9 @@
                                 <td>
                                     <div class="">
                                         @if ($log->course_id)
-                                            {{ $log->course->instructor->first_name }} {{ $log->course->instructor->last_name }}
+                                            {{ $log->course->faculty->first_name }} {{ $log->course->faculty->last_name }}
                                         @else
-                                            No Instructor Found
+                                            No Faculty Found
                                         @endif
                                     </div>
                                 </td>

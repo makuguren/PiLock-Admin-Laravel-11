@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\Instructor;
 
-use App\Models\Instructor;
+use App\Models\Faculty;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -18,7 +18,7 @@ class ProfileUpdateRequest extends FormRequest
         return [
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', Rule::unique(Instructor::class)->ignore($this->user()->id)],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', Rule::unique(Faculty::class)->ignore($this->user()->id)],
             'instructor_theme' => ['nullable', 'string']
         ];
     }

@@ -11,7 +11,7 @@ use App\Models\Setting;
 use App\Models\Course;
 use Livewire\Component;
 use App\Models\Schedules;
-use App\Models\Instructor;
+use App\Models\Faculty;
 use App\Models\MakeupSchedule;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -101,7 +101,7 @@ class Index extends Component
     public function render(){
         $totalStudents = User::count();
         $totalSchedules = Schedules::count();
-        $totalInstructors = Instructor::count();
+        $totalFaculties = Faculty::count();
         $totalCourses = Course::count();
         $totalSections = Section::count();
         $totalEvents = Event::count();
@@ -153,7 +153,7 @@ class Index extends Component
             'totalStudents' => $totalStudents,
             'totalSchedules' => $totalSchedules,
             'totalEvents' => $totalEvents,
-            'totalInstructors' => $totalInstructors,
+            'totalFaculties' => $totalFaculties,
             'totalCourses' => $totalCourses,
             'totalSections' => $totalSections,
             'systeminfo' => $systeminfo,

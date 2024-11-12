@@ -57,9 +57,9 @@
     </div>
 
     <!-- Navbar -->
-    <nav class="navbar sticky top-0 justify-between bg-base-100">
+    <nav class="sticky top-0 justify-between navbar bg-base-100">
         <!-- Logo -->
-        <a class="btn btn-ghost text-lg font-bold">
+        <a class="text-lg font-bold btn btn-ghost">
             <img alt="Logo" src="{{ asset('assets/images/pilock-white.png') }}" class="w-10" />
             Pi:Lock System
         </a>
@@ -77,7 +77,7 @@
                     <li><a href="{{ route('admin.login') }}">Admin Login</a></li>
                 @endauth
 
-                @auth('instructor')
+                @auth('faculty')
                     <li><a href="{{ route('instructor.dashboard.index') }}">Instructor Dashboard</a></li>
                 @else
                     <li><a href="{{ route('instructor.login') }}">Instructor Login</a></li>
@@ -92,7 +92,7 @@
         </div>
 
         <!-- Menu for desktop -->
-        {{-- <ul class="hidden menu sm:menu-horizontal gap-2">
+        {{-- <ul class="hidden gap-2 menu sm:menu-horizontal">
             <li><a>Home</a></li>
             <li><a>About</a></li>
             <li><a>Members</a></li>
@@ -101,11 +101,11 @@
         </ul> --}}
 
         <!-- Menu for desktop -->
-        <div class="hidden sm:flex gap-2 mr-2">
+        <div class="hidden gap-2 mr-2 sm:flex">
             <!-- Dropdown menu -->
             @if ($appSetting->isRegLoginStud == '1' || $appSetting->isRegInst == '1' || $appSetting->isRegAdmins == '1')
                 <div class="dropdown dropdown-end">
-                    <button class="btn btn-ghost btn-sm text-white bg-blue-700 hover:bg-blue-500">
+                    <button class="text-white bg-blue-700 btn btn-ghost btn-sm hover:bg-blue-500">
                         <span class="material-symbols-outlined">how_to_reg</span>
                         Register
                         {{-- <i class="fa-solid fa-chevron-down"></i> --}}
@@ -129,7 +129,7 @@
 
             <!-- Dropdown menu -->
             <div class="dropdown dropdown-end">
-                <button class="btn btn-ghost btn-sm text-white bg-blue-700 hover:bg-blue-500">
+                <button class="text-white bg-blue-700 btn btn-ghost btn-sm hover:bg-blue-500">
                     <span class="material-symbols-outlined">Login</span>
                     Login
                     {{-- <i class="fa-solid fa-chevron-down"></i> --}}
@@ -142,7 +142,7 @@
                         <li><a href="{{ route('admin.login') }}">Admin Login</a></li>
                     @endauth
 
-                    @auth('instructor')
+                    @auth('faculty')
                         <li><a href="{{ route('instructor.dashboard.index') }}">Instructor Dashboard</a></li>
                     @else
                         <li><a href="{{ route('instructor.login') }}">Instructor Login</a></li>
@@ -158,23 +158,23 @@
         </div>
     </nav>
 
-    <section class="flex flex-col lg:flex-row justify-center gap-10 h-screen p-4" id="body">
+    <section class="flex flex-col justify-center h-screen gap-10 p-4 lg:flex-row" id="body">
         <!-- Text Content -->
-        <div class="flex flex-col justify-center items-start gap-6 text-white text-justify lg:w-1/2 lg:items-left">
-            <h1 class="text-3xl lg:text-5xl font-bold">Pi:Lock System</h1>
+        <div class="flex flex-col items-start justify-center gap-6 text-justify text-white lg:w-1/2 lg:items-left">
+            <h1 class="text-3xl font-bold lg:text-5xl">Pi:Lock System</h1>
 
             <p class="text-base lg:text-lg">
                 Welcome to Pi:Lock System – your ultimate solution for secure, automated door locking. Our system leverages the power of Raspberry Pi and Laravel 11 to offer seamless schedule-based authentication, ensuring your spaces are protected and accessible only at the right times. Experience the future of security with Pi:Lock System.
             </p>
 
             <!-- Uncomment this section if needed -->
-            {{-- <div class="flex flex-col lg:flex-row gap-4">
-                <a class="btn btn-ghost bg-green-700 hover:bg-green-500 text-white px-4 py-2 rounded">
+            {{-- <div class="flex flex-col gap-4 lg:flex-row">
+                <a class="px-4 py-2 text-white bg-green-700 rounded btn btn-ghost hover:bg-green-500">
                     Get started
-                    <i class="fa-solid fa-arrow-right text-sm"></i>
+                    <i class="text-sm fa-solid fa-arrow-right"></i>
                 </a>
 
-                <a class="btn btn-ghost bg-neutral-700 hover:bg-neutral-500 text-white px-4 py-2 rounded">
+                <a class="px-4 py-2 text-white rounded btn btn-ghost bg-neutral-700 hover:bg-neutral-500">
                     See our blog
                     <i class="fa-solid fa-blog"></i>
                 </a>
@@ -182,22 +182,22 @@
         </div>
 
         <!-- Image -->
-        <div class="flex flex-col justify-center items-center lg:w-1/3">
+        <div class="flex flex-col items-center justify-center lg:w-1/3">
             <img src="{{ asset('assets/images/pilock-dark.png') }}" alt="Pi:Lock System" class="w-full h-auto max-w-md">
         </div>
     </section>
 
 
-    <section class="bg-base-100 p-10">
+    <section class="p-10 bg-base-100">
         <div class="flex flex-col items-center gap-8">
-            <h1 class="font-bold text-4xl self-center">Meet the Members</h1>
+            <h1 class="self-center text-4xl font-bold">Meet the Members</h1>
 
             <!-- Team -->
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-20">
+            <div class="grid grid-cols-1 gap-20 sm:grid-cols-3">
                 <!-- Member -->
                 <div class="flex gap-4">
                     <!-- Photo -->
-                    <img alt="Logo" src="{{ asset('assets/images/members/mayor.jpg') }}" class="rounded-full w-24" />
+                    <img alt="Logo" src="{{ asset('assets/images/members/mayor.jpg') }}" class="w-24 rounded-full" />
 
                     <div class="flex flex-col gap-2">
                         <!-- Name -->
@@ -207,17 +207,17 @@
                         <span class="text-sm">Programmer, UI Designer, Database Designer - D'Logics</span>
 
                         <!-- Socials -->
-                        {{-- <div class="flex text-accent text-xs">
+                        {{-- <div class="flex text-xs text-accent">
                             <a class="btn btn-ghost btn-sm btn-circle">
-                                <i class="fa-brands fa-github text-lg"></i>
+                                <i class="text-lg fa-brands fa-github"></i>
                             </a>
 
                             <a class="btn btn-ghost btn-sm btn-circle">
-                                <i class="fa-brands fa-twitter text-lg"></i>
+                                <i class="text-lg fa-brands fa-twitter"></i>
                             </a>
 
                             <a class="btn btn-ghost btn-sm btn-circle">
-                                <i class="fa-brands fa-facebook text-lg"></i>
+                                <i class="text-lg fa-brands fa-facebook"></i>
                             </a>
                         </div> --}}
                     </div>
@@ -226,7 +226,7 @@
                 <!-- Member -->
                 <div class="flex gap-4">
                     <!-- Photo -->
-                    <img alt="Logo" src="{{ asset('assets/images/members/fulledo.jpg') }}" class="rounded-full w-24" />
+                    <img alt="Logo" src="{{ asset('assets/images/members/fulledo.jpg') }}" class="w-24 rounded-full" />
 
                     <div class="flex flex-col gap-2">
                         <!-- Name -->
@@ -236,17 +236,17 @@
                         <span class="text-sm">Project Head, QA Tester - D'Logics</span>
 
                         <!-- Socials -->
-                        {{-- <div class="flex text-accent text-xs">
+                        {{-- <div class="flex text-xs text-accent">
                             <a class="btn btn-ghost btn-sm btn-circle">
-                                <i class="fa-brands fa-github text-lg"></i>
+                                <i class="text-lg fa-brands fa-github"></i>
                             </a>
 
                             <a class="btn btn-ghost btn-sm btn-circle">
-                                <i class="fa-brands fa-twitter text-lg"></i>
+                                <i class="text-lg fa-brands fa-twitter"></i>
                             </a>
 
                             <a class="btn btn-ghost btn-sm btn-circle">
-                                <i class="fa-brands fa-facebook text-lg"></i>
+                                <i class="text-lg fa-brands fa-facebook"></i>
                             </a>
                         </div> --}}
                     </div>
@@ -255,7 +255,7 @@
                 <!-- Member -->
                 <div class="flex gap-4">
                     <!-- Photo -->
-                    <img alt="Logo" src="{{ asset('assets/images/members/sombrero.jpeg') }}" class="rounded-full w-24" />
+                    <img alt="Logo" src="{{ asset('assets/images/members/sombrero.jpeg') }}" class="w-24 rounded-full" />
 
                     <div class="flex flex-col gap-2">
                         <!-- Name -->
@@ -265,17 +265,17 @@
                         <span class="text-sm">Documentation Writer, Database Designer - D'Logics</span>
 
                         <!-- Socials -->
-                        {{-- <div class="flex text-accent text-xs">
+                        {{-- <div class="flex text-xs text-accent">
                             <a class="btn btn-ghost btn-sm btn-circle">
-                                <i class="fa-brands fa-github text-lg"></i>
+                                <i class="text-lg fa-brands fa-github"></i>
                             </a>
 
                             <a class="btn btn-ghost btn-sm btn-circle">
-                                <i class="fa-brands fa-twitter text-lg"></i>
+                                <i class="text-lg fa-brands fa-twitter"></i>
                             </a>
 
                             <a class="btn btn-ghost btn-sm btn-circle">
-                                <i class="fa-brands fa-facebook text-lg"></i>
+                                <i class="text-lg fa-brands fa-facebook"></i>
                             </a>
                         </div> --}}
                     </div>
@@ -284,7 +284,7 @@
                 <!-- Member -->
                 <div class="flex gap-4">
                     <!-- Photo -->
-                    <img alt="Logo" src="{{ asset('assets/images/members/eloisa.jpg') }}" class="rounded-full w-24" />
+                    <img alt="Logo" src="{{ asset('assets/images/members/eloisa.jpg') }}" class="w-24 rounded-full" />
 
                     <div class="flex flex-col gap-2">
                         <!-- Name -->
@@ -294,17 +294,17 @@
                         <span class="text-sm">Document Writer, UI Designer - D'Logics</span>
 
                         <!-- Socials -->
-                        {{-- <div class="flex text-accent text-xs">
+                        {{-- <div class="flex text-xs text-accent">
                             <a class="btn btn-ghost btn-sm btn-circle">
-                                <i class="fa-brands fa-github text-lg"></i>
+                                <i class="text-lg fa-brands fa-github"></i>
                             </a>
 
                             <a class="btn btn-ghost btn-sm btn-circle">
-                                <i class="fa-brands fa-twitter text-lg"></i>
+                                <i class="text-lg fa-brands fa-twitter"></i>
                             </a>
 
                             <a class="btn btn-ghost btn-sm btn-circle">
-                                <i class="fa-brands fa-facebook text-lg"></i>
+                                <i class="text-lg fa-brands fa-facebook"></i>
                             </a>
                         </div> --}}
                     </div>
@@ -313,7 +313,7 @@
                 <!-- Member -->
                 <div class="flex gap-4">
                     <!-- Photo -->
-                    <img alt="Logo" src="{{ asset('assets/images/members/larry.png') }}" class="rounded-full w-24" />
+                    <img alt="Logo" src="{{ asset('assets/images/members/larry.png') }}" class="w-24 rounded-full" />
 
                     <div class="flex flex-col gap-2">
                         <!-- Name -->
@@ -323,17 +323,17 @@
                         <span class="text-sm">Programmer, Database Designer, UI Designer - Team-BA</span>
 
                         <!-- Socials -->
-                        {{-- <div class="flex text-accent text-xs">
+                        {{-- <div class="flex text-xs text-accent">
                             <a class="btn btn-ghost btn-sm btn-circle">
-                                <i class="fa-brands fa-github text-lg"></i>
+                                <i class="text-lg fa-brands fa-github"></i>
                             </a>
 
                             <a class="btn btn-ghost btn-sm btn-circle">
-                                <i class="fa-brands fa-twitter text-lg"></i>
+                                <i class="text-lg fa-brands fa-twitter"></i>
                             </a>
 
                             <a class="btn btn-ghost btn-sm btn-circle">
-                                <i class="fa-brands fa-facebook text-lg"></i>
+                                <i class="text-lg fa-brands fa-facebook"></i>
                             </a>
                         </div> --}}
                     </div>
@@ -342,7 +342,7 @@
                 <!-- Member -->
                 <div class="flex gap-4">
                     <!-- Photo -->
-                    <img alt="Logo" src="{{ asset('assets/images/members/baltazar.jpg') }}" class="rounded-full w-24" />
+                    <img alt="Logo" src="{{ asset('assets/images/members/baltazar.jpg') }}" class="w-24 rounded-full" />
 
                     <div class="flex flex-col gap-2">
                         <!-- Name -->
@@ -352,17 +352,17 @@
                         <span class="text-sm">Project Head, Database Designer, Programmer - Team-BA</span>
 
                         <!-- Socials -->
-                        {{-- <div class="flex text-accent text-xs">
+                        {{-- <div class="flex text-xs text-accent">
                             <a class="btn btn-ghost btn-sm btn-circle">
-                                <i class="fa-brands fa-github text-lg"></i>
+                                <i class="text-lg fa-brands fa-github"></i>
                             </a>
 
                             <a class="btn btn-ghost btn-sm btn-circle">
-                                <i class="fa-brands fa-twitter text-lg"></i>
+                                <i class="text-lg fa-brands fa-twitter"></i>
                             </a>
 
                             <a class="btn btn-ghost btn-sm btn-circle">
-                                <i class="fa-brands fa-facebook text-lg"></i>
+                                <i class="text-lg fa-brands fa-facebook"></i>
                             </a>
                         </div> --}}
                     </div>
@@ -371,7 +371,7 @@
                 <!-- Member -->
                 <div class="flex gap-4">
                     <!-- Photo -->
-                    <img alt="Logo" src="{{ asset('assets/images/members/neverio.jpg') }}" class="rounded-full w-24" />
+                    <img alt="Logo" src="{{ asset('assets/images/members/neverio.jpg') }}" class="w-24 rounded-full" />
 
                     <div class="flex flex-col gap-2">
                         <!-- Name -->
@@ -381,17 +381,17 @@
                         <span class="text-sm">UI Designer, Documentation, Writer - Team-BA</span>
 
                         <!-- Socials -->
-                        {{-- <div class="flex text-accent text-xs">
+                        {{-- <div class="flex text-xs text-accent">
                             <a class="btn btn-ghost btn-sm btn-circle">
-                                <i class="fa-brands fa-github text-lg"></i>
+                                <i class="text-lg fa-brands fa-github"></i>
                             </a>
 
                             <a class="btn btn-ghost btn-sm btn-circle">
-                                <i class="fa-brands fa-twitter text-lg"></i>
+                                <i class="text-lg fa-brands fa-twitter"></i>
                             </a>
 
                             <a class="btn btn-ghost btn-sm btn-circle">
-                                <i class="fa-brands fa-facebook text-lg"></i>
+                                <i class="text-lg fa-brands fa-facebook"></i>
                             </a>
                         </div> --}}
                     </div>
@@ -401,11 +401,11 @@
     </section>
 
 
-    <footer class="flex flex-col sm:flex-row gap-8 justify-between p-10 bg-base-200">
+    <footer class="flex flex-col justify-between gap-8 p-10 sm:flex-row bg-base-200">
 
         <!-- Brand -->
         <aside>
-            <p class="text-3xl flex items-center gap-2 font-bold">
+            <p class="flex items-center gap-2 text-3xl font-bold">
                 <img alt="Logo" src="{{ asset('assets/images/pilock-white.png') }}" class="inline w-12" />
                 Pi:Lock System
             </p>
@@ -415,16 +415,16 @@
         <!-- Socials -->
         <nav class="flex gap-4">
             <a class="btn btn-ghost btn-sm btn-circle">
-                <i class="fa-brands fa-github text-2xl"></i>
+                <i class="text-2xl fa-brands fa-github"></i>
             </a>
             <a class="btn btn-ghost btn-sm btn-circle">
-                <i class="fa-brands fa-twitter text-2xl"></i>
+                <i class="text-2xl fa-brands fa-twitter"></i>
             </a>
             <a class="btn btn-ghost btn-sm btn-circle">
-                <i class="fa-brands fa-facebook text-2xl"></i>
+                <i class="text-2xl fa-brands fa-facebook"></i>
             </a>
             <a class="btn btn-ghost btn-sm btn-circle">
-                <i class="fa-brands fa-youtube text-2xl"></i>
+                <i class="text-2xl fa-brands fa-youtube"></i>
             </a>
         </nav>
     </footer>

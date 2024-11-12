@@ -7,7 +7,7 @@ use App\Models\Course;
 use Livewire\Component;
 use App\Models\Schedules;
 use App\Models\Attendance;
-use App\Models\Instructor;
+use App\Models\Faculty;
 use App\Models\MakeupSchedule;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -49,7 +49,7 @@ class Index extends Component
             'password' => ['required', 'string', 'min:8', 'confirmed', Password::defaults()],
         ]);
 
-        Instructor::find(Auth::id())->update([
+        Faculty::find(Auth::id())->update([
             'password' => Hash::make($validated['password']),
             'isDefaultPass' => '0'
         ]);

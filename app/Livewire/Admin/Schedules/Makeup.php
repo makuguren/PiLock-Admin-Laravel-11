@@ -7,7 +7,7 @@ use App\Models\Section;
 use App\Models\Subject;
 use Livewire\Component;
 use App\Models\Schedules;
-use App\Models\Instructor;
+use App\Models\Faculty;
 use Livewire\WithPagination;
 use Illuminate\Database\QueryException;
 
@@ -116,7 +116,7 @@ class Makeup extends Component
     }
 
     public function render(){
-        $instructors = Instructor::all();
+        $instructors = Faculty::all();
         $sections = Section::all();
         $courses = Course::all();
         $schedules = Schedules::where('isMakeUp', '1')->where('isApproved', '1')->paginate(10);

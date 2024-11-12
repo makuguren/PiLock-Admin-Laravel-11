@@ -2,7 +2,7 @@
 
 namespace App\Livewire\Admin\RfidChecker;
 
-use App\Models\Instructor;
+use App\Models\Faculty;
 use App\Models\User;
 use Livewire\Component;
 
@@ -12,7 +12,7 @@ class Index extends Component
 
     public function checkUIDTag(){
 
-        $checkInst = Instructor::where('tag_uid', $this->tag_uid)->first();
+        $checkInst = Faculty::where('tag_uid', $this->tag_uid)->first();
         $checkStud = User::where('tag_uid', $this->tag_uid)->first();
 
         if($checkInst){

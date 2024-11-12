@@ -4,7 +4,7 @@ namespace App\Imports;
 
 use App\Models\Course;
 use App\Models\Section;
-use App\Models\Instructor;
+use App\Models\Faculty;
 use Illuminate\Support\Facades\Crypt;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\Importable;
@@ -32,7 +32,7 @@ class CourseImport implements ToModel, WithHeadingRow, WithValidation
         );
 
         // Find the existing instructor based on instructor name
-        $instructor = Instructor::where('first_name', $row['instructor_fname'])->where('last_name', $row['instructor_lname'])->first();
+        $instructor = Faculty::where('first_name', $row['instructor_fname'])->where('last_name', $row['instructor_lname'])->first();
 
         // If the instructor exists, create or update the course
         if ($instructor) {

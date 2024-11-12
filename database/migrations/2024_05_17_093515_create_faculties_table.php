@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('instructors', function (Blueprint $table) {
+        Schema::create('faculties', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable();
             $table->string('first_name')->nullable();
@@ -25,7 +25,7 @@ return new class extends Migration
             $table->string('google_id')->unique()->nullable();
             $table->text('avatar')->nullable();
             $table->enum('gender', ['0','1','2'])->default('0')->comment('0=None, 1=Male, 2=Female')->nullable();
-            $table->string('instructor_theme')->nullable();
+            $table->string('faculty_theme')->nullable();
             $table->enum('isDefaultPass', ['0','1'])->default('1')->comment('0=No, 1=Yes');
         });
     }
@@ -35,6 +35,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('instructors');
+        Schema::dropIfExists('faculties');
     }
 };

@@ -8,7 +8,7 @@ use App\Models\Section;
 use App\Models\Subject;
 use Livewire\Component;
 use App\Models\Schedules;
-use App\Models\Instructor;
+use App\Models\Faculty;
 use Livewire\Attributes\On;
 use App\Imports\CourseImport;
 use Livewire\WithFileUploads;
@@ -21,7 +21,7 @@ use Maatwebsite\Excel\Validators\ValidationException;
 
 class Timetable extends Component
 {
-    public $schedule_id, $instructor_fname, $instructor_lname, $import_file;
+    public $schedule_id, $faculty_fname, $faculty_lname, $import_file;
     public $course_id, $course_code, $days, $time_start, $time_end, $lateDuration;
 
     use WithFileUploads;
@@ -86,8 +86,8 @@ class Timetable extends Component
         $fetchCourse = Course::find($course_id);
         if($fetchCourse){
             $this->course_code = $fetchCourse->course_code;
-            $this->instructor_fname = $fetchCourse->instructor->first_name;
-            $this->instructor_lname = $fetchCourse->instructor->last_name;
+            $this->faculty_fname = $fetchCourse->faculty->first_name;
+            $this->faculty_lname = $fetchCourse->faculty->last_name;
         }
     }
 
@@ -129,8 +129,8 @@ class Timetable extends Component
             $this->schedule_id = $schedule->id;
             $this->course_id = $schedule->course_id;
             $this->course_code = $schedule->course->course_code;
-            $this->instructor_fname = $schedule->course->instructor->first_name;
-            $this->instructor_lname = $schedule->course->instructor->last_name;
+            $this->faculty_fname = $schedule->course->faculty->first_name;
+            $this->faculty_lname = $schedule->course->faculty->last_name;
             $this->days = $schedule->days;
             $this->time_start = Carbon::parse($schedule->time_start)->format('H:i:s');
             $this->time_end = Carbon::parse($schedule->time_end)->format('H:i:s');
@@ -177,14 +177,14 @@ class Timetable extends Component
     }
 
     public function render(){
-        $instructors = Instructor::all();
+        // $faculties = Faculty::all();
         $sections = Section::all();
         $courses = Course::all();
         $schedules = Schedules::all();
         return view('livewire.admin.schedules.timetable', [
             'schedules' => $schedules,
             'courses' => $courses,
-            'instructors' => $instructors,
+            // 'faculties' => $faculties,
             'sections' => $sections,
         ]);
     }

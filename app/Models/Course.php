@@ -6,7 +6,7 @@ use App\Models\User;
 use App\Models\Section;
 use App\Models\Schedules;
 use App\Models\Attendance;
-use App\Models\Instructor;
+use App\Models\Faculty;
 use App\Models\EnrolledCourse;
 use App\Models\MakeupSchedule;
 use Illuminate\Database\Eloquent\Model;
@@ -22,20 +22,20 @@ class Course extends Model
         'course_code',
         'course_title',
         'section_id',
-        'instructor_id',
+        'faculty_id',
         'course_key'
     ];
 
     // Admin Interface
-    public function instructor(){
-        return $this->belongsTo(Instructor::class, 'instructor_id', 'id');
+    public function faculty(){
+        return $this->belongsTo(Faculty::class, 'faculty_id', 'id');
     }
 
     public function section(){
         return $this->belongsTo(Section::class, 'section_id', 'id');
     }
 
-    // Instructor Interface
+    // Faculty Interface
     public function attendance(){ //Current Attendance View
         return $this->hasMany(Attendance::class, 'course_id', 'id');
     }

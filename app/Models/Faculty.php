@@ -10,11 +10,11 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Instructor extends Authenticatable
+class Faculty extends Authenticatable
 {
     use HasFactory, Notifiable;
 
-    protected $guard = 'instructor';
+    protected $guard = 'faculty';
 
     /**
      * The attributes that are mass assignable.
@@ -28,7 +28,7 @@ class Instructor extends Authenticatable
         'email',
         'password',
         'gender',
-        'instructor_theme',
+        'faculty_theme',
         'tag_uid',
         'google_id',
         'avatar',

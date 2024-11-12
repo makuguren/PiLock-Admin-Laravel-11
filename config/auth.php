@@ -46,9 +46,9 @@ return [
             'provider' => 'admins',
         ],
 
-        'instructor' => [
+        'faculty' => [
             'driver' => 'session',
-            'provider' => 'instructors',
+            'provider' => 'faculties',
         ],
 
         // Archive Guards
@@ -91,9 +91,9 @@ return [
             'model' => App\Models\Admin::class,
         ],
 
-        'instructors' => [
+        'faculties' => [
             'driver' => 'eloquent',
-            'model' => App\Models\Instructor::class,
+            'model' => App\Models\Faculty::class,
         ],
 
         // Archive Providers

@@ -8,7 +8,7 @@ use App\Models\Section;
 use App\Models\Subject;
 use Livewire\Component;
 use App\Models\Schedules;
-use App\Models\Instructor;
+use App\Models\Faculty;
 use App\Models\MakeupSchedule;
 use Livewire\WithPagination;
 use App\Rules\NoMakeupSchedOverlap;

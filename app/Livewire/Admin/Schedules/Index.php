@@ -9,7 +9,7 @@ use App\Models\Subject;
 use Livewire\Component;
 use App\Models\Schedules;
 use App\Models\Attendance;
-use App\Models\Instructor;
+use App\Models\Faculty;
 use Livewire\WithPagination;
 use App\Imports\CourseImport;
 use Livewire\WithFileUploads;
@@ -28,7 +28,7 @@ class Index extends Component
     use WithFileUploads;
 
     public $schedule_id, $course_id, $days, $time_start, $time_end, $lateDuration, $isCurrent;
-    public $instructor_fname, $instructor_lname, $course_code, $import_file, $isDisableButton;
+    public $faculty_fname, $faculty_lname, $course_code, $import_file, $isDisableButton;
 
     //Validations
     // protected function rules(){
@@ -71,8 +71,8 @@ class Index extends Component
     public function fetchCourseDetails(int $course_id){
         $fetchCourse = Course::find($course_id);
         if($fetchCourse){
-            $this->instructor_fname = $fetchCourse->instructor->first_name;
-            $this->instructor_lname = $fetchCourse->instructor->last_name;
+            $this->faculty_fname = $fetchCourse->faculty->first_name;
+            $this->faculty_lname = $fetchCourse->faculty->last_name;
             $this->course_code = $fetchCourse->course_code;
             // $this->dispatch('instdetails', 'HelloWorld');
         }
@@ -201,8 +201,8 @@ class Index extends Component
             $this->schedule_id = $schedule->id;
             $this->course_id = $schedule->course_id;
             $this->course_code = $schedule->course->course_code;
-            $this->instructor_fname = $schedule->course->instructor->first_name;
-            $this->instructor_lname = $schedule->course->instructor->last_name;
+            $this->faculty_fname = $schedule->course->faculty->first_name;
+            $this->faculty_lname = $schedule->course->faculty->last_name;
             $this->days = $schedule->days;
             $this->time_start = Carbon::parse($schedule->time_start)->format('H:i:s');
             $this->time_end = Carbon::parse($schedule->time_end)->format('H:i:s');
@@ -254,7 +254,7 @@ class Index extends Component
     }
 
     public function render(){
-        $instructors = Instructor::all();
+        // $faculties = Faculty::all();
         $sections = Section::all();
         $courses = Course::all();
         $schedules = Schedules::where('isMakeUp', '0')
@@ -264,7 +264,7 @@ class Index extends Component
         return view('livewire.admin.schedules.index', [
             'schedules' => $schedules,
             'courses' => $courses,
-            'instructors' => $instructors,
+            // 'faculties' => $faculties,
             'sections' => $sections,
             // 'isDisableButton' => $this->isDisableButton,
         ]);

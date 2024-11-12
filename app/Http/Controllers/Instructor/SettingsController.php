@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Instructor;
 
-use App\Models\Instructor;
+use App\Models\Faculty;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -17,7 +17,7 @@ class SettingsController extends Controller
     }
 
     public function updateProfile(ProfileUpdateRequest $request){
-        $instructorprofile = Instructor::where('id', Auth::user()->id);
+        $instructorprofile = Faculty::where('id', Auth::user()->id);
         $validatedData = $request->validated();
 
         $instructorprofile->update([

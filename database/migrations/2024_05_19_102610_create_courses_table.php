@@ -16,13 +16,13 @@ return new class extends Migration
             $table->string('course_code');
             $table->string('course_title');
             $table->unsignedBigInteger('section_id')->nullable();
-            $table->unsignedBigInteger('instructor_id')->nullable();
+            $table->unsignedBigInteger('faculty_id')->nullable();
             $table->string('course_key');
             $table->timestamps();
 
             // Foreign Key
             $table->foreign('section_id')->references('id')->on('sections');
-            $table->foreign('instructor_id')->references('id')->on('instructors');
+            $table->foreign('faculty_id')->references('id')->on('faculties');
         });
     }
 
