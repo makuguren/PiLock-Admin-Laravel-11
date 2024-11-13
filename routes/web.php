@@ -11,6 +11,26 @@ Route::get('/', function () {
     return view('landing');
 })->name('welcome.index');
 
+// Route::get('/pastebin', function () {
+//     $array = json_decode(\Http::get('https://pastebin.com/raw/UKhcdjRe'), true);
+//     $allowd_ips = $array['configurations']['maintenance']['allowed_ips'] ?? [];
+
+//     return ($allowd_ips);
+// });
+
+// Route::get('/ipconfig', function () {
+//     $blocked_ips = ['192.168.8.156', '203.0.113.5']; // Example blocked IPs
+//     $client_ip = $_SERVER['REMOTE_ADDR'];
+
+//     if (in_array($client_ip, $blocked_ips)) {
+//         // Deny access
+//         header('HTTP/1.0 403 Forbidden');
+//         echo "Access denied.";
+//         exit;
+//     }
+
+// });
+
 // Livewire::setUpdateRoute(function ($handle) {
 //     return Route::post('Autogen_V3_Livewire_3/public/livewire/update', $handle);
 // });

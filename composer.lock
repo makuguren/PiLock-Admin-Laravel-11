@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "629f2368a998e9aa86094bfdf7410220",
+    "content-hash": "e74fd94a61d1c433f122d1e2005525ac",
     "packages": [
         {
             "name": "barryvdh/laravel-debugbar",
@@ -2756,6 +2756,42 @@
                 "source": "https://github.com/makuguren/laravel-livewire-calendar/tree/v3.1"
             },
             "time": "2024-03-27T01:52:33+00:00"
+        },
+        {
+            "name": "makuguren/laravelsupport",
+            "version": "v1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/makuguren/Laravel-Support-Lib.git",
+                "reference": "aae0b5fdacc9ef7740812f1c315637bb3cdd46de"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/makuguren/Laravel-Support-Lib/zipball/aae0b5fdacc9ef7740812f1c315637bb3cdd46de",
+                "reference": "aae0b5fdacc9ef7740812f1c315637bb3cdd46de",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Makuguren\\Laravelsupport\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "makuguren",
+                    "email": "markgmiguel@outlook.com"
+                }
+            ],
+            "support": {
+                "issues": "https://github.com/makuguren/Laravel-Support-Lib/issues",
+                "source": "https://github.com/makuguren/Laravel-Support-Lib/tree/v1.0.2"
+            },
+            "time": "2024-11-13T10:53:16+00:00"
         },
         {
             "name": "markbaker/complex",
@@ -10614,12 +10650,12 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {},
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
         "php": "^8.2"
     },
-    "platform-dev": [],
+    "platform-dev": {},
     "plugin-api-version": "2.6.0"
 }
