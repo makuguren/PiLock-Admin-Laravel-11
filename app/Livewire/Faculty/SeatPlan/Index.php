@@ -10,11 +10,12 @@ use Livewire\Component;
 use App\Models\SeatPlan;
 use App\Models\Schedules;
 use Livewire\Attributes\On;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Auth;
 
 class Index extends Component
 {
-    public $selectedCourseSection = null;
+    public $selectedCourseSection = null, $selectedDLCourseSection;
     public $disabledSection, $disabledSubject = '';
 
     public $seat_id, $student_name, $seat_number;
@@ -37,6 +38,38 @@ class Index extends Component
             $this->student_name = $seatQuery->student->first_name . ' ' . $seatQuery->student->last_name;
             $this->seat_number = $seatQuery->seat_number;
         }
+    }
+
+    public function downloadSeatPlan(){
+
+        // // Image Paths
+        // $ccsimageData = base64_encode(file_get_contents(public_path('assets/images/ccs.png')));
+        // $ccsimageBase64 = 'data:image/jpeg;base64,' . $ccsimageData;
+
+        // $cspcimageData = base64_encode(file_get_contents(public_path('assets/images/cspc.png')));
+        // $cspcimageBase64 = 'data:image/jpeg;base64,' . $cspcimageData;
+
+        // $seatStuds = SeatPlan::where('course_id', $this->selectedDLCourseSection)
+        //     ->join('users', 'seat_plan.student_id', '=', 'users.id')
+        //     ->select('seat_plan.*', 'users.first_name', 'users.last_name')
+        //     ->orderBy('seat_number', 'ASC')
+        //     ->get();
+
+        return redirect()->route('faculty.seatplan.seatstuds', $this->selectedDLCourseSection);
+
+        // $data = [
+        //     'title' => 'Downloaded Seat Plan',
+        //     'seatStuds' => $seatStuds,
+        //     'ccsheader' => $ccsimageBase64,
+        //     'cspcheader' => $cspcimageBase64
+        // ];
+
+        // $pdf = Pdf::loadView('livewire.faculty.seat-plan.seatstud', $data);
+        // $this->dispatch('close-modal');
+
+        // return response()->streamDownload(function() use($pdf){
+        //     echo $pdf->stream();
+        // }, 'student_seats.pdf');
     }
 
     public function render(){

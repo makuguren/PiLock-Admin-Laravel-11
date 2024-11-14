@@ -5,7 +5,7 @@
         "dev": "vite",
         "build": "vite build",
         "seeders": "php artisan db:seed --class=AdminRolePermissionSeeder && php artisan db:seed --class=ConfigurationSeeder && php artisan db:seed --class=SeatsConfigurationSeeder",
-        "start": "php artisan serve --host 0.0.0.0 --port 8085"
+        "start": "php artisan serve --host 0.0.0.0 --port 8000"
     },
     "devDependencies": {
         "@tailwindcss/forms": "^0.5.2",

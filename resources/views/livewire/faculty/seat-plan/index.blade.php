@@ -4,6 +4,7 @@
 
 <div>
     @include('livewire.faculty.seat-plan.preview')
+    @include('livewire.faculty.seat-plan.download')
 
     {{-- <ul wire:sortable="updateTaskOrder">
         @foreach ($seatplan as $seatplan)
@@ -54,10 +55,15 @@
                 </ul>
             </div>
 
-            <a wire:navigate.hover href="{{ route('faculty.seatplan.assign') }}" class="mt-3 bg-red-700 btn btn-ghost hover:bg-red-500 w-55 btn-sm">
+            <a wire:navigate.hover href="{{ route('faculty.seatplan.assign') }}" class="mt-3 bg-blue-700 btn btn-ghost hover:bg-blue-500 w-55 btn-sm">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-armchair"><path d="M19 9V6a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v3"/><path d="M3 16a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5a2 2 0 0 0-4 0v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V11a2 2 0 0 0-4 0z"/><path d="M5 18v2"/><path d="M19 18v2"/></svg>
-                <span class="text-sm text-white">Edit SeatPlan</span>
+                <span class="text-sm text-white">Assign Seat Plan</span>
             </a>
+
+            <label for="download_seats" class="mt-3 bg-red-700 btn btn-ghost hover:bg-red-500 w-55 btn-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-crown"><path d="M11.562 3.266a.5.5 0 0 1 .876 0L15.39 8.87a1 1 0 0 0 1.516.294L21.183 5.5a.5.5 0 0 1 .798.519l-2.834 10.246a1 1 0 0 1-.956.734H5.81a1 1 0 0 1-.957-.734L2.02 6.02a.5.5 0 0 1 .798-.519l4.276 3.664a1 1 0 0 0 1.516-.294z"/><path d="M5 21h14"/></svg>
+                <span class="text-sm text-white">Download Seat Plan</span>
+            </label>
         </div>
 
         <div class="p-6 border-gray-100 rounded-md shadow-md bg-base-100 shadow-black/5">
@@ -94,3 +100,12 @@
         </div>
     </div>
 </div>
+
+<x-slot:scripts>
+    <script>
+        function cancel_downloadseats(){
+            document.getElementById('download_seats').checked = false;
+            document.getElementById('selectedDLCourseSection').value = '';
+        }
+    </script>
+</x-slot>

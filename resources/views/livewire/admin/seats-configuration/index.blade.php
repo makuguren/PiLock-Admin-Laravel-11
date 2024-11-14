@@ -7,7 +7,7 @@
     @include('livewire.admin.seats-configuration.export-seats')
 
     <div class="p-6">
-        <div class="flex flex-row">
+        <div class="flex flex-row gap-2">
             <div class="flex flex-col w-full">
                 <h1 class="mb-2 text-2xl font-bold">Seats Configuration</h1>
                 <ul class="flex items-center mb-6 text-sm">
@@ -18,12 +18,13 @@
                     <li class="mr-2 font-medium text-gray-600">Seats Configuration</li>
                 </ul>
             </div>
-            <label for="load_config" class="mt-3 bg-blue-700 btn hover:bg-blue-500 w-55 btn-sm">
+
+            <label for="load_config" class="mt-3 bg-blue-700 btn btn-ghost hover:bg-blue-500 w-55 btn-sm">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-crown"><path d="M11.562 3.266a.5.5 0 0 1 .876 0L15.39 8.87a1 1 0 0 0 1.516.294L21.183 5.5a.5.5 0 0 1 .798.519l-2.834 10.246a1 1 0 0 1-.956.734H5.81a1 1 0 0 1-.957-.734L2.02 6.02a.5.5 0 0 1 .798-.519l4.276 3.664a1 1 0 0 0 1.516-.294z"/><path d="M5 21h14"/></svg>
                 <span class="text-sm text-white">Load Configuration</span>
             </label>
 
-            <label for="export_config" class="mt-3 bg-blue-700 btn hover:bg-blue-500 w-55 btn-sm">
+            <label for="export_config" class="mt-3 bg-blue-700 btn btn-ghost hover:bg-blue-500 w-55 btn-sm">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-crown"><path d="M11.562 3.266a.5.5 0 0 1 .876 0L15.39 8.87a1 1 0 0 0 1.516.294L21.183 5.5a.5.5 0 0 1 .798.519l-2.834 10.246a1 1 0 0 1-.956.734H5.81a1 1 0 0 1-.957-.734L2.02 6.02a.5.5 0 0 1 .798-.519l4.276 3.664a1 1 0 0 0 1.516-.294z"/><path d="M5 21h14"/></svg>
                 <span class="text-sm text-white">Save Configuration</span>
             </label>
@@ -64,8 +65,8 @@
                         </label>
                         <input disabled type="number" wire:model="column" id="column" class="input input-bordered" required>
                     </div>
-                    <button {{ $disableBtnAdd ? 'disabled' : '' }} type="submit" class="text-white bg-blue-700 btn hover:bg-blue-500">Add Seat</button>
-                    <button {{ $disableBtnBlkAdd ? 'disabled' : '' }} type="submit" wire:click.prevent="bulkaddSeats" id="bulkaddSeats" class="text-white bg-blue-700 btn hover:bg-blue-500">Add Rows and Columns</button>
+                    <button {{ $disableBtnAdd ? 'disabled' : '' }} type="submit" class="text-white bg-blue-700 btn btn-ghost hover:bg-blue-500">Add Seat</button>
+                    <button {{ $disableBtnBlkAdd ? 'disabled' : '' }} type="submit" wire:click.prevent="bulkaddSeats" id="bulkaddSeats" class="text-white bg-blue-700 btn btn-ghost hover:bg-blue-500">Add Rows and Columns</button>
                 </form>
             </div>
         </div>

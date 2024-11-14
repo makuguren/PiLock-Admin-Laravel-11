@@ -12,8 +12,8 @@
                 @error('name') <span class="error" role="alert">{{ $message }}</span> @enderror
             </div>
             <div class="modal-action">
-                <button type="button" onclick="cancel_export()" class="text-white bg-red-700 btn hover:bg-red-500">Cancel</button>
-                <button type="submit" class="text-white bg-blue-700 btn hover:bg-blue-500">Save</button>
+                <button type="button" onclick="cancel_export()" class="text-white bg-red-700 btn btn-ghost hover:bg-red-500">Cancel</button>
+                <button type="submit" class="text-white bg-blue-700 btn btn-ghost hover:bg-blue-500">Save</button>
             </div>
         </form>
     </div>

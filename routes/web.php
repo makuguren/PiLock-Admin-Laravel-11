@@ -275,6 +275,10 @@ Route::middleware(['auth:faculty', App\Http\Middleware\FacultyComponentLayout::c
         Route::get('assign', App\Livewire\Faculty\SeatPlan\EditSP::class)->name('seatplan.assign');
     });
 
+    Route::prefix('seatplan')->controller(App\Http\Controllers\Faculty\StudSeatsController::class)->group(function(){
+        Route::get('{course_id}/seatstuds', 'index')->name('seatplan.seatstuds');
+    });
+
     //Profile Routes
     Route::controller(App\Http\Controllers\Faculty\SettingsController::class)->group(function () {
         Route::get('settings', 'index')->name('settings.index');
