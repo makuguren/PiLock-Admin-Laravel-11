@@ -5,8 +5,6 @@ namespace App\Http\Controllers\Faculty;
 use App\Models\Course;
 use App\Models\SeatPlan;
 use Illuminate\Http\Request;
-
-use function Termwind\render;
 use App\Http\Controllers\Controller;
 
 class StudSeatsController extends Controller

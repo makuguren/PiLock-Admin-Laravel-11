@@ -4,17 +4,21 @@ namespace App\Livewire\Global\Switches;
 
 use App\Models\Log;
 use App\Models\User;
+use App\Models\Admin;
 use App\Models\Course;
 use App\Models\Archive;
+use App\Models\Faculty;
 use App\Models\Section;
 use App\Models\Setting;
 use Livewire\Component;
 use App\Models\SeatPlan;
 use App\Models\Schedules;
 use App\Models\Attendance;
-use App\Models\Faculty;
 use App\Models\EnrolledCourse;
 use App\Jobs\DeactivateArchiveJob;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\QueryException;
@@ -24,6 +28,7 @@ use Illuminate\Support\Facades\Log as LaravelLog;
 class Configuration extends Component
 {
     public $isDevInteg, $isMaintenance, $isRegStud, $isRegLoginStud, $isRegInst, $isRegAdmins = false;
+    public $token, $password;
 
     public function mount(){
         // $maintenance = Setting::where('id', '1')->first();
@@ -334,10 +339,35 @@ class Configuration extends Component
         }
     }
 
+    public function generateToken(){
+        $admin = Admin::findOrFail(Auth::user()->id);
+        if($admin){
+            $this->token = $admin->createToken($admin->first_name . ' ' . $admin->last_name)->plainTextToken;
+        }
+        toastr()->success('Token Generated Successfully');
+        $this->dispatch('generate-token');
+    }
+
+    public function revokeToken(){
+        $admin = Admin::findOrFail(Auth::user()->id);
+
+        if ($admin && Hash::check($this->password, $admin->password)) {
+            $admin->tokens()->delete();
+            $this->dispatch('close-modal');
+            toastr()->success('Token Revoked Successfully');
+        } else {
+            toastr()->error('Password is incorrect. Token revocation failed.');
+        }
+    }
+
     public function render(){
         $archives = Archive::all();
+
+        // Check if has token exists
+        $Checktoken = DB::table('personal_access_tokens')->where('tokenable_id', Auth::id())->first();
         return view('livewire.global.switches.configuration', [
-            'archives' => $archives
+            'archives' => $archives,
+            'Checktoken' => $Checktoken
         ]);
     }
 }

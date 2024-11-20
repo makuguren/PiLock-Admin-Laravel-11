@@ -57,8 +57,14 @@
             </div>
         </div>
         <div class="modal-action">
-            <button type="button" onclick="cancel_load()" class="text-white bg-red-700 btn btn-ghost hover:bg-red-500">Cancel</button>
-            <button type="button" wire:click="loadConfiguration" class="text-white bg-blue-700 btn btn-ghost hover:bg-blue-500">Load</button>
+            <button type="button" onclick="cancel_load()" class="text-white bg-red-700 btn btn-ghost hover:bg-red-500">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-ban"><circle cx="12" cy="12" r="10"/><path d="m4.9 4.9 14.2 14.2"/></svg>
+                Cancel
+            </button>
+            <button type="button" wire:click="loadConfiguration" class="text-white bg-blue-700 btn btn-ghost hover:bg-blue-500">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-save"><path d="M15.2 3a2 2 0 0 1 1.4.6l3.8 3.8a2 2 0 0 1 .6 1.4V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/><path d="M17 21v-7a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v7"/><path d="M7 3v4a1 1 0 0 0 1 1h7"/></svg>
+                Load
+            </button>
         </div>
     </div>
 </div>
