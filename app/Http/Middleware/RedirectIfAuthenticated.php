@@ -125,53 +125,53 @@ class RedirectIfAuthenticated
             return route('admin.settings.index');
         }
 
-        // Instructor Side
-        if($request->routeIs('instructor.login')){
-            return route('instructor.dashboard.index');
+        // Faculty Side
+        if($request->routeIs('faculty.login')){
+            return route('faculty.dashboard.index');
         }
 
-        if($request->routeIs('instructor.login')){
-            return route('instructor.attendances.index');
+        if($request->routeIs('faculty.login')){
+            return route('faculty.attendances.index');
         }
 
-        if($request->routeIs('instructor.login')){
-            return route('instructor.attendances.current');
+        if($request->routeIs('faculty.login')){
+            return route('faculty.attendances.current');
         }
 
-        if($request->routeIs('instructor.login')){
-            return route('instructor.events.index');
+        if($request->routeIs('faculty.login')){
+            return route('faculty.events.index');
         }
 
-        if($request->routeIs('instructor.login')){
-            return route('instructor.courses.index');
+        if($request->routeIs('faculty.login')){
+            return route('faculty.courses.index');
         }
 
-        if($request->routeIs('instructor.login')){
-            return route('instructor.courses.blocked');
+        if($request->routeIs('faculty.login')){
+            return route('faculty.courses.blocked');
         }
 
-        if($request->routeIs('instructor.login')){
-            return route('instructor.students.index');
+        if($request->routeIs('faculty.login')){
+            return route('faculty.students.index');
         }
 
-        if($request->routeIs('instructor.login')){
-            return route('instructor.schedules.index');
+        if($request->routeIs('faculty.login')){
+            return route('faculty.schedules.index');
         }
 
-        if($request->routeIs('instructor.login')){
-            return route('instructor.schedules.makeup');
+        if($request->routeIs('faculty.login')){
+            return route('faculty.schedules.makeup');
         }
 
-        if($request->routeIs('instructor.login')){
-            return route('instructor.seatplan.index');
+        if($request->routeIs('faculty.login')){
+            return route('faculty.seatplan.index');
         }
 
-        if($request->routeIs('instructor.login')){
-            return route('instructor.seatplan.assign');
+        if($request->routeIs('faculty.login')){
+            return route('faculty.seatplan.assign');
         }
 
-        if($request->routeIs('instructor.login')){
-            return route('instructor.settings.index');
+        if($request->routeIs('faculty.login')){
+            return route('faculty.settings.index');
         }
 
         // Student Side
