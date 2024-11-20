@@ -24,9 +24,9 @@
 
                 <div class="overflow-x-auto">
                     <form wire:submit.prevent="checkUIDTag">
-                        <div class="w-full">
-                            <label class="label-text">Tag UID</label>
-                            <input wire:model="tag_uid" id="tag_uid" class="block w-full px-4 py-3 mb-3 input input-bordered bg-base-300" name="tag_uid" autofocus type="text" placeholder="">
+                        <div class="w-full mb-4">
+                            <label class="mb-2 label-text">Tag UID</label>
+                            <input wire:model="tag_uid" id="tag_uid" class="block w-full px-4 py-3 mt-2 input input-bordered bg-base-300" name="tag_uid" autofocus type="text" placeholder="">
                         </div>
                     </form>
                 </div>
@@ -39,30 +39,29 @@
 
                 <div class="overflow-x-auto">
 
-                    <div class="w-full">
-                        <label class="label-text">Student Avatar</label>
-                        {{-- <input class="block w-full px-4 py-3 mb-3 input input-bordered bg-base-300" value="{{ $info->avatar ?? '' }}" type="text" placeholder="" disabled> --}}
-                        <img src="{{ $info->avatar ?? '' }}" class="rounded-md" alt="" srcset="">
+                    <div class="w-full mb-4">
+                        <label class="mb-2 label-text">Student Avatar</label>
+                        <img src="{{ $info->avatar ?? '' }}" class="mt-2 rounded-md" alt="" srcset="">
                     </div>
 
-                    <div class="w-full">
-                        <label class="label-text">Student ID</label>
-                        <input class="block w-full px-4 py-3 mb-3 input input-bordered bg-base-300" value="{{ $info ? $info->student_id : $info->id ?? '' }}" type="text" placeholder="" disabled>
+                    <div class="w-full mb-4">
+                        <label class="mb-2 label-text">Student ID</label>
+                        <input class="block w-full px-4 py-3 mt-2 input input-bordered bg-base-300" value="{{ $info ? $info->student_id : $info->id ?? '' }}" type="text" placeholder="" disabled>
                     </div>
 
-                    <div class="w-full">
-                        <label class="label-text">UID Tag</label>
-                        <input class="block w-full px-4 py-3 mb-3 input input-bordered bg-base-300" value="{{ $info->tag_uid ?? '' }}" type="text" placeholder="" disabled>
+                    <div class="w-full mb-4">
+                        <label class="mb-2 label-text">UID Tag</label>
+                        <input class="block w-full px-4 py-3 mt-2 input input-bordered bg-base-300" value="{{ $info->tag_uid ?? '' }}" type="text" placeholder="" disabled>
                     </div>
 
-                    <div class="w-full">
-                        <label class="label-text">Name</label>
-                        <input class="block w-full px-4 py-3 mb-3 input input-bordered bg-base-300" value="{{ $info->first_name ?? '' }} {{ $info->last_name ?? '' }}" type="text" placeholder="" disabled>
+                    <div class="w-full mb-4">
+                        <label class="mb-2 label-text">Name</label>
+                        <input class="block w-full px-4 py-3 mt-2 input input-bordered bg-base-300" value="{{ $info->first_name ?? '' }} {{ $info->last_name ?? '' }}" type="text" placeholder="" disabled>
                     </div>
 
-                    <div class="w-full">
-                        <label class="label-text">Section (Student)</label>
-                        <input class="block w-full px-4 py-3 mb-3 input input-bordered bg-base-300" value="{{ $info->section->program ?? '' }} {{ $info->section->year ?? '' }}{{ $info->section->block ?? '' }}" type="text" placeholder="" disabled>
+                    <div class="w-full mb-4">
+                        <label class="mb-2 label-text">Section (Student)</label>
+                        <input class="block w-full px-4 py-3 mt-2 input input-bordered bg-base-300" value="{{ $info->section->program ?? '' }} {{ $info->section->year ?? '' }}{{ $info->section->block ?? '' }}" type="text" placeholder="" disabled>
                     </div>
                 </div>
             </div>

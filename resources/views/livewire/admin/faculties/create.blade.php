@@ -6,13 +6,13 @@
             <div class="flex flex-wrap mb-2">
                 <div class="w-full px-3 mb-2 md:w-1/2">
                     <label class="label-text">First Name</label> <span class="text-red-600">*</span>
-                    <input wire:model="first_name" id="addfac_first" class="block w-full px-4 py-3 mt-1 mb-1 input input-bordered bg-base-300 form-control" type="text">
+                    <input wire:model="first_name" id="addfac_first" class="block w-full px-4 py-3 mt-2 mb-2 input input-bordered bg-base-300 form-control" type="text">
                     @error('first_name') <span class="mt-1 space-y-1 text-sm text-red-600 error" role="alert">{{ $message }}</span> @enderror
                 </div>
 
                 <div class="w-full px-3 md:w-1/2">
                     <label class="label-text">Last Name</label> <span class="text-red-600">*</span>
-                    <input wire:model="last_name" id="addfac_last" class="block w-full px-4 py-3 mt-1 mb-1 input input-bordered bg-base-300 form-control" type="text">
+                    <input wire:model="last_name" id="addfac_last" class="block w-full px-4 py-3 mt-2 mb-2 input input-bordered bg-base-300 form-control" type="text">
                     @error('last_name') <span class="mt-1 space-y-1 text-sm text-red-600 error" role="alert">{{ $message }}</span> @enderror
                 </div>
             </div>
@@ -20,7 +20,7 @@
             <div class="flex flex-wrap mb-2">
                 <div class="w-full px-3">
                     <label class="label-text">Gender</label> <span class="text-red-600">*</span>
-                    <select wire:model="gender" id="addgender" class="block w-full px-4 py-3 mt-1 mb-1 select select-bordered bg-base-300 form-control">
+                    <select wire:model="gender" id="addgender" class="block w-full px-4 py-3 mt-2 mb-2 select select-bordered bg-base-300 form-control">
                         <option value="">--Select Gender--</option>
                         <option value="1">Male</option>
                         <option value="2">Female</option>
@@ -32,14 +32,14 @@
             <div class="flex flex-wrap mb-2">
                 <div class="w-full px-3">
                     <label class="label-text">Email</label> <span class="text-red-600">*</span>
-                    <input wire:model="email" id="addfac_email" class="block w-full px-4 py-3 mt-1 mb-1 input input-bordered bg-base-300 form-control" type="email">
+                    <input wire:model="email" id="addfac_email" class="block w-full px-4 py-3 mt-2 mb-2 input input-bordered bg-base-300 form-control" type="email">
                     @error('email') <span class="mt-1 space-y-1 text-sm text-red-600 error" role="alert">{{ $message }}</span> @enderror
                 </div>
             </div>
             <div class="flex flex-wrap mb-6">
                 <div class="w-full px-3">
                     <label class="label-text">Password</label> <span class="text-red-600">*</span>
-                    <input wire:model="password" id="addfac_password" class="block w-full px-4 py-3 mt-1 mb-1 input input-bordered bg-base-300 form-control" type="password">
+                    <input wire:model="password" id="addfac_password" class="block w-full px-4 py-3 mt-2 mb-2 input input-bordered bg-base-300 form-control" type="password">
                     @error('password') <span class="mt-1 space-y-1 text-sm text-red-600 error" role="alert">{{ $message }}</span> @enderror
                 </div>
             </div>

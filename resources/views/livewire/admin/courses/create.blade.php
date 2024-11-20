@@ -4,37 +4,24 @@
       <h3 class="text-lg font-bold">Add Course</h3>
         <form wire:submit.prevent="saveCourse" method="dialog" class="w-full mt-6">
             @csrf
-            <div class="flex flex-wrap mb-2">
+            <div class="flex flex-wrap mb-4">
                 <div class="w-full px-3 md:w-1/2">
                     <label class="label-text">Code</label> <span class="text-red-600">*</span>
-                    <input wire:model="course_code" id="addcourse_code" class="block w-full px-4 py-3 mt-1 mb-1 input input-bordered bg-base-300 form-control" type="text">
+                    <input wire:model="course_code" id="addcourse_code" class="block w-full px-4 py-3 mt-2 mb-2 input input-bordered bg-base-300 form-control" type="text">
                     @error('course_code') <span class="mt-1 space-y-1 text-sm text-red-600 error" role="alert">{{ $message }}</span> @enderror
                 </div>
 
                 <div class="w-full px-3 md:w-1/2">
                     <label class="label-text">Title</label> <span class="text-red-600">*</span>
-                    <input wire:model="course_title" id="addcourse_title" class="block w-full px-4 py-3 mt-1 mb-1 input input-bordered bg-base-300 form-control" type="text">
+                    <input wire:model="course_title" id="addcourse_title" class="block w-full px-4 py-3 mt-2 mb-2 input input-bordered bg-base-300 form-control" type="text">
                     @error('course_title') <span class="mt-1 space-y-1 text-sm text-red-600 error" role="alert">{{ $message }}</span> @enderror
                 </div>
             </div>
 
-            {{-- <div class="flex flex-wrap mb-2">
-                <div class="w-full px-3">
-                    <label class="label-text">Section</label>
-                    <select wire:model="section_id" id="addsection_id" class="block w-full px-4 py-3 mb-3 select select-bordered bg-base-300 form-control">
-                        <option value="">--Select Section--</option>
-                        @foreach ($sections as $section)
-                            <option value="{{ $section->id }}">{{ $section->program }} {{ $section->year }}{{ $section->block }}</option>
-                        @endforeach
-                    </select>
-                    @error('section_id') <span class="error" role="alert">{{ $message }}</span> @enderror
-                </div>
-            </div> --}}
-
-            <div class="flex flex-wrap mb-2">
+            <div class="flex flex-wrap mb-4">
                 <div class="w-full px-3 md:w-1/3">
                     <label class="label-text">Program</label> <span class="text-red-600">*</span>
-                    <select wire:model="program" id="addprogram" class="block w-full px-4 py-3 mt-1 mb-1 select select-bordered bg-base-300 form-control">
+                    <select wire:model="program" id="addprogram" class="block w-full px-4 py-3 mt-2 mb-2 select select-bordered bg-base-300 form-control">
                         <option value="">--Select Program--</option>
                         <option value="BSIT">BSIT</option>
                         <option value="BSCS">BSCS</option>
@@ -46,7 +33,7 @@
 
                 <div class="w-full px-3 md:w-1/3">
                     <label class="label-text">Year</label> <span class="text-red-600">*</span>
-                    <select wire:model="year" id="addyear" class="block w-full px-4 py-3 mt-1 mb-1 select select-bordered bg-base-300 form-control">
+                    <select wire:model="year" id="addyear" class="block w-full px-4 py-3 mt-2 mb-2 select select-bordered bg-base-300 form-control">
                         <option value="">--Select Year--</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -58,7 +45,7 @@
 
                 <div class="w-full px-3 md:w-1/3">
                     <label class="label-text">Block</label> <span class="text-red-600">*</span>
-                    <select wire:model="block" id="addblock" class="block w-full px-4 py-3 mt-1 mb-1 select select-bordered bg-base-300 form-control">
+                    <select wire:model="block" id="addblock" class="block w-full px-4 py-3 mt-2 mb-2 select select-bordered bg-base-300 form-control">
                         <option value="">--Select Block--</option>
                         <option value="A">A</option>
                         <option value="B">B</option>
@@ -73,10 +60,10 @@
                 </div>
             </div>
 
-            <div class="flex flex-wrap mb-2">
+            <div class="flex flex-wrap mb-4">
                 <div class="w-full px-3">
                     <label class="label-text">Faculty</label> <span class="text-red-600">*</span>
-                    <select wire:model="faculty_id" id="addfaculty_id" class="block w-full px-4 py-3 mt-1 mb-1 select select-bordered bg-base-300 form-control">
+                    <select wire:model="faculty_id" id="addfaculty_id" class="block w-full px-4 py-3 mt-2 mb-2 select select-bordered bg-base-300 form-control">
                         <option value="">--Select Faculties--</option>
                         @foreach ($faculties as $faculty)
                             <option value="{{ $faculty->id }}">{{ $faculty->first_name }} {{ $faculty->last_name }}</option>
@@ -89,7 +76,7 @@
             <div class="flex flex-wrap mb-6">
                 <div class="w-full px-3">
                     <label class="label-text">Enrollment Key</label> <span class="text-red-600">*</span>
-                    <input wire:model="course_key" id="addcourse_key" class="block w-full px-4 py-3 mt-1 mb-1 input input-bordered bg-base-300 form-control" type="text">
+                    <input wire:model="course_key" id="addcourse_key" class="block w-full px-4 py-3 mt-2 mb-2 input input-bordered bg-base-300 form-control" type="text">
                     @error('course_key') <span class="mt-1 space-y-1 text-sm text-red-600 error" role="alert">{{ $message }}</span> @enderror
                 </div>
             </div>

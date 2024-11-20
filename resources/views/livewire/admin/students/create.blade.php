@@ -31,7 +31,7 @@
                 <div class="flex flex-wrap mb-6">
                     <div class="w-full px-3">
                         <label class="label-text">Student ID</label> <span class="text-red-600">*</span>
-                        <input class="w-full px-4 py-3 mt-1 mb-1 input input-bordered bg-base-300" name="student_id" type="text" placeholder="">
+                        <input class="w-full px-4 py-3 mt-2 mb-2 input input-bordered bg-base-300" name="student_id" type="text" placeholder="">
                         @error('student_id')<span class="mt-1 space-y-1 text-sm text-red-600 error">{{$message}}</span> @enderror
                     </div>
                 </div>
@@ -39,13 +39,13 @@
                 <div class="flex flex-wrap mb-4 md:mb-3">
                     <div class="w-full px-3 mb-4 md:w-1/2">
                         <label class="label-text">First Name</label> <span class="text-red-600">*</span>
-                        <input class="w-full px-4 py-3 mt-1 mb-1 input input-bordered bg-base-300" name="first_name" type="text" placeholder="">
+                        <input class="w-full px-4 py-3 mt-2 mb-2 input input-bordered bg-base-300" name="first_name" type="text" placeholder="">
                         @error('first_name')<span class="mt-1 space-y-1 text-sm text-red-600 error">{{$message}}</span> @enderror
                     </div>
 
                     <div class="w-full px-3 md:w-1/2">
                         <label class="label-text">Last Name</label> <span class="text-red-600">*</span>
-                        <input class="w-full px-4 py-3 mt-1 mb-1 input input-bordered bg-base-300" name="last_name" type="text" placeholder="">
+                        <input class="w-full px-4 py-3 mt-2 mb-2 input input-bordered bg-base-300" name="last_name" type="text" placeholder="">
                         @error('last_name')<span class="mt-1 space-y-1 text-sm text-red-600 error">{{$message}}</span> @enderror
                     </div>
                 </div>
@@ -53,7 +53,7 @@
                 <div class="flex flex-wrap mb-1 md:mb-6">
                     <div class="w-full px-3 mb-4 md:w-1/2 md:mb-0">
                         <label class="label-text" for="">Section</label> <span class="text-red-600">*</span>
-                        <select class="w-full px-4 py-3 mt-1 mb-1 select select-bordered bg-base-300" name="section_id">
+                        <select class="w-full px-4 py-3 mt-2 mb-2 select select-bordered bg-base-300" name="section_id">
                             <option>--Select your Section--</option>
                             @foreach ($sections as $section)
                                 <option value="{{ $section->id }}">{{ $section->program }} {{ $section->year }}{{ $section->block }}</option>
@@ -64,7 +64,7 @@
 
                     <div class="w-full px-3 mb-4 md:w-1/2 md:mb-0">
                         <label class="label-text" for="">Gender</label> <span class="text-red-600">*</span>
-                        <select class="w-full px-4 py-3 mt-1 mb-1 select select-bordered bg-base-300" name="gender">
+                        <select class="w-full px-4 py-3 mt-2 mb-2 select select-bordered bg-base-300" name="gender">
                             <option>--Select Gender--</option>
                             <option value="1">Male</option>
                             <option value="2">Female</option>
@@ -76,13 +76,13 @@
                 <div class="flex flex-wrap mb-6">
                     <div class="w-full px-3 mb-4 md:w-1/2 md:mb-0">
                         <label class="label-text" for="grid-email">Email</label> <span class="text-red-600">*</span>
-                        <input class="w-full px-4 py-3 mt-1 mb-1 input input-bordered bg-base-300" name="email" type="email" placeholder="">
+                        <input class="w-full px-4 py-3 mt-2 mb-2 input input-bordered bg-base-300" name="email" type="email" placeholder="">
                         @error('email')<span class="mt-1 space-y-1 text-sm text-red-600 error">{{$message}}</span> @enderror
                     </div>
 
                     <div class="w-full px-3 mb-4 md:w-1/2 md:mb-0">
                         <label class="label-text" for="grid-password">Password</label> <span class="text-red-600">*</span>
-                        <input class="w-full px-4 py-3 mt-1 mb-1 input input-bordered bg-base-300" name="password" type="password" placeholder="">
+                        <input class="w-full px-4 py-3 mt-2 mb-2 input input-bordered bg-base-300" name="password" type="password" placeholder="">
                         @error('password')<span class="mt-1 space-y-1 text-sm text-red-600 error">{{$message}}</span> @enderror
                     </div>
                 </div>

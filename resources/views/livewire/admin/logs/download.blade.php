@@ -13,7 +13,7 @@
             <div class="flex flex-wrap mb-2">
                 <div class="w-full px-3">
                     <label class="label-text">Course and Section</label>
-                    <select wire:model="dlsection_id" id="selsection_id" class="block w-full px-4 py-3 mt-1 mb-1 select select-bordered bg-base-300 form-control" required>
+                    <select wire:model="dlsection_id" id="selsection_id" class="block w-full px-4 py-3 mt-2 mb-2 select select-bordered bg-base-300 form-control" required>
                         <option value="" selected>--Select Course & Section--</option>
                         @foreach ($courses as $course)
                             <option value="{{ $course->id }}">{{ $course->course_title }} -
@@ -31,7 +31,7 @@
                 <div class="w-full px-3">
                     <label class="label-text">From</label>
                     <label class="flex items-center">
-                        <input type="date" wire:model="dlfromdate" id="dlpdfdate" class="block w-full px-4 py-3 mt-1 mb-1 text-sm input input-bordered form-control bg-base-300" />
+                        <input type="date" wire:model="dlfromdate" id="dlpdfdate" class="block w-full px-4 py-3 mt-2 mb-2 text-sm input input-bordered form-control bg-base-300" />
                     </label>
                     @error('dlfromdate') <span class="error" role="alert">{{ $message }}</span> @enderror
                 </div>
@@ -41,7 +41,7 @@
                 <div class="w-full px-3">
                     <label class="label-text">To</label>
                     <label class="flex items-center">
-                        <input type="date" wire:model="dltodate" id="dlpdfdate" class="block w-full px-4 py-3 mt-1 mb-1 text-sm input input-bordered form-control bg-base-300" />
+                        <input type="date" wire:model="dltodate" id="dlpdfdate" class="block w-full px-4 py-3 mt-2 mb-2 text-sm input input-bordered form-control bg-base-300" />
                     </label>
                     @error('dltodate') <span class="error" role="alert">{{ $message }}</span> @enderror
                 </div>

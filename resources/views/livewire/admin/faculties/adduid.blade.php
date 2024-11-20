@@ -34,14 +34,14 @@
                 <div class="flex flex-wrap mb-6">
                     <div class="w-full px-3">
                         <label class="label-text">Tag UID</label>
-                        <input wire:model="tag_uid" class="block w-full px-4 py-3 mb-3 input input-bordered bg-base-300" name="tag_uid" id="tag_uid" onkeydown="focusNext(event, 'faculty_id')" autofocus type="text" placeholder="Tap your ID">
+                        <input wire:model="tag_uid" class="block w-full px-4 py-3 mt-2 mb-2 input input-bordered bg-base-300" name="tag_uid" id="tag_uid" onkeydown="focusNext(event, 'faculty_id')" autofocus type="text" placeholder="Tap your ID">
                         @error('tag_uid')<small class="text-danger">{{$message}}</small> @enderror
                     </div>
                 </div>
                 <div class="flex flex-row mb-6 place-items-center">
                     <div class="w-full px-3">
                         <label class="label-text">ID</label>
-                        <input wire:model="faculty_id" id="faculty_id" class="block w-full px-4 py-3 mb-3 input input-bordered bg-base-300" type="text" placeholder="Enter your ID">
+                        <input wire:model="faculty_id" id="faculty_id" class="block w-full px-4 py-3 mt-2 mb-2 input input-bordered bg-base-300" type="text" placeholder="Enter your ID">
                         @error('faculty_id')<small class="text-danger">{{$message}}</small> @enderror
                     </div>
 
