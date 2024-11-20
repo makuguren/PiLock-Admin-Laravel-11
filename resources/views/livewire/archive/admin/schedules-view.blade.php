@@ -24,8 +24,8 @@
                 </div>
 
                 <div class="w-full px-3 md:w-1/2">
-                    <label class="label-text">Instructor</label>
-                    <input value="{{ $instructor_fname ?? '' }} {{ $instructor_lname ?? '' }}" id="instructor_name" class="block w-full px-4 py-3 mt-1 mb-1 input input-bordered bg-base-300 form-control" type="name" disabled>
+                    <label class="label-text">Faculty</label>
+                    <input value="{{ $faculty_fname ?? '' }} {{ $faculty_lname ?? '' }}" id="faculty_name" class="block w-full px-4 py-3 mt-1 mb-1 input input-bordered bg-base-300 form-control" type="name" disabled>
                 </div>
             </div>
 

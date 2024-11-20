@@ -78,7 +78,7 @@
                                     @endphp
                                     <td wire:click="viewSchedule({{ $schedule->id }})" rowspan="{{ $rowspan }}" style="background: orange;">
                                         {{ $schedule->course->course_code }}<br>
-                                        {{ $schedule->course->instructor->name }}<br>
+                                        {{ $schedule->course->faculty->name }}<br>
                                         {{ $schedule->course->section->program }} {{ $schedule->course->section->year }}{{ $schedule->course->section->block }}
                                     </td>
                                 @else
@@ -117,7 +117,7 @@
 
                                     <td wire:click="viewSchedule({{ $schedule->id }})" rowspan="{{ $rowspan }}" style="background: orange;">
                                         {{ $schedule->course->course_code }}<br>
-                                        @if ($schedule->course->instructor->gender == '1') MR. @else MS. @endif {{-- strtoupper($schedule->course->instructor->first_name[0]) --}} {{ strtoupper($schedule->course->instructor->last_name) }}<br>
+                                        @if ($schedule->course->faculty->gender == '1') MR. @else MS. @endif {{-- strtoupper($schedule->course->faculty->first_name[0]) --}} {{ strtoupper($schedule->course->faculty->last_name) }}<br>
                                         {{ $schedule->course->section->program }} {{ $schedule->course->section->year }}{{ $schedule->course->section->block }}
                                     </td>
                                 @else
@@ -148,13 +148,13 @@
         function cancel_sched(){
             document.getElementById('view_schedule_modal').checked = false;
 
-            document.getElementById('editcourse_id').value = '';
+            // document.getElementById('editcourse_id').value = '';
             // document.getElementById('course_code').value = '';
-            // document.getElementById('instructor_name').value = '';
-            document.getElementById('editdays').value = '';
-            document.getElementById('edittime_start').value = '';
-            document.getElementById('edittime_end').value = '';
-            document.getElementById('editlate_duration').value = '';
+            // document.getElementById('faculty_name').value = '';
+            // document.getElementById('editdays').value = '';
+            // document.getElementById('edittime_start').value = '';
+            // document.getElementById('edittime_end').value = '';
+            // document.getElementById('editlate_duration').value = '';
         }
     </script>
 </x-slot>

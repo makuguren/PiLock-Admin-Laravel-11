@@ -19,7 +19,7 @@ class SeatPlan extends Model
         'seat_number'
     ];
 
-    // Instructor Interface
+    // Faculty Interface
     public function student(){
         return $this->belongsTo(User::class, 'student_id', 'id');
     }

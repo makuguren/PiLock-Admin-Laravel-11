@@ -71,15 +71,15 @@
             </li>
 
             <li>
-                <details id="disclosure-instructors">
-                    <summary class="hover:bg-blue-400 hover:text-white {{ Request::is('archive/admin/instructors') || Request::is('archive/admin/instructors/*') ? 'group bg-blue-700 text-white':'' }}">
+                <details id="disclosure-faculties">
+                    <summary class="hover:bg-blue-400 hover:text-white {{ Request::is('archive/admin/faculties') || Request::is('archive/admin/faculties/*') ? 'group bg-blue-700 text-white':'' }}">
                         <span>
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
                         </span>Faculties
                     </summary>
                     <ul>
                         <li class="">
-                            <a wire:navigate.hover href="{{ route('archive.admin.instructors.index') }}"
+                            <a wire:navigate.hover href="{{ route('archive.admin.faculties.index') }}"
                                 class="group text-sm flex items-center hover:text-blue-700 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">
                                 Faculty List
                             </a>

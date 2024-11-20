@@ -17,7 +17,7 @@ class BlockedStudentCourses extends Model
         'course_id',
     ];
 
-    // Instructor Interface
+    // Faculty Interface
     public function student(){
         return $this->belongsTo(User::class, 'student_id', 'id');
     }

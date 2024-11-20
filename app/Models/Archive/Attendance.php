@@ -7,7 +7,7 @@ use App\Models\Archive\Course;
 use App\Models\Archive\Section;
 use App\Models\Archive\Subject;
 use App\Models\Archive\Schedules;
-use App\Models\Archive\Instructor;
+use App\Models\Archive\Faculty;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -29,7 +29,7 @@ class Attendance extends Model
         'isMakeUp'
     ];
 
-    // Instructor Interface
+    // Faculty Interface
     public function student(){
         return $this->belongsTo(User::class, 'student_id', 'id');
     }

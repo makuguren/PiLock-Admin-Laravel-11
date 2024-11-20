@@ -10,17 +10,15 @@ use App\Models\Archive\Section;
 use App\Models\Archive\Subject;
 use Livewire\Component;
 use App\Models\Archive\FacultyLog;
-use App\Models\Archive\Instructor;
+use App\Models\Archive\Faculty;
 use Livewire\WithPagination;
-use App\Exports\StudentLogsExport;
-use App\Exports\InstructorLogsExport;
-use App\Exports\LogsMultiSheetExport;
+use App\Exports\Archive\LogsMultiSheetExport;
 
 class Logs extends Component
 {
     use WithPagination;
 
-    public $filter_coursesec, $filter_instructor, $filter_date = '';
+    public $filter_coursesec, $filter_faculty, $filter_date = '';
     public $dlsection_id, $dlfromdate, $dltodate;
 
     public $sortField = 'time_in';
@@ -32,7 +30,7 @@ class Logs extends Component
         $this->resetPage();
     }
 
-    public function filter_instructor(){
+    public function filter_faculty(){
         $this->resetPage();
     }
 
@@ -81,7 +79,7 @@ class Logs extends Component
                     ->orderBy('time_in', 'DESC')
                     ->paginate(5);
 
-        $instructors = Instructor::all();
+        $faculties = Faculty::all();
         $courses = Course::all();
         return view('livewire.archive.admin.logs', [
             'logs' => $logs,

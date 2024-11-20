@@ -14,7 +14,7 @@ class MakeupSchedule extends Model
 
     protected $fillable = [
         'course_id',
-        'instructor_id',
+        'faculty_id',
         'section_id',
         'days',
         'time_start',

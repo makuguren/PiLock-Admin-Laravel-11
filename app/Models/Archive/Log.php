@@ -5,7 +5,7 @@ namespace App\Models\Archive;
 use App\Models\Archive\User;
 use App\Models\Archive\Section;
 use App\Models\Archive\Subject;
-use App\Models\Archive\Instructor;
+use App\Models\Archive\Faculty;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 

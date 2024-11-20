@@ -30,25 +30,25 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($instructors as $instructor)
+                        @forelse ($faculties as $faculty)
                         <tr>
-                            <td><div class="font-bold">{{ $instructor->id }}</div></td>
+                            <td><div class="font-bold">{{ $faculty->id }}</div></td>
                             <td>
                                 <div class="">
-                                    @if ($instructor->tag_uid)
-                                        {{ $instructor->tag_uid }}
+                                    @if ($faculty->tag_uid)
+                                        {{ $faculty->tag_uid }}
                                     @else
                                         No UID Assigned
                                     @endif
                                 </div>
                             </td>
-                            <td><div class="">{{ $instructor->first_name }} {{ $instructor->last_name }}</div></td>
+                            <td><div class="">{{ $faculty->first_name }} {{ $faculty->last_name }}</div></td>
                             <td>
                                 <div class="">
-                                    @if ($instructor->gender)
-                                        @if ($instructor->gender == '1')
+                                    @if ($faculty->gender)
+                                        @if ($faculty->gender == '1')
                                             Male
-                                        @elseif ($instructor->gender == '2')
+                                        @elseif ($faculty->gender == '2')
                                             Female
                                         @endif
                                     @else
@@ -56,7 +56,7 @@
                                     @endif
                                 </div>
                             </td>
-                            <td><div class="">{{ $instructor->email }}</div></td>
+                            <td><div class="">{{ $faculty->email }}</div></td>
                         </tr>
                         @empty
                             <tr>
@@ -66,7 +66,7 @@
                     </tbody>
                 </table>
                 <div class="mt-3">
-                    {{ $instructors->links() }}
+                    {{ $faculties->links() }}
                 </div>
             </div>
         </div>

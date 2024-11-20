@@ -9,7 +9,7 @@ use App\Models\Archive\Subject;
 use Livewire\Component;
 use App\Models\Archive\Schedules;
 use App\Models\Archive\Attendance;
-use App\Models\Archive\Instructor;
+use App\Models\Archive\Faculty;
 use Livewire\WithPagination;
 use App\Imports\CourseImport;
 use Livewire\WithFileUploads;
@@ -27,8 +27,7 @@ class RegSchedules extends Component
     use WithPagination;
 
     public function render(){
-        $subjects = Subject::all();
-        $instructors = Instructor::all();
+        $faculties = Faculty::all();
         $sections = Section::all();
         $courses = Course::all();
         $schedules = Schedules::where('isMakeUp', '0')
@@ -38,8 +37,7 @@ class RegSchedules extends Component
         return view('livewire.archive.admin.schedules', [
             'schedules' => $schedules,
             'courses' => $courses,
-            'subjects' => $subjects,
-            'instructors' => $instructors,
+            'faculties' => $faculties,
             'sections' => $sections,
             // 'isDisableButton' => $this->isDisableButton,
         ]);

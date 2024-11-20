@@ -57,9 +57,9 @@ return [
             'provider' => 'archive_admins',
         ],
 
-        'archive_instructor' => [
+        'archive_faculty' => [
             'driver' => 'session',
-            'provider' => 'archive_instructors',
+            'provider' => 'archive_faculties',
         ],
     ],
 
@@ -102,9 +102,9 @@ return [
             'model' => App\Models\Archive\Admin::class,
         ],
 
-        'archive_instructors' => [
+        'archive_faculties' => [
             'driver' => 'eloquent',
-            'model' => App\Models\Archive\Instructor::class,
+            'model' => App\Models\Archive\Faculty::class,
         ],
 
         // 'users' => [

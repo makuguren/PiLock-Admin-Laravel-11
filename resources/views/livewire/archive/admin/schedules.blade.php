@@ -28,7 +28,7 @@
                     <thead class="rounded-md bg-base-200 text-md">
                         <tr>
                             <th>COURSE TITLE</th>
-                            <th>INSTRUCTOR</th>
+                            <th>FACULTY</th>
                             <th>DAY</th>
                             <th>SECTION</th>
                             <th>TIME START</th>
@@ -50,9 +50,9 @@
                             <td>
                                 <div class="">
                                     @if ($schedule->course_id)
-                                        {{ $schedule->course->instructor->first_name }} {{ $schedule->course->instructor->last_name }}
+                                        {{ $schedule->course->faculty->first_name }} {{ $schedule->course->faculty->last_name }}
                                     @else
-                                        No Instructor
+                                        No Faculty
                                     @endif
                                 </div>
                             </td>

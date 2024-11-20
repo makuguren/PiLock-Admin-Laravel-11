@@ -43,8 +43,8 @@ Route::middleware(['auth:archive_admin', App\Http\Middleware\Archive\AdminCompon
         Route::get('/', App\Livewire\Archive\Admin\Students::class)->name('students.index');
     });
 
-    Route::prefix('instructors')->group(function () {
-        Route::get('/', App\Livewire\Archive\Admin\Faculties::class)->name('instructors.index');
+    Route::prefix('faculties')->group(function () {
+        Route::get('/', App\Livewire\Archive\Admin\Faculties::class)->name('faculties.index');
     });
 
     Route::prefix('events')->group(function () {
@@ -73,57 +73,57 @@ Route::middleware(['auth:archive_admin', App\Http\Middleware\Archive\AdminCompon
     });
 });
 
-// Instructor Interface
-Route::middleware('guest:archive_instructor')->prefix('archive/instructor')->name('archive.instructor.')->group(function () {
-    Route::get('login', [App\Http\Controllers\Archive\Instructor\Auth\AuthenticatedSessionController::class, 'create'])
+// Faculty Interface
+Route::middleware('guest:archive_faculty')->prefix('archive/faculty')->name('archive.faculty.')->group(function () {
+    Route::get('login', [App\Http\Controllers\Archive\Faculty\Auth\AuthenticatedSessionController::class, 'create'])
                 ->name('login');
 
-    Route::post('login', [App\Http\Controllers\Archive\Instructor\Auth\AuthenticatedSessionController::class, 'store']);
+    Route::post('login', [App\Http\Controllers\Archive\Faculty\Auth\AuthenticatedSessionController::class, 'store']);
 });
 
-Route::middleware('auth:archive_instructor')->prefix('archive/instructor')->name('archive.instructor.')->group(function () {
-    Route::get('/profile', [App\Http\Controllers\Archive\Instructor\ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [App\Http\Controllers\Archive\Instructor\ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [App\Http\Controllers\Archive\Instructor\ProfileController::class, 'destroy'])->name('profile.destroy');
+Route::middleware('auth:archive_faculty')->prefix('archive/faculty')->name('archive.faculty.')->group(function () {
+    Route::get('/profile', [App\Http\Controllers\Archive\Faculty\ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [App\Http\Controllers\Archive\Faculty\ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [App\Http\Controllers\Archive\Faculty\ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::put('password', [App\Http\Controllers\Archive\Instructor\Auth\PasswordController::class, 'update'])->name('password.update');
+    Route::put('password', [App\Http\Controllers\Archive\Faculty\Auth\PasswordController::class, 'update'])->name('password.update');
 
-    Route::post('logout', [App\Http\Controllers\Archive\Instructor\Auth\AuthenticatedSessionController::class, 'destroy'])
+    Route::post('logout', [App\Http\Controllers\Archive\Faculty\Auth\AuthenticatedSessionController::class, 'destroy'])
                 ->name('logout');
 });
 
-Route::middleware(['auth:archive_instructor', App\Http\Middleware\Archive\InstructorComponentLayout::class])->prefix('archive/instructor')->name('archive.instructor.')->group(function () {
+Route::middleware(['auth:archive_faculty', App\Http\Middleware\Archive\FacultyComponentLayout::class])->prefix('archive/faculty')->name('archive.faculty.')->group(function () {
 
-    Route::get('dashboard', App\Livewire\Archive\Instructor\Dashboard::class)->name('dashboard.index');
+    Route::get('dashboard', App\Livewire\Archive\Faculty\Dashboard::class)->name('dashboard.index');
 
     Route::prefix('attendances')->group(function () {
-        Route::get('/', App\Livewire\Archive\Instructor\Attendances::class)->name('attendances.index');
+        Route::get('/', App\Livewire\Archive\Faculty\Attendances::class)->name('attendances.index');
     });
 
     Route::prefix('events')->group(function () {
-        Route::get('/', App\Livewire\Archive\Instructor\Events::class)->name('events.index');
+        Route::get('/', App\Livewire\Archive\Faculty\Events::class)->name('events.index');
     });
 
     Route::prefix('courses')->group(function () {
-        Route::get('/', App\Livewire\Archive\Instructor\Courses::class)->name('courses.index');
-        Route::get('blockedstudents', App\Livewire\Archive\Instructor\CoursesBlockedStudents::class)->name('courses.blocked');
+        Route::get('/', App\Livewire\Archive\Faculty\Courses::class)->name('courses.index');
+        Route::get('blockedstudents', App\Livewire\Archive\Faculty\CoursesBlockedStudents::class)->name('courses.blocked');
     });
 
     Route::prefix('students')->group(function() {
-        Route::get('/', App\Livewire\Archive\Instructor\Students::class)->name('students.index');
+        Route::get('/', App\Livewire\Archive\Faculty\Students::class)->name('students.index');
     });
 
     Route::prefix('schedules')->group(function () {
-        Route::get('/', App\Livewire\Archive\Instructor\RegSchedules::class)->name('schedules.index');
-        Route::get('makeupscheds', App\Livewire\Archive\Instructor\MakeupScheds::class)->name('schedules.makeup');
+        Route::get('/', App\Livewire\Archive\Faculty\RegSchedules::class)->name('schedules.index');
+        Route::get('makeupscheds', App\Livewire\Archive\Faculty\MakeupScheds::class)->name('schedules.makeup');
     });
 
     Route::prefix('seatplan')->group(function () {
-        Route::get('/', App\Livewire\Archive\Instructor\SeatPlanIndex::class)->name('seatplan.index');
-        Route::get('assign', App\Livewire\Archive\Instructor\SeatPlanEdit::class)->name('seatplan.assign');
+        Route::get('/', App\Livewire\Archive\Faculty\SeatPlanIndex::class)->name('seatplan.index');
+        Route::get('assign', App\Livewire\Archive\Faculty\SeatPlanEdit::class)->name('seatplan.assign');
     });
 
-    Route::controller(App\Http\Controllers\Archive\Instructor\SettingsController::class)->group(function () {
+    Route::controller(App\Http\Controllers\Archive\Faculty\SettingsController::class)->group(function () {
         Route::get('settings', 'index')->name('settings.index');
         Route::patch('settings', 'updateProfile')->name('settings.updateProfile');
     });

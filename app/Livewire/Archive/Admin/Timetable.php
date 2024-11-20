@@ -8,7 +8,7 @@ use App\Models\Archive\Section;
 use App\Models\Archive\Subject;
 use Livewire\Component;
 use App\Models\Archive\Schedules;
-use App\Models\Archive\Instructor;
+use App\Models\Archive\Faculty;
 use Livewire\Attributes\On;
 use App\Imports\CourseImport;
 use Livewire\WithFileUploads;
@@ -21,7 +21,7 @@ use Maatwebsite\Excel\Validators\ValidationException;
 
 class Timetable extends Component
 {
-    public $schedule_id, $instructor_fname, $instructor_lname;
+    public $schedule_id, $faculty_fname, $faculty_lname;
     public $course_id, $course_code, $days, $time_start, $time_end, $lateDuration;
 
     public function viewSchedule(int $schedule_id){
@@ -32,8 +32,8 @@ class Timetable extends Component
             $this->schedule_id = $schedule->id;
             $this->course_id = $schedule->course_id;
             $this->course_code = $schedule->course->course_code;
-            $this->instructor_fname = $schedule->course->instructor->first_name;
-            $this->instructor_lname = $schedule->course->instructor->last_name;
+            $this->faculty_fname = $schedule->course->faculty->first_name;
+            $this->faculty_lname = $schedule->course->faculty->last_name;
             $this->days = $schedule->days;
             $this->time_start = Carbon::parse($schedule->time_start)->format('H:i:s');
             $this->time_end = Carbon::parse($schedule->time_end)->format('H:i:s');
@@ -44,16 +44,14 @@ class Timetable extends Component
     }
 
     public function render(){
-        $subjects = Subject::all();
-        $instructors = Instructor::all();
+        $faculties = Faculty::all();
         $sections = Section::all();
         $courses = Course::all();
         $schedules = Schedules::all();
         return view('livewire.archive.admin.schedules-timetable', [
             'schedules' => $schedules,
             'courses' => $courses,
-            'subjects' => $subjects,
-            'instructors' => $instructors,
+            'faculties' => $faculties,
             'sections' => $sections,
         ]);
     }

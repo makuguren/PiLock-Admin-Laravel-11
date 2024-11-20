@@ -17,19 +17,6 @@
                 </ul>
             </div>
 
-            {{-- Buttons for Enabling Live without Reloading Page. --}}
-            @if ($wirePoll === true)
-                <button wire:click="getWirePollSwitch(false)" class="mt-3 bg-green-700 btn btn-ghost hover:bg-green-500 w-55 btn-sm">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-id-card"><path d="M16 10h2"/><path d="M16 14h2"/><path d="M6.17 15a3 3 0 0 1 5.66 0"/><circle cx="9" cy="11" r="2"/><rect x="2" y="5" width="20" height="14" rx="2"/></svg>
-                    <span class="text-sm text-white">Live Reload ON</span>
-                </button>
-            @else
-                <button wire:click="getWirePollSwitch(true)" class="mt-3 bg-red-700 btn btn-ghost hover:bg-red-500 w-55 btn-sm">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-id-card"><path d="M16 10h2"/><path d="M16 14h2"/><path d="M6.17 15a3 3 0 0 1 5.66 0"/><circle cx="9" cy="11" r="2"/><rect x="2" y="5" width="20" height="14" rx="2"/></svg>
-                    <span class="text-sm text-white">Live Reload OFF</span>
-                </button>
-            @endif
-
             <label for="download_logs_modal" class="mt-3 bg-red-700 btn btn-ghost hover:bg-red-500 w-55 btn-sm">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-download"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
                 <span class="text-sm text-white">Download Logs</span>
@@ -47,13 +34,13 @@
                     <div class="w-full">
                         <span class="text-sm font-medium">Select Courses and Section</span>
                         <form wire:submit="filter_coursesec">
-                            <select wire:model="filter_coursesec" class="flex items-center w-full mt-1 select select-bordered">
+                            <select wire:model.live="filter_coursesec" class="flex items-center w-full mt-1 select select-bordered">
                                 <option value="" selected>All Course & Section</option>
                                 @foreach ($courses as $course)
                                     <option value="{{ $course->id }}">{{ $course->course_title }} -
                                         {{ $course->section->program }}
                                         {{ $course->section->year }}{{ $course->section->block }} -
-                                        {{ $course->instructor->first_name }} {{ $course->instructor->last_name }}
+                                        {{ $course->faculty->first_name }} {{ $course->faculty->last_name }}
                                     </option>
                                 @endforeach
                             </select>
@@ -64,7 +51,7 @@
                         <span class="text-sm font-medium">Select Date</span>
                         <form wire:submit="filter_date">
                             <label class="flex items-center w-full">
-                                <input type="date" wire:model="filter_date" name="date" value="" class="w-full mt-1 text-sm input input-bordered form-control bg-base-100" />
+                                <input type="date" wire:model.live="filter_date" name="date" value="" class="w-full mt-1 text-sm input input-bordered form-control bg-base-100" />
                             </label>
                         </form>
                     </div>
@@ -97,8 +84,8 @@
                             <tr>
                                 <td>
                                     <div class="font-bold">
-                                        @if ($faculty->course->instructor_id)
-                                            {{ $faculty->course->instructor->id }}
+                                        @if ($faculty->course->faculty_id)
+                                            {{ $faculty->course->faculty->id }}
                                         @else
                                             No ID
                                         @endif
@@ -107,7 +94,7 @@
                                 <td>
                                     <div class="">
                                         @if ($faculty->course_id)
-                                            {{ $faculty->course->instructor->first_name }} {{ $faculty->course->instructor->last_name }}
+                                            {{ $faculty->course->faculty->first_name }} {{ $faculty->course->faculty->last_name }}
                                         @else
                                             No Faculty Name
                                         @endif
@@ -172,7 +159,7 @@
                             <th>NAME</th>
                             <th>SECTION</th>
                             <th>COURSE TITLE</th>
-                            <th>INSTRUCTOR</th>
+                            <th>FACULTY</th>
                             <th>DATE</th>
                             <th>
                                 <button wire:click="sortBy('time_in')" class="focus:outline-none">
@@ -200,7 +187,7 @@
                             </th>
                         </tr>
                     </thead>
-                    <tbody @if($wirePoll === true) wire:poll.1000ms @endif>
+                    <tbody>
                         @forelse ($logs as $log)
                             <tr>
                                 <td>
@@ -242,9 +229,9 @@
                                 <td>
                                     <div class="">
                                         @if ($log->course_id)
-                                            {{ $log->course->instructor->first_name }} {{ $log->course->instructor->last_name }}
+                                            {{ $log->course->faculty->first_name }} {{ $log->course->faculty->last_name }}
                                         @else
-                                            No Instructor Found
+                                            No Faculty Found
                                         @endif
                                     </div>
                                 </td>
