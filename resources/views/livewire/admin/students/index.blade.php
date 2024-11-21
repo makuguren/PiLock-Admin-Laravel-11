@@ -23,19 +23,6 @@
                 </ul>
             </div>
 
-            {{-- Buttons for Enabling Live without Reloading Page. --}}
-            @if ($wirePoll === true)
-                <button wire:click="getWirePollSwitch(false)" class="mt-3 bg-green-700 btn btn-ghost hover:bg-green-500 w-55 btn-sm">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-id-card"><path d="M16 10h2"/><path d="M16 14h2"/><path d="M6.17 15a3 3 0 0 1 5.66 0"/><circle cx="9" cy="11" r="2"/><rect x="2" y="5" width="20" height="14" rx="2"/></svg>
-                    <span class="text-sm text-white">Live Reload ON</span>
-                </button>
-            @else
-                <button wire:click="getWirePollSwitch(true)" class="mt-3 bg-red-700 btn btn-ghost hover:bg-red-500 w-55 btn-sm">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-id-card"><path d="M16 10h2"/><path d="M16 14h2"/><path d="M6.17 15a3 3 0 0 1 5.66 0"/><circle cx="9" cy="11" r="2"/><rect x="2" y="5" width="20" height="14" rx="2"/></svg>
-                    <span class="text-sm text-white">Live Reload OFF</span>
-                </button>
-            @endif
-
             @can('Add Tag UID to Students')
             <a wire:navigate.hover href="{{ route('admin.students.addtaguid') }}" class="mt-3 bg-orange-700 btn btn-ghost hover:bg-orange-500 w-55 btn-sm">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-id-card"><path d="M16 10h2"/><path d="M16 14h2"/><path d="M6.17 15a3 3 0 0 1 5.66 0"/><circle cx="9" cy="11" r="2"/><rect x="2" y="5" width="20" height="14" rx="2"/></svg>

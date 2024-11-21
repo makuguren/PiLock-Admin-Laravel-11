@@ -17,8 +17,6 @@ class Index extends Component
     public $sortField = 'last_name';
     public $sortDirection = 'asc';
 
-    public $wirePoll = true;
-
     public function filter_section(){
         dd($this->filter_section);
         $this->resetPage();
@@ -37,11 +35,6 @@ class Index extends Component
         }
 
         $this->sortField = $field;
-    }
-
-    public function getWirePollSwitch(bool $wirePoll){
-        sleep(2);
-        $this->wirePoll = $wirePoll;
     }
 
     public function render(){
