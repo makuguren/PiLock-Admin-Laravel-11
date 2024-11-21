@@ -35,7 +35,7 @@
                 <div class="flex flex-col gap-5 md:flex-row">
                     <div class="w-full">
                         <span class="text-sm font-medium">Select Course and Sections</span>
-                        <select wire:model.live="selectedCourseSection" id="section" class="flex items-center w-full select select-bordered">
+                        <select wire:model.live="selectedCourseSection" id="section" class="flex items-center w-full mt-2 select select-bordered">
                             <option value="">All Course and Section</option>
                             @foreach($courseSecs as $courseSec)
                                 <option value="{{ $courseSec->id }}">

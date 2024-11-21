@@ -18,7 +18,7 @@ class Makeup extends Component
 {
     use WithPagination;
     public $schedule_id, $course_id, $days, $time_start, $time_end, $lateDuration;
-    public $faculty_fname, $faculty_lname;
+    public $course_code, $faculty_fname, $faculty_lname;
 
     //Validations
     protected function rules(){
@@ -35,6 +35,21 @@ class Makeup extends Component
         ];
     }
 
+    protected function messages(){
+        return [
+            'course_id.required' => 'The course is required.',
+            'course_id.integer' => 'The course ID must be an integer.',
+            'days.required' => 'Please select a day for the schedule.',
+            'days.in' => 'The selected day is invalid. Please choose a valid day of the week.',
+            'time_start.required' => 'The start time is required.',
+            'time_end.required' => 'The end time is required.',
+            'time_end.after' => 'The end time must be after the start time.',
+            'lateDuration.numeric' => 'The late duration must be a number.',
+            'lateDuration.min' => 'The late duration must be at least 0 minutes.',
+            'lateDuration.max' => 'The late duration cannot exceed 60 minutes.',
+        ];
+    }
+
     public function updated($fields){
         $this->validateOnly($fields);
     }
@@ -43,6 +58,7 @@ class Makeup extends Component
     public function fetchCourseDetails(int $course_id){
         $fetchCourse = Course::find($course_id);
         if($fetchCourse){
+            $this->course_code = $fetchCourse->course_code;
             $this->faculty_fname = $fetchCourse->faculty->first_name;
             $this->faculty_lname = $fetchCourse->faculty->last_name;
         }
@@ -74,6 +90,7 @@ class Makeup extends Component
         if($schedule){
             $this->schedule_id = $schedule->id;
             $this->course_id = $schedule->course_id;
+            $this->course_code = $schedule->course->course_code;
             $this->faculty_fname = $schedule->course->faculty->first_name;
             $this->faculty_lname = $schedule->course->faculty->last_name;
             $this->days = $schedule->days;
@@ -113,6 +130,9 @@ class Makeup extends Component
 
     public function resetInput(){
         $this->course_id = '';
+        $this->course_code = '';
+        $this->faculty_fname = '';
+        $this->faculty_lname = '';
         $this->days = '';
         $this->time_start = '';
         $this->time_end = '';

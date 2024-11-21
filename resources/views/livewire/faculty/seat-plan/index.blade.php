@@ -6,42 +6,6 @@
     @include('livewire.faculty.seat-plan.preview')
     @include('livewire.faculty.seat-plan.download')
 
-    {{-- <ul wire:sortable="updateTaskOrder">
-        @foreach ($seatplan as $seatplan)
-            <li wire:sortable.item="{{ $task->id }}" wire:key="task-{{ $task->id }}">
-                <h4 wire:sortable.handle>{{ $seatplan->student_id }}</h4>
-                <button wire:click="removeTask({{ $seatplan->id }})">Remove</button>
-            </li>
-        @endforeach
-    </ul> --}}
-
-    {{-- <div class="p-6 border-gray-100 rounded-md shadow-md bg-base-100 shadow-black/5">
-        <div class="overflow-x-auto">
-            <table class="table table-zebra">
-                <thead class="rounded-md bg-base-200 text-md">
-                    <tr>
-                        <th>ID</th>
-                        <th>STUDENT ID</th>
-                        <th>SEAT NUMBER</th>
-                    </tr>
-                </thead>
-                <tbody wire:sortable="updateSeatPlan">
-                    @forelse ($seatplan as $seatplan)
-                    <tr wire:sortable.item="{{ $seatplan->id }}" wire:key="seatplan-{{ $seatplan->id }}">
-                        <td><div class="">{{ $seatplan->id }}</div></td>
-                        <td><div class="">{{ $seatplan->student->name }}</div></td>
-                        <td><div class="">{{ $seatplan->seat_number }}</div></td>
-                    </tr>
-                    @empty
-                        <tr>
-                            <td><div class="font-bold">No Seatplan Found</div></td>
-                        </tr>
-                    @endforelse
-                </tbody>
-            </table>
-        </div>
-    </div> --}}
-
     <div class="p-6">
         <div class="flex flex-row gap-2">
             <div class="flex flex-col w-full">
@@ -75,7 +39,7 @@
                 <div class="flex flex-col gap-5 md:flex-row">
                     <div class="w-full">
                         <span class="text-sm font-medium">Select Sections</span>
-                        <select wire:model="selectedCourseSection" id="section" class="flex items-center w-full select select-bordered">
+                        <select wire:model="selectedCourseSection" id="section" class="flex items-center w-full mt-2 select select-bordered">
                             <option {{ $disabledSection }} value="">All Sections</option>
                             @foreach($courseSecs as $courseSec)
                                 <option value="{{ $courseSec->id }}">

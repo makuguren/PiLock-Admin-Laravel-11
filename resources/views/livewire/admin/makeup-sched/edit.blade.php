@@ -4,10 +4,10 @@
       <h3 class="text-lg font-bold">Edit Schedule</h3>
         <form wire:submit.prevent="updateSchedule" method="dialog" class="w-full mt-6">
             @csrf
-            <div class="flex flex-wrap mb-2">
+            <div class="flex flex-wrap mb-4">
                 <div class="w-full px-3">
                     <label class="label-text">Course and Section</label> <span class="text-red-600">*</span>
-                    <select wire:model="course_id" id="addcourse_id" class="block w-full px-4 py-3 mt-2 mb-4 select select-bordered bg-base-300 form-control" required>
+                    <select wire:model="course_id" id="addcourse_id" class="block w-full px-4 py-3 mt-2 mb-2 select select-bordered bg-base-300 form-control" required>
                         <option value="">--Select Courses--</option>
                             @foreach ($courses as $course)
                                 <option wire:click="fetchCourseDetails({{ $course->id }})" value="{{ $course->id }}">{{ $course->course_title }} | {{ $course->section->program }} {{ $course->section->year }}{{ $course->section->block }}</option>
@@ -17,10 +17,10 @@
                 </div>
             </div>
 
-            <div class="flex flex-wrap mb-2">
+            <div class="flex flex-wrap mb-4">
                 <div class="w-full px-3 md:w-1/2">
                     <label class="label-text">Course Code</label>
-                    <input value="{{ $course_code ?? '' }}" id="course_code" class="block w-full px-4 py-3 mt-2 mb-4 input input-bordered bg-base-300 form-control" type="name" disabled>
+                    <input value="{{ $course_code ?? '' }}" id="course_code" class="block w-full px-4 py-3 mt-2 mb-2 input input-bordered bg-base-300 form-control" type="name" disabled>
                 </div>
 
                 <div class="w-full px-3 md:w-1/2">
@@ -29,10 +29,10 @@
                 </div>
             </div>
 
-            <div class="flex flex-wrap mb-2">
+            <div class="flex flex-wrap mb-4">
                 <div class="w-full px-3">
                     <label class="label-text">Days</label> <span class="text-red-600">*</span>
-                    <select wire:model="days" id="adddays" class="block w-full px-4 py-3 mt-2 mb-4 select select-bordered bg-base-300 form-control" required>
+                    <select wire:model="days" id="adddays" class="block w-full px-4 py-3 mt-2 mb-2 select select-bordered bg-base-300 form-control" required>
                         <option value="">--Select Days--</option>
                         <option value="Sunday">Sunday</option>
                         <option value="Monday">Monday</option>
@@ -48,7 +48,7 @@
             <div class="flex flex-wrap mb-6">
                 <div class="w-full px-3 md:w-1/3">
                     <label class="label-text">Time Start</label> <span class="text-red-600">*</span>
-                    <select wire:model="time_start" id="addtime_start" class="block w-full px-4 py-3 mt-2 mb-4 select select-bordered bg-base-300 form-control" required>
+                    <select wire:model="time_start" id="addtime_start" class="block w-full px-4 py-3 mt-2 mb-2 select select-bordered bg-base-300 form-control" required>
                         <option value="">--Select Time Start--</option>
                         <option value="07:00:00">07:00 AM</option>
                         <option value="08:00:00">08:00 AM</option>
@@ -70,7 +70,7 @@
 
                 <div class="w-full px-3 md:w-1/3">
                     <label class="label-text">Time End</label> <span class="text-red-600">*</span>
-                    <select wire:model="time_end" id="addtime_end" class="block w-full px-4 py-3 mt-2 mb-4 select select-bordered bg-base-300 form-control" required>
+                    <select wire:model="time_end" id="addtime_end" class="block w-full px-4 py-3 mt-2 mb-2 select select-bordered bg-base-300 form-control" required>
                         <option value="">--Select Time End--</option>
                         <option value="07:00:00">07:00 AM</option>
                         <option value="08:00:00">08:00 AM</option>
@@ -92,7 +92,7 @@
 
                 <div class="w-full px-3 md:w-1/3">
                     <label class="label-text">Late Tolerance</label>
-                    <input wire:model="lateDuration" id="addlate_duration" class="block w-full px-4 py-3 mt-2 mb-4 input input-bordered bg-base-300 form-control" type="number" placeholder="0 - 60 minutes">
+                    <input wire:model="lateDuration" id="addlate_duration" class="block w-full px-4 py-3 mt-2 mb-2 input input-bordered bg-base-300 form-control" type="number" placeholder="0 - 60 minutes">
                     @error('lateDuration') <span class="mt-1 space-y-1 text-sm text-red-600 error" role="alert">{{ $message }}</span> @enderror
                 </div>
             </div>

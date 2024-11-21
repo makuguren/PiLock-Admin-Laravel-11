@@ -51,6 +51,8 @@ class Index extends Component
     public function addStudCourse(){
         $validatedData = $this->validate([
             'course_id' => 'required|integer',
+        ], [
+            'course_id.required' => 'Please select a course.',
         ]);
 
         EnrolledCourse::create([

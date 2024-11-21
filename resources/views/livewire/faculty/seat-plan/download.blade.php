@@ -4,7 +4,7 @@
         <h3 class="text-lg font-bold">Download Seat Plan</h3>
         <form wire:submit.prevent="downloadSeatPlan" method="POST" class="space-y-4">
             @csrf
-            <div class="px-3 form-control">
+            <div class="px-3 mb-6 form-control">
                 <label for="section" class="label">
                     <span class="label-text">Select Section:</span>
                 </label>

@@ -22,6 +22,19 @@ class Index extends Component
         ];
     }
 
+    protected function messages(){
+        return [
+            'course_code.required' => 'Please provide a course code.',
+            'course_code.string' => 'Course code must be a valid string.',
+            'course_title.required' => 'Please provide a course title.',
+            'course_title.string' => 'Course title must be a valid string.',
+            'section_id.required' => 'Please select a section.',
+            'section_id.integer' => 'Section ID must be a valid integer.',
+            'course_key.required' => 'Please provide a course key.',
+            'course_key.string' => 'Course key must be a valid string.',
+        ];
+    }
+
     public function updated($fields){
         $this->validateOnly($fields);
     }

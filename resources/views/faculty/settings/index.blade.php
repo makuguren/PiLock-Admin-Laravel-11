@@ -28,22 +28,22 @@
                 <form action="{{ route('faculty.settings.updateProfile') }}" method="POST" class="w-full">
                     @csrf
                     @method('patch')
-                    <div class="flex flex-wrap mb-3">
+                    <div class="flex flex-wrap mb-4">
                         <div class="w-full px-3 md:w-1/2">
                             <label class="label-text">First Name</label>
-                            <input class="block w-full px-4 py-3 mb-3 input input-bordered bg-base-300 form-control" name="first_name" value="{{ $user->first_name }}" id="" type="text" placeholder="">
+                            <input class="block w-full px-4 py-3 mt-2 mb-2 input input-bordered bg-base-300 form-control" name="first_name" value="{{ $user->first_name }}" id="" type="text" placeholder="" readonly>
                         </div>
 
                         <div class="w-full px-3 md:w-1/2">
                             <label class="label-text">Last Name</label>
-                            <input class="block w-full px-4 py-3 mb-3 input input-bordered bg-base-300 form-control" name="last_name" value="{{ $user->last_name }}" id="" type="text" placeholder="">
+                            <input class="block w-full px-4 py-3 mt-2 mb-2 input input-bordered bg-base-300 form-control" name="last_name" value="{{ $user->last_name }}" id="" type="text" placeholder="" readonly>
                         </div>
                     </div>
 
-                    <div class="flex flex-wrap mb-3">
+                    <div class="flex flex-wrap mb-4">
                         <div class="w-full px-3">
                             <label class="label-text">Email Address</label>
-                            <input class="block w-full px-4 py-3 mb-3 input input-bordered bg-base-300 form-control" name="email" value="{{ $user->email }}" id="" type="email" placeholder="">
+                            <input class="block w-full px-4 py-3 mt-2 mb-2 input input-bordered bg-base-300 form-control" name="email" value="{{ $user->email }}" id="" type="email" placeholder="" readonly>
                         </div>
                     </div>
 
@@ -74,24 +74,24 @@
                 <form action="{{ route('faculty.password.update') }}" method="post">
                     @csrf
                     @method('put')
-                    <div class="flex flex-wrap mb-3">
+                    <div class="flex flex-wrap mb-4">
                         <div class="w-full px-3">
                             <label class="label-text">Current Password</label>
-                            <input class="block w-full px-4 py-3 mb-3 input input-bordered bg-base-300 form-control" name="current_password" id="" type="password" placeholder="">
+                            <input class="block w-full px-4 py-3 mt-2 mb-2 input input-bordered bg-base-300 form-control" name="current_password" id="" type="password" placeholder="">
                             <x-input-error :messages="$errors->updatePassword->get('current_password')" class="mt-2" />
                         </div>
                     </div>
-                    <div class="flex flex-wrap mb-3">
+                    <div class="flex flex-wrap mb-4">
                         <div class="w-full px-3">
                             <label class="label-text">New Password</label>
-                            <input class="block w-full px-4 py-3 mb-3 input input-bordered bg-base-300 form-control" name="password" id="" type="password" placeholder="">
+                            <input class="block w-full px-4 py-3 mt-2 mb-2 input input-bordered bg-base-300 form-control" name="password" id="" type="password" placeholder="">
                             <x-input-error :messages="$errors->updatePassword->get('password')" class="mt-2" />
                         </div>
                     </div>
                     <div class="flex flex-wrap mb-6">
                         <div class="w-full px-3">
                             <label class="label-text">Confirm Password</label>
-                            <input class="block w-full px-4 py-3 mb-3 input input-bordered bg-base-300 form-control" name="password_confirmation" id="" type="password" placeholder="">
+                            <input class="block w-full px-4 py-3 mt-2 mb-2 input input-bordered bg-base-300 form-control" name="password_confirmation" id="" type="password" placeholder="">
                             <x-input-error :messages="$errors->updatePassword->get('password_confirmation')" class="mt-2" />
                         </div>
                     </div>

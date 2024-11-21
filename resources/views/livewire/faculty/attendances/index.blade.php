@@ -32,7 +32,7 @@
                 <div class="flex flex-col gap-5 md:flex-row">
                     <div class="w-full">
                         <span class="text-sm font-medium">Course and Section</span>
-                        <select wire:model.live="selectedCourseSection" id="section" class="flex items-center w-full mt-1 mb-1 select select-bordered">
+                        <select wire:model.live="selectedCourseSection" id="section" class="flex items-center w-full mt-2 select select-bordered">
                             <option value="">--Course and Section--</option>
                             @foreach($courseSecs as $courseSec)
                                 <option value="{{ $courseSec->id }}">
@@ -47,7 +47,7 @@
                     <div class="w-full">
                         <span class="text-sm font-medium">Date</span>
                         <label class="flex items-center">
-                            <input type="date" wire:model.live="selectedDate" name="date" class="block w-full mt-1 mb-1 text-sm input input-bordered form-control bg-base-100" />
+                            <input type="date" wire:model.live="selectedDate" name="date" class="block w-full mt-2 text-sm input input-bordered form-control bg-base-100" />
                         </label>
                     </div>
                 </div>

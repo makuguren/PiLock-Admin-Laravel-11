@@ -20,6 +20,11 @@
                     <li class="mr-2 font-medium text-gray-600">Make-Up Schedules</li>
                 </ul>
             </div>
+
+            <label for="add_modal" class="mt-3 bg-blue-700 btn btn-ghost hover:bg-blue-500 w-55 btn-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar-clock"><path d="M21 7.5V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h3.5"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h5"/><path d="M17.5 17.5 16 16.3V14"/><circle cx="16" cy="16" r="6"/></svg>
+                <span class="text-sm text-white">Add Schedule</span>
+            </label>
         </div>
 
         <div class="p-6 border-gray-100 rounded-md shadow-md bg-base-100 shadow-black/5">
@@ -135,9 +140,13 @@
             document.getElementById('edit_modal').checked = false;
             document.getElementById('delete_modal').checked = false;
 
+            document.getElementById('addcourse_id').value = '';
+            document.getElementById('course_code').value = '';
+            document.getElementById('faculty_name').value = '';
             document.getElementById('adddays').value = '';
             document.getElementById('addtime_start').value = '';
             document.getElementById('addtime_end').value = '';
+            document.getElementById('addlate_duration').value = '';
 
             // document.getElementById('editsubject_id').value = '';
             // document.getElementById('editifaculty_id').value = '';
