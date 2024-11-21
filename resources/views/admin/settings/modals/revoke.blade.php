@@ -6,10 +6,10 @@
             @csrf
             <div class="flex flex-wrap mb-6">
                 <div class="w-full px-3">
-                    <label for="password" class="label-text">Password</label>
-                    <input type="password" wire:model="password" id="password" name="password" class="block w-full px-3 py-2 mt-1 input input-bordered bg-base-300" required>
+                    <label for="password" class="label-text">Password</label> <span class="text-red-600">*</span>
+                    <input type="password" wire:model="password" id="password" name="password" class="block w-full px-3 py-2 mt-2 mb-2 input input-bordered bg-base-300" required>
                     {{-- <span class="mt-1 text-sm text-red-500" id="password-error">Error: Incorrect password. Please try again.</span> --}}
-                    <p class="mt-2 text-sm text-gray-600">Please enter your password to confirm the revocation of your API token. This action cannot be undone.</p>
+                    <p class="mt-1 text-sm text-gray-600">Please enter your password to confirm the revocation of your API token. This action cannot be undone.</p>
                 </div>
             </div>
             <div class="modal-action">

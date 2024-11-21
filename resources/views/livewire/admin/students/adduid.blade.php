@@ -27,27 +27,31 @@
             {{-- Code Here --}}
             <form wire:submit.prevent="updateUIDTag" class="w-full">
                 @csrf
-                <div class="flex flex-wrap mb-6">
+                <div class="flex flex-wrap mb-4">
                     <div class="w-full px-3">
                         <label class="label-text">Tag UID</label>
                         <input wire:model="tag_uid" class="block w-full px-4 py-3 mt-2 mb-2 input input-bordered bg-base-300" name="tag_uid" id="tag_uid" onkeydown="focusNext(event, 'student_id')" autofocus type="text" placeholder="">
                         @error('tag_uid')<small class="text-danger">{{$message}}</small> @enderror
                     </div>
                 </div>
-                <div class="flex flex-row mb-6 place-items-center">
+
+                <div class="flex flex-row items-center mb-4">
                     <div class="w-full px-3">
                         <label class="label-text">Student ID</label>
-                        <input wire:model="student_id" id="student_id" class="block w-full px-4 py-3 mt-2 mb-2 input input-bordered bg-base-300" type="text" placeholder="">
-                        @error('student_id')<small class="text-danger">{{$message}}</small> @enderror
+                        <div class="flex items-center">
+                            <input wire:model="student_id" id="student_id" class="block w-full px-4 py-3 mt-2 mb-2 input input-bordered bg-base-300" type="text" placeholder="Enter student name or ID">
+                            <div class="ml-5">
+                                <button wire:click="findStudent" type="button" class="w-32 mt-2 mb-2 bg-blue-700 btn btn-ghost hover:bg-blue-500">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" /></svg>
+                                    <span class="text-sm text-white">Search</span>
+                                </button>
+                            </div>
+                        </div>
+                        @error('faculty_id')<small class="text-danger">{{$message}}</small> @enderror
                     </div>
-
-                    <button wire:click="findStudent" type="button" class="w-32 mt-2 bg-blue-700 btn btn-ghost hover:bg-blue-500">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-                        <span class="text-white">Search</span>
-                    </button>
                 </div>
 
-                <div class="flex flex-wrap mb-6">
+                <div class="flex flex-wrap mb-4">
                     <div class="w-full px-3">
                         <label class="label-text" for="">Name</label>
                         <input class="w-full mt-2 mb-2 input input-bordered bg-base-300" name="name" value="{{ $student->first_name ?? '' }} {{ $student->last_name ?? '' }}" type="text" placeholder="" disabled>

@@ -3,11 +3,11 @@
     <div class="modal-box">
       <h3 class="text-lg font-bold">Add Permission</h3>
         <form wire:submit.prevent="savePermission" method="dialog" class="w-full mt-6">
-            <div class="flex flex-wrap mb-2">
+            <div class="flex flex-wrap mb-6">
                 <div class="w-full px-3">
-                    <label class="label-text">Name</label>
+                    <label class="label-text">Name</label> <span class="text-red-600">*</span>
                     <input wire:model="name" id="addperm_name" class="block w-full px-4 py-3 mt-2 mb-2 input input-bordered bg-base-300 form-control" type="text">
-                    @error('name') <span class="error" role="alert">{{ $message }}</span> @enderror
+                    @error('name') <span class="mt-1 space-y-1 text-sm text-red-600 error" role="alert">{{ $message }}</span> @enderror
                 </div>
             </div>
             <div class="modal-action">

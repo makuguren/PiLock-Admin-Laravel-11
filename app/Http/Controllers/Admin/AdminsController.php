@@ -33,6 +33,24 @@ class AdminsController extends Controller implements HasMiddleware
             'email' => 'required|email|max:255|unique:admins,email',
             'password' => 'required|string|min:8|max:20',
             'roles' => 'required'
+        ], [
+            'first_name.required' => 'The first name field is required.',
+            'first_name.string' => 'The first name must be a string.',
+            'first_name.max' => 'The first name may not be greater than 255 characters.',
+            'last_name.required' => 'The last name field is required.',
+            'last_name.string' => 'The last name must be a string.',
+            'last_name.max' => 'The last name may not be greater than 255 characters.',
+            'gender.required' => 'The gender field is required.',
+            'gender.integer' => 'The gender must be an integer.',
+            'email.required' => 'The email field is required.',
+            'email.email' => 'The email must be a valid email address.',
+            'email.max' => 'The email may not be greater than 255 characters.',
+            'email.unique' => 'The email has already been taken.',
+            'password.required' => 'The password field is required.',
+            'password.string' => 'The password must be a string.',
+            'password.min' => 'The password must be at least 8 characters.',
+            'password.max' => 'The password may not be greater than 20 characters.',
+            'roles.required' => 'The roles field is required.'
         ]);
 
         $admin = Admin::create([
@@ -63,8 +81,27 @@ class AdminsController extends Controller implements HasMiddleware
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
             'gender' => 'required|integer',
-            'password' => 'nullable|string|min:8|max:20',
+            'email' => 'required|email|max:255|unique:admins,email',
+            'password' => 'required|string|min:8|max:20',
             'roles' => 'required'
+        ], [
+            'first_name.required' => 'The first name field is required.',
+            'first_name.string' => 'The first name must be a string.',
+            'first_name.max' => 'The first name may not be greater than 255 characters.',
+            'last_name.required' => 'The last name field is required.',
+            'last_name.string' => 'The last name must be a string.',
+            'last_name.max' => 'The last name may not be greater than 255 characters.',
+            'gender.required' => 'The gender field is required.',
+            'gender.integer' => 'The gender must be an integer.',
+            'email.required' => 'The email field is required.',
+            'email.email' => 'The email must be a valid email address.',
+            'email.max' => 'The email may not be greater than 255 characters.',
+            'email.unique' => 'The email has already been taken.',
+            'password.required' => 'The password field is required.',
+            'password.string' => 'The password must be a string.',
+            'password.min' => 'The password must be at least 8 characters.',
+            'password.max' => 'The password may not be greater than 20 characters.',
+            'roles.required' => 'The roles field is required.'
         ]);
 
         $data = [

@@ -20,7 +20,8 @@ class Index extends Component
 
     public function messages(){
         return [
-
+            'name.required' => 'Role Name is required',
+            'name.unique' => 'Role Name already exists',
         ];
     }
 

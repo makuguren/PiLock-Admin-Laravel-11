@@ -28,52 +28,53 @@
                 @csrf
                 <div class="flex flex-wrap mb-4">
                     <div class="w-full px-3 md:w-1/2">
-                        <label class="label-text">First Name</label>
-                        <input class="block w-full px-5 py-4 mt-2 mb-2 input input-bordered bg-base-300" name="first_name" type="text" placeholder="">
-                        @error('first_name')<small class="text-danger">{{$message}}</small> @enderror
+                        <label class="label-text">First Name</label> <span class="text-red-600">*</span>
+                        <input class="block w-full px-5 py-4 mt-2 mb-2 input input-bordered bg-base-300" name="first_name" type="text" placeholder="" value="{{ old('first_name') }}">
+                        @error('first_name')<span class="mt-1 space-y-1 text-sm text-red-600 error" role="alert">{{$message}}</span> @enderror
                     </div>
 
                     <div class="w-full px-3 md:w-1/2">
-                        <label class="label-text">Last Name</label>
-                        <input class="block w-full px-5 py-4 mt-2 mb-2 input input-bordered bg-base-300" name="last_name" type="text" placeholder="">
-                        @error('last_name')<small class="text-danger">{{$message}}</small> @enderror
+                        <label class="label-text">Last Name</label> <span class="text-red-600">*</span>
+                        <input class="block w-full px-5 py-4 mt-2 mb-2 input input-bordered bg-base-300" name="last_name" type="text" placeholder="" value="{{ old('last_name') }}">
+                        @error('last_name')<span class="mt-1 space-y-1 text-sm text-red-600 error" role="alert">{{$message}}</span> @enderror
                     </div>
                 </div>
 
                 <div class="flex flex-wrap mb-4">
                     <div class="w-full px-3">
-                        <label class="label-text">Gender</label>
+                        <label class="label-text">Gender</label> <span class="text-red-600">*</span>
                         <select class="w-full mt-2 mb-2 select select-bordered bg-base-300" name="gender">
                             <option>--Select Gender--</option>
-                            <option value="1">Male</option>
-                            <option value="2">Female</option>
+                            <option value="1" {{ old('gender') == '1' ? 'selected' : '' }}>Male</option>
+                            <option value="2" {{ old('gender') == '2' ? 'selected' : '' }}>Female</option>
                         </select>
-                        @error('gender')<small class="text-danger">{{$message}}</small> @enderror
+                        @error('gender')<span class="mt-1 space-y-1 text-sm text-red-600 error" role="alert">{{$message}}</span> @enderror
                     </div>
                 </div>
                 <div class="flex flex-wrap mb-4">
                     <div class="w-full px-3 md:w-1/2">
-                        <label class="label-text">Email</label>
-                        <input class="block w-full px-4 py-3 mt-2 mb-2 input input-bordered bg-base-300" name="email" type="email" placeholder="">
-                        @error('email')<small class="text-danger">{{$message}}</small> @enderror
+                        <label class="label-text">Email</label> <span class="text-red-600">*</span>
+                        <input class="block w-full px-4 py-3 mt-2 mb-2 input input-bordered bg-base-300" name="email" type="email" placeholder="" value="{{ old('email') }}">
+                        @error('email')<span class="mt-1 space-y-1 text-sm text-red-600 error" role="alert">{{$message}}</span> @enderror
                     </div>
 
                     <div class="w-full px-3 md:w-1/2">
-                        <label class="label-text">Password</label>
-                        <input class="block w-full px-4 py-3 mt-2 mb-2 input input-bordered bg-base-300" name="password" type="password" placeholder="">
-                        @error('password')<small class="text-danger">{{$message}}</small> @enderror
+                        <label class="label-text">Password</label> <span class="text-red-600">*</span>
+                        <input class="block w-full px-4 py-3 mt-2 mb-2 input input-bordered bg-base-300" name="password" type="password" placeholder="" value="{{ old('password') }}">
+                        @error('password')<span class="mt-1 space-y-1 text-sm text-red-600 error" role="alert">{{$message}}</span> @enderror
                     </div>
                 </div>
                 <div class="flex flex-wrap mb-6">
                     <div class="w-full px-3">
-                        <label class="label-text" for="">Role</label>
+                        <label class="label-text" for="">Role</label> <span class="text-red-600">*</span>
 
                         <select class="w-full mt-2 mb-2 select select-bordered bg-base-300" name="roles[]">
                             <option>--Select Role--</option>
                             @foreach ($roles as $role)
-                                <option value="{{ $role }}">{{ $role }}</option>
+                                <option value="{{ $role }}" {{ old('roles') == $role ? 'selected' : '' }}>{{ $role }}</option>
                             @endforeach
                         </select>
+                        @error('roles') <span class="mt-1 space-y-1 text-sm text-red-600 error" role="alert">{{ $message }}</span> @enderror
                     </div>
                 </div>
                 <div class="flex flex-row-reverse">

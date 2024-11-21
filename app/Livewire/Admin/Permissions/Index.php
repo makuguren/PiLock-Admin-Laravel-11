@@ -21,7 +21,8 @@ class Index extends Component
 
     public function messages(){
         return [
-
+            'name.required' => 'Permission Name is required',
+            'name.unique' => 'Permission Name already exists',
         ];
     }
 

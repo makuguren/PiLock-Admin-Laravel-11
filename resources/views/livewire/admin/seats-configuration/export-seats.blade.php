@@ -4,13 +4,14 @@
         <h3 class="text-lg font-bold">Save Configuration</h3>
         <form wire:submit.prevent="exportConfiguration" method="POST" class="space-y-4">
             @csrf
-            <div class="px-3 form-control">
+            <div class="px-3 mb-6 form-control">
                 <label for="name" class="label">
                     <span class="label-text">Name:</span>
                 </label>
                 <input type="text" wire:model="name" id="name" class="input input-bordered bg-base-300" placeholder="" required>
-                @error('name') <span class="error" role="alert">{{ $message }}</span> @enderror
+                @error('name') <span class="mt-1 space-y-1 text-sm text-red-600 error" role="alert">{{ $message }}</span> @enderror
             </div>
+
             <div class="modal-action">
                 <button type="button" onclick="cancel_export()" class="text-white bg-red-700 btn btn-ghost hover:bg-red-500">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-ban"><circle cx="12" cy="12" r="10"/><path d="m4.9 4.9 14.2 14.2"/></svg>

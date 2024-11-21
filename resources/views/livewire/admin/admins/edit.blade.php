@@ -29,44 +29,44 @@
                 @method('PUT')
                 <div class="flex flex-wrap mb-4">
                     <div class="w-full px-3 md:w-1/2">
-                        <label class="label-text">First Name</label>
+                        <label class="label-text">First Name</label> <span class="text-red-600">*</span>
                         <input class="block w-full px-5 py-4 mt-2 mb-2 input input-bordered bg-base-300" name="first_name" value="{{ $admin->first_name }}" type="text" placeholder="">
-                        @error('first_name')<small class="text-danger">{{$message}}</small> @enderror
+                        @error('first_name')<span class="mt-1 space-y-1 text-sm text-red-600 error" role="alert">{{$message}}</span> @enderror
                     </div>
 
                     <div class="w-full px-3 md:w-1/2">
-                        <label class="label-text">Last Name</label>
+                        <label class="label-text">Last Name</label> <span class="text-red-600">*</span>
                         <input class="block w-full px-5 py-4 mt-2 mb-2 input input-bordered bg-base-300" name="last_name" value="{{ $admin->last_name }}" type="text" placeholder="">
-                        @error('last_name')<small class="text-danger">{{$message}}</small> @enderror
+                        @error('last_name')<span class="mt-1 space-y-1 text-sm text-red-600 error" role="alert">{{$message}}</span> @enderror
                     </div>
                 </div>
                 <div class="flex flex-wrap mb-4">
                     <div class="w-full px-3">
-                        <label class="label-text">Gender</label>
+                        <label class="label-text">Gender</label> <span class="text-red-600">*</span>
                         <select class="w-full mt-2 mb-2 select select-bordered bg-base-300" name="gender">
                             <option>--Select Gender--</option>
                             <option value="1" {{ $admin->gender == '1' ? 'Selected':'' }}>Male</option>
                             <option value="2" {{ $admin->gender == '2' ? 'Selected':'' }}>Female</option>
                         </select>
-                        @error('gender')<small class="text-danger">{{$message}}</small> @enderror
+                        @error('gender')<span class="mt-1 space-y-1 text-sm text-red-600 error" role="alert">{{$message}}</span> @enderror
                     </div>
                 </div>
                 <div class="flex flex-wrap mb-3">
                     <div class="w-full px-3 md:w-1/2">
-                        <label class="label-text">Email</label>
+                        <label class="label-text">Email</label> <span class="text-red-600">*</span>
                         <input class="block w-full px-4 py-3 mt-2 mb-2 input input-bordered bg-base-300" name="email" readonly value="{{ $admin->email }}" type="email" placeholder="">
-                        @error('email')<small class="text-danger">{{$message}}</small> @enderror
+                        @error('email')<span class="mt-1 space-y-1 text-sm text-red-600 error" role="alert">{{$message}}</span> @enderror
                     </div>
 
                     <div class="w-full px-3 md:w-1/2">
-                        <label class="label-text">Password</label>
+                        <label class="label-text">Password</label> <span class="text-red-600">*</span>
                         <input class="block w-full px-4 py-3 mt-2 mb-2 input input-bordered bg-base-300" name="password" type="password" placeholder="">
-                        @error('password')<small class="text-danger">{{$message}}</small> @enderror
+                        @error('password')<span class="mt-1 space-y-1 text-sm text-red-600 error" role="alert">{{$message}}</span> @enderror
                     </div>
                 </div>
                 <div class="flex flex-wrap mb-6">
                     <div class="w-full px-3">
-                        <label class="label-text" for="">Role</label>
+                        <label class="label-text" for="">Role</label> <span class="text-red-600">*</span>
 
                         <select class="w-full mt-2 mb-2 select select-bordered bg-base-300" name="roles[]">
                             <option>--Select Role--</option>
@@ -74,6 +74,7 @@
                                 <option value="{{ $role }}" {{ in_array($role, $userRoles) ? 'selected':'' }}>{{ $role }}</option>
                             @endforeach
                         </select>
+                        @error('roles') <span class="mt-1 space-y-1 text-sm text-red-600 error" role="alert">{{ $message }}</span> @enderror
                     </div>
                 </div>
                 <div class="flex flex-row-reverse">

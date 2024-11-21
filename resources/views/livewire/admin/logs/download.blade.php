@@ -10,9 +10,9 @@
                 </div>
             </div> --}}
 
-            <div class="flex flex-wrap mb-2">
+            <div class="flex flex-wrap mb-4">
                 <div class="w-full px-3">
-                    <label class="label-text">Course and Section</label>
+                    <label class="label-text">Course and Section</label> <span class="text-red-600">*</span>
                     <select wire:model="dlsection_id" id="selsection_id" class="block w-full px-4 py-3 mt-2 mb-2 select select-bordered bg-base-300 form-control" required>
                         <option value="" selected>--Select Course & Section--</option>
                         @foreach ($courses as $course)
@@ -23,27 +23,27 @@
                             </option>
                         @endforeach
                     </select>
-                    @error('dlsection_id') <span class="error" role="alert">{{ $message }}</span> @enderror
+                    @error('dlsection_id') <span class="mt-1 space-y-1 text-sm text-red-600 error" role="alert">{{ $message }}</span> @enderror
                 </div>
             </div>
 
             <div class="flex flex-wrap mb-2">
                 <div class="w-full px-3">
-                    <label class="label-text">From</label>
+                    <label class="label-text">From</label> <span class="text-red-600">*</span>
                     <label class="flex items-center">
                         <input type="date" wire:model="dlfromdate" id="dlpdfdate" class="block w-full px-4 py-3 mt-2 mb-2 text-sm input input-bordered form-control bg-base-300" />
                     </label>
-                    @error('dlfromdate') <span class="error" role="alert">{{ $message }}</span> @enderror
+                    @error('dlfromdate') <span class="mt-1 space-y-1 text-sm text-red-600 error" role="alert">{{ $message }}</span> @enderror
                 </div>
             </div>
 
-            <div class="flex flex-wrap mb-2">
+            <div class="flex flex-wrap mb-6">
                 <div class="w-full px-3">
-                    <label class="label-text">To</label>
+                    <label class="label-text">To</label> <span class="text-red-600">*</span>
                     <label class="flex items-center">
                         <input type="date" wire:model="dltodate" id="dlpdfdate" class="block w-full px-4 py-3 mt-2 mb-2 text-sm input input-bordered form-control bg-base-300" />
                     </label>
-                    @error('dltodate') <span class="error" role="alert">{{ $message }}</span> @enderror
+                    @error('dltodate') <span class="mt-1 space-y-1 text-sm text-red-600 error" role="alert">{{ $message }}</span> @enderror
                 </div>
             </div>
 
