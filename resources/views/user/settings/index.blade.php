@@ -28,31 +28,31 @@
                 <form action="{{ route('user.settings.updateProfile') }}" method="POST" class="w-full">
                     @csrf
                     @method('patch')
-                    <div class="flex flex-wrap mb-3">
+                    <div class="flex flex-wrap mb-4">
                         <div class="w-full px-3">
                             <label class="label-text">Full Name</label>
-                            <input class="block w-full px-4 py-3 mb-3 input input-bordered bg-base-300 form-control" name="name" value="{{ $user->first_name }} {{ $user->last_name }}" id="" type="text" placeholder="" disabled>
+                            <input class="block w-full px-4 py-3 mt-2 mb-2 input input-bordered bg-base-300 form-control" name="name" value="{{ $user->first_name }} {{ $user->last_name }}" id="" type="text" placeholder="" readonly>
                         </div>
                     </div>
 
-                    <div class="flex flex-wrap mb-3">
+                    <div class="flex flex-wrap mb-4">
                         <div class="w-full px-3">
                             <label class="label-text">Email Address</label>
-                            <input class="block w-full px-4 py-3 mb-3 input input-bordered bg-base-300 form-control" name="email" value="{{ $user->email }}" id="" type="email" placeholder="" disabled>
+                            <input class="block w-full px-4 py-3 mt-2 mb-2 input input-bordered bg-base-300 form-control" name="email" value="{{ $user->email }}" id="" type="email" placeholder="" readonly>
                         </div>
                     </div>
 
-                    <div class="flex flex-wrap mb-3">
+                    <div class="flex flex-wrap mb-4">
                         <div class="w-full px-3">
                             <label class="label-text">Student ID</label>
-                            <input class="block w-full px-4 py-3 mb-3 input input-bordered bg-base-300 form-control" name="student_id" value="{{ $user->student_id }}" id="" type="text" placeholder="" disabled>
+                            <input class="block w-full px-4 py-3 mt-2 mb-2 input input-bordered bg-base-300 form-control" name="student_id" value="{{ $user->student_id }}" id="" type="text" placeholder="" readonly>
                         </div>
                     </div>
 
-                    <div class="flex flex-wrap mb-3">
+                    <div class="flex flex-wrap mb-4">
                         <div class="w-full px-3">
                             <label class="label-text">Section</label>
-                            <select class="block w-full px-4 py-3 mb-3 select select-bordered bg-base-300 form-control" name="section_id" disabled>
+                            <select class="block w-full px-4 py-3 mt-2 mb-2 select select-bordered bg-base-300 form-control" name="section_id" disabled>
                                 <option>--Select your Section--</option>
                                 @foreach ($sections as $section)
                                 <option value="{{ $section->id }}" {{ $section->id == $user->section_id ? 'Selected':'' }}>{{ $section->program }} {{ $section->year }}{{ $section->block }}</option>
@@ -64,7 +64,7 @@
                     <div class="flex flex-wrap mb-6">
                         <div class="w-full px-3">
                             <label class="label-text" for="">Theme</label>
-                            <select name="user_theme" class="w-full select select-bordered bg-base-300">
+                            <select name="user_theme" class="w-full mt-2 mb-2 select select-bordered bg-base-300">
                                 <option value="light" {{ $user->user_theme == 'light' ? 'selected':'' }}>Light</option>
                                 <option value="dark" {{ $user->user_theme == 'dark' ? 'selected':'' }}>Dark</option>
                             </select>

@@ -23,13 +23,42 @@ class Index extends Component
     //Validations
     protected function rules(){
         return [
-            'first_name' => 'required|string',
-            'last_name' => 'required|string',
-            'student_id' => 'required|string|unique:users,student_id',
-            'program' => 'required|string',
-            'year' => 'required|integer',
-            'block' => 'required|string',
-            'gender' => 'required|integer',
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'student_id' => 'required|string|max:255|unique:users,student_id',
+            'program' => 'required|string|max:255',
+            'year' => 'required|integer|min:1|max:4',
+            'block' => 'required|string|max:1',
+            'gender' => 'required|integer|min:1|max:2',
+        ];
+    }
+
+    protected function messages(){
+        return [
+            'first_name.required' => 'Please enter your first name as it is a required field.',
+            'first_name.string' => 'First name must be a string of characters.',
+            'first_name.max' => 'First name cannot exceed 255 characters in length.',
+            'last_name.required' => 'Please enter your last name as it is a required field.',
+            'last_name.string' => 'Last name must be a string of characters.',
+            'last_name.max' => 'Last name cannot exceed 255 characters in length.',
+            'student_id.required' => 'Student ID is a required field and must be entered.',
+            'student_id.string' => 'Student ID must be a string of characters.',
+            'student_id.max' => 'Student ID cannot exceed 255 characters in length.',
+            'student_id.unique' => 'The entered Student ID already exists in the system.',
+            'program.required' => 'Program is a required field and must be selected.',
+            'program.string' => 'Program must be a string of characters.',
+            'program.max' => 'Program cannot exceed 255 characters in length.',
+            'year.required' => 'Year is a required field and must be entered.',
+            'year.integer' => 'Year must be an integer value.',
+            'year.min' => 'Year must be at least 1.',
+            'year.max' => 'Year cannot exceed 4.',
+            'block.required' => 'Block is a required field and must be selected.',
+            'block.string' => 'Block must be a single character.',
+            'block.max' => 'Block cannot exceed 1 character in length.',
+            'gender.required' => 'Gender is a required field and must be selected.',
+            'gender.integer' => 'Gender must be an integer value.',
+            'gender.min' => 'Gender must be at least 1.',
+            'gender.max' => 'Gender cannot exceed 2.',
         ];
     }
 
